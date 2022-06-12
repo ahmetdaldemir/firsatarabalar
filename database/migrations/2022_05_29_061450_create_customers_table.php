@@ -15,6 +15,27 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('identity');
+            $table->string('phone');
+            $table->string('email');
+            $table->string('password');
+            $table->string('gender')->nullable();
+            $table->date('birthday')->nullable();
+            $table->string('smscode')->nullable();
+
+            $table->unsignedBigInteger("city_id");
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('restrict');
+
+
+            $table->unsignedBigInteger("town_id");
+            $table->foreign('town_id')->references('id')->on('towns')->onDelete('restrict');
+
+            $table->string('freecar')->nullable();
+            $table->dateTime('date_login')->nullable();
+            $table->boolean('status')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

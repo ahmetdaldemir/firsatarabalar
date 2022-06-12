@@ -15,15 +15,6 @@ return new class extends Migration
     {
         Schema::create('banners', function (Blueprint $table) {
             $table->id();
-            $table->string('fullname');
-            $table->integer('identity');
-            $table->string('phone');
-            $table->string('email');
-            $table->string('password');
-            $table->dateTime('login_date')->nullable();
-            $table->string('api_key');
-            $table->string('password_key')->nullable();
-            $table->boolean('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

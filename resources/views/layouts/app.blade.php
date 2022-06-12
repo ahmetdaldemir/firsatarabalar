@@ -127,7 +127,7 @@
                 <li><a href="/"><i class="fa-fw fad fa-chart-network"></i> <span class="nav-label">Göstergeler</span></a></li>
 <!--  {(Request::getSegment(0) == "agents") ? "class='active'":""} -->
                 <li>
-                    <a href="/agents">
+                    <a href="{{route('admin.expert.index')}}">
                         <i class="fa-fw fad fa-user-tie"></i>
                         <span class="nav-label">Danışmanlar</span>
                         <span class="label label-outline float-right">0</span>
@@ -135,20 +135,26 @@
                 </li>
 
                 <li>
-                    <a href="/customers">
+                    <a href="{{route('admin.customer.index')}}">
                         <i class="fa-fw fad fa-users"></i>
                         <span class="nav-label">Müşteriler</span>
                         <span class="label label-success float-right">0</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/cars">
+                    <a href="{{route('admin.car.index')}}">
                         <i class="fa-fw fad fa-users"></i>
                         <span class="nav-label">Araçlar</span>
                         <span class="label label-success float-right">0</span>
                     </a>
                 </li>
-
+                <li>
+                    <a href="{{route('admin.customer_car_valuation.index')}}">
+                        <i class="fa-fw fad fa-bullseye-pointer"></i>
+                        <span class="nav-label">Değerlemeler</span>
+                        <span class="label label-info float-right">0</span>
+                    </a>
+                </li>
 
                 <li>
                     <a href="/interests">
@@ -177,7 +183,7 @@
                         <li><a href="/helps/contents">İçerikler</a></li>
                     </ul>
                 </li>
-                <li><a href="/staticpages"><i class="fa-fw fad fa-file-alt"></i> <span class="nav-label">Sabit Sayfalar</span></a></li>
+                <li><a href="{{route('admin.page.index')}}"><i class="fa-fw fad fa-file-alt"></i> <span class="nav-label">Sabit Sayfalar</span></a></li>
 
                 <li><hr style='border-top: 1px solid #3a586f'></li>
 

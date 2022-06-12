@@ -15,12 +15,17 @@ return new class extends Migration
     {
         Schema::create('insurance_claims', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("id_insurance");
-            $table->foreign('id_insurance')->references('id')->on('insurance')->onDelete('restrict');
+
+            $table->unsignedBigInteger("insurance_id");
+            $table->foreign('insurance_id')->references('id')->on('insurances')->onDelete('restrict');
+
+
             $table->unsignedBigInteger("id_car");
             $table->foreign('id_car')->references('id')->on('cars')->onDelete('restrict');
-            $table->unsignedBigInteger("id_customer");
-            $table->foreign('id_customer')->references('id')->on('customer')->onDelete('restrict');
+
+            $table->unsignedBigInteger("customer_id");
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('restrict');
+
             $table->string('plate');
             $table->string('chassis_number');
             $table->double('price');

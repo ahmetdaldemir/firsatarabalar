@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('customer_messages', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('customer_id');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('restrict');
+            $table->integer('user_id')->default()->nullable();
+            $table->text('message');
+            $table->enum('type',['sender','receiver']);
             $table->timestamps();
         });
     }

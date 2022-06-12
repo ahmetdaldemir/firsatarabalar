@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('meta_key')->nullable();
             $table->string('meta_description')->nullable();
             $table->string('labels')->nullable();
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('customer_car_photos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('car_id');
+            $table->foreign('car_id')->references('id')->on('cars')->onDelete('restrict');
+            $table->string('image');
             $table->timestamps();
         });
     }

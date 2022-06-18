@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="b885c04f-2c14-4637-a8fd-4d82b6e17b50" name="ftpyeni" url="http://ftp.firsatarabalar.com">
+        <fileTransfer rootFolder="/yenipanel.firsatarabalar.com" host="ftp.firsatarabalar.com" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

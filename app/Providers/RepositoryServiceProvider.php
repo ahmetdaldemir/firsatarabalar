@@ -21,10 +21,16 @@ use App\Repositories\Cities\CityRepositoryInterface;
 
 use App\Repositories\Pages\PageRepository;
 use App\Repositories\Pages\PageRepositoryInterface;
+use App\Repositories\Roles\RoleRepository;
+use App\Repositories\Roles\RoleRepositoryInterface;
 use App\Repositories\Town\TownRepository;
 use App\Repositories\Town\TownRepositoryInterface;
 
- use Illuminate\Support\ServiceProvider;
+use App\Repositories\Users\UserRepository;
+use App\Repositories\Users\UserRepositoryInterface;
+use App\Repositories\Valuation\ValuationRepository;
+use App\Repositories\Valuation\ValuationRepositoryInterface;
+use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -43,6 +49,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(CustomerCarValuationInterface::class, CustomerCarValuationRepository::class);
         $this->app->bind(CustomerCarInterface::class, CustomerCarRepository::class);
         $this->app->bind(PageRepositoryInterface::class, PageRepository::class);
+        $this->app->bind(ValuationRepositoryInterface::class, ValuationRepository::class);
+        $this->app->bind(RoleRepositoryInterface::class, RoleRepository::class);
+        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
 
     }
 

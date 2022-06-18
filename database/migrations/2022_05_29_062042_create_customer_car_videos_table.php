@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('customer_car_videos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('car_id');
-            $table->foreign('car_id')->references('id')->on('cars')->onDelete('restrict');
+            $table->unsignedBigInteger('customer_car_id');
+            $table->foreign('customer_car_id')->references('id')->on('customer_cars')->onDelete('restrict');
             $table->string('video');
+            $table->boolean('active')->default(0);
             $table->timestamps();
         });
     }

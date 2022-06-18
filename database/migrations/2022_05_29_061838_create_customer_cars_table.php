@@ -30,8 +30,8 @@ return new class extends Migration
 
             $table->string('custom_version')->nullable();
 
-            $table->unsignedBigInteger('expert_id');
-            $table->foreign('expert_id')->references('id')->on('experts')->onDelete('restrict');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
 
             $table->string('car_city');
             $table->string('car_state');

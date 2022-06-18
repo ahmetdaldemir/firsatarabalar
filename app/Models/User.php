@@ -8,11 +8,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
+    use HasRoles;
     /**
      * The attributes that are mass assignable.
      *
@@ -55,5 +56,23 @@ class User extends Authenticatable
         return new Attribute(
             get: fn($value) => ["user", "admin", "manager"][$value],
         );
+    }
+
+
+    public function expert_earnings()
+    {
+        return $this->belongsTo(UserEarning::class,'user_id','id');
+    }
+
+
+    public function expert_earnings_sum()
+    {
+        $sum = 0;
+        $earn = UserEarning::where('user_id',$this->id)->get();
+        foreach ($earn as $item)
+        {
+            $sum += $item->earning;
+        }
+        return $sum;
     }
 }

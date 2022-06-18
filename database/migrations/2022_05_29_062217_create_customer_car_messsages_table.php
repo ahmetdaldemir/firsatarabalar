@@ -16,8 +16,16 @@ return new class extends Migration
         Schema::create('customer_car_messsages', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('compare_id');
-            $table->foreign('compare_id')->references('id')->on('compares')->onDelete('restrict');
+            $table->unsignedBigInteger('customer_id');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('restrict');
+
+
+            $table->unsignedBigInteger('buyer_id');
+            $table->foreign('buyer_id')->references('id')->on('customers')->onDelete('restrict');
+
+            $table->unsignedBigInteger('customer_car_id');
+            $table->foreign('customer_car_id')->references('id')->on('customer_cars')->onDelete('restrict');
+
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
             $table->text('message');

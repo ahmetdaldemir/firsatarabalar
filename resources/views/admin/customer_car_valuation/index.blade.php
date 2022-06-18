@@ -41,7 +41,7 @@
                     <select name="agent_id" id="agent_id" class="form-control mr-2">
                         <option value="">Danışman Seçiniz</option>
                         @foreach ( $experts as $expert )
-                            <option value="{{$expert->id}}" {{( Request::get("agent_id")==$expert->id ) ? "selected" : ""}}>{{$expert->firstname}} {{$expert->lastname}}</option>
+                            <option value="{{$expert->id}}" {{( Request::get("agent_id")==$expert->id ) ? "selected" : ""}}>{{$expert->name}}</option>
                         @endforeach
                     </select>
                     <button type="submit" class="btn btn-sm btn-primary"><i class="fad fa-search"></i></button>
@@ -67,8 +67,7 @@
                 <th width="100" class="text-center">Kayıt Zamanı</th>
                 <th width="80" class="text-center">Enb İyi Fiyat</th>
                 <th width="115" class="text-center">Değerlemeci</th>
-                <th width="110" class="text-center">Durum</th>
-                <th width="160" class="text-center" colspan="2">İşlem(ler)</th>
+                 <th width="160" class="text-center" colspan="2">İşlem(ler)</th>
             </tr>
             </thead>
             <tbody>
@@ -79,7 +78,7 @@
             @else
                 @foreach($customer_car_valuations  as $customer_car_valuation)
                     <tr id="carRow-1">
-                        <td class="text-center">{{$customer_car_valuation->id}}</td>
+                        <td class="text-center"><a href="{{route('admin.valuation.index',['id' => $customer_car_valuation->id])}}">{{$customer_car_valuation->id}}</a></td>
                         <td class="text-left">{{@$customer_car_valuation->customer->firstname}} {{@$customer_car_valuation->customer->lastname}}</a></td>
                         <td class="text-center">{{$customer_car_valuation->buyer_id}}</td>
 
@@ -87,31 +86,19 @@
                         <td class="text-center">{{@$customer_car_valuation->plate}}</td>
                         <td class="text-center">{{\Carbon\Carbon::parse($customer_car_valuation->created_at)->format('d-m-Y')}}</td>
                         <td class="text-left">{{$customer_car_valuation->gal_price_1}} ₺</td>
-                        <td class="text-left">{{$customer_car_valuation->expert->firstname}} {{$customer_car_valuation->expert->lastname}}</td>
+                        <td class="text-left">{{$customer_car_valuation->expert->name}}</td>
+
                         <td class="text-center">
-                            @if ( $customer_car_valuation->status == 0 )
-                                <span class="text-danger">Onaya Gelmedi</span>
-                            @elseif ( $customer_car_valuation->status == 1 )
-                                <span class="text-warning">Onay Bekliyor</span>
-                            @elseif ( $customer_car_valuation->status == 2 )
-                                <span class="text-info">Rapor Gönderildi</span>
-                            @endif
-                        </td>
-                        <td class="text-center">
-                            @if ( $customer_car_valuation->status == 0 )
-                                <span class="btn btn-xs btn-danger w-100"><i class="fad fa-times mr-1"></i> İşlem Yapılamaz</span>
-                            @else
-                                @if ( $customer_car_valuation->status == 1 )
-                                    <a href="javascript:;" data-valuationid="{{$customer_car_valuation->id}}" class="confirm btn btn-xs btn-primary"><i class="fad fa-check mr-1"></i> Onayla</a>
-                                    <a href="javascript:;" data-valuationid="{{$customer_car_valuation->id}}" class="reject btn btn-xs btn-warning"><i class="fad fa-reply mr-1"></i> Tekrarla</a>
-                                @elseif ( $customer_car_valuation->status == 2 )
-                                    <a href="javascript:;" data-valuationid="{{$customer_car_valuation->id}}" class="reject btn btn-xs btn-warning w-100"><i class="fad fa-reply mr-1"></i> Tekrarla</a>
-                                @endif
-                            @endif
+                            <select class="btn btn-xs btn-danger w-50">
+                                <?php foreach ($status as $key => $value){ ?>
+                                   <option value="<?=$key?>"><?=$value['text']?></option>
+                                <?php } ?>
+                            </select>
+                            <a href=""><i class="fa-fw fad fa-assistive-listening-systems"></i></a>
                         </td>
                         <td>
                             <div class="dropdown">
-                                <a class="btn btn-xs btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fad fa-times mr-1"></i> İptal </a>
+                                <a class="btn btn-xs btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fad fa-times mr-1"></i> Seçiniz </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
                                     <a class="dropdown-item cancel" href="#"  data-valuationid="{{$customer_car_valuation->id}}" data-sendsms="0">Detay</a>
                                     <a class="dropdown-item cancel" href="#"  data-valuationid="{{$customer_car_valuation->id}}" data-sendsms="0">Resimler</a>
@@ -119,7 +106,7 @@
                                     <a class="dropdown-item cancel" href="#"  data-valuationid="{{$customer_car_valuation->id}}" data-sendsms="0">Sessiz Kaldır</a>
                                     <a class="dropdown-item cancel" href="#"  data-valuationid="{{$customer_car_valuation->id}}" data-sendsms="0">Mesajlaşma</a>
                                     <a class="dropdown-item cancel" href="#"  data-valuationid="{{$customer_car_valuation->id}}" data-sendsms="0">Değerlendirme Raporu</a>
-                                </div>
+                                 </div>
                             </div>
                         </td>
                     </tr>

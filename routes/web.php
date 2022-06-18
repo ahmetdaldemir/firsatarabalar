@@ -1,12 +1,15 @@
 <?php
 
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Modules\Admin\CarController;
 use App\Http\Controllers\Modules\Admin\CustomerCarController;
 use App\Http\Controllers\Modules\Admin\CustomerCarValuationController;
 use App\Http\Controllers\Modules\Admin\CustomerController;
-use App\Http\Controllers\Modules\Admin\ExpertController;
+use App\Http\Controllers\Modules\Admin\UserController;
 use App\Http\Controllers\Modules\Admin\PageController;
 use App\Http\Controllers\Modules\Admin\SettingsController;
+use App\Http\Controllers\Modules\Admin\ValuationController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
@@ -36,6 +39,7 @@ All Normal Users Routes List
 Route::middleware(['auth', 'user-access:user'])->group(function () {
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 });
 
 /*------------------------------------------
@@ -49,10 +53,10 @@ Route::prefix('admin/')->middleware(['auth', 'user-access:admin'])->group(functi
 
 
     Route::prefix('expert/')->group(function () {
-        Route::get('index', [ExpertController::class, 'index'])->name('admin.expert.index');
-        Route::get('create', [ExpertController::class, 'create'])->name('admin.expert.create');
-        Route::get('edit', [ExpertController::class, 'form'])->name('admin.expert.edit');
-        Route::post('store', [ExpertController::class, 'store'])->name('admin.expert.store');
+        Route::get('index', [UserController::class, 'index'])->name('admin.expert.index');
+        Route::get('create', [UserController::class, 'create'])->name('admin.expert.create');
+        Route::get('edit', [UserController::class, 'form'])->name('admin.expert.edit');
+        Route::post('store', [UserController::class, 'store'])->name('admin.expert.store');
     });
 
     Route::prefix('customer/')->group(function () {
@@ -77,6 +81,11 @@ Route::prefix('admin/')->middleware(['auth', 'user-access:admin'])->group(functi
         Route::get('edit', [CustomerCarValuationController::class, 'form'])->name('admin.customer_car_valuation.edit');
         Route::post('store', [CustomerCarValuationController::class, 'store'])->name('admin.customer_car_valuation.store');
         Route::get('deleted', [CustomerCarValuationController::class, 'destroy'])->name('admin.customer_car_valuation.deleted');
+    });
+
+    Route::prefix('valuation/')->group(function () {
+        Route::get('index', [ValuationController::class, 'index'])->name('admin.valuation.index');
+
     });
 
     Route::prefix('page/')->group(function () {

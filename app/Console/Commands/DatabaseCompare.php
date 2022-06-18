@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use App\Models\Customer;
 use App\Models\CustomerCar;
+use App\Models\CustomerCarPaymentTransaction;
+use App\Models\CustomerCarPhoto;
 use App\Models\CustomerCarValuation;
 use App\Models\Page;
 use App\Models\Valuation;
@@ -116,48 +118,80 @@ class DatabaseCompare extends Command
 
         }
 */
-      /*  $x = DB::connection('mysql2')->table('valuations')->get();
+        /*  $x = DB::connection('mysql2')->table('valuations')->get();
+          foreach ($x as $item) {
+              $valuatons = new CustomerCarValuation();
+              $valuatons->uuid = $item->uuid;
+              $valuatons->customers_car_id  = $item->customers_car_id;
+              $valuatons->comment =   $item->comment;
+              $valuatons->link1 = $item->link1;
+              $valuatons->link1_comment = $item->link1_comment;
+              $valuatons->link2 = $item->link2;
+              $valuatons->link2_comment = $item->link2_comment;
+              $valuatons->link3 = $item->link3;
+              $valuatons->link3_comment = $item->link3_comment;
+              $valuatons->link4 = $item->link4;
+              $valuatons->link4_comment = $item->link4_comment;
+              $valuatons->link5 = $item->link5;
+              $valuatons->link5_comment = $item->link5_comment;
+              $valuatons->offer_price = $item->offer_price;
+              $valuatons->earning = $item->earning;
+              $valuatons->date_sendconfirm = $item->date_sendconfirm;
+              $valuatons->date_customer_open = $item->date_customer_open;
+              $valuatons->date_confirm = $item->date_confirm;
+              $valuatons->is_confirm = $item->is_confirm;
+              $valuatons->status = $item->status;
+              $valuatons->save();
+          }
+
+        */
+
+        /*   $x = DB::connection('mysql2')->table('staticpages')->get();
+           foreach ($x as $item) {
+               $page = new Page();
+               $page->id_parent = 0;
+               $page->type = "page";
+               $page->title = $item->title;
+               $page->content = $item->content;
+               $page->images = "";
+               $page->slug = Str::slug( $item->title);
+               $page->meta_key = $item->title;
+               $page->meta_description = $item->title;
+               $page->labels = "";
+               $page->save();
+           }
+
+
+           $x = DB::connection('mysql2')->table('customers_cars_photos')->get();
+           foreach ($x as $item) {
+               $pages = CustomerCarPhoto::where('id',$item->id)->first();
+               if(!$pages)
+               {
+                   $page = new CustomerCarPhoto();
+                   $page->id = $item->id;
+                   $page->customer_car_id = $item->customers_car_id;
+                   $page->image = $item->photo;
+                   $page->active = $item->primary;
+                   $page->save();
+               }
+          }
+    */
+
+
+        $x = DB::connection('mysql2')->table('payments')->get();
         foreach ($x as $item) {
-            $valuatons = new CustomerCarValuation();
-            $valuatons->uuid = $item->uuid;
-            $valuatons->customers_car_id  = $item->customers_car_id;
-            $valuatons->comment =   $item->comment;
-            $valuatons->link1 = $item->link1;
-            $valuatons->link1_comment = $item->link1_comment;
-            $valuatons->link2 = $item->link2;
-            $valuatons->link2_comment = $item->link2_comment;
-            $valuatons->link3 = $item->link3;
-            $valuatons->link3_comment = $item->link3_comment;
-            $valuatons->link4 = $item->link4;
-            $valuatons->link4_comment = $item->link4_comment;
-            $valuatons->link5 = $item->link5;
-            $valuatons->link5_comment = $item->link5_comment;
-            $valuatons->offer_price = $item->offer_price;
-            $valuatons->earning = $item->earning;
-            $valuatons->date_sendconfirm = $item->date_sendconfirm;
-            $valuatons->date_customer_open = $item->date_customer_open;
-            $valuatons->date_confirm = $item->date_confirm;
-            $valuatons->is_confirm = $item->is_confirm;
-            $valuatons->status = $item->status;
-            $valuatons->save();
+            $pages = CustomerCarPaymentTransaction::where('id', $item->id)->first();
+            if (!$pages) {
+                $page = new CustomerCarPaymentTransaction();
+                $page->id = $item->id;
+                $page->customer_car_id = $item->customers_cars_id;
+                $page->payment_type = 'rapor';
+                $page->order_total = $item->order_total;
+                $page->response_auth = $item->response_auth;
+                $page->response_payment = $item->response_payment;
+                $page->status = $item->status;
+                $page->save();
+            }
         }
-
-      */
-
-        $x = DB::connection('mysql2')->table('staticpages')->get();
-        foreach ($x as $item) {
-            $page = new Page();
-            $page->id_parent = 0;
-            $page->type = "page";
-            $page->title = $item->title;
-            $page->content = $item->content;
-            $page->images = "";
-            $page->slug = Str::slug( $item->title);
-            $page->meta_key = $item->title;
-            $page->meta_description = $item->title;
-            $page->labels = "";
-            $page->save();
-        }
-
     }
 }

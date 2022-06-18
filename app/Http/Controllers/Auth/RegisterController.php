@@ -5,12 +5,17 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Repositories\Users\UserRepositoryInterface;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
+
+    private UserRepositoryInterface $UserRepository;
+
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -36,9 +41,12 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
+
+
+    public function __construct(UserRepositoryInterface $UserRepository)
     {
         $this->middleware('guest');
+        $this->UserRepository = $UserRepository;
     }
 
     /**
@@ -62,12 +70,14 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function create(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        if(is_null($request->expert_id))
+        {
+            $this->UserRepository->create($request);
+        }else{
+            $this->UserRepository->update($request->expert_id,$request);
+        }
+
     }
 }

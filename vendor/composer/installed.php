@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'c87d308ad77896b17cf120b6c5b335d6aa3c6cf1',
+        'reference' => 'b13bc8b07307b4fc42f081eb16594c115b64d6bc',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -487,7 +487,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'c87d308ad77896b17cf120b6c5b335d6aa3c6cf1',
+            'reference' => 'b13bc8b07307b4fc42f081eb16594c115b64d6bc',
             'dev_requirement' => false,
         ),
         'laravel/passport' => array(
@@ -1240,6 +1240,15 @@
             'aliases' => array(),
             'reference' => '51e5daaa7e43c154fe57f1ddfbba862f9fe57646',
             'dev_requirement' => true,
+        ),
+        'spatie/laravel-permission' => array(
+            'pretty_version' => '5.5.4',
+            'version' => '5.5.4.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../spatie/laravel-permission',
+            'aliases' => array(),
+            'reference' => 'cb86fd87b43fcfc493c3f2b1de6fad100c078146',
+            'dev_requirement' => false,
         ),
         'stella-maris/clock' => array(
             'pretty_version' => '0.1.4',

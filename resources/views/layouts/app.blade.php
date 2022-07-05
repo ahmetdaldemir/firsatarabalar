@@ -109,11 +109,12 @@
     <script src="{{asset('admin/js/plugins/pace/pace.min.js')}}"></script>
     <script src="{{asset('admin/js/plugins/sweetalert/sweetalert.min.js')}}"></script>
     <script src="{{asset('web/js/jquery.mask.min.js')}}" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js" charset="utf-8"></script>
 
 
 </head>
 
-<body>
+<body ng-app="app">
 
 <div id="wrapper">
 

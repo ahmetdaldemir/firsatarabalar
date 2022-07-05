@@ -8,4 +8,8 @@ interface CustomerCarInterface
     public function create($request);
     public function update($id,$request);
     public function filter();
+    public function assignmentDo($request);
+    public function status($request,$status);
+    public function statusLog($request,$status);
+
 }

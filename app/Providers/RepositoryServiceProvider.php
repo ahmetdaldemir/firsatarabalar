@@ -7,8 +7,7 @@ use App\Repositories\Cars\CarRepositoryInterface;
 
 use App\Repositories\CustomerCar\CustomerCarInterface;
 use App\Repositories\CustomerCar\CustomerCarRepository;
-use App\Repositories\CustomerCarValuation\CustomerCarValuationInterface;
-use App\Repositories\CustomerCarValuation\CustomerCarValuationRepository;
+
 
 use App\Repositories\Customers\CustomerRepository;
 use App\Repositories\Customers\CustomerRepositoryInterface;
@@ -23,6 +22,8 @@ use App\Repositories\Pages\PageRepository;
 use App\Repositories\Pages\PageRepositoryInterface;
 use App\Repositories\Roles\RoleRepository;
 use App\Repositories\Roles\RoleRepositoryInterface;
+use App\Repositories\Settings\SettingRepository;
+use App\Repositories\Settings\SettingRepositoryInterface;
 use App\Repositories\Town\TownRepository;
 use App\Repositories\Town\TownRepositoryInterface;
 
@@ -46,12 +47,12 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(CityRepositoryInterface::class, CityRepository::class);
         $this->app->bind(TownRepositoryInterface::class, TownRepository::class);
         $this->app->bind(CarRepositoryInterface::class, CarRepository::class);
-        $this->app->bind(CustomerCarValuationInterface::class, CustomerCarValuationRepository::class);
         $this->app->bind(CustomerCarInterface::class, CustomerCarRepository::class);
         $this->app->bind(PageRepositoryInterface::class, PageRepository::class);
         $this->app->bind(ValuationRepositoryInterface::class, ValuationRepository::class);
         $this->app->bind(RoleRepositoryInterface::class, RoleRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->bind(SettingRepositoryInterface::class, SettingRepository::class);
 
     }
 

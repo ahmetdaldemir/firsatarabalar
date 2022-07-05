@@ -3,7 +3,6 @@
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Modules\Admin\CarController;
 use App\Http\Controllers\Modules\Admin\CustomerCarController;
-use App\Http\Controllers\Modules\Admin\CustomerCarValuationController;
 use App\Http\Controllers\Modules\Admin\CustomerController;
 use App\Http\Controllers\Modules\Admin\UserController;
 use App\Http\Controllers\Modules\Admin\PageController;
@@ -26,6 +25,8 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', function () {
+    return view('welcome');
+});Route::get('/', function () {
     return view('welcome');
 });
 
@@ -76,11 +77,11 @@ Route::prefix('admin/')->middleware(['auth', 'user-access:admin'])->group(functi
     });
 
     Route::prefix('customer_car_valuation/')->group(function () {
-        Route::get('index', [CustomerCarValuationController::class, 'index'])->name('admin.customer_car_valuation.index');
-        Route::get('create', [CustomerCarValuationController::class, 'create'])->name('admin.customer_car_valuation.create');
-        Route::get('edit', [CustomerCarValuationController::class, 'form'])->name('admin.customer_car_valuation.edit');
-        Route::post('store', [CustomerCarValuationController::class, 'store'])->name('admin.customer_car_valuation.store');
-        Route::get('deleted', [CustomerCarValuationController::class, 'destroy'])->name('admin.customer_car_valuation.deleted');
+        Route::get('index', [CustomerCarController::class, 'index'])->name('admin.customer_car_valuation.index');
+        Route::get('create', [CustomerCarController::class, 'create'])->name('admin.customer_car_valuation.create');
+        Route::get('edit', [CustomerCarController::class, 'form'])->name('admin.customer_car_valuation.edit');
+        Route::post('store', [CustomerCarController::class, 'store'])->name('admin.customer_car_valuation.store');
+        Route::get('deleted', [CustomerCarController::class, 'destroy'])->name('admin.customer_car_valuation.deleted');
     });
 
     Route::prefix('valuation/')->group(function () {
@@ -102,6 +103,8 @@ Route::prefix('admin/')->middleware(['auth', 'user-access:admin'])->group(functi
         Route::get('city/{id}', [SettingsController::class, 'city'])->name('admin.setting.city.{id}');
 
     });
+
+    Route::post('assignmentDo', [CustomerCarController::class, 'assignmentDo'])->name('admin.assignmentDo');
 
 
 

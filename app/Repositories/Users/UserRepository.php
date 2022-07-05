@@ -12,6 +12,12 @@ class UserRepository implements UserRepositoryInterface
         return User::all();
     }
 
+
+    public function getExpert()
+    {
+        return User::where('type',0)->get();
+    }
+
     public function getById($id)
     {
         return User::findOrFail($id);

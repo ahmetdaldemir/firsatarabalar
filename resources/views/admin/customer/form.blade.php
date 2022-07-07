@@ -25,12 +25,8 @@
                 <li><a class="nav-link" data-toggle="tab" href="#cars"><i class="fad fa-cars"></i> Araçları <span
                                 class="label label-plain ml-2">{{($cars != NULL) ? count($cars) : 0}}</span></a></a>
                 </li>
-                <li><a class="nav-link" data-toggle="tab" href="#payments"><i class="fad fa-sack-dollar"></i> Ödemeleri
-                        <span class="label label-plain ml-2">{{($payments != NULL) ? count($payments) : 0}}</span></a></a>
-                </li>
                 <li><a class="nav-link" data-toggle="tab" href="#notes"><i class="fad fa-comment-alt-dots"></i> Müşteri
-                        Notları <span
-                                class="label label-plain ml-2">{{($customer != NULL) ? count($customer->comments) : 0}}</span></a></a>
+                        Notları <span class="label label-plain ml-2"></span></a></a>
                 </li>
             </ul>
             <div class="tab-content">
@@ -177,26 +173,26 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @if ( empty($cars) )
+                            @if ( empty(@$customer->customer_cars) )
                                 <tr>
                                     <td colspan="10" class="text-center bg-white" height="80">Henüz hiç araç yok!</td>
                                 </tr>
                             @else
-                                @foreach ( $customer->customer_cars as $car )
+                                @foreach ( @$customer->customer_cars as $car )
                                     <tr id="carRow-1">
                                         <td class="text-center">{{$car->id}}</td>
                                         <td class="text-center">{{$car->plate}}</td>
-                                        <td class="text-left">{{@$car->Brand->brand_name}} - {{@$car->Brand->name}}</td>
+                                        <td class="text-left">{{$car->brand->name}}</td>
                                         <td class="text-center">{{$car->fuel}}</td>
                                         <td class="text-center">{{$car->body}}</td>
                                         <td class="text-center">{{$car->date_created}}</td>
                                         <td class="text-center">{{$car->agent}}</td>
                                         <td class="text-center">
 
-                                            @if ( @$car->Payment->status == 0 )
+                                            @if ( @$car->payment->status == 0 )
                                                 <span class="text-danger">Ödeme Bekleniyor</span>
                                             @else
-                                                @if( !$car->agent_id )
+                                                @if(!$car->user_id )
                                                     <a href="javascript:;" data-carid="{{$car->id}}"
                                                        class="confirm btn btn-xs btn-primary"><i
                                                                 class="fad fa-check mr-1"></i> Onayla ve Ata</a>
@@ -216,76 +212,6 @@
                     </div>
                 </div>
 
-                <div role="tabpanel" id="payments" class="tab-pane">
-                    <div class="panel-body">
-
-                        <table class="table table-striped table-bordered table-hover mb-0 bg-white">
-                            <thead class="thead-light">
-                            <tr>
-                                <th width="40" class="text-center">#</th>
-                                <th width="80" class="text-center">Plaka</th>
-                                <th>Araç Marka / İsim</th>
-                                <th width="90" class="text-center">Tür</th>
-                                <th width="85" class="text-center">Tutar</th>
-                                <th width="120" class="text-center">Kayıt Z.</th>
-                                <th width="50" class="text-center"></th>
-                                <th width="100" class="text-center">Durum</th>
-                                <th width="100" class="text-center">İşlem(ler)</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @if ( empty($payments) )
-                                <tr>
-                                    <td colspan="10" class="text-center bg-white" height="80">Hiç ödeme yok!</td>
-                                </tr>
-                            @else
-                                @foreach ( $payments as $payment )
-                                    <tr>
-                                        <td class="text-center">{{$payment->id}}</td>
-                                        <td class="text-center">{{$payment->CustomerCar->plate}}</td>
-                                        <td>{{@$payment->Brand->brand_name}} - {{@$payment->Brand->name}}</td>
-                                        <td class="text-center">{{ ( $payment->payment_method == "KK" ) ? "Kredi Kartı" : "Havale / EFT"}}</td>
-                                        <td class="text-center">{{$payment->order_total}} ₺</td>
-                                        <td class="text-center">{{$payment->date_created}}</td>
-                                        <td class="text-center">
-                                            @if ( $payment->payment_method == "KK" )
-                                                <a tabindex="0" class="btn btn-xs btn-info" role="button"
-                                                   data-toggle="popover" data-trigger="focus" data-placement="left"
-                                                   title="Ödeme Sonucu" data-content="{{@$payment->ResponseText}}"><i
-                                                            class="fad fa-search"></i></a>
-                                            @endif
-                                        </td>
-                                        <td class="text-center">{!! ( $payment->status ) ? '<span class="label label-primary">Ödendi</span>' : '<span class="label label-plain">Beklemede</span>' !!}</td>
-                                        <td class="text-center">
-
-                                            <div class="dropdown">
-                                                <a class="btn btn-xs btn-success dropdown-toggle" href="#" role="button"
-                                                   id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                                   aria-expanded="false">İşlemler </a>
-                                                <div class="dropdown-menu dropdown-menu-right"
-                                                     aria-labelledby="dropdownMenuLink">
-                                                    <a class="dropdown-item" href="#">Ödendi İşaretle</a>
-                                                    <a class="dropdown-item" href="#">Beklemede İşaretle</a>
-
-                                                    @if ( $payment->payment_method == "KK" && !empty($payment->bankReturn) )
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="#">Dönüş Mesajı</a>
-                                                    @endif
-
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#">Kaydı Sil</a>
-                                                </div>
-                                            </div>
-
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
 
                 <div role="tabpanel" id="notes" class="tab-pane">
                     <div class="panel-body">
@@ -320,8 +246,8 @@
                                 @foreach (@$customer->comments as $comment )
                                     <tr>
                                         <td class="text-center">{{$comment->id}}</td>
-                                        <td>{{$comment->comment}}</td>
-                                        <td class="text-center">{{$comment->name}}</td>
+                                        <td>{{$comment->message}}</td>
+                                        <td class="text-center">{{$comment->user->firstname}} {{$comment->user->lastname}} </td>
                                         <td class="text-center">{{$comment->date_created}}</td>
                                         <td class="text-center"><a href="javascript:;"
                                                                    class="comment_delete btn btn-sm btn-danger"
@@ -427,7 +353,7 @@
                 loadstates($(this).val());
             });
 
-            @if($customer)
+            @if(@$customer)
             if ({{old('city',@$customer->city)}}) {
                 loadstates({{old('city',@$customer->city)}}, {{old('state',@$customer->state)}});
             }

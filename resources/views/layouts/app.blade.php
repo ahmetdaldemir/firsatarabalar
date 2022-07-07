@@ -108,7 +108,7 @@
     <script src="{{asset('admin/js/inspinia.js')}}"></script>
     <script src="{{asset('admin/js/plugins/pace/pace.min.js')}}"></script>
     <script src="{{asset('admin/js/plugins/sweetalert/sweetalert.min.js')}}"></script>
-    <script src="{{asset('web/js/jquery.mask.min.js')}}" charset="utf-8"></script>
+    <script src="{{asset('admin/js/jquery.mask.min.js')}}" charset="utf-8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js" charset="utf-8"></script>
 
 
@@ -168,14 +168,7 @@
 
                 <li><a href="/payments"><i class="fa-fw fad fa-money-bill-wave"></i> <span class="nav-label">Ödemeler</span></a></li>
 
-                <li>
-                    <a href="/bank-transfers">
-                        <i class="fa-fw fad fa-money-check-edit-alt"></i>
-                        <span class="nav-label">Havale Bildirimleri</span>
-                        <span class="label label-danger float-right">0</span>
-                    </a>
-                </li>
-<!-- $Counter["BankTransfers"] -->
+
                 <li><a href="/reviews"><i class="fa-fw fad fa-comments-alt"></i> <span class="nav-label">Kullanıcı Görüşleri</span></a></li>
                 <li>
                     <a href="javascript:;"><i class="fa-fw fad fa-question-circle"></i> <span class="nav-label">Yardım Sayfaları</span><span class="fa arrow"></span></a>

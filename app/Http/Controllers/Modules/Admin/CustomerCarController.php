@@ -5,6 +5,7 @@ use App\Enums\DateEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\carRequest;
 use App\Models\CustomerCar;
+use App\Repositories\Cities\CityRepositoryInterface;
 use App\Repositories\CustomerCar\CustomerCarInterface;
 use App\Repositories\Users\UserRepositoryInterface;
 use App\Services\Sms;
@@ -19,13 +20,16 @@ class CustomerCarController extends Controller
     protected $now;
     protected $customer_car_status;
     protected $sms;
+    private CityRepositoryInterface $CityRepository;
 
-    public function __construct(CustomerCarInterface $CustomerCar,UserRepositoryInterface $UserRepository)
+    public function __construct(CustomerCarInterface $CustomerCar, UserRepositoryInterface $UserRepository,CityRepositoryInterface $CityRepository)
     {
         $this->CustomerCar = $CustomerCar;
         $this->UserRepository = $UserRepository;
         $this->now = Carbon::now();
         $this->sms = new Sms();
+        $this->CityRepository = $CityRepository;
+
     }
 
     public function index()
@@ -34,17 +38,17 @@ class CustomerCarController extends Controller
         $data['customer_car_valuations'] = $this->CustomerCar->get();
         $data['years'] = DateEnum::Years;
         $data['experts'] = $this->UserRepository->getExpert();
-        $data['mounth'] =$this->now->month;
-        $data['this_year'] =$this->now->year;
+        $data['mounth'] = $this->now->month;
+        $data['this_year'] = $this->now->year;
         $data['status'] = CustomerCarStatus::Status;
-        return view('admin.customer_car_valuation.index',$data);
+        return view('admin.customer_car_valuation.index', $data);
     }
 
     public function deleted()
     {
         $data['show'] = "checked";
         $data['cars'] = $this->CustomerCar->deleted();
-        return view('admin.car.index',$data);
+        return view('admin.car.index', $data);
     }
 
 
@@ -54,7 +58,7 @@ class CustomerCarController extends Controller
         $data['payments'] = NULL;
         $data['cars'] = NULL;
         $data['cities'] = $this->CityRepository->get();
-        return view('admin.car.form',$data);
+        return view('admin.customer_car_valuation.form', $data);
     }
 
     public function create()
@@ -63,17 +67,16 @@ class CustomerCarController extends Controller
         $data['payments'] = NULL;
         $data['cars'] = NULL;
         $data['cities'] = $this->CityRepository->get();
-        return view('admin.car.form',$data);
+        return view('admin.car.form', $data);
     }
 
 
     public function store(carRequest $request)
     {
-        if(is_null($request->car_id))
-        {
+        if (is_null($request->car_id)) {
             $this->CustomerCar->create($request);
-        }else{
-            $this->CustomerCar->update($request->car_id,$request);
+        } else {
+            $this->CustomerCar->update($request->car_id, $request);
         }
         return redirect()->route('admin.car.index');
     }
@@ -109,11 +112,16 @@ class CustomerCarController extends Controller
 
     public function assignmentDo(Request $request)
     {
-        $this->CustomerCar->assignmentDo($request);
-        $this->sms->sendexpertmessage($request);
-        $this->CustomerCar->status($request,CustomerCarStatus::STATUS_STRING['ASSINGTO']);
-        $this->CustomerCar->statusLog($request,CustomerCarStatus::STATUS_STRING['ASSINGTO']);
-        return response()->json(null, Response::HTTP_OK);
+        $check = $this->CustomerCar->checkAssingTo($request, CustomerCarStatus::STATUS_STRING['ASSINGTO']);
+        if(!$check)
+        {
+            $this->CustomerCar->assignmentDo($request);
+            $this->sms->sendexpertmessage($request);
+            $this->CustomerCar->status($request, CustomerCarStatus::STATUS_STRING['ASSINGTO']);
+            $this->CustomerCar->statusLog($request, CustomerCarStatus::STATUS_STRING['ASSINGTO']);
+            return response()->json("Atama Başarılı", Response::HTTP_OK);
+        }
+        return response()->json("Daha Önce Atama işlemi yapılmıştır", Response::HTTP_CONFLICT);
     }
 
 

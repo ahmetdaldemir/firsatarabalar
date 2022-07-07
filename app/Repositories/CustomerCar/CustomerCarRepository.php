@@ -2,8 +2,9 @@
 
 use App\Models\CustomerCar;
 use App\Models\CustomerCarStatuHistory;
+use Illuminate\Support\Facades\Auth;
 
-class CustomerCarRepository implements CustomerCarInterface
+class CustomerCarRepository  implements CustomerCarInterface
 {
     public function get()
     {
@@ -113,6 +114,7 @@ class CustomerCarRepository implements CustomerCarInterface
             $customercarstatushistories = new CustomerCarStatuHistory();
             $customercarstatushistories->customer_car_id = $request->customer_car_id;
             $customercarstatushistories->status = $status;
+            $customercarstatushistories->user_id = Auth::id();
             $customercarstatushistories->save();
         } catch (\Illuminate\Database\QueryException $e) {
             return $e->getMessage();
@@ -121,5 +123,9 @@ class CustomerCarRepository implements CustomerCarInterface
         }
     }
 
+    public function checkAssingTo($request, $status)
+    {
+        return CustomerCarStatuHistory::where('customer_car_id',$request->customer_car_id)->where('status',$status)->get();
+    }
 
 }

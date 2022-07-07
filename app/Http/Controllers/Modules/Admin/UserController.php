@@ -33,7 +33,7 @@ class UserController extends Controller
         $data['dateBegin'] = NULL;
         $data['dateEnd'] = NULL;
         $data['years'] = NULL;
-        $data['roles'] = NULL;
+        $data['roles'] = $this->RoleRepository->get();
 
 
         if($request)

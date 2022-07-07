@@ -93,9 +93,8 @@
                             <td class="text-left">{{@$customer_car_valuation->customer->firstname}} {{@$customer_car_valuation->customer->lastname}}</a></td>
                             <td class="text-center">{{$customer_car_valuation->buyer_id}}</td>
 
-                            <td class="text-left">{{@$customer_car_valuation->car->name}}
-                                - {{@$customer_car_valuation->car->brand->name}}</td>
-                            <td class="text-center">{{@$customer_car_valuation->plate}}</td>
+                            <td class="text-left">{{@$customer_car_valuation->car->name}}  - {{@$customer_car_valuation->car->brand->name}}</td>
+                            <td class="text-center"><a href="{{route('admin.customer_car_valuation.edit',['id' =>$customer_car_valuation->id ])}}">{{@$customer_car_valuation->plate}} </a></td>
                             <td class="text-center">{{\Carbon\Carbon::parse($customer_car_valuation->created_at)->format('d-m-Y')}}</td>
                             <td class="text-left">{{$customer_car_valuation->gal_price_1}} ₺</td>
                             <td class="text-left">{{$customer_car_valuation->expert->name}}</td>
@@ -332,9 +331,10 @@
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 }).then(function successCallback(data) {
                     $("#agentModal").modal('hide');
-                    swal("Atama Yapıldı");
+                    swal(data.data);
                 }, function errorCallback(response) {
-
+                    $("#agentModal").modal('hide');
+                    swal(response.data);
                 });
             };
         });

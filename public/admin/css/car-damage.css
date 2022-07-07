@@ -13,7 +13,7 @@
 
 .car-parts {
     position: relative;
-    background-image: url("../../web/img/car-parts/car_base.png");
+    background-image: url("../../admin/img/car_base.png");
     background-position: 0 0;
     width: 311px;
     height: 391px
@@ -98,7 +98,7 @@
 
 
 .car-parts .front-bumper.original {
-    background-image: url("../../web/img/car-parts/car_original.png");
+    background-image: url("../../admin/img/car_original.png");
     background-position: 0 -245px;
     width: 105px;
     height: 22px
@@ -106,28 +106,28 @@
 
 .car-parts .front-bumper:hover,
 .car-parts .front-bumper.hover {
-    background-image: url("../../web/img/car-parts/car_hover.png");
+    background-image: url("../../admin/img/car_hover.png");
     background-position: 0 -245px;
     width: 105px;
     height: 22px
 }
 
 .car-parts .front-bumper.painted {
-    background-image: url("../../web/img/car-parts/car_painted.png");
+    background-image: url("../../admin/img/car_painted.png");
     background-position: 0 -245px;
     width: 105px;
     height: 22px
 }
 
 .car-parts .front-bumper.paintedlocal {
-    background-image: url("../../web/img/car-parts/car_painted_local.png");
+    background-image: url("../../admin/img/car_painted_local.png");
     background-position: 0 -245px;
     width: 105px;
     height: 22px
 }
 
 .car-parts .front-bumper.changed {
-    background-image: url("../../web/img/car-parts/car_changed.png");
+    background-image: url("../../admin/img/car_changed.png");
     background-position: 0 -245px;
     width: 105px;
     height: 22px
@@ -136,7 +136,7 @@
 
 
 .car-parts .front-left-mudguard {
-    background-image: url("../../web/img/car-parts/car_original.png");
+    background-image: url("../../admin/img/car_original.png");
     background-position: -299px -164px;
     width: 28px;
     height: 43px
@@ -144,28 +144,28 @@
 
 .car-parts .front-left-mudguard:hover,
 .car-parts .front-left-mudguard.hover {
-    background-image: url("../../web/img/car-parts/car_hover.png");
+    background-image: url("../../admin/img/car_hover.png");
     background-position: -299px -164px;
     width: 28px;
     height: 43px
 }
 
 .car-parts .front-left-mudguard.painted {
-    background-image: url("../../web/img/car-parts/car_painted.png");
+    background-image: url("../../admin/img/car_painted.png");
     background-position: -299px -164px;
     width: 28px;
     height: 43px
 }
 
 .car-parts .front-left-mudguard.paintedlocal {
-    background-image: url("../../web/img/car-parts/car_painted_local.png");
+    background-image: url("../../admin/img/car_painted_local.png");
     background-position: -299px -164px;
     width: 28px;
     height: 43px
 }
 
 .car-parts .front-left-mudguard.changed {
-    background-image: url("../../web/img/car-parts/car_changed.png");
+    background-image: url("../../admin/img/car_changed.png");
     background-position: -299px -164px;
     width: 28px;
     height: 43px
@@ -174,7 +174,7 @@
 
 
 .car-parts .front-right-mudguard {
-    background-image: url("../../web/img/car-parts/car_original.png");
+    background-image: url("../../admin/img/car_original.png");
     background-position: -299px -111px;
     width: 28px;
     height: 43px
@@ -182,28 +182,28 @@
 
 .car-parts .front-right-mudguard:hover,
 .car-parts .front-right-mudguard.hover {
-    background-image: url("../../web/img/car-parts/car_hover.png");
+    background-image: url("../../admin/img/car_hover.png");
     background-position: -299px -111px;
     width: 28px;
     height: 43px
 }
 
 .car-parts .front-right-mudguard.painted {
-    background-image: url("../../web/img/car-parts/car_painted.png");
+    background-image: url("../../admin/img/car_painted.png");
     background-position: -299px -111px;
     width: 28px;
     height: 43px
 }
 
 .car-parts .front-right-mudguard.paintedlocal {
-    background-image: url("../../web/img/car-parts/car_painted_local.png");
+    background-image: url("../../admin/img/car_painted_local.png");
     background-position: -299px -111px;
     width: 28px;
     height: 43px
 }
 
 .car-parts .front-right-mudguard.changed {
-    background-image: url("../../web/img/car-parts/car_changed.png");
+    background-image: url("../../admin/img/car_changed.png");
     background-position: -299px -111px;
     width: 28px;
     height: 43px
@@ -212,7 +212,7 @@
 
 
 .car-parts .front-hood {
-    background-image: url("../../web/img/car-parts/car_original.png");
+    background-image: url("../../admin/img/car_original.png");
     background-position: 0 0;
     width: 110px;
     height: 80px
@@ -220,28 +220,28 @@
 
 .car-parts .front-hood:hover,
 .car-parts .front-hood.hover {
-    background-image: url("../../web/img/car-parts/car_hover.png");
+    background-image: url("../../admin/img/car_hover.png");
     background-position: 0 0;
     width: 110px;
     height: 80px
 }
 
 .car-parts .front-hood.painted {
-    background-image: url("../../web/img/car-parts/car_painted.png");
+    background-image: url("../../admin/img/car_painted.png");
     background-position: 0 0;
     width: 110px;
     height: 80px
 }
 
 .car-parts .front-hood.paintedlocal {
-    background-image: url("../../web/img/car-parts/car_painted_local.png");
+    background-image: url("../../admin/img/car_painted_local.png");
     background-position: 0 0;
     width: 110px;
     height: 80px
 }
 
 .car-parts .front-hood.changed {
-    background-image: url("../../web/img/car-parts/car_changed.png");
+    background-image: url("../../admin/img/car_changed.png");
     background-position: 0 0;
     width: 110px;
     height: 80px
@@ -250,7 +250,7 @@
 
 
 .car-parts .front-left-door {
-    background-image: url("../../web/img/car-parts/car_original.png");
+    background-image: url("../../admin/img/car_original.png");
     background-position: -120px 0;
     width: 80px;
     height: 104px
@@ -258,28 +258,28 @@
 
 .car-parts .front-left-door:hover,
 .car-parts .front-left-door.hover {
-    background-image: url("../../web/img/car-parts/car_hover.png");
+    background-image: url("../../admin/img/car_hover.png");
     background-position: -120px 0;
     width: 80px;
     height: 104px
 }
 
 .car-parts .front-left-door.painted {
-    background-image: url("../../web/img/car-parts/car_painted.png");
+    background-image: url("../../admin/img/car_painted.png");
     background-position: -120px 0;
     width: 80px;
     height: 104px
 }
 
 .car-parts .front-left-door.paintedlocal {
-    background-image: url("../../web/img/car-parts/car_painted_local.png");
+    background-image: url("../../admin/img/car_painted_local.png");
     background-position: -120px 0;
     width: 80px;
     height: 104px
 }
 
 .car-parts .front-left-door.changed {
-    background-image: url("../../web/img/car-parts/car_changed.png");
+    background-image: url("../../admin/img/car_changed.png");
     background-position: -120px 0;
     width: 80px;
     height: 104px
@@ -288,7 +288,7 @@
 
 
 .car-parts .front-right-door {
-    background-image: url("../../web/img/car-parts/car_original.png");
+    background-image: url("../../admin/img/car_original.png");
     background-position: 0 -90px;
     width: 80px;
     height: 105px
@@ -296,28 +296,28 @@
 
 .car-parts .front-right-door:hover,
 .car-parts .front-right-door.hover {
-    background-image: url("../../web/img/car-parts/car_hover.png");
+    background-image: url("../../admin/img/car_hover.png");
     background-position: 0 -90px;
     width: 80px;
     height: 105px
 }
 
 .car-parts .front-right-door.painted {
-    background-image: url("../../web/img/car-parts/car_painted.png");
+    background-image: url("../../admin/img/car_painted.png");
     background-position: 0 -90px;
     width: 80px;
     height: 105px
 }
 
 .car-parts .front-right-door.paintedlocal {
-    background-image: url("../../web/img/car-parts/car_painted_local.png");
+    background-image: url("../../admin/img/car_painted_local.png");
     background-position: 0 -90px;
     width: 80px;
     height: 105px
 }
 
 .car-parts .front-right-door.changed {
-    background-image: url("../../web/img/car-parts/car_changed.png");
+    background-image: url("../../admin/img/car_changed.png");
     background-position: 0 -90px;
     width: 80px;
     height: 105px
@@ -326,7 +326,7 @@
 
 
 .car-parts .rear-left-door {
-    background-image: url("../../web/img/car-parts/car_original.png");
+    background-image: url("../../admin/img/car_original.png");
     background-position: -210px -95px;
     width: 79px;
     height: 84px
@@ -334,28 +334,28 @@
 
 .car-parts .rear-left-door:hover,
 .car-parts .rear-left-door.hover {
-    background-image: url("../../web/img/car-parts/car_hover.png");
+    background-image: url("../../admin/img/car_hover.png");
     background-position: -210px -95px;
     width: 79px;
     height: 84px
 }
 
 .car-parts .rear-left-door.painted {
-    background-image: url("../../web/img/car-parts/car_painted.png");
+    background-image: url("../../admin/img/car_painted.png");
     background-position: -210px -95px;
     width: 79px;
     height: 84px
 }
 
 .car-parts .rear-left-door.paintedlocal {
-    background-image: url("../../web/img/car-parts/car_painted_local.png");
+    background-image: url("../../admin/img/car_painted_local.png");
     background-position: -210px -95px;
     width: 79px;
     height: 84px
 }
 
 .car-parts .rear-left-door.changed {
-    background-image: url("../../web/img/car-parts/car_changed.png");
+    background-image: url("../../admin/img/car_changed.png");
     background-position: -210px -95px;
     width: 79px;
     height: 84px
@@ -364,7 +364,7 @@
 
 
 .car-parts .rear-right-door {
-    background-image: url("../../web/img/car-parts/car_original.png");
+    background-image: url("../../admin/img/car_original.png");
     background-position: -210px 0;
     width: 79px;
     height: 85px
@@ -372,28 +372,28 @@
 
 .car-parts .rear-right-door:hover,
 .car-parts .rear-right-door.hover {
-    background-image: url("../../web/img/car-parts/car_hover.png");
+    background-image: url("../../admin/img/car_hover.png");
     background-position: -210px 0;
     width: 79px;
     height: 85px
 }
 
 .car-parts .rear-right-door.painted {
-    background-image: url("../../web/img/car-parts/car_painted.png");
+    background-image: url("../../admin/img/car_painted.png");
     background-position: -210px 0;
     width: 79px;
     height: 85px
 }
 
 .car-parts .rear-right-door.paintedlocal {
-    background-image: url("../../web/img/car-parts/car_painted_local.png");
+    background-image: url("../../admin/img/car_painted_local.png");
     background-position: -210px 0;
     width: 79px;
     height: 85px
 }
 
 .car-parts .rear-right-door.changed {
-    background-image: url("../../web/img/car-parts/car_changed.png");
+    background-image: url("../../admin/img/car_changed.png");
     background-position: -210px 0;
     width: 79px;
     height: 85px
@@ -402,7 +402,7 @@
 
 
 .car-parts .roof {
-    background-image: url("../../web/img/car-parts/car_original.png");
+    background-image: url("../../admin/img/car_original.png");
     background-position: -120px -114px;
     width: 74px;
     height: 53px
@@ -410,28 +410,28 @@
 
 .car-parts .roof:hover,
 .car-parts .roof.hover {
-    background-image: url("../../web/img/car-parts/car_hover.png");
+    background-image: url("../../admin/img/car_hover.png");
     background-position: -120px -114px;
     width: 74px;
     height: 53px
 }
 
 .car-parts .roof.painted {
-    background-image: url("../../web/img/car-parts/car_painted.png");
+    background-image: url("../../admin/img/car_painted.png");
     background-position: -120px -114px;
     width: 74px;
     height: 53px
 }
 
 .car-parts .roof.paintedlocal {
-    background-image: url("../../web/img/car-parts/car_painted_local.png");
+    background-image: url("../../admin/img/car_painted_local.png");
     background-position: -120px -114px;
     width: 74px;
     height: 53px
 }
 
 .car-parts .roof.changed {
-    background-image: url("../../web/img/car-parts/car_changed.png");
+    background-image: url("../../admin/img/car_changed.png");
     background-position: -120px -114px;
     width: 74px;
     height: 53px
@@ -440,7 +440,7 @@
 
 
 .car-parts .rear-bumper {
-    background-image: url("../../web/img/car-parts/car_original.png");
+    background-image: url("../../admin/img/car_original.png");
     background-position: -114px -205px;
     width: 105px;
     height: 22px
@@ -448,28 +448,28 @@
 
 .car-parts .rear-bumper:hover,
 .car-parts .rear-bumper.hover {
-    background-image: url("../../web/img/car-parts/car_hover.png");
+    background-image: url("../../admin/img/car_hover.png");
     background-position: -114px -205px;
     width: 105px;
     height: 22px
 }
 
 .car-parts .rear-bumper.painted {
-    background-image: url("../../web/img/car-parts/car_painted.png");
+    background-image: url("../../admin/img/car_painted.png");
     background-position: -114px -205px;
     width: 105px;
     height: 22px
 }
 
 .car-parts .rear-bumper.paintedlocal {
-    background-image: url("../../web/img/car-parts/car_painted_local.png");
+    background-image: url("../../admin/img/car_painted_local.png");
     background-position: -114px -205px;
     width: 105px;
     height: 22px
 }
 
 .car-parts .rear-bumper.changed {
-    background-image: url("../../web/img/car-parts/car_changed.png");
+    background-image: url("../../admin/img/car_changed.png");
     background-position: -114px -205px;
     width: 105px;
     height: 22px
@@ -478,7 +478,7 @@
 
 
 .car-parts .rear-hood {
-    background-image: url("../../web/img/car-parts/car_original.png");
+    background-image: url("../../admin/img/car_original.png");
     background-position: 0 -205px;
     width: 104px;
     height: 30px
@@ -486,28 +486,28 @@
 
 .car-parts .rear-hood:hover,
 .car-parts .rear-hood.hover {
-    background-image: url("../../web/img/car-parts/car_hover.png");
+    background-image: url("../../admin/img/car_hover.png");
     background-position: 0 -205px;
     width: 104px;
     height: 30px
 }
 
 .car-parts .rear-hood.painted {
-    background-image: url("../../web/img/car-parts/car_painted.png");
+    background-image: url("../../admin/img/car_painted.png");
     background-position: 0 -205px;
     width: 104px;
     height: 30px
 }
 
 .car-parts .rear-hood.paintedlocal {
-    background-image: url("../../web/img/car-parts/car_painted_local.png");
+    background-image: url("../../admin/img/car_painted_local.png");
     background-position: 0 -205px;
     width: 104px;
     height: 30px
 }
 
 .car-parts .rear-hood.changed {
-    background-image: url("../../web/img/car-parts/car_changed.png");
+    background-image: url("../../admin/img/car_changed.png");
     background-position: 0 -205px;
     width: 104px;
     height: 30px
@@ -516,7 +516,7 @@
 
 
 .car-parts .rear-left-mudguard {
-    background-image: url("../../web/img/car-parts/car_original.png");
+    background-image: url("../../admin/img/car_original.png");
     background-position: -299px 0;
     width: 28px;
     height: 46px
@@ -524,28 +524,28 @@
 
 .car-parts .rear-left-mudguard:hover,
 .car-parts .rear-left-mudguard.hover {
-    background-image: url("../../web/img/car-parts/car_hover.png");
+    background-image: url("../../admin/img/car_hover.png");
     background-position: -299px 0;
     width: 28px;
     height: 46px
 }
 
 .car-parts .rear-left-mudguard.painted {
-    background-image: url("../../web/img/car-parts/car_painted.png");
+    background-image: url("../../admin/img/car_painted.png");
     background-position: -299px 0;
     width: 28px;
     height: 46px
 }
 
 .car-parts .rear-left-mudguard.paintedlocal {
-    background-image: url("../../web/img/car-parts/car_painted_local.png");
+    background-image: url("../../admin/img/car_painted_local.png");
     background-position: -299px 0;
     width: 28px;
     height: 46px
 }
 
 .car-parts .rear-left-mudguard.changed {
-    background-image: url("../../web/img/car-parts/car_changed.png");
+    background-image: url("../../admin/img/car_changed.png");
     background-position: -299px 0;
     width: 28px;
     height: 46px
@@ -554,7 +554,7 @@
 
 
 .car-parts .rear-right-mudguard {
-    background-image: url("../../web/img/car-parts/car_original.png");
+    background-image: url("../../admin/img/car_original.png");
     background-position: -299px -56px;
     width: 28px;
     height: 45px
@@ -562,28 +562,28 @@
 
 .car-parts .rear-right-mudguard:hover,
 .car-parts .rear-right-mudguard.hover {
-    background-image: url("../../web/img/car-parts/car_hover.png");
+    background-image: url("../../admin/img/car_hover.png");
     background-position: -299px -56px;
     width: 28px;
     height: 45px
 }
 
 .car-parts .rear-right-mudguard.painted {
-    background-image: url("../../web/img/car-parts/car_painted.png");
+    background-image: url("../../admin/img/car_painted.png");
     background-position: -299px -56px;
     width: 28px;
     height: 45px
 }
 
 .car-parts .rear-right-mudguard.paintedlocal {
-    background-image: url("../../web/img/car-parts/car_painted_local.png");
+    background-image: url("../../admin/img/car_painted_local.png");
     background-position: -299px -56px;
     width: 28px;
     height: 45px
 }
 
 .car-parts .rear-right-mudguard.changed {
-    background-image: url("../../web/img/car-parts/car_changed.png");
+    background-image: url("../../admin/img/car_changed.png");
     background-position: -299px -56px;
     width: 28px;
     height: 45px

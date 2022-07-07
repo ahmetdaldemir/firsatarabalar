@@ -14,4 +14,17 @@ class Customer extends Model
     {
         return $this->belongsTo(CustomerCar::class,'customer_id','id');
     }
+
+
+    public function comments()
+    {
+        return $this->belongsTo(CustomerMessage::class,'customer_id','id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id','id');
+    }
+
+
 }

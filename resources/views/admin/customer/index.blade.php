@@ -46,7 +46,7 @@
             @else
                 @foreach ( $customers as $customer )
                     <tr id="customerRow-{{$customer->id}}">
-                        <td class="text-center"><a href="/customers/{{$customer->id}}/{{$customer->slug}}">{{$customer->id}}</a></td>
+                        <td class="text-center"><a href="{{route('admin.customer.edit',['id' => $customer->id])}}">{{$customer->id}}</a></td>
                         <td>{{$customer->firstname}} {{$customer->lastname}}</td>
                         <td class="text-center">{{$customer->phone}}</td>
                         <td >{{$customer->email}}</td>
@@ -58,7 +58,7 @@
                                 <a href="javascript:;" onclick="undeleteCustomer({{$customer->id}});" class="btn btn-xs btn-warning"><i class="fad fa-reply mr-1"></i> Geri Al</a>
                             @else
                                 <a href="javascript:;" data-toggle="modal" data-target="#SendSms" data-customernumber='{{$customer->phone}}' class="sendsms btn btn-xs btn-primary"><i class="far fa-envelope"></i></a>
-                                <a href="/customers/{{$customer->id}}/{{$customer->slug}}" class="btn btn-xs btn-success"><i class="fad fa-edit mr-1"></i> Düzenle</a>
+                                <a href="{{route('admin.customer.edit',['id' => $customer->id])}}" class="btn btn-xs btn-success"><i class="fad fa-edit mr-1"></i> Düzenle</a>
                                 <a href="javascript:;" onclick="deleteCustomer({{$customer->id}});" class="delete btn btn-xs btn-danger"><i class="fad fa-trash-alt mr-1"></i> Sil</a>
                             @endif
                         </td>

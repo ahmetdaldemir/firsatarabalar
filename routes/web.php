@@ -82,12 +82,10 @@ Route::prefix('admin/')->middleware(['auth', 'user-access:admin'])->group(functi
         Route::get('edit', [CustomerCarController::class, 'form'])->name('admin.customer_car_valuation.edit');
         Route::post('store', [CustomerCarController::class, 'store'])->name('admin.customer_car_valuation.store');
         Route::get('deleted', [CustomerCarController::class, 'destroy'])->name('admin.customer_car_valuation.deleted');
+        Route::get('store_valuation', [CustomerCarController::class, 'store_valuation'])->name('admin.customer_car_valuation.store_valuation');
     });
 
-    Route::prefix('valuation/')->group(function () {
-        Route::get('index', [ValuationController::class, 'index'])->name('admin.valuation.index');
 
-    });
 
     Route::prefix('page/')->group(function () {
         Route::get('index', [PageController::class, 'index'])->name('admin.page.index');

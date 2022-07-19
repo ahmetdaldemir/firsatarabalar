@@ -59,6 +59,6 @@ class CustomerCar extends Model
 
     public function payment()
     {
-        return $this->belongsTo(CustomerCarPaymentTransaction::class,'customer_car_id','id');
+        return $this->belongsTo(CustomerCarPaymentTransaction::class,'id','customer_car_id');
     }
 }

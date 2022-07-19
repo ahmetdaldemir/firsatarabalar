@@ -88,7 +88,7 @@
                     @foreach($customer_car_valuations  as $customer_car_valuation)
                         <tr id="carRow-1">
                             <td class="text-center"><a
-                                        href="{{route('admin.valuation.index',['id' => $customer_car_valuation->id])}}">{{$customer_car_valuation->id}}</a>
+                                        href="{{route('admin.customer_car_valuation.index',['id' => $customer_car_valuation->id])}}">{{$customer_car_valuation->id}}</a>
                             </td>
                             <td class="text-left">{{@$customer_car_valuation->customer->firstname}} {{@$customer_car_valuation->customer->lastname}}</a></td>
                             <td class="text-center">{{$customer_car_valuation->buyer_id}}</td>

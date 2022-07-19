@@ -569,7 +569,7 @@
                         <div class="row">
                             <div class="col-lg-12">
 
-                                <form id="ValuationSave" ng-submit="ValuationSave()" action="javascript():;" method="post">
+                                <form id="ValuationSave" ng-submit="ValuationSave()" method="post">
                                     <input type="hidden" name="valuation_id" value="{{$car->valuation->id ?? 0}}">
                                     <input type="hidden" name="customers_car_id" value="{{$car->id}}">
                                     <input type="hidden" name="sendtoadmin" id="sendtoadmin" value="">

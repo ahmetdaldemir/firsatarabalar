@@ -82,7 +82,7 @@ Route::prefix('admin/')->middleware(['auth', 'user-access:admin'])->group(functi
         Route::get('edit', [CustomerCarController::class, 'form'])->name('admin.customer_car_valuation.edit');
         Route::post('store', [CustomerCarController::class, 'store'])->name('admin.customer_car_valuation.store');
         Route::get('deleted', [CustomerCarController::class, 'destroy'])->name('admin.customer_car_valuation.deleted');
-        Route::get('store_valuation', [CustomerCarController::class, 'store_valuation'])->name('admin.customer_car_valuation.store_valuation');
+        Route::post('store_valuation', [CustomerCarController::class, 'store_valuation'])->name('admin.customer_car_valuation.store_valuation');
     });
 
 

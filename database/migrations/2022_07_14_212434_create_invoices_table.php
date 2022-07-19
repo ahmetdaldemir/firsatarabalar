@@ -13,14 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('customer_car_transactions', function (Blueprint $table) {
+        Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('customer_car_id');
-            $table->foreign('customer_car_id')->references('id')->on('customer_cars')->onDelete('restrict');
-            $table->string('type');
-            $table->string('process');
-            $table->json('data');
-            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -32,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer_car_transactions');
+        Schema::dropIfExists('invoices');
     }
 };

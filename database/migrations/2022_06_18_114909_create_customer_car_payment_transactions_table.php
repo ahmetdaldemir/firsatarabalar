@@ -22,6 +22,7 @@ return new class extends Migration
             $table->json('response_auth')->nullable();
             $table->json('response_payment')->nullable();
             $table->boolean('status')->default(0);
+            $table->boolean('invoice')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

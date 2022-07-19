@@ -35,6 +35,10 @@ return new class extends Migration
             $table->string('freecar')->nullable();
             $table->dateTime('date_login')->nullable();
             $table->boolean('status')->default(1);
+            $table->string('parasut_id')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('tax_number')->nullable();
+            $table->string('tax_office')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

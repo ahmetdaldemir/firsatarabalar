@@ -15,7 +15,15 @@ class Customer extends Model
         return $this->belongsTo(CustomerCar::class,'customer_id','id');
     }
 
+    public function city()
+    {
+        return $this->belongsTo(City::class,'city_id','id');
+    }
 
+    public function town()
+    {
+        return $this->belongsTo(Town::class,'town_id','id');
+    }
     public function comments()
     {
         return $this->belongsTo(CustomerMessage::class,'customer_id','id');

@@ -4,6 +4,7 @@ use App\Enums\CustomerCarStatus;
 use App\Enums\DateEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\carRequest;
+use App\Jobs\CustomerCarValuationPdf;
 use App\Models\CustomerCar;
 use App\Models\CustomerCarValuation;
 use App\Repositories\Cities\CityRepositoryInterface;
@@ -149,6 +150,9 @@ class CustomerCarController extends Controller
         $valuation->is_confirm = $request->is_confirm;
         $valuation->status = $request->status;
         $valuation->save();
+
+        $customerCar = $this->CustomerCar->getById($request->customers_car_id);
+        $this->dispatch(new CustomerCarValuationPdf($customerCar));
     }
 
 

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\SettingsController;
  use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,4 +23,25 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //Route::get('/setting', function () {
 //   return "dad";
 //});
+Route::get('/login', [AuthController::class, 'login']);
+Route::get('/register', [AuthController::class, 'register']);
+Route::get('/device', [AuthController::class, 'device']);
+
+
+//Setting
 Route::get('/setting', [SettingsController::class, 'index']);
+Route::get('/cities', [SettingsController::class, 'cities']);
+Route::get('/towns', [SettingsController::class, 'towns']);
+Route::get('/distincs', [SettingsController::class, 'distincs']);
+Route::get('/cars', [SettingsController::class, 'cars']);
+Route::get('/neighbourhoods', [SettingsController::class, 'neighbourhoods']);
+Route::get('/brands', [SettingsController::class, 'brands']);
+Route::get('/page', [SettingsController::class, 'page']);
+Route::get('/page_category', [SettingsController::class, 'page_category']);
+
+//Customer
+Route::get('/all', [CustomerController::class, 'all']);
+Route::get('/getById', [CustomerController::class, 'getById']);
+
+
+

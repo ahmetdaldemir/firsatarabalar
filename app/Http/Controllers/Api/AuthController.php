@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\Device;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 
 class AuthController extends Controller
@@ -55,5 +57,18 @@ class AuthController extends Controller
         ]);
     }
 
+    public function device(Request $request)
+    {
+        $token = Str::random(32);
+        Device::create([
+            'device' => $request->device,
+            'deviceId' => $request->deviceId,
+            'token' => $token,
 
+        ]);
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+        ]);
+    }
 }

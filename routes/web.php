@@ -26,6 +26,7 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [ViewController::class, 'index']);
+Route::get('arac-sat', [ViewController::class, 'carSell']);
 
 Auth::routes();
 

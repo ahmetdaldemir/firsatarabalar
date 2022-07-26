@@ -10,7 +10,8 @@
     <meta name="robots" content=""/>
     <meta name="description" content="Samar - Creative Agency Bootstrap HTML Template"/>
     <meta property="og:title" content="Samar - Creative Agency Bootstrap HTML Template"/>
-    <meta property="og:description" content="Samar - Creative Agency Bootstrap HTML Template is particularly designed for agency, business, corporate agency, creative, professional, digital agency Business Template"/>
+    <meta property="og:description"
+          content="Samar - Creative Agency Bootstrap HTML Template is particularly designed for agency, business, corporate agency, creative, professional, digital agency Business Template"/>
     <meta property="og:image" content="https://samar.dexignzone.com/xhtml/social-image.png"/>
     <meta name="format-detection" content="telephone=no">
 
@@ -33,14 +34,11 @@
 <div class="page-wraper">
     @include('layouts/custom/header')
     <div class="page-content bg-white">
-
         @yield('content')
     </div>
-
     @include('layouts/custom/footer')
     <button class="scroltop icon-up" type="button"><i class="fa fa-arrow-up"></i></button>
 </div>
 @include('layouts/custom/script')
-
 </body>
 </html>

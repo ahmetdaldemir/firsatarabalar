@@ -11,4 +11,10 @@ class ViewController
         return view('view.home',$data);
     }
 
+    public function carSell()
+    {
+        $data['chart'] = [];
+        return view('view.car_sell',$data);
+    }
+
 }

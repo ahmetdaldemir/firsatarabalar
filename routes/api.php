@@ -3,7 +3,8 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\SettingsController;
- use Illuminate\Http\Request;
+use App\Http\Controllers\Api\VehicleRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,8 +41,9 @@ Route::get('/page', [SettingsController::class, 'page']);
 Route::get('/page_category', [SettingsController::class, 'page_category']);
 
 //Customer
-Route::get('/all', [CustomerController::class, 'all']);
-Route::get('/getById', [CustomerController::class, 'getById']);
+Route::get('/customer', [CustomerController::class, 'index']);
+Route::get('/customer/{id}', [CustomerController::class, 'show/{id}'])->name('customer.id');
 
 
+Route::resource('vehicle_request',  VehicleRequest::class);
 

@@ -27,9 +27,10 @@ class CustomerController extends Controller
         ], 200);
     }
 
-    public function get(Request $request)
+    public function show($id)
     {
-        $data = $this->CustomerRepository->getById($request->id);
+        return $id;
+        $data = $this->CustomerRepository->getById($id);
         return \response()->json([
             'data' => $data,
         ], 200);

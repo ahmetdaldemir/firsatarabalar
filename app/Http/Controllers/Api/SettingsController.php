@@ -46,8 +46,7 @@ class SettingsController extends Controller
 
     public function towns(Request $request)
     {
-
-        $data = Town::where('city_id', $request->id)->get();
+         $data = Town::where('city_id', $request->id)->get();
         return \response()->json([
             'data' => $data,
         ], 200);

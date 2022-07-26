@@ -32,6 +32,8 @@ use App\Repositories\Users\UserRepositoryInterface;
 use App\Repositories\Valuation\ValuationRepository;
 use App\Repositories\Valuation\ValuationRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
+use VehicleRequestRepository;
+use VehicleRequestRepositoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -53,6 +55,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(RoleRepositoryInterface::class, RoleRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(SettingRepositoryInterface::class, SettingRepository::class);
+        $this->app->bind( VehicleRequestRepositoryInterface::class,  VehicleRequestRepository::class);
 
     }
 

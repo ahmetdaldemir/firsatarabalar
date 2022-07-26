@@ -8,6 +8,7 @@ use App\Http\Controllers\Modules\Admin\UserController;
 use App\Http\Controllers\Modules\Admin\PageController;
 use App\Http\Controllers\Modules\Admin\SettingsController;
 use App\Http\Controllers\Modules\Admin\ValuationController;
+use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,11 +25,7 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ViewController::class, 'index']);
 
 Auth::routes();
 

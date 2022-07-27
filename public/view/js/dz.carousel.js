@@ -80,20 +80,20 @@ jQuery(document).ready(function() {
 				items:1
 			},
 			600:{
-				items:1
+				items:2
 			},			
 			
 			767:{
-				items:1
+				items:3
 			},
 			1200:{
-				items:1
+				items:3
 			},
 			1600:{
-				items:1
+				items:3
 			},
 			2400:{
-				items:1
+				items:5
 			}
 		}
 	})

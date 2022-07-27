@@ -8,8 +8,8 @@
                 <div class="row align-items-center">
                     <div class="col-md-7">
                         <div class="banner-content">
-                            <h1 data-wow-duration="1.2s" data-wow-delay="1s" class="wow fadeInUp">AİLENE EN UYGUN ARACI
-                                SANİYELER İÇİNDE BUL</h1>
+                            <h2 data-wow-duration="1.2s" data-wow-delay="1s" class="wow fadeInUp">AİLENE EN UYGUN ARACI
+                                SANİYELER İÇİNDE BUL</h2>
                             <p data-wow-duration="1.4s" data-wow-delay="1.5s" class="wow fadeInUp m-b30">Morbi sed lacus
                                 nec risus finibus feugiat et fermentum nibh. Pellentesque vitae ante at elit fringilla
                                 ac at purus.</p>
@@ -24,55 +24,58 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
-                    <div class="icon-bx-wraper style-1 box-hover text-center m-b30">
-                        <div class="icon-bx-md radius bg-yellow shadow-yellow">
-                            <a href="javascript:void(0);" class="icon-cell">
-                                <i class="flaticon-office"></i>
-                            </a>
-                        </div>
-                        <div class="icon-content">
-                            <h4 class="dlab-title">Strategy & Research</h4>
-                            <p>Fusce sit amet dui vitae urna tristique imperdiet. Donec eget sapien euismod, faucibus
-                                nibh non, consequat elit. </p>
-                        </div>
+
+        </div>
+    </div>
+<section class="content-inner-4" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
+                <div class="icon-bx-wraper style-1 box-hover text-center m-b30">
+                    <div class="icon-bx-md radius bg-yellow shadow-yellow">
+                        <a href="javascript:void(0);" class="icon-cell">
+                            <i class="flaticon-office"></i>
+                        </a>
+                    </div>
+                    <div class="icon-content">
+                        <h4 class="dlab-title">Strategy & Research</h4>
+                        <p>Fusce sit amet dui vitae urna tristique imperdiet. Donec eget sapien euismod, faucibus
+                            nibh non, consequat elit. </p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.4s">
-                    <div class="icon-bx-wraper style-1 box-hover active text-center m-b30">
-                        <div class="icon-bx-md radius bg-red shadow-red">
-                            <a href="javascript:void(0);" class="icon-cell">
-                                <i class="flaticon-website"></i>
-                            </a>
-                        </div>
-                        <div class="icon-content">
-                            <h4 class="dlab-title">Web Development</h4>
-                            <p>Fusce sit amet dui vitae urna tristique imperdiet. Donec eget sapien euismod, faucibus
-                                nibh non, consequat elit. </p>
-                        </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.4s">
+                <div class="icon-bx-wraper style-1 box-hover active text-center m-b30">
+                    <div class="icon-bx-md radius bg-red shadow-red">
+                        <a href="javascript:void(0);" class="icon-cell">
+                            <i class="flaticon-website"></i>
+                        </a>
+                    </div>
+                    <div class="icon-content">
+                        <h4 class="dlab-title">Web Development</h4>
+                        <p>Fusce sit amet dui vitae urna tristique imperdiet. Donec eget sapien euismod, faucibus
+                            nibh non, consequat elit. </p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 offset-lg-0 offset-md-3 wow fadeInUp" data-wow-duration="2s"
-                     data-wow-delay="0.6s">
-                    <div class="icon-bx-wraper style-1 box-hover text-center m-b30">
-                        <div class="icon-bx-md radius bg-green shadow-green">
-                            <a href="javascript:void(0);" class="icon-cell">
-                                <i class="flaticon-pie-charts"></i>
-                            </a>
-                        </div>
-                        <div class="icon-content">
-                            <h4 class="dlab-title">Web Solution</h4>
-                            <p>Fusce sit amet dui vitae urna tristique imperdiet. Donec eget sapien euismod, faucibus
-                                nibh non, consequat elit. </p>
-                        </div>
+            </div>
+            <div class="col-lg-4 col-md-6 offset-lg-0 offset-md-3 wow fadeInUp" data-wow-duration="2s"
+                 data-wow-delay="0.6s">
+                <div class="icon-bx-wraper style-1 box-hover text-center m-b30">
+                    <div class="icon-bx-md radius bg-green shadow-green">
+                        <a href="javascript:void(0);" class="icon-cell">
+                            <i class="flaticon-pie-charts"></i>
+                        </a>
+                    </div>
+                    <div class="icon-content">
+                        <h4 class="dlab-title">Web Solution</h4>
+                        <p>Fusce sit amet dui vitae urna tristique imperdiet. Donec eget sapien euismod, faucibus
+                            nibh non, consequat elit. </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </section>
-
+</section>
     <!-- Projects -->
     <section class="content-inner-1">
         <div class="container-fluid">
@@ -527,27 +530,15 @@
     <section class="content-inner bgl-primary">
         <div class="container">
             <div class="row testimonials-wraper-1 align-items-center">
-                <div class="col-lg-6 wow fadeInRight" data-wow-duration="2s" data-wow-delay="0.8s">
-                    <div class="section-head style-1">
-                        <h6 class="sub-title">TESTMONIAL</h6>
-                        <h2 class="title m-b10">WHAT OUR CLIENTS SAY’S</h2>
-                        <p>Nunc vel ligula ut erat scelerisque vehicula sit amet porttitor magna. Donec malesuada quis
-                            diam quis pellentesque.</p>
-                    </div>
-                </div>
-                <div class="col-lg-6">
+
+                <div class="col-lg-12">
                     <div class="testimonials-carousel1 owl-carousel owl-theme owl-btn-2 owl-btn-white owl-btn-shadow owl-btn-center">
                         <div class="item wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
                             <div class="testimonial-1">
                                 <div class="testimonial-text">
-                                    <p>Cras porttitor orci vel ex convallis congue. Aliquam et pharetra urna. Quisque
-                                        auctor purus in nunc posuere, vitae condimentum odio mattis. Nulla hendrerit
-                                        tellus tellus, sed pharetra dui vulputate sed.</p>
+                                    <p>Cras porttitor orci vel ex convallis congue. Aliquam et pharetra urna.</p>
                                 </div>
                                 <div class="testimonial-detail">
-                                    <div class="testimonial-pic">
-                                        <img src="images/testimonials/pic3..jpg')}}" alt="">
-                                    </div>
                                     <div class="clearfix">
                                         <strong class="testimonial-name">Eity Akhter</strong>
                                         <span class="testimonial-position">CEO & Founder </span>
@@ -558,14 +549,9 @@
                         <div class="item wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.4s">
                             <div class="testimonial-1">
                                 <div class="testimonial-text">
-                                    <p>Cras porttitor orci vel ex convallis congue. Aliquam et pharetra urna. Quisque
-                                        auctor purus in nunc posuere, vitae condimentum odio mattis. Nulla hendrerit
-                                        tellus tellus, sed pharetra dui vulputate sed.</p>
+                                    <p>Cras porttitor orci vel ex convallis congue. Aliquam et pharetra urna.</p>
                                 </div>
                                 <div class="testimonial-detail">
-                                    <div class="testimonial-pic">
-                                        <img src="images/testimonials/pic3..jpg')}}" alt="">
-                                    </div>
                                     <div class="clearfix">
                                         <strong class="testimonial-name">Lora Price</strong>
                                         <span class="testimonial-position">CEO & Founder </span>
@@ -576,14 +562,9 @@
                         <div class="item wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.6s">
                             <div class="testimonial-1">
                                 <div class="testimonial-text">
-                                    <p>Cras porttitor orci vel ex convallis congue. Aliquam et pharetra urna. Quisque
-                                        auctor purus in nunc posuere, vitae condimentum odio mattis. Nulla hendrerit
-                                        tellus tellus, sed pharetra dui vulputate sed.</p>
+                                    <p>Cras porttitor orci vel ex convallis congue. Aliquam et pharetra urna.</p>
                                 </div>
                                 <div class="testimonial-detail">
-                                    <div class="testimonial-pic">
-                                        <img src="images/testimonials/pic3..jpg')}}" alt="">
-                                    </div>
                                     <div class="clearfix">
                                         <strong class="testimonial-name">Cak Dikin</strong>
                                         <span class="testimonial-position">CEO & Founder </span>

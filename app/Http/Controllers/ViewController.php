@@ -17,4 +17,9 @@ class ViewController
         return view('view.car_sell',$data);
     }
 
+    public function contact()
+    {
+        $data['chart'] = [];
+        return view('view.contact',$data);
+    }
 }

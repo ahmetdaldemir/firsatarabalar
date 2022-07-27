@@ -181,7 +181,7 @@
 
                 <li><hr style='border-top: 1px solid #3a586f'></li>
 
-                <li><a href="/settings"><i class="fa-fw fad fa-cog"></i><span class="nav-label">Ayarlar</span></a></li>
+                <li><a href="/admin/setting/index"><i class="fa-fw fad fa-cog"></i><span class="nav-label">Ayarlar</span></a></li>
                 <li><a href="/logout"><i class="fa-fw fad fa-sign-out"></i> <span class="nav-label">Çıkış Yap</span></a></li>
             </ul>
         </div>

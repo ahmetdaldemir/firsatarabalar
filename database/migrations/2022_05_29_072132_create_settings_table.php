@@ -15,15 +15,9 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('logo')->nullable();
-            $table->string('favicon')->nullable();
-            $table->string('mail')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('whatsapp')->nullable();
-
-            $table->unsignedBigInteger('default_payment_id');
-            $table->foreign('default_payment_id')->references('id')->on('payments')->onDelete('restrict');
-
+            $table->string('key')->nullable();
+            $table->string('value')->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }

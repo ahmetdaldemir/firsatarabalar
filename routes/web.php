@@ -26,7 +26,8 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [ViewController::class, 'index']);
-Route::get('arac-sat', [ViewController::class, 'carSell']);
+Route::get('arac-sat', [ViewController::class, 'carSell'])->name('arac-sat');
+Route::get('iletisim', [ViewController::class, 'contact'])->name('iletisim');
 
 Auth::routes();
 
@@ -97,6 +98,8 @@ Route::prefix('admin/')->middleware(['auth', 'user-access:admin'])->group(functi
 
     Route::prefix('setting/')->group(function () {
         Route::get('city/{id}', [SettingsController::class, 'city'])->name('admin.setting.city.{id}');
+        Route::get('index', [SettingsController::class, 'index'])->name('admin.setting.index');
+        Route::post('save', [SettingsController::class, 'save'])->name('admin.setting.save');
 
     });
 

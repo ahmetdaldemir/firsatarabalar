@@ -2,39 +2,7 @@
 <footer class="site-footer style-1" id="footer" style="background-image: url(https://makaanlelo.com/tf_products_007/samar/xhtml/images/background/bg10.png);">
     <div class="footer-top">
         <div class="container">
-            <div class="footer-info wow fadeIn" data-wow-duration="2s" data-wow-delay="0.8s">
-                <div class="row align-items-center">
-                    <div class="col-xl-5 col-md-4">
-                        <div class="footer-logo">
-                            <a href="index.html"><img src="images/logo-white.png" alt=""/></a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-4 col-sm-6">
-                        <div class="icon-bx-wraper left m-b10">
-                            <div class="icon-lg">
-                                <a href="javascript:void(0);" class="icon-cell">
-                                    <i class="flaticon-email"></i>
-                                </a>
-                            </div>
-                            <div class="icon-content">
-                                <p><strong>+91 987-654-3210</strong><br/>info@example.com</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-4 col-sm-6">
-                        <div class="icon-bx-wraper left m-b10">
-                            <div class="icon-lg">
-                                <a href="javascript:void(0);" class="icon-cell">
-                                    <i class="flaticon-location"></i>
-                                </a>
-                            </div>
-                            <div class="icon-content">
-                                <p>1247/Plot No. 39, 15th Phase, Colony, Kkatpally, Hyderabad</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class="row">
                 <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeIn" data-wow-duration="2s" data-wow-delay="0.2s">
                     <div class="widget widget_about">

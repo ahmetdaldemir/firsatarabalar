@@ -25,11 +25,11 @@
                         <a href="/"><img src="{{asset('view/images/logo.png')}}" alt=""></a>
                     </div>
                     <ul class="nav navbar-nav navbar">
-                        <li class="active"><a href="javascript:void(0);"><span>Anasayfa</span></a></li>
+                        <li class="active"><a href="/"><span>Anasayfa</span></a></li>
                         <li class=""><a href="javascript:void(0);"><span>Kurumsal</span></a></li>
                         <li class=""><a href="javascript:void(0);"><span>Nasıl Çalışır</span></a></li>
                         <li class=""><a href="javascript:void(0);"><span>Kullanıcı Görüşleri</span></a></li>
-                        <li class=""><a href="javascript:void(0);"><span>İletişim</span></a></li>
+                        <li class=""><a href="/iletisim"><span>İletişim</span></a></li>
 
                     </ul>
                     <div class="dlab-social-icon">

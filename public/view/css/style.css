@@ -17236,7 +17236,7 @@ textarea {
 .testimonial-1 {
     background-color: #fff;
     border-radius: 0.25rem;
-    padding: 35px;
+    padding: 15px;
     box-shadow: 1px 0 20px rgba(0, 0, 0, 0.1);
     position: relative;
 }
@@ -17268,7 +17268,7 @@ textarea {
     position: absolute;
     font-family: 'Font Awesome 5 Free';
     font-weight: 700;
-    font-size: 85px;
+    font-size: 50px;
     color: var(--primary);
     opacity: 0.4;
     line-height: 1;
@@ -17314,7 +17314,7 @@ textarea {
 }
 
 .owl-carousel .testimonial-1 {
-    margin: 15px;
+    margin: 0px;
 }
 
 .testimonials-carousel2 {
@@ -20104,6 +20104,10 @@ ul.primary li:before {
     padding-bottom: 115px;
 }
 
+.content-inner-4 {
+    margin-top: -150px;
+ }
+
 @media only screen and (max-width: 991px) {
     .content-inner-1 {
         padding-top: 70px;
@@ -20442,7 +20446,7 @@ button.scroltop {
     background-position: left bottom;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 750px;
+    height: 700px;
     position: relative;
     overflow: hidden;
     z-index: 1;

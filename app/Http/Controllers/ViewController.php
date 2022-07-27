@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-class ViewController
+
+class ViewController extends BaseController
 {
+    public function __construct()
+    {
+    }
 
     public function index()
     {

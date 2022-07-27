@@ -34,7 +34,7 @@ class SettingsController extends Controller
 
     public function save(Request $request)
     {
-        dd($request);
+
         if (!empty($request->files->all())) {
             $files = $request->files->all()['setting'];
             foreach ($files as $key => $file) {
@@ -46,7 +46,18 @@ class SettingsController extends Controller
             }
         }
 
+        foreach ($request->setting as $key => $value)
+        {
+             if(!empty($value) && gettype($value) == 'string')
+            {
+                $setting = Setting::where('key', $key)->first();
+                $setting->value = $value;
+                $setting->save();
+            }
 
+        }
+
+     //  return redirect()->back();
     }
 
 }

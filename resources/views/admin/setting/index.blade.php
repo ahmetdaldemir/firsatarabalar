@@ -60,9 +60,11 @@
                 @if($setting->type == 'file')
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">{{$setting->title}}</label>
-                        <div class="col-sm-9">
+                        <div class="col-md-3">
+                            <img src="{{asset('storage/files/'.$setting->value)}}">
+                        </div>
+                        <div class="col-sm-6">
                             <input type="{{$setting->type}}" class="form-control" name="setting[{{$setting->key}}]"/>
-                            <input type="hidden" name="setting[{{$setting->key}}_hidden]" value="{{$setting->value}}"/>
                         </div>
                     </div>
                 @endif

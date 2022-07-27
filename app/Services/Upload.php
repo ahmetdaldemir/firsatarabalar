@@ -2,7 +2,8 @@
 
 namespace App\Services;
 
-use Illuminate\Http\UploadedFile;
+ use Illuminate\Http\Request;
+ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class Upload
@@ -15,12 +16,13 @@ class Upload
         $this->filename = "";
     }
 
-    public function index(UploadedFile $file)
+    public function index($file)
     {
+
         $uploadedFile = $file->getClientOriginalName();
-        $filename = time() . $uploadedFile->getClientOriginalName();
+        $filename = time() ."_". $uploadedFile;
         Storage::disk('local')->putFileAs(
-            'files/' . $filename,
+            'files/',
             $file,
             $filename
         );

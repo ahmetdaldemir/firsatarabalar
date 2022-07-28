@@ -26,8 +26,14 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [ViewController::class, 'index']);
-Route::get('arac-sat', [ViewController::class, 'carSell'])->name('arac-sat');
 Route::get('iletisim', [ViewController::class, 'contact'])->name('iletisim');
+
+Route::middleware(['customer_auth', 'user-access:customer'])->group(function () {
+    Route::get('arac-sat', [ViewController::class, 'carSell'])->name('arac-sat');
+});
+
+
+
  Auth::routes();
 
 /*------------------------------------------
@@ -36,7 +42,6 @@ All Normal Users Routes List
 --------------------------------------------
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:user'])->group(function () {
-
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 });

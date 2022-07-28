@@ -17,7 +17,7 @@
                 <!-- Extra Nav -->
                 <div class="extra-nav">
                     <div class="extra-cell">
-                        <a href="{{route('arac-sat')}}" class="btn btn-primary">Aracımı Satmak İstiyorum<i class="fa fa-angle-right m-l10"></i></a>
+                        <a href="javascript:;" ng-click="CustomerLogin()" class="btn btn-primary">Aracımı Satmak İstiyorum<i class="fa fa-angle-right m-l10"></i></a>
                     </div>
                 </div>
                 <div class="header-nav navbar-collapse collapse justify-content-end" id="navbarNavDropdown">

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-class ViewController extends BaseController
+class ViewController
 {
     public function __construct()
     {

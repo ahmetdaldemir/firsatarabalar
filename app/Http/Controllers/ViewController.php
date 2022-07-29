@@ -15,6 +15,18 @@ class ViewController
         return view('view.home',$data);
     }
 
+    public function how_run_system()
+    {
+        $data['chart'] = [];
+        return view('view.how_run_system',$data);
+    }
+
+    public function customer_comment()
+    {
+        $data['chart'] = [];
+        return view('view.customer_comment',$data);
+    }
+
     public function carSell()
     {
         $data['chart'] = [];
@@ -26,4 +38,5 @@ class ViewController
         $data['chart'] = [];
         return view('view.contact',$data);
     }
-}
+
+ }

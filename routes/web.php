@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Modules\Admin\CarController;
 use App\Http\Controllers\Modules\Admin\CustomerCarController;
 use App\Http\Controllers\Modules\Admin\CustomerController;
@@ -27,6 +28,9 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [ViewController::class, 'index']);
 Route::get('iletisim', [ViewController::class, 'contact'])->name('iletisim');
+Route::post('giris-yap', [AuthController::class, 'login'])->name('giris-yap');
+Route::get('nasil_calisir', [ViewController::class, 'how_run_system'])->name('nasil_calisir');
+Route::get('kullanici_gorusleri', [ViewController::class, 'customer_comment'])->name('kullanici_gorusleri');
 
 Route::middleware(['customer_auth', 'user-access:customer'])->group(function () {
     Route::get('arac-sat', [ViewController::class, 'carSell'])->name('arac-sat');

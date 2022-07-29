@@ -14,8 +14,8 @@ class CustomerAuthenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (! $request->expectsJson()) {
-            return false;
+         if (! $request->expectsJson()) {
+             return route('login');
         }
     }
 }

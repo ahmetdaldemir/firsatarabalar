@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController
 {
@@ -35,31 +37,25 @@ class AuthController
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
-    }
+     }
 
     public function login(Request $request)
     {
-        $input = $request->all();
 
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+        $credentials = array(
+            'email' => $request->email,
+            'password' => $request->password
+        );
 
-        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
-        {
-            if (auth()->user()->type == 'admin') {
-                return redirect()->route('admin.home');
-            }else if (auth()->user()->type == 'manager') {
-                return redirect()->route('manager.home');
-            }else{
-                return redirect()->route('home');
-            }
-        }else{
-            return redirect()->route('login')
-                ->with('error','Email-Address And Password Are Wrong.');
+        $remember_me = $request->has('remember') ? true : false;
+
+        if (Auth::guard('customer')->attempt($credentials, $remember_me)) {
+            $finduser = Customer::find(Auth::guard('web')->id());
+            Auth::guard('customer')->login($finduser, $remember_me);
+            return response()->json(['success' => true], 200);
         }
+        return response()->json(['success' => false, 'message' => "Hatalı Kullanıcı Adı ve Şifre"], 200);
+
 
     }
 }

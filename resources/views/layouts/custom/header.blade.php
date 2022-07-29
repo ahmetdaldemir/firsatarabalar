@@ -27,8 +27,8 @@
                     <ul class="nav navbar-nav navbar">
                         <li class="active"><a href="/"><span>Anasayfa</span></a></li>
                         <li class=""><a href="javascript:void(0);"><span>Kurumsal</span></a></li>
-                        <li class=""><a href="javascript:void(0);"><span>Nasıl Çalışır</span></a></li>
-                        <li class=""><a href="javascript:void(0);"><span>Kullanıcı Görüşleri</span></a></li>
+                        <li class=""><a href="{{route('nasil_calisir')}}"><span>Nasıl Çalışır</span></a></li>
+                        <li class=""><a href="{{route('kullanici_gorusleri')}}"><span>Kullanıcı Görüşleri</span></a></li>
                         <li class=""><a href="/iletisim"><span>İletişim</span></a></li>
 
                     </ul>

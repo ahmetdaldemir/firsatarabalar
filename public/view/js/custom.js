@@ -361,23 +361,7 @@ var Samar = function(){
 				
 				//alert(columnWidthValue);
 				
-				self.imagesLoaded(function () {
-					filter: filterValue,
-					self.masonry({
-						gutter: gutter,
-						columnWidth:columnWidthValue, 
-						//columnWidth:3, 
-						//gutterWidth: 15,
-						isAnimated: true,
-						itemSelector: ".card-container",
-						//horizontalOrder: true,
-						//fitWidth: true,
-						//stagger: 30
-						//containerStyle: null
-						//percentPosition: true
-					});
-					
-				}); 
+
 				
 			} 
 		}

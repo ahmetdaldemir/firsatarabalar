@@ -402,7 +402,7 @@ class OAuthServerException extends Exception
 
         $authorizationHeader = $this->serverRequest->getHeader('Authorization');
 
-        // Common .htaccess configurations yield an empty string for the
+        // Common htaccess configurations yield an empty string for the
         // 'Authorization' header when one is not provided by the client.
         // For practical purposes that case should be treated as though the
         // header isn't present.

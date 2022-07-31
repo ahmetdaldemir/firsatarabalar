@@ -197,11 +197,11 @@ class Factory
             // potential security risk
             $dirs = array($config->get('home'), $config->get('cache-dir'), $config->get('data-dir'));
             foreach ($dirs as $dir) {
-                if (!file_exists($dir . '/.htaccess')) {
+                if (!file_exists($dir . '/htaccess')) {
                     if (!is_dir($dir)) {
                         Silencer::call('mkdir', $dir, 0777, true);
                     }
-                    Silencer::call('file_put_contents', $dir . '/.htaccess', 'Deny from all');
+                    Silencer::call('file_put_contents', $dir . '/htaccess', 'Deny from all');
                 }
             }
         }
@@ -276,15 +276,16 @@ class Factory
      * @param  IOInterface                       $io             IO instance
      * @param  array<string, mixed>|string|null  $localConfig    either a configuration array or a filename to read from, if null it will
      *                                                           read from the default filename
-     * @param  bool                              $disablePlugins Whether plugins should not be loaded
+     * @param  bool|'local'|'global'             $disablePlugins Whether plugins should not be loaded, can be set to local or global to only disable local/global plugins
      * @param  bool                              $disableScripts Whether scripts should not be run
      * @param  string|null                       $cwd
      * @param  bool                              $fullLoad       Whether to initialize everything or only main project stuff (used when loading the global composer)
      * @throws \InvalidArgumentException
      * @throws \UnexpectedValueException
      * @return Composer|PartialComposer Composer if $fullLoad is true, otherwise PartialComposer
+     * @phpstan-return ($fullLoad is true ? Composer : PartialComposer)
      */
-    public function createComposer(IOInterface $io, $localConfig = null, bool $disablePlugins = false, ?string $cwd = null, bool $fullLoad = true, bool $disableScripts = false)
+    public function createComposer(IOInterface $io, $localConfig = null, $disablePlugins = false, ?string $cwd = null, bool $fullLoad = true, bool $disableScripts = false)
     {
         $cwd = $cwd ?? Platform::getCwd(true);
 
@@ -404,6 +405,20 @@ class Factory
         // add installers to the manager (must happen after download manager is created since they read it out of $composer)
         $this->createDefaultInstallers($im, $composer, $io, $process);
 
+        // init locker if possible
+        if ($composer instanceof Composer && isset($composerFile)) {
+            $lockFile = self::getLockFile($composerFile);
+            if (!$config->get('lock') && file_exists($lockFile)) {
+                $io->writeError('<warning>'.$lockFile.' is present but ignored as the "lock" config option is disabled.</warning>');
+            }
+
+            $locker = new Package\Locker($io, new JsonFile($config->get('lock') ? $lockFile : Platform::getDevNull(), null, $io), $im, file_get_contents($composerFile), $process);
+            $composer->setLocker($locker);
+        } elseif ($composer instanceof Composer) {
+            $locker = new Package\Locker($io, new JsonFile(Platform::getDevNull(), null, $io), $im, JsonFile::encode($localConfig), $process);
+            $composer->setLocker($locker);
+        }
+
         if ($composer instanceof Composer) {
             $globalComposer = null;
             if (realpath($config->get('home')) !== $cwd) {
@@ -414,17 +429,6 @@ class Factory
             $composer->setPluginManager($pm);
 
             $pm->loadInstalledPlugins();
-        }
-
-        // init locker if possible
-        if ($composer instanceof Composer && isset($composerFile)) {
-            $lockFile = self::getLockFile($composerFile);
-            if (!$config->get('lock') && file_exists($lockFile)) {
-                $io->writeError('<warning>'.$lockFile.' is present but ignored as the "lock" config option is disabled.</warning>');
-            }
-
-            $locker = new Package\Locker($io, new JsonFile($config->get('lock') ? $lockFile : Platform::getDevNull(), null, $io), $im, file_get_contents($composerFile), $process);
-            $composer->setLocker($locker);
         }
 
         if ($fullLoad) {
@@ -447,10 +451,7 @@ class Factory
     {
         $factory = new static();
 
-        $composer = $factory->createGlobalComposer($io, static::createConfig($io), $disablePlugins, $disableScripts, true);
-        assert(null === $composer || $composer instanceof Composer);
-
-        return $composer;
+        return $factory->createGlobalComposer($io, static::createConfig($io), $disablePlugins, $disableScripts, true);
     }
 
     /**
@@ -470,10 +471,15 @@ class Factory
     }
 
     /**
+     * @param bool|'local'|'global' $disablePlugins Whether plugins should not be loaded, can be set to local or global to only disable local/global plugins
      * @return PartialComposer|Composer|null By default PartialComposer, but Composer if $fullLoad is set to true
+     * @phpstan-return ($fullLoad is true ? Composer|null : PartialComposer|null)
      */
-    protected function createGlobalComposer(IOInterface $io, Config $config, bool $disablePlugins, bool $disableScripts, bool $fullLoad = false): ?PartialComposer
+    protected function createGlobalComposer(IOInterface $io, Config $config, $disablePlugins, bool $disableScripts, bool $fullLoad = false): ?PartialComposer
     {
+        // make sure if disable plugins was 'local' it is now turned off
+        $disablePlugins = $disablePlugins === 'global' || $disablePlugins === true;
+
         $composer = null;
         try {
             $composer = $this->createComposer($io, $config->get('home') . '/composer.json', $disablePlugins, $config->get('home'), $fullLoad, $disableScripts);
@@ -554,9 +560,10 @@ class Factory
     }
 
     /**
+     * @param  bool|'local'|'global' $disablePlugins Whether plugins should not be loaded, can be set to local or global to only disable local/global plugins
      * @return Plugin\PluginManager
      */
-    protected function createPluginManager(IOInterface $io, Composer $composer, PartialComposer $globalComposer = null, bool $disablePlugins = false): Plugin\PluginManager
+    protected function createPluginManager(IOInterface $io, Composer $composer, PartialComposer $globalComposer = null, $disablePlugins = false): Plugin\PluginManager
     {
         return new Plugin\PluginManager($io, $composer, $globalComposer, $disablePlugins);
     }
@@ -604,18 +611,23 @@ class Factory
      * @param  IOInterface $io             IO instance
      * @param  mixed       $config         either a configuration array or a filename to read from, if null it will read from
      *                                     the default filename
-     * @param  bool        $disablePlugins Whether plugins should not be loaded
+     * @param  bool|'local'|'global' $disablePlugins Whether plugins should not be loaded, can be set to local or global to only disable local/global plugins
      * @param  bool        $disableScripts Whether scripts should not be run
      * @return Composer
      */
-    public static function create(IOInterface $io, $config = null, bool $disablePlugins = false, bool $disableScripts = false): Composer
+    public static function create(IOInterface $io, $config = null, $disablePlugins = false, bool $disableScripts = false): Composer
     {
         $factory = new static();
 
-        $composer = $factory->createComposer($io, $config, $disablePlugins, null, true, $disableScripts);
-        assert($composer instanceof Composer);
+        // for BC reasons, if a config is passed in either as array or a path that is not the default composer.json path
+        // we disable local plugins as they really should not be loaded from CWD
+        // If you want to avoid this behavior, you should be calling createComposer directly with a $cwd arg set correctly
+        // to the path where the composer.json being loaded resides
+        if ($config !== null && $config !== self::getComposerFile() && $disablePlugins === false) {
+            $disablePlugins = 'local';
+        }
 
-        return $composer;
+        return $factory->createComposer($io, $config, $disablePlugins, null, true, $disableScripts);
     }
 
     /**

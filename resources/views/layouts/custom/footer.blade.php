@@ -61,7 +61,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 text-center">
-                    <span class="copyright-text">Copyright © 2022 <a href="https://dexignzone.com/" target="_blank">DexignZone</a>. All rights reserved.</span>
+                    <span class="copyright-text">Copyright © 2022 <a href="https://dexignzone.com/" target="_blank">Kaffa Tech</a>. All rights reserved.</span>
                 </div>
             </div>
         </div>

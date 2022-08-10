@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/register', [AuthController::class, 'register']);
+Route::get('/device', [AuthController::class, 'device']);
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -24,10 +28,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //Route::get('/setting', function () {
 //   return "dad";
 //});
-Route::get('/login', [AuthController::class, 'login']);
-Route::get('/register', [AuthController::class, 'register']);
-Route::get('/device', [AuthController::class, 'device']);
-
 
 //Setting
 Route::get('/setting', [SettingsController::class, 'index']);

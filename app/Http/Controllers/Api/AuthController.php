@@ -19,42 +19,40 @@ class AuthController extends Controller
     public function register(Request $request)
     {
 
-        $post_data = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|min:8'
-        ]);
+        $customer_data = Customer::where('email',$request->email)->orWhere('phone',$request->phone)->get();
 
-        $user = Customer::create([
-            'name' => $post_data['name'],
-            'email' => $post_data['email'],
-            'password' => Hash::make($post_data['password']),
-
-        ]);
-
-        $token = $user->createToken('authToken')->plainTextToken;
-
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-        ]);
+        if(!Count($customer_data)>0) {
+            Customer::create([
+                'firstname' => $request['firstname'],
+                'lastname' => $request['lastname'],
+                'email' => $request['email'],
+                'phone' => $request['phone'],
+                'password' => Hash::make($request['password']),
+            ]);
+            return response(['status' => 'success'], 200);
+        }else{
+            return response(['error' => 'error'], 200);
+        }
     }
 
     public function login(Request $request)
     {
-        if (!Auth::attempt($request->only('email', 'password'))) {
-            return response()->json([
-                'message' => 'Login information is invalid.'
-            ], 401);
+        $request->validate([
+            'phone' => 'required',
+            'password' => 'required'
+        ]);
+
+        $user = Customer::where('phone', $request->phone)->first();
+
+        if (! $user || ! Hash::check($request->password, $user->password)) {
+            return response(['status' => 'failed','message' => ['Dogrulama Hatalı.']], 200);//500
         }
 
-        $user = Customer::where('email', $request['email'])->firstOrFail();
-        $token = $user->createToken('authToken')->plainTextToken;
-
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-        ]);
+        $userToken = $user->createToken('api-token')->plainTextToken;
+        if($request->device!=null && !$request->device!='null'){
+            //$user->update(['device_key' => $request->device]);
+        }
+        return response(['status' => 'success','data' => $user,'token' => $userToken], 200);
     }
 
     public function device(Request $request)

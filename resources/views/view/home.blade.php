@@ -1,5 +1,26 @@
 @extends('layouts.view')
 @section('content')
+
+    <div class="modal fade" id="VehicleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Araç Talep Formu
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal Et"</button>
+                    <button type="button" class="btn btn-primary">Talep Gönder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="banner-one" style="background-image: url({{asset('view/images/main-slider/slider1/pic2.png')}});">
         <div class="container">
             <div class="banner-inner">
@@ -30,29 +51,35 @@
     <section class="content-inner-4">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6 wow fadeInUp"  style="background-image: url('{{asset('view/images/pexels-photo-707046.jpeg')}}')">
-                    <div class="icon-bx-wraper style-1 box-hover text-center m-b30">
-                        <div class="icon-content">
-                            <h4 class="dlab-title">Aracını En İyi Fiyata Hemen Sat</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp"   style="background-image: url('{{asset('view/images/pexels-photo-707046.jpeg')}}')">
-                    <div class="icon-bx-wraper style-1 box-hover active text-center m-b30">
+                <div class="col-lg-4 col-md-6 wow fadeInUp">
+                    <a href="{{route('form1')}}">
 
-                        <div class="icon-content">
+                        <div class="icon-bx-wraper style-1 box-hover text-center m-b30"
+                             style="display: table;height: 230px;background-size: cover;background-image: url('{{asset('view/images/pexels-photo-707046.jpeg')}}')">
+                            <div class="icon-content" style="display: table-cell;    vertical-align: middle;">
+                                <h4 class="dlab-title">Aracını En İyi Fiyata Hemen Sat</h4>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp">
+                    <div class="icon-bx-wraper style-1 box-hover text-center m-b30"
+                         style="display: table;height: 230px;background-size: cover;background-image: url('{{asset('view/images/pexels-photo-707046.jpeg')}}')">
+                        <div class="icon-content" style="display: table-cell;    vertical-align: middle;">
                             <h4 class="dlab-title">EN İYİ FİYATA HEMEN ARAÇ AL</h4>
-
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 offset-lg-0 offset-md-3 wow fadeInUp"  style="background-image: url('{{asset('view/images/pexels-photo-707046.jpeg')}}')">
-                    <div class="icon-bx-wraper style-1 box-hover text-center m-b30">
-                        <div class="icon-content">
-                            <h4 class="dlab-title">ARADIĞIM ARAÇ GELİNCE HABER VER</h4>
-
+                <div class="col-lg-4 col-md-6 offset-lg-0 offset-md-3 wow fadeInUp">
+                    <a href="javascript:;" ng-click="VehicleModal()">
+                        <div class="icon-bx-wraper style-1 box-hover text-center m-b30"
+                             style="display: table;height: 230px;background-size: cover;background-image: url('{{asset('view/images/pexels-photo-707046.jpeg')}}')">
+                            <div class="icon-content" style="display: table-cell;    vertical-align: middle;">
+                                <h4 class="dlab-title">ARADIĞIM ARAÇ GELİNCE HABER VER</h4>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -82,180 +109,116 @@
             <div class="container">
                 <div class="clearfix">
                     <ul id="masonry" class="row lightgallery">
+
                         <li class="card-container col-lg-3 col-md-6 col-sm-6 web_design wow fadeInUp"
-                            data-wow-duration="2s"
-                            data-wow-delay="0.2s">
-                            <div class="dlab-box dlab-overlay-box style-1 m-b30">
-                                <div class="dlab-media dlab-img-overlay1 primary">
-                                    <img src="{{asset('view/images/projects/pic1.jpg')}}" alt="">
-                                    <span data-exthumbimage="images/projects/pic1.jpg')}}"
-                                          data-src="{{asset('view/images/projects/pic1.jpg')}}" class="lightimg"
-                                          title="Design">
-										<i class="la la-plus"></i>
-									</span>
-                                </div>
-                                <div class="dlab-info">
-                                    <h4 class="title"><a href="services-details-2.html">Web Development</a></h4>
-                                    <ul class="tags-list">
-                                        <li><a href="#">Brand</a></li>
-                                        <li><a href="#">Website</a></li>
-                                    </ul>
-                                    <a href="services-details-2.html" class="btn btn-light icon-btn"><i
-                                                class="fa fa-angle-right"></i></a>
+                            data-wow-duration="2s" data-wow-delay="0.2s">
+                            <div class="col-lg-12 col-md-6 col-sm-6">
+                                <div class="icon-bx-wraper style-7 text-center m-b30">
+                                    <div class="icon-media">
+                                        <img src="{{asset('view/images/arac.jpeg')}}" alt="">
+                                    </div>
+                                    <div class="icon-content">
+                                        <h4 class="dlab-title">Mercedes</h4>
+                                        <p>Özellikler.</p>
+                                    </div>
                                 </div>
                             </div>
                         </li>
                         <li class="card-container col-lg-3 col-md-6 col-sm-6 mobile_app wow fadeInUp"
                             data-wow-duration="2s" data-wow-delay="0.8s">
-                            <div class="dlab-box dlab-overlay-box style-1 m-b30">
-                                <div class="dlab-media dlab-img-overlay1 primary">
-                                    <img src="{{asset('view/images/projects/pic5.jpg')}}" alt="">
-                                    <span data-exthumbimage="images/projects/pic5.jpg')}}"
-                                          data-src="{{asset('view/images/projects/pic5.jpg')}}" class="lightimg"
-                                          title="Design">
-										<i class="la la-plus"></i>
-									</span>
-                                </div>
-                                <div class="dlab-info">
-                                    <h4 class="title"><a href="services-details-2.html">Strategy & Research</a></h4>
-                                    <ul class="tags-list">
-                                        <li><a href="#">Brand</a></li>
-                                        <li><a href="#">Website</a></li>
-                                    </ul>
-                                    <a href="services-details-2.html" class="btn btn-light icon-btn"><i
-                                                class="fa fa-angle-right"></i></a>
+                            <div class="col-lg-12 col-md-6 col-sm-6">
+                                <div class="icon-bx-wraper style-7 text-center m-b30">
+                                    <div class="icon-media">
+                                        <img src="{{asset('view/images/arac.jpeg')}}" alt="">
+                                    </div>
+                                    <div class="icon-content">
+                                        <h4 class="dlab-title">Mercedes</h4>
+                                        <p>Özellikler.</p>
+                                    </div>
                                 </div>
                             </div>
                         </li>
                         <li class="card-container col-lg-3 col-md-6 col-sm-6 branding wow fadeInUp"
                             data-wow-duration="2s" data-wow-delay="0.6s">
-                            <div class="dlab-box dlab-overlay-box style-1 m-b30">
-                                <div class="dlab-media dlab-img-overlay1 primary">
-                                    <img src="{{asset('view/images/projects/pic2.jpg')}}" alt="">
-                                    <span data-exthumbimage="images/projects/pic2.jpg')}}"
-                                          data-src="{{asset('view/images/projects/pic2.jpg')}}" class="lightimg"
-                                          title="Design">
-										<i class="la la-plus"></i>
-									</span>
-                                </div>
-                                <div class="dlab-info">
-                                    <h4 class="title"><a href="services-details-2.html">Web Solution</a></h4>
-                                    <ul class="tags-list">
-                                        <li><a href="#">Brand</a></li>
-                                        <li><a href="#">Website</a></li>
-                                    </ul>
-                                    <a href="services-details-2.html" class="btn btn-light icon-btn"><i
-                                                class="fa fa-angle-right"></i></a>
+                            <div class="col-lg-12 col-md-6 col-sm-6">
+                                <div class="icon-bx-wraper style-7 text-center m-b30">
+                                    <div class="icon-media">
+                                        <img src="{{asset('view/images/arac.jpeg')}}" alt="">
+                                    </div>
+                                    <div class="icon-content">
+                                        <h4 class="dlab-title">Mercedes</h4>
+                                        <p>Özellikler.</p>
+                                    </div>
                                 </div>
                             </div>
                         </li>
                         <li class="card-container col-lg-3 col-md-6 col-sm-6 web_development wow fadeInUp"
                             data-wow-duration="2s" data-wow-delay="1.2s">
-                            <div class="dlab-box dlab-overlay-box style-1 m-b30">
-                                <div class="dlab-media dlab-img-overlay1 primary">
-                                    <img src="{{asset('view/images/projects/pic6.jpg')}}" alt="">
-                                    <span data-exthumbimage="images/projects/pic6.jpg')}}"
-                                          data-src="{{asset('view/images/projects/pic6.jpg')}}" class="lightimg"
-                                          title="Design">
-										<i class="la la-plus"></i>
-									</span>
-                                </div>
-                                <div class="dlab-info">
-                                    <h4 class="title"><a href="services-details-2.html">Testing & Lunching</a></h4>
-                                    <ul class="tags-list">
-                                        <li><a href="#">Brand</a></li>
-                                        <li><a href="#">Website</a></li>
-                                    </ul>
-                                    <a href="services-details-2.html" class="btn btn-light icon-btn"><i
-                                                class="fa fa-angle-right"></i></a>
+                            <div class="col-lg-12 col-md-6 col-sm-6">
+                                <div class="icon-bx-wraper style-7 text-center m-b30">
+                                    <div class="icon-media">
+                                        <img src="{{asset('view/images/arac.jpeg')}}" alt="">
+                                    </div>
+                                    <div class="icon-content">
+                                        <h4 class="dlab-title">Mercedes</h4>
+                                        <p>Özellikler.</p>
+                                    </div>
                                 </div>
                             </div>
                         </li>
                         <li class="card-container col-lg-3 col-md-6 col-sm-6 web_development wow fadeInUp"
                             data-wow-duration="2s" data-wow-delay="0.4s">
-                            <div class="dlab-box dlab-overlay-box style-1 m-b30">
-                                <div class="dlab-media dlab-img-overlay1 primary">
-                                    <img src="{{asset('view/images/projects/pic7.jpg')}}" alt="">
-                                    <span data-exthumbimage="images/projects/pic7.jpg')}}"
-                                          data-src="{{asset('view/images/projects/pic7.jpg')}}" class="lightimg"
-                                          title="Design">
-										<i class="la la-plus"></i>
-									</span>
-                                </div>
-                                <div class="dlab-info">
-                                    <h4 class="title"><a href="services-details-2.html">Idea & Analysis</a></h4>
-                                    <ul class="tags-list">
-                                        <li><a href="#">Brand</a></li>
-                                        <li><a href="#">Website</a></li>
-                                    </ul>
-                                    <a href="services-details-2.html" class="btn btn-light icon-btn"><i
-                                                class="fa fa-angle-right"></i></a>
+                            <div class="col-lg-12 col-md-6 col-sm-6">
+                                <div class="icon-bx-wraper style-7 text-center m-b30">
+                                    <div class="icon-media">
+                                        <img src="{{asset('view/images/arac.jpeg')}}" alt="">
+                                    </div>
+                                    <div class="icon-content">
+                                        <h4 class="dlab-title">Mercedes</h4>
+                                        <p>Özellikler.</p>
+                                    </div>
                                 </div>
                             </div>
                         </li>
                         <li class="card-container col-lg-3 col-md-6 col-sm-6 seo wow fadeInUp" data-wow-duration="2s"
                             data-wow-delay="1.0s">
-                            <div class="dlab-box dlab-overlay-box style-1 m-b30">
-                                <div class="dlab-media dlab-img-overlay1 primary">
-                                    <img src="{{asset('view/images/projects/pic8.jpg')}}" alt="">
-                                    <span data-exthumbimage="images/projects/pic8.jpg')}}"
-                                          data-src="{{asset('view/images/projects/pic8.jpg')}}" class="lightimg"
-                                          title="Design">
-										<i class="la la-plus"></i>
-									</span>
-                                </div>
-                                <div class="dlab-info">
-                                    <h4 class="title"><a href="services-details-2.html">Online Support</a></h4>
-                                    <ul class="tags-list">
-                                        <li><a href="#">Brand</a></li>
-                                        <li><a href="#">Website</a></li>
-                                    </ul>
-                                    <a href="services-details-2.html" class="btn btn-light icon-btn"><i
-                                                class="fa fa-angle-right"></i></a>
+                            <div class="col-lg-12 col-md-6 col-sm-6">
+                                <div class="icon-bx-wraper style-7 text-center m-b30">
+                                    <div class="icon-media">
+                                        <img src="{{asset('view/images/arac.jpeg')}}" alt="">
+                                    </div>
+                                    <div class="icon-content">
+                                        <h4 class="dlab-title">Mercedes</h4>
+                                        <p>Özellikler.</p>
+                                    </div>
                                 </div>
                             </div>
                         </li>
                         <li class="card-container col-lg-3 col-md-6 col-sm-6 web_development wow fadeInUp"
                             data-wow-duration="2s" data-wow-delay="1.2s">
-                            <div class="dlab-box dlab-overlay-box style-1 m-b30">
-                                <div class="dlab-media dlab-img-overlay1 primary">
-                                    <img src="{{asset('view/images/projects/pic3..jpg')}}" alt="">
-                                    <span data-exthumbimage="images/projects/pic3..jpg')}}"
-                                          data-src="{{asset('view/images/projects/pic3..jpg')}}" class="lightimg"
-                                          title="Design">
-										<i class="la la-plus"></i>
-									</span>
-                                </div>
-                                <div class="dlab-info">
-                                    <h4 class="title"><a href="services-details-2.html">Growth Tracking</a></h4>
-                                    <ul class="tags-list">
-                                        <li><a href="#">Brand</a></li>
-                                        <li><a href="#">Website</a></li>
-                                    </ul>
-                                    <a href="services-details-2.html" class="btn btn-light icon-btn"><i
-                                                class="fa fa-angle-right"></i></a>
+                            <div class="col-lg-12 col-md-6 col-sm-6">
+                                <div class="icon-bx-wraper style-7 text-center m-b30">
+                                    <div class="icon-media">
+                                        <img src="{{asset('view/images/arac.jpeg')}}" alt="">
+                                    </div>
+                                    <div class="icon-content">
+                                        <h4 class="dlab-title">Mercedes</h4>
+                                        <p>Özellikler.</p>
+                                    </div>
                                 </div>
                             </div>
                         </li>
                         <li class="card-container col-lg-3 col-md-6 col-sm-6 seo wow fadeInUp" data-wow-duration="2s"
                             data-wow-delay="1.0s">
-                            <div class="dlab-box dlab-overlay-box style-1 m-b30">
-                                <div class="dlab-media dlab-img-overlay1 primary">
-                                    <img src="{{asset('view/images/projects/pic4..jpg')}}" alt="">
-                                    <span data-exthumbimage="images/projects/pic4..jpg')}}"
-                                          data-src="{{asset('view/images/projects/pic4..jpg')}}" class="lightimg"
-                                          title="Design">
-										<i class="la la-plus"></i>
-									</span>
-                                </div>
-                                <div class="dlab-info">
-                                    <h4 class="title"><a href="services-details-2.html">SEO Marketing</a></h4>
-                                    <ul class="tags-list">
-                                        <li><a href="#">Brand</a></li>
-                                        <li><a href="#">Website</a></li>
-                                    </ul>
-                                    <a href="services-details-2.html" class="btn btn-light icon-btn"><i
-                                                class="fa fa-angle-right"></i></a>
+                            <div class="col-lg-12 col-md-6 col-sm-6">
+                                <div class="icon-bx-wraper style-7 text-center m-b30">
+                                    <div class="icon-media">
+                                        <img src="{{asset('view/images/arac.jpeg')}}" alt="">
+                                    </div>
+                                    <div class="icon-content">
+                                        <h4 class="dlab-title">Mercedes</h4>
+                                        <p>Özellikler.</p>
+                                    </div>
                                 </div>
                             </div>
                         </li>
@@ -551,7 +514,7 @@
         <div class="container">
             <div class="section-head style-1 text-center">
                 <h3 class="sub-title">BLOG</h3>
-             </div>
+            </div>
             <div class="blog-carousel1 owl-carousel owl-theme owl-btn-1 owl-btn-center-lr owl-dots-none owl-btn-primary">
                 <div class="item wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
                     <div class="dlab-blog style-1 bg-white">

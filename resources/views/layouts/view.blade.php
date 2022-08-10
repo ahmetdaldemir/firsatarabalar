@@ -29,7 +29,7 @@
 
 </head>
 <body id="bg" ng-app="app" ng-controller="MainController">
-<div id="loading-area" class="loading-01"></div>
+<!-- div id="loading-area" class="loading-01"></div -->
 <div class="page-wraper">
     @include('layouts/custom/header')
     <div class="page-content bg-white">
@@ -42,14 +42,23 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-sanitize.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-utils/0.1.1/angular-ui-utils.min.js"
-        class=""></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-utils/0.1.1/angular-ui-utils.min.js" class=""></script>
 
 
 <script> var app = angular.module("app", ['ngSanitize']);
     app.filter('unsafe', function ($sce) {
         return $sce.trustAsHtml;
+    });
+    app.directive('customOnChange', function() {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+                var onChangeFunc = scope.$eval(attrs.customOnChange);
+                element.unbind('change').bind('change', function(e) {
+                    onChangeFunc(e);
+                });
+            }
+        };
     });
 </script>
 <script src="{{asset('view/js/angular.js')}}" class=""></script>

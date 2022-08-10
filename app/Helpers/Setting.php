@@ -17,3 +17,20 @@ if (! function_exists('setting')) {
     }
 
 }
+
+if (! function_exists('page')) {
+    /**
+     * Format number
+     *
+     * @param $value
+     * @param $attribute
+     * @param $data
+     * @return boolean
+     */
+    function page($value)
+    {
+        $page =  \App\Models\Page::where('categories',$value)->get();
+        return $page;
+    }
+
+}

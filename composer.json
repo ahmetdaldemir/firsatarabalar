@@ -17,7 +17,9 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
         "nunomaduro/termwind": "^1.13",
-        "spatie/laravel-permission": "^5.5"
+        "predis/predis": "^2.0",
+        "spatie/laravel-permission": "^5.5",
+      "ext-redis": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

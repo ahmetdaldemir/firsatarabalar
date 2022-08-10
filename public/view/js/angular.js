@@ -1,3 +1,4 @@
+
 app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike', '$filter', function ($scope, $http, $httpParamSerializerJQLike, $window, $filter) {
 
     $scope.CustomerLogin = function () {
@@ -42,4 +43,42 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
         });
     }
 
+
+    $scope.GetModel = function (item) {
+        $http({
+            method: "GET",
+            url: "/getmodel?id="+item+"",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            dataType: 'json',
+            cache: true,
+            processData: false,
+            contentType: false
+
+        }).then(function (response) {
+            $scope.modelList = response.data;
+        });
+    }
+
+    $scope.GetDistricts = function (item) {
+        $http({
+            method: "GET",
+            url: "/getdistricts?id="+item+"",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            dataType: 'json',
+            cache: true,
+            processData: false,
+            contentType: false
+
+        }).then(function (response) {
+            $scope.districtsList = response.data;
+        });
+    }
+
+    $scope.VehicleModal = function () {
+       $("#VehicleModal").modal('show');
+    }
 }]);

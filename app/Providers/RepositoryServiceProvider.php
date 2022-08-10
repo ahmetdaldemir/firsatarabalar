@@ -31,9 +31,10 @@ use App\Repositories\Users\UserRepository;
 use App\Repositories\Users\UserRepositoryInterface;
 use App\Repositories\Valuation\ValuationRepository;
 use App\Repositories\Valuation\ValuationRepositoryInterface;
+use App\Repositories\VehicleRequest\VehicleRequestRepository;
+use App\Repositories\VehicleRequest\VehicleRequestRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
-use VehicleRequestRepository;
-use VehicleRequestRepositoryInterface;
+
 
 class RepositoryServiceProvider extends ServiceProvider
 {

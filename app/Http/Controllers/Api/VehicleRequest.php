@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\VehicleRequest\VehicleRequestRepositoryInterface;
 use Illuminate\Http\Request;
 
 class VehicleRequest extends Controller
 {
-    private VehicleRepositoryInterface $VehicleRepository;
+    private VehicleRequestRepositoryInterface $VehicleRepository;
 
-    public function __construct(VehicleRepositoryInterface $VehicleRepository)
+    public function __construct(VehicleRequestRepositoryInterface $VehicleRepository)
     {
         $this->VehicleRepository = $VehicleRepository;
     }

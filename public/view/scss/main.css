@@ -10899,7 +10899,7 @@ textarea {
       padding: 30px; } }
 
 .btn {
-  padding: 20px 35px;
+  padding: 20px 25px;
   display: inline-block;
   border-radius: 0.25rem;
   font-size: 15px;
@@ -19020,7 +19020,7 @@ pre {
         line-height: 1.2;
         margin-bottom: 5px; } }
   .dlab-bnr-inr.text-center .breadcrumb-row .breadcrumb {
-    justify-content: center; }
+    justify-content: left; }
 
 .breadcrumb-row ul {
   background: transparent;

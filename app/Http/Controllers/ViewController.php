@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Customer;
+use App\Models\CustomerCar;
+use App\Models\Page;
+use Illuminate\Http\Request;
+
 class ViewController
 {
     public function __construct()
@@ -12,7 +17,14 @@ class ViewController
     public function index()
     {
         $data['chart'] = [];
+        $data['customer_cars'] = CustomerCar::all();
         return view('view.home',$data);
+    }
+
+    public function pages(Request $request)
+    {
+        $data['pages'] = Page::where('slug',$request->slug)->first();
+        return view('view.pages',$data);
     }
 
     public function how_run_system()

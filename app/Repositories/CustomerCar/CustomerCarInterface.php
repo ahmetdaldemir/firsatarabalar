@@ -11,5 +11,6 @@ interface CustomerCarInterface
     public function assignmentDo($request);
     public function status($request,$status);
     public function statusLog($request,$status);
+    public function getType($type);
 
 }

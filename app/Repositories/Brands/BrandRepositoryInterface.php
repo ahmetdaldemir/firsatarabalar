@@ -1,6 +1,6 @@
-<?php namespace App\Repositories\Cars;
+<?php namespace App\Repositories\Brands;
 
-interface CarRepositoryInterface
+interface BrandRepositoryInterface
 {
     public function get();
     public function getById($id);
@@ -8,5 +8,4 @@ interface CarRepositoryInterface
     public function create($request);
     public function update($id,$request);
     public function filter();
-    public function version_filter($id);
- }
+}

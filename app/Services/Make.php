@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Enums\BodyType;
+use App\Enums\FullType;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\City;
@@ -18,23 +20,85 @@ class Make
     {
         $cache_key = 'brand';
         if (Cache::has($cache_key)) {
-            $data =  Cache::get($cache_key);
+            $data = Cache::get($cache_key);
         } else {
             $brand = Brand::all();
-            $data = Cache::put($cache_key,$brand);
+            $data = Cache::put($cache_key, $brand);
         }
         return $data;
     }
 
-    public function model($id)
+    public function model($year, $brand)
     {
-        $cache_key = 'model:' . $id;
+        $array = [];
+        $cache_key = 'model:' . $year . ":" . $brand;
         $data = Cache::get($cache_key);
         if (!Cache::has($cache_key)) {
-            $data = Car::where('brand_id', $id)->get();
+            $data = Car::select('model')->where('brand_id', $brand)->where('production_start', '<=', $year)->where('production_end', '>=', $year)->get();
+            foreach ($data as $item) {
+                $array[]['model'] = $item->model;
+            }
+            $data = collect($array)->unique()->values();
             Cache::put($cache_key, $data);
         }
-         return $data;
+        return $data;
+    }
+
+    public function fuel($year, $brand, $model)
+    {
+        $array = [];
+        $cache_key = 'fueltype:' . $year . ":" . $brand;
+        $data = Cache::get($cache_key);
+        if (!Cache::has($cache_key)) {
+            $data = Car::select('fueltype')->where('brand_id', $brand)->where('model', $model)->where('production_start', '<=', $year)->where('production_end', '>=', $year)->get();
+            foreach ($data as $item) {
+                $array[] = array(
+                    'fueltype' => FullType::FullType[$item->fueltype],
+                    'id' => $item->fueltype
+                );
+            }
+            $data = collect($array)->unique()->values();
+            Cache::put($cache_key, $data);
+        }
+        return $data;
+    }
+
+    public function body($year, $brand, $model)
+    {
+
+        $array = [];
+        $cache_key = 'bodytype:' . $year . ":" . $brand;
+        $data = Cache::get($cache_key);
+        if (!Cache::has($cache_key)) {
+            $data = Car::select('bodytype')->where('brand_id', $brand)->where('model', $model)->where('production_start', '<=', $year)->where('production_end', '>=', $year)->get();
+            foreach ($data as $item) {
+                $array[] = array(
+                    'bodytype' => BodyType::BodyType[$item->bodytype],
+                    'id' => $item->bodytype
+                );
+            }
+
+            $data = collect($array)->unique()->values();
+            Cache::put($cache_key, $data);
+        }
+        return $data;
+    }
+
+    public function version($year, $brand, $model, $body, $fuel)
+    {
+
+        $array = [];
+        $cache_key = 'name:' . $year . ":" . $brand;
+        $data = Cache::get($cache_key);
+        if (!Cache::has($cache_key)) {
+            $data = Car::select('name')->where('brand_id', $brand)->where('bodytype', $body)->where('fuel', $fuel)->where('model', $model)->where('production_start', '<=', $year)->where('production_end', '>=', $year)->get();
+            foreach ($data as $item) {
+                $array[]['cars'] = BodyType::BodyType[$item->name];
+            }
+            $data = collect($array)->unique()->values();
+            Cache::put($cache_key, $data);
+        }
+        return $data;
     }
 
     public function color()
@@ -61,7 +125,7 @@ class Make
 
     public function districts($id)
     {
-        $cache_key = 'district:'.$id;
+        $cache_key = 'district:' . $id;
         $data = Cache::get($cache_key);
         if (!Cache::has($cache_key)) {
             $data = Town::where('city_id', $id)->get();

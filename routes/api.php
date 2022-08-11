@@ -36,7 +36,7 @@ Route::get('/towns', [SettingsController::class, 'towns']);
 Route::get('/distincs', [SettingsController::class, 'distincs']);
 Route::get('/cars', [SettingsController::class, 'cars']);
 Route::get('/neighbourhoods', [SettingsController::class, 'neighbourhoods']);
-Route::get('/brands', [SettingsController::class, 'brands']);
+Route::get('/brands', [\App\Http\Controllers\Api\BrandController::class, 'index']);
 Route::get('/page', [SettingsController::class, 'page']);
 Route::get('/page_category', [SettingsController::class, 'page_category']);
 
@@ -46,4 +46,13 @@ Route::get('/customer/{id}', [CustomerController::class, 'show/{id}'])->name('cu
 
 
 Route::resource('vehicle_request',  VehicleRequest::class);
+Route::get('/years', [\App\Http\Controllers\Api\CustomController::class, 'years']);
+Route::get('/models', [\App\Http\Controllers\Api\CustomController::class, 'models']);
+Route::get('/fuels', [\App\Http\Controllers\Api\CustomController::class, 'fuels']);
+Route::get('/bodys', [\App\Http\Controllers\Api\CustomController::class, 'bodys']);
+Route::get('/versions', [\App\Http\Controllers\Api\CustomController::class, 'versions']);
+
+
+
+Route::get('/cacheflush', [\App\Http\Controllers\Api\CustomController::class, 'Cacheflush']);
 

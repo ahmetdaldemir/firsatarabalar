@@ -1,22 +1,66 @@
 @extends('layouts.view')
 @section('content')
 
-    <div class="modal fade" id="VehicleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="VehicleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Araç Talep Et</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    Araç Talep Formu
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal Et"</button>
-                    <button type="button" class="btn btn-primary">Talep Gönder</button>
-                </div>
+                <form class="dlab-form" id="VehicleRequest" method="POST" ng-submit="VehicleRequest()">
+                    <div class="modal-title">
+                        <div ng-if="error" class="alert alert-danger">
+                            <span style="display: flex">@{{ brand_id_error }}</span>
+                            <span style="display: flex">@{{ customer_id_error }}</span>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-lg-12 m-b30">
+                            @csrf
+                            <input type="hidden" name="customer_id" value="{{auth()->id()}}">
+                            <input type="hidden" class="form-control" name="dzToDo" value="Contact">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="input-group">
+                                        <select name="brand_id" ng-change="GetVersion(brands)"  ng-model="brands" id="getModelValue" class="form-control">
+                                            @foreach ($brands as $brand)
+                                                <option value="{{$brand->id}}" my-directive>{{$brand->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div class="input-group">
+                                        <select name="version" id="version" class="form-control form-select-sm">
+                                            <option ng-repeat="version in versionList" value="@{{version.name}}">@{{version.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="input-group">
+                                        <input class="form-control form-select-sm" name="price_min" placeholder="0.00"/>
+                                        <input class="form-control form-select-sm" name="price_max"
+                                               placeholder="1.000.000"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="input-group">
+                                        <textarea name="message" class="form-control" placeholder="Message"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal Et</button>
+                        <button type="submit" class="btn btn-primary" id="VehicleRequestButton">Talep Gönder</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -92,25 +136,20 @@
             </div>
             <div class="site-filters style-1 clearfix center mb-5">
                 <ul class="filters" data-bs-toggle="buttons">
-                    <li data-filter=".web_design" class="btn">
-                        <input type="radio">
-                        <a href="javascript:void(0);">Satışta Olanlar</a>
-                    </li>
                     <li data-filter=".web_development" class="btn">
                         <input type="radio">
-                        <a href="javascript:void(0);">Satılan Araçlar</a>
+                        <a ng-click="GetCar(4)"  href="javascript:void(0);">Satılan Araçlar</a>
                     </li>
                     <li data-filter=".branding" class="btn">
                         <input type="radio">
-                        <a href="javascript:void(0);">Gelecek Araçlar</a>
+                        <a ng-click="GetCar(5)" href="javascript:void(0);">Gelecek Araçlar</a>
                     </li>
                 </ul>
             </div>
-            <div class="container">
+            <div class="container" ng-init="GetCar(4)">
                 <div class="clearfix">
                     <ul id="masonry" class="row lightgallery">
-
-                        <li class="card-container col-lg-3 col-md-6 col-sm-6 web_design wow fadeInUp"
+                        <li ng-repeat="car in carList" class="card-container col-lg-3 col-md-6 col-sm-6 web_design wow fadeInUp"
                             data-wow-duration="2s" data-wow-delay="0.2s">
                             <div class="col-lg-12 col-md-6 col-sm-6">
                                 <div class="icon-bx-wraper style-7 text-center m-b30">
@@ -118,107 +157,22 @@
                                         <img src="{{asset('view/images/arac.jpeg')}}" alt="">
                                     </div>
                                     <div class="icon-content">
-                                        <h4 class="dlab-title">Mercedes</h4>
-                                        <p>Özellikler.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="card-container col-lg-3 col-md-6 col-sm-6 mobile_app wow fadeInUp"
-                            data-wow-duration="2s" data-wow-delay="0.8s">
-                            <div class="col-lg-12 col-md-6 col-sm-6">
-                                <div class="icon-bx-wraper style-7 text-center m-b30">
-                                    <div class="icon-media">
-                                        <img src="{{asset('view/images/arac.jpeg')}}" alt="">
-                                    </div>
-                                    <div class="icon-content">
-                                        <h4 class="dlab-title">Mercedes</h4>
-                                        <p>Özellikler.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="card-container col-lg-3 col-md-6 col-sm-6 branding wow fadeInUp"
-                            data-wow-duration="2s" data-wow-delay="0.6s">
-                            <div class="col-lg-12 col-md-6 col-sm-6">
-                                <div class="icon-bx-wraper style-7 text-center m-b30">
-                                    <div class="icon-media">
-                                        <img src="{{asset('view/images/arac.jpeg')}}" alt="">
-                                    </div>
-                                    <div class="icon-content">
-                                        <h4 class="dlab-title">Mercedes</h4>
-                                        <p>Özellikler.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="card-container col-lg-3 col-md-6 col-sm-6 web_development wow fadeInUp"
-                            data-wow-duration="2s" data-wow-delay="1.2s">
-                            <div class="col-lg-12 col-md-6 col-sm-6">
-                                <div class="icon-bx-wraper style-7 text-center m-b30">
-                                    <div class="icon-media">
-                                        <img src="{{asset('view/images/arac.jpeg')}}" alt="">
-                                    </div>
-                                    <div class="icon-content">
-                                        <h4 class="dlab-title">Mercedes</h4>
-                                        <p>Özellikler.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="card-container col-lg-3 col-md-6 col-sm-6 web_development wow fadeInUp"
-                            data-wow-duration="2s" data-wow-delay="0.4s">
-                            <div class="col-lg-12 col-md-6 col-sm-6">
-                                <div class="icon-bx-wraper style-7 text-center m-b30">
-                                    <div class="icon-media">
-                                        <img src="{{asset('view/images/arac.jpeg')}}" alt="">
-                                    </div>
-                                    <div class="icon-content">
-                                        <h4 class="dlab-title">Mercedes</h4>
-                                        <p>Özellikler.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="card-container col-lg-3 col-md-6 col-sm-6 seo wow fadeInUp" data-wow-duration="2s"
-                            data-wow-delay="1.0s">
-                            <div class="col-lg-12 col-md-6 col-sm-6">
-                                <div class="icon-bx-wraper style-7 text-center m-b30">
-                                    <div class="icon-media">
-                                        <img src="{{asset('view/images/arac.jpeg')}}" alt="">
-                                    </div>
-                                    <div class="icon-content">
-                                        <h4 class="dlab-title">Mercedes</h4>
-                                        <p>Özellikler.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="card-container col-lg-3 col-md-6 col-sm-6 web_development wow fadeInUp"
-                            data-wow-duration="2s" data-wow-delay="1.2s">
-                            <div class="col-lg-12 col-md-6 col-sm-6">
-                                <div class="icon-bx-wraper style-7 text-center m-b30">
-                                    <div class="icon-media">
-                                        <img src="{{asset('view/images/arac.jpeg')}}" alt="">
-                                    </div>
-                                    <div class="icon-content">
-                                        <h4 class="dlab-title">Mercedes</h4>
-                                        <p>Özellikler.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="card-container col-lg-3 col-md-6 col-sm-6 seo wow fadeInUp" data-wow-duration="2s"
-                            data-wow-delay="1.0s">
-                            <div class="col-lg-12 col-md-6 col-sm-6">
-                                <div class="icon-bx-wraper style-7 text-center m-b30">
-                                    <div class="icon-media">
-                                        <img src="{{asset('view/images/arac.jpeg')}}" alt="">
-                                    </div>
-                                    <div class="icon-content">
-                                        <h4 class="dlab-title">Mercedes</h4>
-                                        <p>Özellikler.</p>
-                                    </div>
+                                        <div class="row">
+                                            <div class="col-md-7"></div>
+                                            <div class="col-md-7"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-7"><h5 class="dlab-title">Mercedes</h5></div>
+                                            <div class="col-md-5">@{{ car.caryear }}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-7">@{{ car.gear }}</div>
+                                            <div class="col-md-5">@{{ car.fuel }}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12"><button style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">Takibe Al</button></div>
+                                         </div>
+                                     </div>
                                 </div>
                             </div>
                         </li>

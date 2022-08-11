@@ -1,29 +1,28 @@
-<?php namespace App\Repositories\Cars;
+<?php namespace App\Repositories\Brands;
 
-use App\Models\Car;
-use App\Models\CustomerCar;
+use App\Models\Brand;
 
-class CarRepository implements CarRepositoryInterface
+class BrandRepository implements BrandRepositoryInterface
 {
     public function get()
     {
-        return Car::simplePaginate(50);
+        return Brand::all();
     }
 
 
     public function getById($id)
     {
-        return Car::findOrFail($id);
+        return Brand::findOrFail($id);
     }
 
     public function delete($id)
     {
-        return Car::destroy($id);
+        return Brand::destroy($id);
     }
 
     public function create($request)
     {
-        $Cities = new Car();
+        $Cities = new Brand();
         $Cities->firstname = $request->firstname;
         $Cities->lastname = $request->lastname;
         $Cities->email = $request->email;
@@ -35,7 +34,7 @@ class CarRepository implements CarRepositoryInterface
 
     public function update($id, $request)
     {
-        $Cities = Car::find($id);
+        $Cities = Brand::find($id);
         $Cities->firstname = $request->firstname;
         $Cities->lastname = $request->lastname;
         $Cities->email = $request->email;
@@ -56,10 +55,4 @@ class CarRepository implements CarRepositoryInterface
     {
         // TODO: Implement filter() method.
     }
-
-    public function version_filter($id)
-    {
-        return Car::where('brand_id',$id)->distinct()->get(['name']);
-    }
-
 }

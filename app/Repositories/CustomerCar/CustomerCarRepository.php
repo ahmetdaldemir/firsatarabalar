@@ -128,4 +128,10 @@ class CustomerCarRepository  implements CustomerCarInterface
         return CustomerCarStatuHistory::where('customer_car_id',$request->customer_car_id)->where('status',$status)->get();
     }
 
+
+
+    public function getType($type)
+    {
+        return CustomerCar::where('status',$type)->get()->take(setting('pagination_item'));
+    }
 }

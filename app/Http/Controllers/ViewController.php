@@ -6,18 +6,24 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\CustomerCar;
 use App\Models\Page;
+use App\Services\Make;
 use Illuminate\Http\Request;
 
 class ViewController
 {
+    protected $service;
     public function __construct()
     {
+        $this->service = new Make();
     }
+
 
     public function index()
     {
         $data['chart'] = [];
         $data['customer_cars'] = CustomerCar::all();
+        $data['brands'] = $this->service->brands();
+
         return view('view.home',$data);
     }
 

@@ -19,7 +19,7 @@ class CustomController extends Controller
 
     public function models(Request $request)
     {
-      return $this->service->model($request->id);
+      return $this->service->model($request->year,$request->brand);
     }
 
     public function districts(Request $request)

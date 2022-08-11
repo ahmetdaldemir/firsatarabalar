@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
 
     <!-- Meta -->
@@ -22,6 +22,7 @@
 
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" href="{{asset('storage/app/files/'.setting('favicon'))}}">
+    <script src="{{asset('view/js/jquery.min.js')}}"></script><!-- JQUERY.MIN JS -->
 
     <!-- Stylesheet -->
     @include('layouts/custom/style')
@@ -44,6 +45,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-sanitize.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-utils/0.1.1/angular-ui-utils.min.js" class=""></script>
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script> var app = angular.module("app", ['ngSanitize']);
     app.filter('unsafe', function ($sce) {

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CrudController;
 use App\Http\Controllers\CustomController;
 use App\Http\Controllers\Modules\Admin\CarController;
 use App\Http\Controllers\Modules\Admin\CustomerCarController;
@@ -48,6 +49,8 @@ Route::get('form5', [ViewCustomerCarController::class, 'form5'])->name('form5');
 
 Route::get('getmodel', [CustomController::class, 'models'])->name('getmodel');
 Route::get('getdistricts', [CustomController::class, 'districts'])->name('getdistricts');
+Route::get('getversion', [CrudController::class, 'getversion'])->name('getversion');
+Route::get('getcar', [CrudController::class, 'getcar'])->name('getcar');
 
 
 
@@ -55,6 +58,8 @@ Route::get('getdistricts', [CustomController::class, 'districts'])->name('getdis
 
 
 Route::get('sayfalar', [ViewController::class, 'pages'])->name('sayfalar');
+Route::post('vehiclerequest', [CrudController::class, 'vehiclerequest'])->name('vehiclerequest');
+
 
 
 

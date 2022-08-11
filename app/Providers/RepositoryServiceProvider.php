@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\Brands\BrandRepository;
+use App\Repositories\Brands\BrandRepositoryInterface;
 use App\Repositories\Cars\CarRepository;
 use App\Repositories\Cars\CarRepositoryInterface;
 
@@ -57,6 +59,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(SettingRepositoryInterface::class, SettingRepository::class);
         $this->app->bind( VehicleRequestRepositoryInterface::class,  VehicleRequestRepository::class);
+        $this->app->bind( BrandRepositoryInterface::class,  BrandRepository::class);
 
     }
 

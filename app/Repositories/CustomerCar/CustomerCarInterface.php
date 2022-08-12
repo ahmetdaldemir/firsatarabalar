@@ -12,5 +12,8 @@ interface CustomerCarInterface
     public function status($request,$status);
     public function statusLog($request,$status);
     public function getType($type);
+    public function firstStepStore($request);
+    public function secondStepStore($request);
+    public function thirtyStepStore($request);
 
 }

@@ -60,5 +60,24 @@ class CrudController extends Controller
         return response()->json($cars,200);
     }
 
+    public function getbody(Request $request)
+    {
+        $body = $this->service->body($request->year,$request->brand,$request->model);
+        return response()->json($body,200);
+    }
+
+    public function getfuel(Request $request)
+    {
+        $fuel = $this->service->fuel($request->year,$request->brand,$request->model);
+        return response()->json($fuel,200);
+    }
+
+    public function getversionlist(Request $request)
+    {
+        $fuel = $this->service->version($request->year,$request->brand,$request->model,$request->body,$request->fuel);
+        return response()->json($fuel,200);
+    }
+
+
 
 }

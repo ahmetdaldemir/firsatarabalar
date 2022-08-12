@@ -1,11 +1,23 @@
 <?php namespace App\Repositories\CustomerCar;
 
+use App\Models\Customer;
 use App\Models\CustomerCar;
+use App\Models\CustomerCarExper;
 use App\Models\CustomerCarStatuHistory;
+use App\Services\Upload;
 use Illuminate\Support\Facades\Auth;
 
-class CustomerCarRepository  implements CustomerCarInterface
+class CustomerCarRepository implements CustomerCarInterface
 {
+
+    protected $upload;
+
+    public function __construct()
+    {
+        $this->upload = new Upload();
+
+    }
+
     public function get()
     {
         return CustomerCar::orderBy('id', 'desc')->simplePaginate(10);
@@ -125,13 +137,188 @@ class CustomerCarRepository  implements CustomerCarInterface
 
     public function checkAssingTo($request, $status)
     {
-        return CustomerCarStatuHistory::where('customer_car_id',$request->customer_car_id)->where('status',$status)->get();
+        return CustomerCarStatuHistory::where('customer_car_id', $request->customer_car_id)->where('status', $status)->get();
     }
-
 
 
     public function getType($type)
     {
-        return CustomerCar::where('status',$type)->get()->take(setting('pagination_item'));
+        return CustomerCar::where('status', $type)->get()->take(setting('pagination_item'));
     }
+
+    public function customer_add()
+    {
+        if (!Auth::check()) {
+            $rand = rand(000000, 999999);
+            $customer = new Customer();
+            $customer->firstname = "John";
+            $customer->lastname = "Depth";
+            $customer->phone = "5455450000";
+            $customer->email = $rand . "@test.com";
+            $customer->password = bcrypt($rand);
+            $customer->save();
+
+            $credentials = array(
+                'email' => $rand . "@test.com",
+                'password' => $rand
+            );
+
+            if (Auth::guard('customer')->attempt($credentials)) {
+                $finduser = Customer::find(Auth::guard('customer')->id());
+                Auth::guard('customer')->login($finduser);
+            }
+            return $customer->id;
+        } else {
+            return Auth::id();
+        }
+    }
+
+    public function firstStepStore($request)
+    {
+        $customer_id = $this->customer_add();
+
+        $customer_car = CustomerCar::updateOrCreate(
+            ['customer_id' => $customer_id, 'session_id' => cacheresponseid()],
+            [
+                'customer_id' => $customer_id,
+                'caryear' => $request->year,
+                'body' => $request->body,
+                'fuel' => $request->fuel,
+                'gear' => $request->transmission,
+                'car_id' => $request->version,
+                'km' => $request->km,
+                'color' => $request->color,
+                'plate' => $request->plate,
+                'ownorder' => $request->ownorder,
+                'car_city' => $request->car_city,
+                'car_state' => $request->car_state,
+                'description' => $request->description,
+                'laststep' => '1',
+            ]
+        );
+
+
+        return $customer_car->id;
+
+
+        /*  `customer_id`,
+          `buyer_id`,
+          ``,
+          `custom_version`,
+          `user_id`,
+          ``,
+          ``,
+            ``,
+          ``,
+          ``,
+          `sasi`,
+          ``,
+          `sebep`,
+          `score`,
+          ``,
+          `kmPhoto`,
+          ``,
+          ``,
+          ``,
+          `damage`,
+          `maintenance_history`,
+          `status_frame`,
+          `status_pole`,
+          `status_podium`,
+          `status_airbag`,
+          `status_triger`,
+          `status_oppression`,
+          `status_brake`,
+          `status_tyre`,
+          `status_km`,
+          `status_unrealizable`,
+          `status_onArkaBagaj`,
+          `specs`,
+          `tramer`,
+          `tramerValue`,
+          `tramer_photo`,
+          `car_notwork`,
+          `car_exterior_faults`,
+          `car_interior_faults`,
+          `gal_price_1`,
+          `gal_price_2`,
+          `gal_price_3`,
+          `valuation`,
+          `suggested`,
+          `suggested_accept`,
+          `shows`,
+          `date_end`,
+          `date_inspection`,
+          ``,
+          `status`, */
+
+    }
+
+    public function secondStepStore($request)
+    {
+
+        $filename = "";
+        if (!empty($request->files->all())) {
+            $files = $request->files->all()['tramer_image'];
+            $this->upload->index($files);
+            $filename = $this->upload->getFileName();
+        }
+
+        $this->upload->index($request->tramer_image);
+
+
+        $customer_car = CustomerCar::find($request->customer_car_id);
+        $customer_car->damage = json_encode($request->damage);
+        $customer_car->tramer = $request->tramer;
+        $customer_car->tramerValue = $request->tramer_price;
+        $customer_car->tramer_photo = $filename;
+        $customer_car->save();
+        return $request->customer_car_id;
+    }
+
+    public function thirtyStepStore($request)
+    {
+        /* "expert_report_1" => null
+       "expert_report_2" => "cr1.png"
+       "expert_report_3" => null
+       "expert_report_4" => null */
+        dd($request);
+
+
+        $customer_car = CustomerCar::find($request->customer_car_id);
+        $customer_car->car_details = $request->car_details;
+        $customer_car->car_notwork = $request->car_notwork;
+        $customer_car->car_exterior_faults = $request->car_exterior_faults;
+        $customer_car->car_interior_faults = $request->car_interior_faults;
+        $customer_car->maintenance_history = $request->maintenance_history;
+        $customer_car->status_frame = $request->status_frame;
+        $customer_car->status_pole = $request->status_pole;
+        $customer_car->status_podium = $request->status_podium;
+        $customer_car->status_airbag = $request->status_airbag;
+        $customer_car->status_unrealizable = $request->status_unrealizable;
+        $customer_car->status_onArkaBagaj = $request->status_onArkaBagaj;
+        $customer_car->status_km = $request->status_km;
+        $customer_car->status_tyre = $request->status_tyre;
+        $customer_car->date_inspection = $request->date_inspection;
+        $customer_car->gal_fiyat_1 = $request->gal_fiyat_1;
+        $customer_car->save();
+
+
+        $filename = [];
+        if (!empty($request->files->all())) {
+            $files = $request->files->all();
+            foreach ($files as $key => $file) {
+                $this->upload->index($file);
+                $filename = $this->upload->getFileName();
+                $image = new CustomerCarExper();
+                $image->customer_car_id = $request->customer_car_id;
+                $image->image = $image;
+                $image->save();
+            }
+        }
+
+        return $request->customer_car_id;
+    }
+
+
 }

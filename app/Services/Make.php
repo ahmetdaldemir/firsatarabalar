@@ -88,13 +88,16 @@ class Make
     {
 
         $array = [];
-        $cache_key = 'name:' . $year . ":" . $brand;
+        $cache_key = 'name:' . $year . ":" . $brand. ":" .$body. ":" .$fuel;
         $data = Cache::get($cache_key);
         if (!Cache::has($cache_key)) {
-            $data = Car::select('name')->where('brand_id', $brand)->where('bodytype', $body)->where('fuel', $fuel)->where('model', $model)->where('production_start', '<=', $year)->where('production_end', '>=', $year)->get();
+            $data = Car::select('id','name')->where('brand_id', $brand)->where('bodytype', $body)->where('fueltype', $fuel)->where('model', $model)->where('production_start', '<=', $year)->where('production_end', '>=', $year)->get();
             foreach ($data as $item) {
-                $array[]['cars'] = BodyType::BodyType[$item->name];
-            }
+                $array[] = array(
+                    'name' => $item->name,
+                    'id' => $item->id
+                );
+             }
             $data = collect($array)->unique()->values();
             Cache::put($cache_key, $data);
         }

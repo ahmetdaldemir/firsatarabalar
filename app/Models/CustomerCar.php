@@ -10,7 +10,20 @@ class CustomerCar extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $fillable = ['customer_id'];
+    protected $fillable = ['customer_id','session_id','customer_id',
+'caryear',
+        'body',
+        'fuel',
+        'gear',
+        'car_id',
+        'km',
+        'color',
+        'plate',
+        'ownorder',
+'car_city',
+'car_state',
+'description',
+'laststep'];
     protected $casts = [
         'damage' => 'array'
     ];

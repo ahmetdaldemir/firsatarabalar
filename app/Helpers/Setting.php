@@ -34,3 +34,19 @@ if (! function_exists('page')) {
     }
 
 }
+
+if (! function_exists('cacheresponseid')) {
+    /**
+     * Format number
+     *
+     * @param $value
+     * @param $attribute
+     * @param $data
+     * @return boolean
+     */
+    function cacheresponseid()
+    {
+        return "Session_" . session()->getId();
+    }
+
+}

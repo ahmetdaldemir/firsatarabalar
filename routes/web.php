@@ -40,10 +40,10 @@ Route::middleware(['customer_auth', 'user-access:customer'])->group(function () 
 });
 
 Route::get('form1', [ViewCustomerCarController::class, 'form1'])->name('form1');
-Route::get('form2', [ViewCustomerCarController::class, 'form2'])->name('form2');
-Route::get('form3', [ViewCustomerCarController::class, 'form3'])->name('form3');
-Route::get('form4', [ViewCustomerCarController::class, 'form4'])->name('form4');
-Route::get('form5', [ViewCustomerCarController::class, 'form5'])->name('form5');
+Route::post('form2', [ViewCustomerCarController::class, 'form2'])->name('form2');
+Route::post('form3', [ViewCustomerCarController::class, 'form3'])->name('form3');
+Route::post('form4', [ViewCustomerCarController::class, 'form4'])->name('form4');
+Route::post('form5', [ViewCustomerCarController::class, 'form5'])->name('form5');
 
 
 
@@ -51,6 +51,9 @@ Route::get('getmodel', [CustomController::class, 'models'])->name('getmodel');
 Route::get('getdistricts', [CustomController::class, 'districts'])->name('getdistricts');
 Route::get('getversion', [CrudController::class, 'getversion'])->name('getversion');
 Route::get('getcar', [CrudController::class, 'getcar'])->name('getcar');
+Route::get('getbody', [CrudController::class, 'getbody'])->name('getbody');
+Route::get('getfuel', [CrudController::class, 'getfuel'])->name('getfuel');
+Route::get('getversionlist', [CrudController::class, 'getversionlist'])->name('getversionlist');
 
 
 

@@ -25,11 +25,12 @@ class BrandController extends Controller
 		foreach($data as $value){
 			$values[] = array(
 				'id' => $value->id,
-				'name' => $value->name
+				'name' => $value->name,
+				'image' => $value->icon
 			);
 		}
 
-		return $values;
+        return response()->json($values, 200);
 
     }
 

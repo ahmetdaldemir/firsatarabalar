@@ -43,7 +43,7 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
 
 
     $scope.GetModel = function (item,brands) {
-        alert(brands);
+
         $http({
             method: "GET",
             url: "/getmodel?year=" + item + "&brand="+brands+"",
@@ -143,5 +143,66 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
                Swal.fire('Araç Bulunamadı')
             });
     }
+
+    $scope.GetBody = function (year,brand,model) {
+
+        $http({
+            method: "GET",
+            url: "/getbody?year="+year+"&brand="+brand+"&model="+model,
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            dataType: 'json',
+            cache: true,
+            processData: false,
+            contentType: false
+        }).then(function (response) {
+                $scope.bodyList = response.data
+            },
+            function (data) {
+                Swal.fire('Araç Bulunamadı')
+            });
+    }
+
+    $scope.GetFuel = function (year,brand,model) {
+
+        $http({
+            method: "GET",
+            url: "/getfuel?year="+year+"&brand="+brand+"&model="+model,
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            dataType: 'json',
+            cache: true,
+            processData: false,
+            contentType: false
+        }).then(function (response) {
+                $scope.fuelList = response.data
+            },
+            function (data) {
+                Swal.fire('Araç Bulunamadı')
+            });
+    }
+
+    $scope.GetVersion = function (year,brand,model,body,fuel) {
+
+        $http({
+            method: "GET",
+            url: "/getversionlist?year="+year+"&brand="+brand+"&model="+model+"&body="+body+"&fuel="+fuel,
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            dataType: 'json',
+            cache: true,
+            processData: false,
+            contentType: false
+        }).then(function (response) {
+                $scope.versionList = response.data
+            },
+            function (data) {
+                Swal.fire('Araç Bulunamadı')
+            });
+    }
+
 
 }]);

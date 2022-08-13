@@ -47,6 +47,7 @@ Route::get('/customer/{id}', [CustomerController::class, 'show/{id}'])->name('cu
 
 
 Route::get('getversion', [CustomController::class, 'getversion'])->name('getversion');
+Route::get('getcar', [CustomController::class, 'getcar'])->name('getcar');
 
 
 Route::resource('vehicle_request',  VehicleRequest::class);

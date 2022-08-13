@@ -60,6 +60,11 @@ Route::get('mailsend', [CrudController::class, 'mailsend'])->name('mailsend');
 
 
 
+Route::get('register', [AuthController::class, 'register'])->name('register');
+
+
+
+
 
 
 

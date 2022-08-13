@@ -1,6 +1,11 @@
 
 app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike', '$filter', function ($scope, $http, $httpParamSerializerJQLike, $window, $filter) {
 
+
+    $scope.CustomerLoginForm = function () {
+         $("#loginModal").modal("show");
+    }
+
     $scope.CustomerLogin = function () {
         $http({
             method: "GET",
@@ -38,6 +43,24 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
             } else {
                 $scope.loginMessage = "*** " + response.data.message;
             }
+        });
+    }
+
+
+    $scope.register = function () {
+        $http({
+            method: "POST",
+            url: "/register",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            dataType: 'json',
+            cache: false,
+            processData: false,
+            contentType: false
+
+        }).then(function (response) {
+           Swal.fire('info','Kayıt Başarılı');
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CustomerRequest;
 use App\Models\Customer;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -50,12 +51,21 @@ class AuthController
         $remember_me = $request->has('remember') ? true : false;
 
         if (Auth::guard('customer')->attempt($credentials, $remember_me)) {
-            $finduser = Customer::find(Auth::guard('web')->id());
+            $finduser = Customer::find(Auth::guard('customer')->id());
             Auth::guard('customer')->login($finduser, $remember_me);
             return response()->json(['success' => true], 200);
         }
         return response()->json(['success' => false, 'message' => "Hatalı Kullanıcı Adı ve Şifre"], 200);
+    }
 
-
+    public function register(Request $request)
+    {
+        $customer = new Customer();
+        $customer->firstname = $request->firstname;
+        $customer->lastname = $request->lastname;
+        $customer->phone = $request->phone;
+        $customer->email = $request->email;
+        $customer->password = bcrypt($request->password);
+        $customer->save();
     }
 }

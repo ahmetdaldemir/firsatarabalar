@@ -72,5 +72,10 @@ class CustomController extends Controller
        return $this->service->getversion($request->id);
      }
 
+    public function getcar(Request $request)
+    {
+        return $this->service->getType($request->type);
+     }
+
 
 }

@@ -45,7 +45,7 @@ class RegisterController extends Controller
 
     public function __construct(UserRepositoryInterface $UserRepository)
     {
-        $this->middleware('guest');
+        $this->middleware('web');
         $this->UserRepository = $UserRepository;
     }
 
@@ -72,11 +72,11 @@ class RegisterController extends Controller
      */
     protected function create(Request $request)
     {
-        if(is_null($request->expert_id))
+        if(is_null($request->id))
         {
             $this->UserRepository->create($request);
         }else{
-            $this->UserRepository->update($request->expert_id,$request);
+            $this->UserRepository->update($request->id,$request);
         }
 
     }

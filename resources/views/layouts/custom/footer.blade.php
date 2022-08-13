@@ -133,23 +133,28 @@
                                                 </div>
                                             </div>
                                         </form>
-                                        <form id="register-form" action="#"
-                                              method="post" role="form" style="display: none;">
+                                        <form id="register-form" action="javascript:;" ng-click="register()" method="post" role="form" style="display: none;">
+                                            @csrf
+                                            <input name="id" value="" type="hidden" />
                                             <div class="form-group">
-                                                <input type="text" name="name" id="name" tabindex="1"
-                                                       class="form-control" placeholder="İsim Soyisim" value="">
+                                                <input type="text" name="firstname" id="firstname" tabindex="1"
+                                                       class="form-control" placeholder="İsim" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" name="lastname" id="lastname" tabindex="1"
+                                                       class="form-control" placeholder="Soyisim" value="">
                                             </div>
                                             <div class="form-group">
                                                 <input type="email" name="email" id="email" tabindex="1"
                                                        class="form-control" placeholder="Email Adresi" value="">
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" name="password" id="password" tabindex="2"
-                                                       class="form-control" placeholder="Şifre">
+                                                <input type="text" name="phone" id="phone" tabindex="1"
+                                                       class="form-control" placeholder="Telefon" value="">
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" name="confirm-password" id="confirm-password"
-                                                       tabindex="2" class="form-control" placeholder="Şife Tekrar">
+                                                <input type="password" name="password" id="password" tabindex="2"
+                                                       class="form-control" placeholder="Şifre">
                                             </div>
                                             <div class="form-group">
                                                 <div class="row">

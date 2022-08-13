@@ -4,10 +4,12 @@ namespace App\Services;
 
 use App\Enums\BodyType;
 use App\Enums\FullType;
+use App\Enums\Transmission;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\City;
 use App\Models\Color;
+use App\Models\CustomerCar;
 use App\Models\District;
 use App\Models\Page;
 use App\Models\Review;
@@ -90,16 +92,16 @@ class Make
     {
 
         $array = [];
-        $cache_key = 'name:' . $year . ":" . $brand. ":" .$body. ":" .$fuel;
+        $cache_key = 'name:' . $year . ":" . $brand . ":" . $body . ":" . $fuel;
         $data = Cache::get($cache_key);
         if (!Cache::has($cache_key)) {
-            $data = Car::select('id','name')->where('brand_id', $brand)->where('bodytype', $body)->where('fueltype', $fuel)->where('model', $model)->where('production_start', '<=', $year)->where('production_end', '>=', $year)->get();
+            $data = Car::select('id', 'name')->where('brand_id', $brand)->where('bodytype', $body)->where('fueltype', $fuel)->where('model', $model)->where('production_start', '<=', $year)->where('production_end', '>=', $year)->get();
             foreach ($data as $item) {
                 $array[] = array(
                     'name' => $item->name,
                     'id' => $item->id
                 );
-             }
+            }
             $data = collect($array)->unique()->values();
             Cache::put($cache_key, $data);
         }
@@ -146,7 +148,7 @@ class Make
         if (Cache::has($cache_key)) {
             $data = Cache::get($cache_key);
         } else {
-            $brand = Page::where('categories','diger')->where('type','blog')->get();
+            $brand = Page::where('categories', 'diger')->where('type', 'blog')->get();
             $data = Cache::put($cache_key, $brand);
         }
         return $data;
@@ -160,7 +162,7 @@ class Make
         if (Cache::has($cache_key)) {
             $data = Cache::get($cache_key);
         } else {
-            $review = Review::where('status','1')->get()->take(setting('pagination_item'));
+            $review = Review::where('status', '1')->get()->take(setting('pagination_item'));
             $data = Cache::put($cache_key, $review);
         }
         return $data;
@@ -168,7 +170,24 @@ class Make
 
     public function getversion($id)
     {
-        return Car::where('brand_id',$id)->distinct()->get(['name']);
+        return Car::where('brand_id', $id)->distinct()->get(['name']);
     }
+
+
+    public function getType($type)
+    {
+        $arrray = [];
+        $customer_cars = CustomerCar::where('status', $type)->get()->take(setting('pagination_item'));
+        foreach ($customer_cars as $customer_car) {
+            $arrray[] = array(
+                'name' => $customer_car->car->brand_name,
+                'detail' => $customer_car,
+                'button' => ($type == 4) ? "İncele" : "Takibe Al",
+                'price' => ($type == 4) ? $customer_car->suggested . " TL" : "",
+            );
+        }
+        return $arrray;
+    }
+
 
 }

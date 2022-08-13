@@ -51,5 +51,26 @@ class CustomController extends Controller
         return $this->service->version($request->year,$request->brand,$request->model,$request->body,$request->fuel);
     }
 
+    public function colors()
+    {
+       return $this->service->color();
+    }
+
+    public function citys()
+    {
+        return $this->service->cities();
+    }
+
+    public function town(Request $request)
+    {
+        return $this->service->districts($request->id);
+    }
+
+
+    public function getversion(Request $request)
+    {
+       return $this->service->getversion($request->id);
+     }
+
 
 }

@@ -6,8 +6,8 @@
             <div class="dlab-bnr-inr-entry">
                  <nav aria-label="breadcrumb" class="breadcrumb-row">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Get A Quote</li>
+                        <li class="breadcrumb-item"><a href="/">Anasayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">İletişim</li>
                     </ul>
                 </nav>
                 <!-- Breadcrumb Row End -->
@@ -21,12 +21,11 @@
             <div class="row align-items-center">
                 <div class="col-xl-6 col-lg-7 m-b30 wow fadeInLeft" data-wow-duration="2s" data-wow-delay="0.2s" style="visibility: visible; animation-duration: 2s; animation-delay: 0.2s; animation-name: fadeInLeft;">
                     <div class="section-head style-1">
-                        <h6 class="sub-title">CONTACT US</h6>
-                        <h2 class="title">GET IN TOUCH</h2>
+                        <h6 class="sub-title">İletişim</h6>
+                        <h2 class="title">Bize Ulaşın</h2>
                     </div>
-                    <form class="dlab-form dzForm" method="POST" action="script/contact_smtp.php">
+                    <form class="dlab-form dzForm" method="POST" action="{{route('mailsend')}}">
                         <div class="dzFormMsg"></div>
-                        <input type="hidden" class="form-control" name="dzToDo" value="Contact">
                         <input type="hidden" class="form-control" name="reCaptchaEnable" value="0">
                         <div class="row">
                             <div class="col-sm-6">
@@ -34,7 +33,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="la la-user"></i></span>
                                     </div>
-                                    <input name="dzName" type="text" required="" class="form-control" placeholder="First Name">
+                                    <input name="dzName" type="text" required="" class="form-control" placeholder="İsim">
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -42,7 +41,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="la la-user"></i></span>
                                     </div>
-                                    <input name="dzOther[last_name]" type="text" class="form-control" required="" placeholder="Last Name">
+                                    <input name="dzOther[last_name]" type="text" class="form-control" required="" placeholder="Soyisim">
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -50,7 +49,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="la la-envelope"></i></span>
                                     </div>
-                                    <input name="dzEmail" type="text" required="" class="form-control" placeholder="Email Address">
+                                    <input name="dzEmail" type="text" required="" class="form-control" placeholder="Email Adresi">
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -58,28 +57,15 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="la la-phone"></i></span>
                                     </div>
-                                    <input name="dzPhoneNumber" type="text" required="" class="form-control" placeholder="Phone No.">
+                                    <input name="dzPhoneNumber" type="text" required="" class="form-control" placeholder="Telefon">
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="la la-file-alt"></i></span>
                                     </div>
-                                    <input name="dzOther[project_title]" type="text" class="form-control" required="" placeholder="Project Title">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="la la-list"></i></span>
-                                    </div>
-                                    <div class="dropdown bootstrap-select form-control"><select name="dzOther[choose_service]" class="form-control">
-                                            <option selected="">Choose Service</option>
-                                            <option value="1">Web Development</option>
-                                            <option value="2">Web Design</option>
-                                            <option value="3">Strategy &amp; Research</option>
-                                        </select><button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-bs-toggle="dropdown" role="combobox" aria-owns="bs-select-1" aria-haspopup="listbox" aria-expanded="false" title="Choose Service"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">Choose Service</div></div> </div></button><div class="dropdown-menu "><div class="inner show" role="listbox" id="bs-select-1" tabindex="-1"><ul class="dropdown-menu inner show" role="presentation"></ul></div></div></div>
+                                    <input name="dzOther[project_title]" type="text" class="form-control" required="" placeholder="Konu">
                                 </div>
                             </div>
                             <div class="col-sm-12 m-b20">
@@ -87,11 +73,11 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="la la-sms"></i></span>
                                     </div>
-                                    <textarea name="dzMessage" required="" class="form-control" placeholder="Message"></textarea>
+                                    <textarea name="dzMessage" required="" class="form-control" placeholder="Mesaj"></textarea>
                                 </div>
                             </div>
                             <div class="col-sm-12">
-                                <button name="submit" type="submit" value="Submit" class="btn btn-primary">Submit Now<i class="fa fa-angle-right m-l10"></i></button>
+                                <button name="submit" type="submit" value="Submit" class="btn btn-primary">Gönder<i class="fa fa-angle-right m-l10"></i></button>
                             </div>
                         </div>
                     </form>
@@ -106,9 +92,8 @@
                                     </a>
                                 </div>
                                 <div class="icon-content">
-                                    <h4 class="dlab-title">Call Now</h4>
-                                    <p>+91 874 7844 487</p>
-                                    <p>+91 987 4784 578</p>
+                                    <h4 class="dlab-title">Şimdi Ara</h4>
+                                     <p>{{setting('phone')}}</p>
                                 </div>
                             </div>
                         </div>
@@ -120,8 +105,8 @@
                                     </a>
                                 </div>
                                 <div class="icon-content">
-                                    <h4 class="dlab-title">Location</h4>
-                                    <p>1247/Plot No. 39, 15th Phase, Colony, Kukatpally, Hyderabad</p>
+                                    <h4 class="dlab-title">Adres</h4>
+                                    <p>{{setting('address')}}</p>
                                 </div>
                             </div>
                         </div>
@@ -133,9 +118,8 @@
                                     </a>
                                 </div>
                                 <div class="icon-content">
-                                    <h4 class="dlab-title">Email Now</h4>
-                                    <p>info@gmail.com</p>
-                                    <p>Services@gmail.com</p>
+                                    <h4 class="dlab-title">Email</h4>
+                                    <p>{{setting('email')}}</p>
                                 </div>
                             </div>
                         </div>

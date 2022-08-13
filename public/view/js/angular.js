@@ -60,7 +60,7 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
         });
     }
 
-    $scope.GetVersion = function (item) {
+    $scope.GetVersionOnlyCar = function (item) {
         $http({
             method: "GET",
             url: "/getversion?id=" + item + "",

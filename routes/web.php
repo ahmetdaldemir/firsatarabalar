@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CrudController;
 use App\Http\Controllers\CustomController;
+use App\Http\Controllers\DropzoneController;
 use App\Http\Controllers\Modules\Admin\CarController;
 use App\Http\Controllers\Modules\Admin\CustomerCarController;
 use App\Http\Controllers\CustomerCarController as ViewCustomerCarController;
@@ -43,7 +44,8 @@ Route::get('form1', [ViewCustomerCarController::class, 'form1'])->name('form1');
 Route::post('form2', [ViewCustomerCarController::class, 'form2'])->name('form2');
 Route::post('form3', [ViewCustomerCarController::class, 'form3'])->name('form3');
 Route::post('form4', [ViewCustomerCarController::class, 'form4'])->name('form4');
-Route::post('form5', [ViewCustomerCarController::class, 'form5'])->name('form5');
+Route::get('form5', [ViewCustomerCarController::class, 'form5'])->name('form5');
+Route::post('customer_car.file_store', [ViewCustomerCarController::class, 'dropzoneStore'])->name('customer_car.file_store');
 
 
 
@@ -54,6 +56,7 @@ Route::get('getcar', [CrudController::class, 'getcar'])->name('getcar');
 Route::get('getbody', [CrudController::class, 'getbody'])->name('getbody');
 Route::get('getfuel', [CrudController::class, 'getfuel'])->name('getfuel');
 Route::get('getversionlist', [CrudController::class, 'getversionlist'])->name('getversionlist');
+Route::get('mailsend', [CrudController::class, 'mailsend'])->name('mailsend');
 
 
 

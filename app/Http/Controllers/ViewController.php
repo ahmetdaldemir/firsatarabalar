@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\CustomerCar;
 use App\Models\Page;
+use App\Models\Review;
 use App\Services\Make;
 use Illuminate\Http\Request;
 
@@ -20,9 +21,12 @@ class ViewController
 
     public function index()
     {
+
         $data['chart'] = [];
         $data['customer_cars'] = CustomerCar::all();
         $data['brands'] = $this->service->brands();
+        $data['blogs'] = $this->service->blogs();
+        $data['reviews'] =  $this->service->reviews();
 
         return view('view.home',$data);
     }
@@ -42,6 +46,7 @@ class ViewController
     public function customer_comment()
     {
         $data['chart'] = [];
+        $data['reviews'] = Review::where('status',1)->get();
         return view('view.customer_comment',$data);
     }
 

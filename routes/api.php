@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CustomController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\SettingsController;
 use App\Http\Controllers\Api\VehicleRequest;
@@ -45,12 +46,18 @@ Route::get('/customer', [CustomerController::class, 'index']);
 Route::get('/customer/{id}', [CustomerController::class, 'show/{id}'])->name('customer.id');
 
 
+Route::get('getversion', [CustomController::class, 'getversion'])->name('getversion');
+
+
 Route::resource('vehicle_request',  VehicleRequest::class);
 Route::get('/years', [\App\Http\Controllers\Api\CustomController::class, 'years']);
 Route::get('/models', [\App\Http\Controllers\Api\CustomController::class, 'models']);
 Route::get('/fuels', [\App\Http\Controllers\Api\CustomController::class, 'fuels']);
 Route::get('/bodys', [\App\Http\Controllers\Api\CustomController::class, 'bodys']);
 Route::get('/versions', [\App\Http\Controllers\Api\CustomController::class, 'versions']);
+Route::get('/colors', [\App\Http\Controllers\Api\CustomController::class, 'colors']);
+Route::get('/citys', [\App\Http\Controllers\Api\CustomController::class, 'citys']);
+Route::get('/town', [\App\Http\Controllers\Api\CustomController::class, 'town']);
 
 
 

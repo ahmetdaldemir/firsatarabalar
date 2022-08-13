@@ -40,23 +40,26 @@
          $data['page'] = [];
          return view('admin.page.form',$data);
      }
+
+
      public function store(Request $request)
      {
-         if(is_null($request->expert_id))
+         if(!isset($request->id))
          {
-             $this->ExpertRepository->create($request);
+             $this->PageRepository->create($request);
          }else{
-             $this->ExpertRepository->update($request->expert_id,$request);
+             $this->PageRepository->update($request->id,$request);
          }
-         return redirect()->route('admin.expert.index');
+         return redirect()->route('admin.page.index');
      }
+
 
      public function show(Request $request): JsonResponse
      {
          $id = $request->route('id');
 
          return response()->json([
-             'data' => $this->ExpertRepository->getById($id)
+             'data' => $this->PageRepository->getById($id)
          ]);
      }
 
@@ -69,14 +72,14 @@
          ]);
 
          return response()->json([
-             'data' => $this->ExpertRepository->update($id, $data)
+             'data' => $this->PageRepository->update($id, $data)
          ]);
      }
 
      public function destroy(Request $request): JsonResponse
      {
          $id = $request->route('id');
-         $this->ExpertRepository->delete($id);
+         $this->PageRepository->delete($id);
 
          return response()->json(null, Response::HTTP_NO_CONTENT);
      }

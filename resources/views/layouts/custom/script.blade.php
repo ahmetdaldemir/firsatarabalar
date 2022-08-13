@@ -2,7 +2,7 @@
 <script src="{{asset('view/vendor/wow/wow.js')}}"></script><!-- WOW JS -->
 <script src="{{asset('view/vendor/bootstrap/js/popper.min.js')}}"></script><!-- POPPER.MIN JS -->
 <script src="{{asset('view/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script><!-- BOOTSTRAP.MIN JS -->
-<!--script src="{{asset('view/vendor/owl-carousel/owl.carousel.js')}}"></script> OWL-CAROUSEL JS -->
+<script src="{{asset('view/vendor/owl-carousel/owl.carousel.js')}}"></script> <!-- OWL-CAROUSEL JS -->
 <script src="{{asset('view/vendor/magnific-popup/magnific-popup.js')}}"></script><!-- MAGNIFIC-POPUP JS -->
 <script src="{{asset('view/vendor/counter/waypoints-min.js')}}"></script><!-- WAYPOINTS JS -->
 <script src="{{asset('view/vendor/counter/counterup.min.js')}}"></script><!-- COUNTERUP JS -->

@@ -72,7 +72,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">Üye İşlemleri</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -84,10 +84,10 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <a href="#" class="active" id="login-form-link">Login</a>
+                                        <a href="#" class="active" id="login-form-link">Giriş Yap</a>
                                     </div>
                                     <div class="col-md-6">
-                                        <a href="#" id="register-form-link">Register</a>
+                                        <a href="#" id="register-form-link">Kayıt Ol</a>
                                     </div>
                                 </div>
                                 <hr>
@@ -99,23 +99,23 @@
                                               role="form" style="display: block;">
                                             <div class="form-group">
                                                 <input type="text" name="email" id="email" tabindex="1"
-                                                       class="form-control" placeholder="Username" value="">
+                                                       class="form-control" placeholder="Telefon Numarası" value="">
                                             </div>
                                             <div class="form-group">
                                                 <input type="password" name="password" id="password" tabindex="2"
-                                                       class="form-control" placeholder="Password">
+                                                       class="form-control" placeholder="Şifre">
                                             </div>
                                             <div class="form-group text-center">
                                                 <input type="checkbox" tabindex="3" class="" name="remember"
                                                        id="remember">
-                                                <label for="remember"> Remember Me</label>
+                                                <label for="remember"> Beni Hatırla</label>
                                             </div>
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-sm-6 col-sm-offset-3">
                                                         <input type="submit" name="login-submit" id="login-submit"
                                                                tabindex="4" class="form-control btn btn-login"
-                                                               value="Log In">
+                                                               value="Giriş Yap">
                                                     </div>
                                                     <div class="col-sm-6 col-sm-offset-3" id="loginMessage"
                                                          style="color: #f00">@{{loginMessage}}
@@ -126,37 +126,37 @@
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <div class="text-center">
-                                                            <a href="https://phpoll.com/recover" tabindex="5"
-                                                               class="forgot-password">Forgot Password?</a>
+                                                            <a href="#" tabindex="5"
+                                                               class="forgot-password">Şifremi Unuttum?</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </form>
-                                        <form id="register-form" action="https://phpoll.com/register/process"
+                                        <form id="register-form" action="#"
                                               method="post" role="form" style="display: none;">
                                             <div class="form-group">
-                                                <input type="text" name="username" id="username" tabindex="1"
-                                                       class="form-control" placeholder="Username" value="">
+                                                <input type="text" name="name" id="name" tabindex="1"
+                                                       class="form-control" placeholder="İsim Soyisim" value="">
                                             </div>
                                             <div class="form-group">
                                                 <input type="email" name="email" id="email" tabindex="1"
-                                                       class="form-control" placeholder="Email Address" value="">
+                                                       class="form-control" placeholder="Email Adresi" value="">
                                             </div>
                                             <div class="form-group">
                                                 <input type="password" name="password" id="password" tabindex="2"
-                                                       class="form-control" placeholder="Password">
+                                                       class="form-control" placeholder="Şifre">
                                             </div>
                                             <div class="form-group">
                                                 <input type="password" name="confirm-password" id="confirm-password"
-                                                       tabindex="2" class="form-control" placeholder="Confirm Password">
+                                                       tabindex="2" class="form-control" placeholder="Şife Tekrar">
                                             </div>
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-sm-6 col-sm-offset-3">
                                                         <input type="submit" name="register-submit" id="register-submit"
-                                                               tabindex="4" class="form-control btn btn-register"
-                                                               value="Register Now">
+                                                               tabindex="4" class="form-control btn btn-login"
+                                                               value="Kayıt Ol">
                                                     </div>
                                                 </div>
                                             </div>
@@ -169,7 +169,7 @@
                 </div>
 
             </div>
-            <div class="modal-footer">
+            <!--div class="modal-footer">
                 <div class="row">
                     <a href="#" class="col-md-6 fb btn">
                         <i class="fa fa-facebook fa-fw"></i> Login with Facebook
@@ -179,7 +179,7 @@
                         <i class="fa fa-google fa-fw"></i> Login with Google+
                     </a>
                 </div>
-            </div>
+            </div -->
         </div>
     </div>
 </div>

@@ -50,3 +50,25 @@ if (! function_exists('cacheresponseid')) {
     }
 
 }
+
+if (! function_exists('word_abbreviation')) {
+    /**
+     * Format number
+     *
+     * @param $value
+     * @param $attribute
+     * @param $data
+     * @return boolean
+     */
+    function word_abbreviation($item,$chars)
+    {
+        $temiz = strlen($item);
+        if($temiz > $chars){
+            return mb_substr($item,0,$chars,'UTF-8').'...';
+        }else{
+            return $item;
+        }
+    }
+
+}
+

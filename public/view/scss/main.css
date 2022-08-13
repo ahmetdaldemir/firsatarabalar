@@ -11944,7 +11944,7 @@ textarea {
     display: block;
     box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.1); }
     .icon-bx-wraper.style-9 .icon-bx-sm i {
-      font-size: 40px; }
+      font-size: 30px; }
   .icon-bx-wraper.style-9 .icon-content .dlab-title {
     margin-bottom: 10px; }
   .icon-bx-wraper.style-9 .icon-content p {
@@ -14901,7 +14901,7 @@ ul.primary li:before {
       padding-bottom: 20px; } }
 
 .content-inner-1 {
-  padding-top: 115px;
+  padding-top: 25px;
   padding-bottom: 115px; }
   @media only screen and (max-width: 991px) {
     .content-inner-1 {

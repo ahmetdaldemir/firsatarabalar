@@ -23,9 +23,11 @@
     <title>{{setting('meta_title')}}</title>
 
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" href="{{asset('storage/app/files/'.setting('favicon'))}}">
+    <link rel="icon" type="image/png" href="{{asset('storage/files/'.setting('favicon'))}}">
     <script src="{{asset('view/js/jquery.min.js')}}"></script><!-- JQUERY.MIN JS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.css" rel="stylesheet">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.js"></script>
     <!-- Stylesheet -->
     @include('layouts/custom/style')
 

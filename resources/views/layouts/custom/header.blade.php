@@ -6,7 +6,7 @@
             <div class="container clearfix">
                 <!-- Website Logo -->
                 <div class="logo-header  logo-dark">
-                    <a href="/"><img src="{{asset('storage/app/files/'.setting('logo'))}}" alt=""></a>
+                    <a href="/"><img src="{{asset('storage/files/'.setting('logo'))}}" alt=""></a>
                 </div>
                 <!-- Nav Toggle Button -->
                 <button class="navbar-toggler collapsed navicon justify-content-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="header-nav navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
                     <div class="logo-header">
-                        <a href="/"><img src="{{asset('storage/app/files/'.setting('logo'))}}" alt=""></a>
+                        <a href="/"><img src="{{asset('storage/files/'.setting('logo'))}}" alt=""></a>
                     </div>
                     <ul class="nav navbar-nav navbar">
                         <li class="active"><a href="/"><span>Anasayfa</span></a></li>

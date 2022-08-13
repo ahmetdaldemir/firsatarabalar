@@ -1,8 +1,12 @@
 <?php namespace App\Repositories\CustomerCar;
 
+use App\Enums\BodyType;
+use App\Enums\FullType;
+use App\Enums\Transmission;
 use App\Models\Customer;
 use App\Models\CustomerCar;
 use App\Models\CustomerCarExper;
+use App\Models\CustomerCarPhoto;
 use App\Models\CustomerCarStatuHistory;
 use App\Services\Upload;
 use Illuminate\Support\Facades\Auth;
@@ -143,7 +147,21 @@ class CustomerCarRepository implements CustomerCarInterface
 
     public function getType($type)
     {
-        return CustomerCar::where('status', $type)->get()->take(setting('pagination_item'));
+        $arrray = [];
+        $customer_cars =  CustomerCar::where('status', $type)->get()->take(setting('pagination_item'));
+        foreach ($customer_cars as $customer_car)
+        {
+            $arrray[] = array(
+                'name'   =>  $customer_car->car->brand_name,
+                'gear'   => Transmission::Transmission[$customer_car->gear],
+                'fuel'   =>  FullType::FullType[$customer_car->fuel],
+                'body'   =>  BodyType::BodyType[$customer_car->body],
+                'year'   =>  $customer_car->caryear,
+                'button' => ($type == 4)?"İncele" : "Takibe Al",
+                'price'  => ($type == 4)? $customer_car->suggested ." TL" : "",
+            );
+        }
+        return $arrray;
     }
 
     public function customer_add()
@@ -264,26 +282,18 @@ class CustomerCarRepository implements CustomerCarInterface
             $filename = $this->upload->getFileName();
         }
 
-        $this->upload->index($request->tramer_image);
-
-
         $customer_car = CustomerCar::find($request->customer_car_id);
         $customer_car->damage = json_encode($request->damage);
         $customer_car->tramer = $request->tramer;
         $customer_car->tramerValue = $request->tramer_price;
         $customer_car->tramer_photo = $filename;
+        $customer_car->laststep = 2;
         $customer_car->save();
         return $request->customer_car_id;
     }
 
     public function thirtyStepStore($request)
     {
-        /* "expert_report_1" => null
-       "expert_report_2" => "cr1.png"
-       "expert_report_3" => null
-       "expert_report_4" => null */
-        dd($request);
-
 
         $customer_car = CustomerCar::find($request->customer_car_id);
         $customer_car->car_details = $request->car_details;
@@ -300,11 +310,10 @@ class CustomerCarRepository implements CustomerCarInterface
         $customer_car->status_km = $request->status_km;
         $customer_car->status_tyre = $request->status_tyre;
         $customer_car->date_inspection = $request->date_inspection;
-        $customer_car->gal_fiyat_1 = $request->gal_fiyat_1;
+        $customer_car->laststep = 3;
         $customer_car->save();
 
 
-        $filename = [];
         if (!empty($request->files->all())) {
             $files = $request->files->all();
             foreach ($files as $key => $file) {
@@ -312,7 +321,7 @@ class CustomerCarRepository implements CustomerCarInterface
                 $filename = $this->upload->getFileName();
                 $image = new CustomerCarExper();
                 $image->customer_car_id = $request->customer_car_id;
-                $image->image = $image;
+                $image->image = $filename;
                 $image->save();
             }
         }
@@ -321,4 +330,21 @@ class CustomerCarRepository implements CustomerCarInterface
     }
 
 
+    public function fourth($request)
+    {
+        $customer_car = CustomerCar::where('session_id',cacheresponseid())->first();
+        $customer_car_photo = new CustomerCarPhoto();
+        $customer_car_photo->customer_car_id = $customer_car->id;
+        $customer_car_photo->image = $request;
+        $customer_car_photo->active = 0;
+        $customer_car_photo->save();
+
+        $customer_car->laststep = 4;
+        $customer_car->save();
+    }
+
+    public function fifthStep($request)
+    {
+        // TODO: Implement fifthStep() method.
+    }
 }

@@ -22,7 +22,7 @@ class Upload
         $uploadedFile = $file->getClientOriginalName();
         $filename = time() ."_". $uploadedFile;
         Storage::disk('local')->putFileAs(
-            'files/',
+            'public/files/',
             $file,
             $filename
         );

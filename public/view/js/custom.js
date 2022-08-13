@@ -431,15 +431,7 @@ var Samar = function(){
 		/* gallery filter activation = jquery.mixitup.min.js */
 	}
 	
-	/* handle Bootstrap Select ============ */
-	var handleBootstrapSelect = function(){
-		/* Bootstrap Select box function by  = bootstrap-select.min.js */ 
-		if (jQuery('select').length) {
-		    jQuery('select').selectpicker();
-		}
-		/* Bootstrap Select box function by  = bootstrap-select.min.js end*/
-	}
-	
+
 	/* Resizebanner ============ */
 	var handleBannerResize = function(){
 		$(".full-height").css("height", $(window).height());
@@ -647,14 +639,13 @@ var Samar = function(){
 			handlePricingTabs();
 		},
 
-		
+
 		load:function(){
-			handleBootstrapSelect();
 			equalHeight('.equal-wraper .equal-col');
 			counter();
 			masonryBox();
 			handleBootstrapTouchSpin();
-			
+
 		},
 		
 		resize:function(){

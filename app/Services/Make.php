@@ -9,6 +9,8 @@ use App\Models\Car;
 use App\Models\City;
 use App\Models\Color;
 use App\Models\District;
+use App\Models\Page;
+use App\Models\Review;
 use App\Models\Town;
 use Illuminate\Support\Facades\Cache;
 
@@ -136,4 +138,37 @@ class Make
         }
         return $data;
     }
+
+
+    public function blogs()
+    {
+        $cache_key = 'blog';
+        if (Cache::has($cache_key)) {
+            $data = Cache::get($cache_key);
+        } else {
+            $brand = Page::where('categories','diger')->where('type','blog')->get();
+            $data = Cache::put($cache_key, $brand);
+        }
+        return $data;
+    }
+
+
+    public function reviews()
+    {
+
+        $cache_key = 'review';
+        if (Cache::has($cache_key)) {
+            $data = Cache::get($cache_key);
+        } else {
+            $review = Review::where('status','1')->get()->take(setting('pagination_item'));
+            $data = Cache::put($cache_key, $review);
+        }
+        return $data;
+    }
+
+    public function getversion($id)
+    {
+        return Car::where('brand_id',$id)->distinct()->get(['name']);
+    }
+
 }

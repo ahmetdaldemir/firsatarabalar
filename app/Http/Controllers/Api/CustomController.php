@@ -74,8 +74,9 @@ class CustomController extends Controller
 
     public function getcar(Request $request)
     {
-        return $this->service->getType($request->type);
-     }
+        return $this->service->getType($request->type,$request->limit);
+
+    }
 
 
 }

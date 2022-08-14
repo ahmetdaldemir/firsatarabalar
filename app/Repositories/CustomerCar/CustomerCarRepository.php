@@ -6,6 +6,7 @@ use App\Enums\Transmission;
 use App\Models\Customer;
 use App\Models\CustomerCar;
 use App\Models\CustomerCarExper;
+use App\Models\CustomerCarFollow;
 use App\Models\CustomerCarPhoto;
 use App\Models\CustomerCarStatuHistory;
 use App\Services\Upload;
@@ -148,17 +149,19 @@ class CustomerCarRepository implements CustomerCarInterface
     public function getType($type)
     {
         $arrray = [];
-        $customer_cars =  CustomerCar::where('status', $type)->get()->take(setting('pagination_item'));
-        foreach ($customer_cars as $customer_car)
-        {
+        $customer_cars = CustomerCar::where('status', $type)->get()->take(setting('pagination_item'));
+        foreach ($customer_cars as $customer_car) {
             $arrray[] = array(
-                'name'   =>  $customer_car->car->brand_name,
-                'gear'   => Transmission::Transmission[$customer_car->gear],
-                'fuel'   =>  FullType::FullType[$customer_car->fuel],
-                'body'   =>  BodyType::BodyType[$customer_car->body],
-                'year'   =>  $customer_car->caryear,
-                'button' => ($type == 4)?"İncele" : "Takibe Al",
-                'price'  => ($type == 4)? $customer_car->suggested ." TL" : "",
+                'name' => $customer_car->car->brand_name,
+                'id' => $customer_car->id,
+                'gear' => Transmission::Transmission[$customer_car->gear],
+                'fuel' => FullType::FullType[$customer_car->fuel],
+                'body' => BodyType::BodyType[$customer_car->body],
+                'year' => $customer_car->caryear,
+                'button' => ($type == 5) ? "İncele" : "Favorilere Ekle",
+                'price' => ($type == 5) ? $customer_car->suggested . " TL" : "",
+                'type' => $type,
+                'follow' => CustomerCarFollow::where('customer_id',Auth::guard('customer')->id())->where('customer_car_id',$customer_car->id)->count()
             );
         }
         return $arrray;
@@ -214,62 +217,7 @@ class CustomerCarRepository implements CustomerCarInterface
                 'laststep' => '1',
             ]
         );
-
-
         return $customer_car->id;
-
-
-        /*  `customer_id`,
-          `buyer_id`,
-          ``,
-          `custom_version`,
-          `user_id`,
-          ``,
-          ``,
-            ``,
-          ``,
-          ``,
-          `sasi`,
-          ``,
-          `sebep`,
-          `score`,
-          ``,
-          `kmPhoto`,
-          ``,
-          ``,
-          ``,
-          `damage`,
-          `maintenance_history`,
-          `status_frame`,
-          `status_pole`,
-          `status_podium`,
-          `status_airbag`,
-          `status_triger`,
-          `status_oppression`,
-          `status_brake`,
-          `status_tyre`,
-          `status_km`,
-          `status_unrealizable`,
-          `status_onArkaBagaj`,
-          `specs`,
-          `tramer`,
-          `tramerValue`,
-          `tramer_photo`,
-          `car_notwork`,
-          `car_exterior_faults`,
-          `car_interior_faults`,
-          `gal_price_1`,
-          `gal_price_2`,
-          `gal_price_3`,
-          `valuation`,
-          `suggested`,
-          `suggested_accept`,
-          `shows`,
-          `date_end`,
-          `date_inspection`,
-          ``,
-          `status`, */
-
     }
 
     public function secondStepStore($request)
@@ -332,7 +280,7 @@ class CustomerCarRepository implements CustomerCarInterface
 
     public function fourth($request)
     {
-        $customer_car = CustomerCar::where('session_id',cacheresponseid())->first();
+        $customer_car = CustomerCar::where('session_id', cacheresponseid())->first();
         $customer_car_photo = new CustomerCarPhoto();
         $customer_car_photo->customer_car_id = $customer_car->id;
         $customer_car_photo->image = $request;

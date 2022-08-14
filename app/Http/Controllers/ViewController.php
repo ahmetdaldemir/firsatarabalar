@@ -9,6 +9,7 @@ use App\Models\Page;
 use App\Models\Review;
 use App\Services\Make;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ViewController
 {
@@ -27,7 +28,6 @@ class ViewController
         $data['brands'] = $this->service->brands();
         $data['blogs'] = $this->service->blogs();
         $data['reviews'] =  $this->service->reviews();
-
         return view('view.home',$data);
     }
 

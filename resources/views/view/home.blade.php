@@ -145,17 +145,16 @@
                 <ul class="filters" data-bs-toggle="buttons">
                     <li data-filter=".web_development" class="btn active">
                         <input type="radio">
-                        <a ng-click="GetCar(4)" href="javascript:void(0);">Satılan Araçlar</a>
+                        <a ng-click="GetCar(5)" href="javascript:void(0);">Satılan Araçlar</a>
                     </li>
                     <li data-filter=".branding" class="btn">
                         <input type="radio">
-                        <a ng-click="GetCar(5)" href="javascript:void(0);">Gelecek Araçlar</a>
+                        <a ng-click="GetCar(4)" href="javascript:void(0);">Gelecek Araçlar</a>
                     </li>
                 </ul>
             </div>
-            <div class="container" ng-init="GetCar(4)">
-                <div class="clearfix">
-                    <ul id="masonry" class="row lightgallery">
+            <div class="container" ng-init="GetCar(5)">
+                     <ul id="masonry" class="row lightgallery h-auto">
                         <li ng-repeat="car in carList"
                             class="card-container col-lg-3 col-md-6 col-sm-6 web_design wow fadeInUp"
                             data-wow-duration="2s" data-wow-delay="0.2s">
@@ -189,9 +188,12 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 m-t10">
-                                                <button style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;"
-                                                        class="btn btn-success">@{{ car.button }}
-                                                    <span>@{{ car.price }}</span></button>
+                                                <button ng-if="car.follow == 0" type="button" ng-click="CustomerCarFollow(car.type,car.id)" style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">@{{ car.button }}
+                                                    <span ng-if="car.item == 5">@{{ car.price }}</span>
+                                                </button>
+                                                <button ng-if="car.follow == 1" type="button" ng-click="CustomerCarUnFollow(car.type,car.id)" style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">Listeden Çıkart
+                                                    <i class="fas fa-check-circle" style="    float: left;font-size: 19px;"></i>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -199,11 +201,10 @@
                             </div>
                         </li>
                     </ul>
-                </div>
-            </div>
+             </div>
         </div>
     </section>
-
+<div class="clearfix"></div>
     <section style="background-image: url({{asset('view/images/background/bg1.png')}}); background-size:100%;">
         <div class="content-inner-2">
             <div class="container">
@@ -225,7 +226,7 @@
                                 <div class="icon-bx-wraper style-2 left m-b30">
                                     <div class="icon-bx-md radius bg-white text-red">
                                         <a href="javascript:void(0);" class="icon-cell">
-                                            <i class="flaticon-idea"></i>
+                                            <img src="{{asset('view/images/icon/car_add.jpeg')}}" />
                                         </a>
                                     </div>
                                     <div class="icon-content">
@@ -236,7 +237,7 @@
                                 <div class="icon-bx-wraper style-2 left m-b30">
                                     <div class="icon-bx-md radius bg-white text-yellow">
                                         <a href="javascript:void(0);" class="icon-cell">
-                                            <i class="flaticon-line-graph"></i>
+                                            <img src="{{asset('view/images/icon/fast_valuation.jpeg')}}" />
                                         </a>
                                     </div>
                                     <div class="icon-content">
@@ -248,7 +249,7 @@
                                 <div class="icon-bx-wraper style-2 left m-b30">
                                     <div class="icon-bx-md radius bg-white text-green">
                                         <a href="javascript:void(0);" class="icon-cell">
-                                            <i class="flaticon-rocket"></i>
+                                            <img src="{{asset('view/images/icon/confirm.jpeg')}}" />
                                         </a>
                                     </div>
                                     <div class="icon-content">

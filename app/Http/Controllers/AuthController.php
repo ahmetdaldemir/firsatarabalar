@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CustomerRequest;
 use App\Models\Customer;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController
 {
@@ -38,28 +39,46 @@ class AuthController
      */
     public function __construct()
     {
-     }
+    }
 
     public function login(Request $request)
     {
-
         $credentials = array(
             'email' => $request->email,
             'password' => $request->password
         );
-
         $remember_me = $request->has('remember') ? true : false;
 
         if (Auth::guard('customer')->attempt($credentials, $remember_me)) {
+
+            return redirect()->intended('/')->withSuccess('You have Successfully loggedin');
+/*
             $finduser = Customer::find(Auth::guard('customer')->id());
             Auth::guard('customer')->login($finduser, $remember_me);
-            return response()->json(['success' => true], 200);
+            return response()->json(['success' => true], 200); */
         }
         return response()->json(['success' => false, 'message' => "Hatalı Kullanıcı Adı ve Şifre"], 200);
     }
 
+    public function logout() {
+        Session::flush();
+        Auth::guard('customer')->logout();
+        return Redirect('/');
+    }
+
     public function register(Request $request)
     {
+
+        $validated = $request->validate([
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'required|email|unique:customers',
+            'password' => 'required',
+            'phone' => 'required|numeric|min:10|unique:customers',
+            'g-recaptcha-response' => 'required|recaptcha'
+        ]);
+
+
         $customer = new Customer();
         $customer->firstname = $request->firstname;
         $customer->lastname = $request->lastname;
@@ -67,5 +86,9 @@ class AuthController
         $customer->email = $request->email;
         $customer->password = bcrypt($request->password);
         $customer->save();
+
+        return response()->json(['success' => false, 'message' => $validated], 200);
+
     }
+
 }

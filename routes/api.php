@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CustomController;
+use App\Http\Controllers\Api\CustomerCarController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\SettingsController;
 use App\Http\Controllers\Api\VehicleRequest;
@@ -40,6 +42,7 @@ Route::get('/neighbourhoods', [SettingsController::class, 'neighbourhoods']);
 Route::get('/brands', [\App\Http\Controllers\Api\BrandController::class, 'index']);
 Route::get('/page', [SettingsController::class, 'page']);
 Route::get('/page_category', [SettingsController::class, 'page_category']);
+Route::post('/register', [AuthController::class, 'register'])->name('register');
 
 //Customer
 Route::get('/customer', [CustomerController::class, 'index']);
@@ -50,7 +53,7 @@ Route::get('getversion', [CustomController::class, 'getversion'])->name('getvers
 Route::get('getcar', [CustomController::class, 'getcar'])->name('getcar');
 
 
-Route::resource('vehicle_request',  VehicleRequest::class);
+Route::resource('vehicle_request', VehicleRequest::class);
 Route::get('/years', [\App\Http\Controllers\Api\CustomController::class, 'years']);
 Route::get('/models', [\App\Http\Controllers\Api\CustomController::class, 'models']);
 Route::get('/fuels', [\App\Http\Controllers\Api\CustomController::class, 'fuels']);
@@ -61,6 +64,19 @@ Route::get('/citys', [\App\Http\Controllers\Api\CustomController::class, 'citys'
 Route::get('/town', [\App\Http\Controllers\Api\CustomController::class, 'town']);
 
 
-
 Route::get('/cacheflush', [\App\Http\Controllers\Api\CustomController::class, 'Cacheflush']);
 
+
+Route::get('form1', [CustomerCarController::class, 'form1'])->name('form1');
+Route::post('form2', [CustomerCarController::class, 'form2'])->name('form2');
+Route::post('form3', [CustomerCarController::class, 'form3'])->name('form3');
+Route::post('form4', [CustomerCarController::class, 'form4'])->name('form4');
+Route::get('form5', [CustomerCarController::class, 'form5'])->name('form5');
+Route::post('customer_car.file_store', [CustomerCarController::class, 'dropzoneStore'])->name('customer_car.file_store');
+
+
+
+Route::get('follow', [AccountController::class, 'customer_car_id_follow'])->name('follow');
+Route::get('unFollow', [AccountController::class, 'customer_car_id_un_follow'])->name('unFfollow');
+Route::get('mycars', [AccountController::class, 'mycars'])->name('mycars');
+Route::post('letMeCar', [AccountController::class, 'letMeCar'])->name('letMeCar');

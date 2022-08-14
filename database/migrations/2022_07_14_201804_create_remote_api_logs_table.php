@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('remote_api_logs', function (Blueprint $table) {
             $table->engine = 'MyISAM';
 
-            $table->id();
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->string('request_class', 512);

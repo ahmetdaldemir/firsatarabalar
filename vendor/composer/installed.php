@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'cc8afcc1252136739d5ad1f5fee4bfa56d5c3e02',
+        'reference' => '0be16b9d6e8c2ad154d86fb379ec7772ca735759',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -466,6 +466,15 @@
                 0 => 'v9.23.0',
             ),
         ),
+        'josiasmontag/laravel-recaptchav3' => array(
+            'pretty_version' => '1.0.0',
+            'version' => '1.0.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../josiasmontag/laravel-recaptchav3',
+            'aliases' => array(),
+            'reference' => 'a18b78e3921ea8c265a136bb0823a08e601bef0b',
+            'dev_requirement' => false,
+        ),
         'justinrainbow/json-schema' => array(
             'pretty_version' => '5.2.12',
             'version' => '5.2.12.0',
@@ -505,7 +514,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'cc8afcc1252136739d5ad1f5fee4bfa56d5c3e02',
+            'reference' => '0be16b9d6e8c2ad154d86fb379ec7772ca735759',
             'dev_requirement' => false,
         ),
         'laravel/passport' => array(

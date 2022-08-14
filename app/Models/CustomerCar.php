@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CustomerCar extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
-    protected $fillable = ['customer_id','session_id','customer_id',
-'caryear',
+    protected $fillable = ['customer_id', 'session_id', 'customer_id',
+        'caryear',
         'body',
         'fuel',
         'gear',
@@ -20,58 +20,73 @@ class CustomerCar extends Model
         'color',
         'plate',
         'ownorder',
-'car_city',
-'car_state',
-'description',
-'laststep'];
+        'car_city',
+        'car_state',
+        'description',
+        'laststep'];
     protected $casts = [
         'damage' => 'array'
     ];
 
     public function customer()
     {
-        return $this->belongsTo(Customer::class,'customer_id','id');
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
     }
 
     public function buyer()
     {
-        return $this->belongsTo(Customer::class,'buyer_id','id');
+        return $this->belongsTo(Customer::class, 'buyer_id', 'id');
     }
 
     public function expert()
     {
-        return $this->belongsTo(User::class,'user_id','id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function car()
     {
-        return $this->belongsTo(Car::class,'car_id','id');
+        return $this->belongsTo(Car::class, 'car_id', 'id');
     }
 
     public function comment()
     {
-        return $this->belongsTo(CustomerCarComment::class,'customer_car_id','id');
+        return $this->belongsTo(CustomerCarComment::class, 'customer_car_id', 'id');
     }
+
     public function photo()
     {
-        return $this->belongsTo(CustomerCarPhoto::class,'customer_car_id','id');
+        return $this->belongsTo(CustomerCarPhoto::class, 'customer_car_id', 'id');
     }
+
     public function video()
     {
-        return $this->belongsTo(CustomerCarVideo::class,'customer_car_id','id');
+        return $this->belongsTo(CustomerCarVideo::class, 'customer_car_id', 'id');
     }
+
     public function exper()
     {
-        return $this->belongsTo(CustomerCarExper::class,'customer_car_id','id');
+        return $this->belongsTo(CustomerCarExper::class, 'customer_car_id', 'id');
     }
 
     public function valuation()
     {
-        return $this->belongsTo(CustomerCarValuation::class,'customer_car_id','id');
+        return $this->belongsTo(CustomerCarValuation::class, 'customer_car_id', 'id');
     }
 
     public function payment()
     {
-        return $this->belongsTo(CustomerCarPaymentTransaction::class,'id','customer_car_id');
+        return $this->belongsTo(CustomerCarPaymentTransaction::class, 'id', 'customer_car_id');
+    }
+
+
+    public function cities()
+    {
+        return $this->belongsTo(City::class, 'car_city', 'id');
+    }
+
+
+    public function state()
+    {
+        return $this->belongsTo(City::class, 'car_state', 'id');
     }
 }

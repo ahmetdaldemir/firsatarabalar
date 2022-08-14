@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CrudController;
@@ -33,6 +34,7 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [ViewController::class, 'index']);
 Route::get('iletisim', [ViewController::class, 'contact'])->name('iletisim');
 Route::post('giris-yap', [AuthController::class, 'login'])->name('giris-yap');
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('nasil_calisir', [ViewController::class, 'how_run_system'])->name('nasil_calisir');
 Route::get('kullanici_gorusleri', [ViewController::class, 'customer_comment'])->name('kullanici_gorusleri');
 
@@ -60,7 +62,7 @@ Route::get('mailsend', [CrudController::class, 'mailsend'])->name('mailsend');
 
 
 
-Route::get('register', [AuthController::class, 'register'])->name('register');
+Route::post('kayit-ol', [AuthController::class, 'register'])->name('kayit-ol');
 
 
 
@@ -162,4 +164,16 @@ All Admin Routes List
 Route::middleware(['auth', 'user-access:manager'])->group(function () {
 
     Route::get('/manager/home', [HomeController::class, 'managerHome'])->name('manager.home');
+});
+
+
+Route::middleware(['customer_auth'])->group(function () {
+    Route::get('/profil', [AccountController::class, 'profil'])->name('profil');
+    Route::post('/account.customer.update', [AccountController::class, 'account_update'])->name('account.customer.update');
+    Route::post('/account.customer.password.update', [AccountController::class, 'password_update'])->name('account.customer.password.update');
+    Route::get('/account.customer.customer_car_id_follow', [AccountController::class, 'customer_car_id_follow'])->name('account.customer.customer_car_id_follow');
+    Route::get('/account.customer.customer_car_id_un_follow', [AccountController::class, 'customer_car_id_un_follow'])->name('account.customer.customer_car_id_un_follow');
+    Route::get('/account.customer.follow', [AccountController::class, 'follow'])->name('account.customer.follow');
+    Route::get('/account.customer.car', [AccountController::class, 'car'])->name('account.customer.car');
+
 });

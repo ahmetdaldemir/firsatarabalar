@@ -6655,6 +6655,7 @@ fieldset:disabled .btn {
     display: block;
     clear: both;
     content: "";
+    float: none;
 }
 
 .link-primary {
@@ -15019,7 +15020,7 @@ textarea {
     vertical-align: middle;
     max-width: 100%;
     width: auto;
-    height: 40px;
+    height: 60px;
 }
 
 .icon-bx-sm {
@@ -18824,8 +18825,8 @@ textarea {
     position: relative;
     padding-left: 20px;
     margin-bottom: 25px;
-    font-size: 30px;
-    font-weight: 800;
+    font-size: 17px;
+    font-weight: 600;
     text-transform: uppercase;
 }
 

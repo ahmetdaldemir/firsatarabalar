@@ -174,18 +174,68 @@ class Make
     }
 
 
-    public function getType($type)
+    public function getType($type, $limit)
     {
         $arrray = [];
-        $customer_cars = CustomerCar::where('status', $type)->get()->take(setting('pagination_item'));
+        if($limit>0)
+        {
+            $customer_cars = CustomerCar::where('status', $type)->get()->take($limit);
+        }else{
+            $customer_cars = CustomerCar::where('status', $type)->get()->take(setting('pagination_item'));
+        }
         foreach ($customer_cars as $customer_car) {
             $arrray[] = array(
-                'name' => $customer_car->car->brand_name,
-                'detail' => $customer_car,
-                'button' => ($type == 4) ? "İncele" : "Takibe Al",
-                'price' => ($type == 4) ? $customer_car->suggested . " TL" : "",
+                'id' => $customer_car->id,
+                'name' => 'Mercedes edition 1 amg paket',
+                'version' => '1.5 TSI ACT Business DSG',
+                'image' => 'Uploads/Cars/Photos/6418_5BeE_1654522691.jpg',
+                'images' => [
+                    'Uploads/Cars/Photos/6418_5BeE_1654522691.jpg',
+                    'Uploads/Cars/Photos/6418_5BeE_1654522691.jpg',
+                    'Uploads/Cars/Photos/6418_5BeE_1654522691.jpg',
+                    'Uploads/Cars/Photos/6418_5BeE_1654522691.jpg',
+                    'Uploads/Cars/Photos/6418_5BeE_1654522691.jpg',
+                ],
+                'tab1' => [
+                    "km" => $customer_car->km,
+                    "modelyili" => $customer_car->caryear,
+                    "kasatipi" => BodyType::BodyType[$customer_car->bodytype] ?? NULL,
+                    "motorcc" => $customer_car->car->horse,
+                    "motorhacmi" => $customer_car->car->engine,
+                    "gear" => Transmission::Transmission[$customer_car->gear]?? NULL,
+                    "fuel" => FullType::FullType[$customer_car->fueltype]?? NULL,
+                    "tramer" => $customer_car->tramer,
+                ],
+                'tab2' => [
+                    'a01' => $customer_car->status_frame,
+                    'a02' => $customer_car->status_pole,
+                    'a03' => $customer_car->status_podium,
+                    'a04' => $customer_car->status_airbag,
+                    'a05' => $customer_car->status_triger,
+                    'a06' => $customer_car->status_oppression,
+                    'a07' => $customer_car->status_brake,
+                    'a08' => $customer_car->status_tyre,
+                    'a09' => $customer_car->status_km,
+                    'a10' => $customer_car->status_unrealizable,
+                    'a11' => $customer_car->status_onArkaBagaj,
+                ],
+                'tab3' => [
+                    'a12' =>  $customer_car->car_notwork,
+                    'a13' => $customer_car->car_details,
+                    'a14' => $customer_car->car_interior_faults,
+                    'a15' => $customer_car->car_exterior_faults,
+                    'a16' => $customer_car->maintenance_history,
+                    'a17' => $customer_car->ownorder,
+                    'a18' =>  $customer_car->cities->name ?? NULL."/". $customer_car->state->name ?? NULL,
+                ],
+                'brand' => $customer_car->car->brand->name,
+                'model' => $customer_car->car->model,
+                'desc' => $customer_car->description,
+                'price' => $customer_car->suggested,
+                'sale' => true,
             );
         }
+
         return $arrray;
     }
 

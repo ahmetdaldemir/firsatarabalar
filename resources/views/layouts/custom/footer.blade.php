@@ -1,4 +1,5 @@
 <!-- Footer -->
+
 <footer class="site-footer style-1" id="footer"
         style="background-image: url(https://makaanlelo.com/tf_products_007/samar/xhtml/images/background/bg10.png);">
     <div class="footer-top">
@@ -60,7 +61,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 text-center">
-                    <span class="copyright-text">Copyright © 2022 <a href="https://dexignzone.com/" target="_blank">Kaffa Tech</a>. All rights reserved.</span>
+                    <span class="copyright-text">Copyright © 2022 <a href="https://kaffatech.com/" target="_blank">Kaffa Tech</a>. All rights reserved.</span>
                 </div>
             </div>
         </div>
@@ -84,10 +85,10 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <a href="#" class="active" id="login-form-link">Giriş Yap</a>
+                                        <a href="#" class="active" id="loginForm-link">Giriş Yap</a>
                                     </div>
                                     <div class="col-md-6">
-                                        <a href="#" id="register-form-link">Kayıt Ol</a>
+                                        <a href="#" id="registerForm-link">Kayıt Ol</a>
                                     </div>
                                 </div>
                                 <hr>
@@ -95,8 +96,8 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <form id="login-form" action="javascript:;" ng-click="login()" method="post"
-                                              role="form" style="display: block;">
+                                        <form id="loginForm" action="javascript:;" ng-submit="login()" method="post" role="form" style="display: block;">
+                                            @csrf
                                             <div class="form-group">
                                                 <input type="text" name="email" id="email" tabindex="1"
                                                        class="form-control" placeholder="Telefon Numarası" value="">
@@ -106,16 +107,13 @@
                                                        class="form-control" placeholder="Şifre">
                                             </div>
                                             <div class="form-group text-center">
-                                                <input type="checkbox" tabindex="3" class="" name="remember"
-                                                       id="remember">
+                                                <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
                                                 <label for="remember"> Beni Hatırla</label>
                                             </div>
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-sm-6 col-sm-offset-3">
-                                                        <input type="submit" name="login-submit" id="login-submit"
-                                                               tabindex="4" class="form-control btn btn-login"
-                                                               value="Giriş Yap">
+                                                        <button type="submit" class="form-control btn btn-login">Giriş Yap  </button>
                                                     </div>
                                                     <div class="col-sm-6 col-sm-offset-3" id="loginMessage"
                                                          style="color: #f00">@{{loginMessage}}
@@ -133,35 +131,43 @@
                                                 </div>
                                             </div>
                                         </form>
-                                        <form id="register-form" action="javascript:;" ng-click="register()" method="post" role="form" style="display: none;">
+                                        <form id="registerForm" autocomplete="off" action="javascript:;"
+                                              ng-submit="register()" method="post" role="form" style="display: none;">
                                             @csrf
-                                            <input name="id" value="" type="hidden" />
+                                            <input name="id" value="" type="hidden"/>
                                             <div class="form-group">
                                                 <input type="text" name="firstname" id="firstname" tabindex="1"
-                                                       class="form-control" placeholder="İsim" value="">
+                                                       class="form-control" placeholder="İsim" value="" required>
                                             </div>
                                             <div class="form-group">
                                                 <input type="text" name="lastname" id="lastname" tabindex="1"
-                                                       class="form-control" placeholder="Soyisim" value="">
+                                                       class="form-control" placeholder="Soyisim" value="" required>
                                             </div>
                                             <div class="form-group">
                                                 <input type="email" name="email" id="email" tabindex="1"
-                                                       class="form-control" placeholder="Email Adresi" value="">
+                                                       class="form-control" placeholder="Email Adresi" value=""
+                                                       required>
                                             </div>
                                             <div class="form-group">
                                                 <input type="text" name="phone" id="phone" tabindex="1"
-                                                       class="form-control" placeholder="Telefon" value="">
+                                                       class="form-control" placeholder="5xx xxx xx xx" value=""
+                                                       required>
                                             </div>
                                             <div class="form-group">
                                                 <input type="password" name="password" id="password" tabindex="2"
-                                                       class="form-control" placeholder="Şifre">
+                                                       class="form-control" placeholder="Şifre" required>
                                             </div>
+                                            @if(env('GOOGLE_RECAPTCHA_KEY'))
+                                                <div class="g-recaptcha"  data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+                                                </div>
+                                            @endif
+                                            <script src='https://www.google.com/recaptcha/api.js'></script>
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-sm-6 col-sm-offset-3">
-                                                        <input type="submit" name="register-submit" id="register-submit"
-                                                               tabindex="4" class="form-control btn btn-login"
-                                                               value="Kayıt Ol">
+                                                        <button type="submit" class="form-control btn btn-login">Kayıt
+                                                            Ol
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -174,6 +180,7 @@
                 </div>
 
             </div>
+
             <!--div class="modal-footer">
                 <div class="row">
                     <a href="#" class="col-md-6 fb btn">
@@ -297,19 +304,19 @@
         border-color: #1CA347;
     }
 
-    #login-form {
+    #loginForm {
         padding: 10px;
     }
 
-    #login-form .form-group {
+    #loginForm .form-group {
         margin-bottom: 10px;
     }
 
-    #register-form {
+    #registerForm {
         padding: 10px;
     }
 
-    #register-form .form-group {
+    #registerForm .form-group {
         margin-bottom: 10px;
     }
 </style>

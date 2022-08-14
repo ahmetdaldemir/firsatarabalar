@@ -17,6 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('device');
             $table->string('deviceId');
+
+            $table->unsignedBigInteger('customer_id');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('restrict');
+
             $table->timestamps();
         });
     }

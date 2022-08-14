@@ -1,9 +1,8 @@
-
 app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike', '$filter', function ($scope, $http, $httpParamSerializerJQLike, $window, $filter) {
 
 
     $scope.CustomerLoginForm = function () {
-         $("#loginModal").modal("show");
+        $("#loginModal").modal("show");
     }
 
     $scope.CustomerLogin = function () {
@@ -32,11 +31,7 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
-            dataType: 'json',
-            cache: false,
-            processData: false,
-            contentType: false
-
+            data: $("#loginForm").serialize(),
         }).then(function (response) {
             if (response.data.success == true) {
                 window.location.reload();
@@ -50,26 +45,24 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
     $scope.register = function () {
         $http({
             method: "POST",
-            url: "/register",
+            url: "/kayit-ol",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
-            dataType: 'json',
-            cache: false,
-            processData: false,
-            contentType: false
-
+            data: $("#registerForm").serialize(),
         }).then(function (response) {
-           Swal.fire('info','Kayıt Başarılı');
+            $("#loginModal").modal('hide')
+
+            Swal.fire('info', 'Kayıt Başarılı');
         });
     }
 
 
-    $scope.GetModel = function (item,brands) {
+    $scope.GetModel = function (item, brands) {
 
         $http({
             method: "GET",
-            url: "/getmodel?year=" + item + "&brand="+brands+"",
+            url: "/getmodel?year=" + item + "&brand=" + brands + "",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
@@ -93,10 +86,9 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
             dataType: 'json',
 
         }).then(function (response) {
-             $scope.versionList = response.data;
+            $scope.versionList = response.data;
         });
     }
-
 
 
     $scope.GetDistricts = function (item) {
@@ -151,7 +143,7 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
 
         $http({
             method: "GET",
-            url: "/getcar?type="+type+"",
+            url: "/getcar?type=" + type + "",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
@@ -163,15 +155,15 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
                 $scope.carList = response.data
             },
             function (data) {
-               Swal.fire('Araç Bulunamadı')
+                Swal.fire('Araç Bulunamadı')
             });
     }
 
-    $scope.GetBody = function (year,brand,model) {
+    $scope.GetBody = function (year, brand, model) {
 
         $http({
             method: "GET",
-            url: "/getbody?year="+year+"&brand="+brand+"&model="+model,
+            url: "/getbody?year=" + year + "&brand=" + brand + "&model=" + model,
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
@@ -187,11 +179,11 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
             });
     }
 
-    $scope.GetFuel = function (year,brand,model) {
+    $scope.GetFuel = function (year, brand, model) {
 
         $http({
             method: "GET",
-            url: "/getfuel?year="+year+"&brand="+brand+"&model="+model,
+            url: "/getfuel?year=" + year + "&brand=" + brand + "&model=" + model,
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
@@ -207,11 +199,11 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
             });
     }
 
-    $scope.GetVersion = function (year,brand,model,body,fuel) {
+    $scope.GetVersion = function (year, brand, model, body, fuel) {
 
         $http({
             method: "GET",
-            url: "/getversionlist?year="+year+"&brand="+brand+"&model="+model+"&body="+body+"&fuel="+fuel,
+            url: "/getversionlist?year=" + year + "&brand=" + brand + "&model=" + model + "&body=" + body + "&fuel=" + fuel,
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
@@ -224,6 +216,46 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
             },
             function (data) {
                 Swal.fire('Araç Bulunamadı')
+            });
+    }
+
+
+    $scope.CustomerCarFollow = function (type, customer_car_id) {
+
+        if (type == 4) {
+            $http({
+                method: "GET",
+                url: "/account.customer.customer_car_id_follow?type=" + type + "&customer_car_id=" + customer_car_id,
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+            }).then(function (response) {
+                    Swal.fire(response.data.message);
+                    $scope.GetCar(4);
+                },
+                function (data) {
+                    Swal.fire(data.data.message);
+                });
+        } else {
+            Swal.fire(response.data.message);
+        }
+
+    }
+
+
+    $scope.CustomerCarUnFollow = function (follow_id) {
+        $http({
+            method: "GET",
+            url: "/account.customer.customer_car_id_un_follow?follow_id=" + follow_id,
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+        }).then(function (response) {
+                console.log(response);
+                window.location.reload();
+            },
+            function (data) {
+                Swal.fire(data.data.message);
             });
     }
 

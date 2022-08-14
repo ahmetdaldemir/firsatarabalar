@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\CustomerCarFollow;
 use App\Models\Device;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 
@@ -18,41 +21,47 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:customers',
+            'phone' => 'required|numeric|min:10|unique:customers',
+        ]);
 
-        $customer_data = Customer::where('email',$request->email)->orWhere('phone',$request->phone)->get();
-
-        if(!Count($customer_data)>0) {
-            Customer::create([
-                'firstname' => $request['firstname'],
-                'lastname' => $request['lastname'],
-                'email' => $request['email'],
-                'phone' => $request['phone'],
-                'password' => Hash::make($request['password']),
-            ]);
-            return response(['status' => 'success'], 200);
-        }else{
-            return response(['error' => 'error'], 200);
+        if ($validator->fails()) {
+            return response(['status' => 'false', 'data' => $validator->messages()], 200);
         }
+
+        $customer = new Customer();
+        $customer->firstname = $request->firstname;
+        $customer->lastname = $request->lastname;
+        $customer->email = $request->email;
+        $customer->phone = $request->phone;
+        $customer->password = bcrypt($request->password);
+        $customer->save();
+        return response(['status' => 'success'], 200);
     }
 
     public function login(Request $request)
     {
-        $request->validate([
-            'phone' => 'required',
-            'password' => 'required'
-        ]);
+        Log::info($request);
+        $credentials = array(
+            'phone' => $request->phone,
+            'password' => $request->password
+        );
+        $remember_me = $request->has('remember') ? true : false;
 
-        $user = Customer::where('phone', $request->phone)->first();
+        if (Auth::guard('customer')->attempt($credentials, $remember_me)) {
+            $user = Customer::find(Auth::guard('customer')->id());
+            $userToken = $user->createToken('api - token')->plainTextToken;
+            $follows = CustomerCarFollow::where('customer_id',Auth::guard('customer')->id())->get();
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
-            return response(['status' => 'failed','message' => ['Dogrulama Hatalı.']], 200);//500
+            Device::firstOrCreate(
+                ['customer_id' =>Auth::guard('customer')->id(),'deviceId' => $request->device_id],
+                ['device' => $request->device]
+            );
+
+            return response(['status' => 'success', 'data' => $user,'favorites' => $follows, 'token' => $userToken], 200);
         }
-
-        $userToken = $user->createToken('api-token')->plainTextToken;
-        if($request->device!=null && !$request->device!='null'){
-            //$user->update(['device_key' => $request->device]);
-        }
-        return response(['status' => 'success','data' => $user,'token' => $userToken], 200);
+        return response()->json(['success' => false, 'message' => "Hatalı Kullanıcı Adı ve Şifre"], 200);
     }
 
     public function device(Request $request)

@@ -8,8 +8,8 @@
                 <li class="breadcrumb-item"><a href="/">Ana Sayfa</a></li>
                 <li class="breadcrumb-item active"><a href="/cars">Araçlar</a></li>
                 <li class="breadcrumb-item active"><strong>{{str_replace(" ", "", strtoupper($car['plate']))}}
-                        - {{$car['car_city']}} - {{$car->customer['firstname']}} {{$car->customer['lastname']}}
-                        - {{$car->customer['phone']}}</strong></li>
+                        - {{$car['car_city'] ?? NULL}} - {{$car->customer['firstname'] ?? NULL}} {{$car->customer['lastname'] ?? NULL}}
+                        - {{$car->customer['phone'] ?? NULL}}</strong></li>
             </ol>
         </div>
         <div class="col-6 d-flex justify-content-end align-items-center" style="padding-top: 46px">
@@ -314,7 +314,8 @@
                                                             <div class="damage-area">
                                                                 <div class="car-parts">
                                                                     @if ($car->damage)
-                                                                        @foreach ($car->damage as $key => $value)
+                                                                        <?php $damage = json_decode($car->damage); ?>
+                                                                        @foreach ($damage as $key => $value)
                                                                             @continue( substr($key, 0, 5) == "islem" )
                                                                             <div class="{{$key}} {{$value}}"></div>
                                                                         @endforeach

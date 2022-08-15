@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Jobs\SendEmailJob;
 use App\Models\Customer;
 use App\Models\CustomerCar;
@@ -10,6 +11,7 @@ use App\Services\Make;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\VehicleRequest as VehicleModel;
 
 
 class AccountController extends Controller
@@ -34,7 +36,7 @@ class AccountController extends Controller
         $customer->email = $request->email;
         $customer->phone = $request->phone;
         $customer->save();
-        return redirect()->back();
+        return response(['status' => true], 200);
     }
 
     public function password_update(Request $request)
@@ -44,13 +46,13 @@ class AccountController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors('Şifreler Eşleşmiyor');
+			return response(['status' => false,'msg' => 'Şifre Eşleşmiyor'], 200);
         }
-
+		
         $customer = Customer::find($request->customer_id);
         $customer->password = bcrypt($request->password);
         $customer->save();
-        return redirect()->back();
+        return response(['status' => true], 200);
     }
 
 
@@ -85,19 +87,20 @@ class AccountController extends Controller
         $customer_car_follow_new = CustomerCarFollow::where('customer_id', $request->customer_id)->where('customer_car_id', $request->customer_car_id)->first();
         if ($customer_car_follow_new) {
             $customer_car_follow_new->delete();
-            return response()->json(['success' => false, 'message' => "Araç favorilerimden çıkartıldı."], 200);
+            return response()->json(['success' => false, 'msg' => "Araç favorilerimden çıkartıldı."], 200);
         }
         return response()->json(['success' => false, 'message' => "Favori Bulunamadı."], 200);
     }
 
     public function mycars(Request $request)
     {
-        return CustomerCar::where('customer_id', $request->customer_id)->get();
+        $data = CustomerCar::where('customer_id', $request->customer_id)->get();
+        return response($data, 200);
     }
 
     public function letMeCar(Request $request)
     {
-        $vehicle = new VehicleRequest();
+        $vehicle = new VehicleModel();
         $vehicle->brand_id = $request->brandID;
         $vehicle->version = $request->version;
         $vehicle->customer_id = $request->customerID;
@@ -106,6 +109,14 @@ class AccountController extends Controller
         $vehicle->message = $request->message;
         $vehicle->save();
         dispatch(new SendEmailJob($vehicle));
+		
+        return response(['success' => true], 200);
+    }
+
+    public function letMeCarList(Request $request)
+    {
+        $data =  VehicleModel::where('customer_id', $request->customer_id)->get();
+        return response($data, 200);
     }
 
 }

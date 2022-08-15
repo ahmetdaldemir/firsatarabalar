@@ -78,5 +78,8 @@ Route::post('customer_car.file_store', [CustomerCarController::class, 'dropzoneS
 
 Route::get('follow', [AccountController::class, 'customer_car_id_follow'])->name('follow');
 Route::get('unFollow', [AccountController::class, 'customer_car_id_un_follow'])->name('unFfollow');
+Route::post('change_password', [AccountController::class, 'password_update'])->name('change_password');
+Route::post('account_update', [AccountController::class, 'account_update'])->name('account_update');
 Route::get('mycars', [AccountController::class, 'mycars'])->name('mycars');
 Route::post('letMeCar', [AccountController::class, 'letMeCar'])->name('letMeCar');
+Route::post('letMeCarList', [AccountController::class, 'letMeCarList'])->name('letMeCarList');

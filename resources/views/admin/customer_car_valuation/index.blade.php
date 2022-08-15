@@ -97,7 +97,7 @@
                             <td class="text-center"><a href="{{route('admin.customer_car_valuation.edit',['id' =>$customer_car_valuation->id ])}}">{{@$customer_car_valuation->plate}} </a></td>
                             <td class="text-center">{{\Carbon\Carbon::parse($customer_car_valuation->created_at)->format('d-m-Y')}}</td>
                             <td class="text-left">{{$customer_car_valuation->gal_price_1}} ₺</td>
-                            <td class="text-left">{{$customer_car_valuation->expert->name}}</td>
+                            <td class="text-left">{{$customer_car_valuation->expert->name ?? NULL}}</td>
 
                             <td class="text-center">
                                 <select onchange="statuschange(this,{{$customer_car_valuation->id}})"

@@ -22,6 +22,8 @@ use App\Repositories\Cities\CityRepositoryInterface;
 
 use App\Repositories\Pages\PageRepository;
 use App\Repositories\Pages\PageRepositoryInterface;
+use App\Repositories\Reviews\ReviewRepository;
+use App\Repositories\Reviews\ReviewRepositoryInterface;
 use App\Repositories\Roles\RoleRepository;
 use App\Repositories\Roles\RoleRepositoryInterface;
 use App\Repositories\Settings\SettingRepository;
@@ -60,6 +62,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SettingRepositoryInterface::class, SettingRepository::class);
         $this->app->bind( VehicleRequestRepositoryInterface::class,  VehicleRequestRepository::class);
         $this->app->bind( BrandRepositoryInterface::class,  BrandRepository::class);
+        $this->app->bind( ReviewRepositoryInterface::class,  ReviewRepository::class);
 
     }
 

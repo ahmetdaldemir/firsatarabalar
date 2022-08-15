@@ -169,7 +169,7 @@
                 <li><a href="/payments"><i class="fa-fw fad fa-money-bill-wave"></i> <span class="nav-label">Ödemeler</span></a></li>
 
 
-                <li><a href="/reviews"><i class="fa-fw fad fa-comments-alt"></i> <span class="nav-label">Kullanıcı Görüşleri</span></a></li>
+                <li><a href="{{route('admin.reviews.index')}}"><i class="fa-fw fad fa-comments-alt"></i> <span class="nav-label">Kullanıcı Görüşleri</span></a></li>
                 <li>
                     <a href="javascript:;"><i class="fa-fw fad fa-question-circle"></i> <span class="nav-label">Yardım Sayfaları</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse" aria-expanded="true" style="">

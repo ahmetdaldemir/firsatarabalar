@@ -10,6 +10,7 @@ use App\Http\Controllers\Modules\Admin\CarController;
 use App\Http\Controllers\Modules\Admin\CustomerCarController;
 use App\Http\Controllers\CustomerCarController as ViewCustomerCarController;
 use App\Http\Controllers\Modules\Admin\CustomerController;
+use App\Http\Controllers\Modules\Admin\ReviewController;
 use App\Http\Controllers\Modules\Admin\UserController;
 use App\Http\Controllers\Modules\Admin\PageController;
 use App\Http\Controllers\Modules\Admin\SettingsController;
@@ -138,6 +139,16 @@ Route::prefix('admin/')->middleware(['auth', 'user-access:admin'])->group(functi
         Route::get('edit', [PageController::class, 'form'])->name('admin.page.edit');
         Route::post('store', [PageController::class, 'store'])->name('admin.page.store');
         Route::get('deleted', [PageController::class, 'destroy'])->name('admin.page.deleted');
+    });
+
+
+    Route::prefix('reviews/')->group(function () {
+        Route::get('index', [ReviewController::class, 'index'])->name('admin.reviews.index');
+        Route::get('create', [ReviewController::class, 'form'])->name('admin.reviews.create');
+        Route::get('edit', [ReviewController::class, 'form'])->name('admin.reviews.edit');
+        Route::post('store', [ReviewController::class, 'store'])->name('admin.reviews.store');
+        Route::get('deleted', [ReviewController::class, 'destroy'])->name('admin.reviews.deleted');
+        Route::get('status', [ReviewController::class, 'status'])->name('admin.review.status');
     });
 
 

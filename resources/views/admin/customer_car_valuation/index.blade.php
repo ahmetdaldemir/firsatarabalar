@@ -45,12 +45,14 @@
                             Gönderildi
                         </option>
                     </select>
+                    @role('Admin')
                     <select name="agent_id" id="agent_id" class="form-control mr-2">
                         <option value="">Danışman Seçiniz</option>
                         @foreach ( $experts as $expert )
                             <option value="{{$expert->id}}" {{( Request::get("agent_id")==$expert->id ) ? "selected" : ""}}>{{$expert->name}}</option>
                         @endforeach
                     </select>
+                    @endrole
                     <button type="submit" class="btn btn-sm btn-primary"><i class="fad fa-search"></i></button>
                     @if ( Request::get("agent_id") || strlen(Request::get("state")) > 0 )
                         <a href="/valuations" type="submit" class="btn btn-sm btn-warning ml-1"><i
@@ -88,7 +90,7 @@
                     @foreach($customer_car_valuations  as $customer_car_valuation)
                         <tr id="carRow-1">
                             <td class="text-center"><a
-                                        href="{{route('admin.customer_car_valuation.index',['id' => $customer_car_valuation->id])}}">{{$customer_car_valuation->id}}</a>
+                                        href="{{route('admin.customer_car_valuation.edit',['id' => $customer_car_valuation->id])}}">{{$customer_car_valuation->id}}</a>
                             </td>
                             <td class="text-left">{{@$customer_car_valuation->customer->firstname}} {{@$customer_car_valuation->customer->lastname}}</a></td>
                             <td class="text-center">{{$customer_car_valuation->buyer_id}}</td>

@@ -13,6 +13,7 @@ final class Tramer extends Enum
 {
     const Tramer = [
         0 => "Tramer Var",
+        2 => "Tramer Var",
         1 => "Tramer Yok",
         3 => "Ağır Hasar Kayıtlı",
      ];

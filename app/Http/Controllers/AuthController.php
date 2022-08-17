@@ -44,14 +44,14 @@ class AuthController
     public function login(Request $request)
     {
         $credentials = array(
-            'email' => $request->email,
+            'phone' => $request->phone,
             'password' => $request->password
         );
         $remember_me = $request->has('remember') ? true : false;
 
         if (Auth::guard('customer')->attempt($credentials, $remember_me)) {
 
-            return redirect()->intended('/')->withSuccess('You have Successfully loggedin');
+            return redirect()->to('/')->withSuccess('You have Successfully loggedin');
 /*
             $finduser = Customer::find(Auth::guard('customer')->id());
             Auth::guard('customer')->login($finduser, $remember_me);

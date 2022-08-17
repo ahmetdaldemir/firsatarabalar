@@ -50,12 +50,12 @@ class CustomerCar extends Model
 
     public function comment()
     {
-        return $this->belongsTo(CustomerCarComment::class, 'customer_car_id', 'id');
+        return $this->hasMany(CustomerCarComment::class);
     }
 
     public function photo()
     {
-        return $this->belongsTo(CustomerCarPhoto::class, 'customer_car_id', 'id');
+        return $this->hasMany(CustomerCarPhoto::class);
     }
 
     public function video()

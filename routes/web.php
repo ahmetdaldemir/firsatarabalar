@@ -15,6 +15,7 @@ use App\Http\Controllers\Modules\Admin\UserController;
 use App\Http\Controllers\Modules\Admin\PageController;
 use App\Http\Controllers\Modules\Admin\SettingsController;
 use App\Http\Controllers\Modules\Admin\ValuationController;
+use App\Http\Controllers\Modules\Admin\VehicleRequestController;
 use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,8 @@ Route::post('giris-yap', [AuthController::class, 'login'])->name('giris-yap');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('nasil_calisir', [ViewController::class, 'how_run_system'])->name('nasil_calisir');
 Route::get('kullanici_gorusleri', [ViewController::class, 'customer_comment'])->name('kullanici_gorusleri');
+Route::get('blog', [ViewController::class, 'blog'])->name('blog');
+Route::get('kurumsal', [ViewController::class, 'about'])->name('kurumsal');
 
 Route::middleware(['customer_auth', 'user-access:customer'])->group(function () {
     Route::get('arac-sat', [ViewController::class, 'carSell'])->name('arac-sat');
@@ -86,8 +89,9 @@ All Normal Users Routes List
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 });
+
+Route::get('/admin.logout', [LogoutController::class, 'logout'])->name('admin.logout');
 
 /*------------------------------------------
 --------------------------------------------
@@ -104,6 +108,8 @@ Route::prefix('admin/')->middleware(['auth', 'user-access:admin'])->group(functi
         Route::get('create', [UserController::class, 'create'])->name('admin.expert.create');
         Route::get('edit', [UserController::class, 'form'])->name('admin.expert.edit');
         Route::post('store', [UserController::class, 'store'])->name('admin.expert.store');
+        Route::get('permission', [UserController::class, 'permission'])->name('admin.expert.permission');
+        Route::post('permission.save', [UserController::class, 'permissionsave'])->name('admin.exper.permission.save');
     });
 
     Route::prefix('customer/')->group(function () {
@@ -129,6 +135,9 @@ Route::prefix('admin/')->middleware(['auth', 'user-access:admin'])->group(functi
         Route::post('store', [CustomerCarController::class, 'store'])->name('admin.customer_car_valuation.store');
         Route::get('deleted', [CustomerCarController::class, 'destroy'])->name('admin.customer_car_valuation.deleted');
         Route::post('store_valuation', [CustomerCarController::class, 'store_valuation'])->name('admin.customer_car_valuation.store_valuation');
+        Route::post('store_comment', [CustomerCarController::class, 'store_comment'])->name('admin.customer_car_valuation.store_comment');
+        Route::post('get_comment', [CustomerCarController::class, 'get_comment'])->name('admin.customer_car_valuation.get_comment');
+        Route::get('delete_commnet', [CustomerCarController::class, 'delete_commnet'])->name('admin.customer_car_valuation.delete_commnet');
     });
 
 
@@ -149,6 +158,16 @@ Route::prefix('admin/')->middleware(['auth', 'user-access:admin'])->group(functi
         Route::post('store', [ReviewController::class, 'store'])->name('admin.reviews.store');
         Route::get('deleted', [ReviewController::class, 'destroy'])->name('admin.reviews.deleted');
         Route::get('status', [ReviewController::class, 'status'])->name('admin.review.status');
+    });
+
+
+    Route::prefix('vehicle_request/')->group(function () {
+        Route::get('index', [VehicleRequestController::class, 'index'])->name('admin.vehicle_request.index');
+        Route::get('create', [VehicleRequestController::class, 'form'])->name('admin.vehicle_request.create');
+        Route::get('edit', [VehicleRequestController::class, 'form'])->name('admin.vehicle_request.edit');
+        Route::post('store', [VehicleRequestController::class, 'store'])->name('admin.vehicle_request.store');
+        Route::get('deleted', [VehicleRequestController::class, 'destroy'])->name('admin.vehicle_request.deleted');
+        Route::get('status', [VehicleRequestController::class, 'status'])->name('admin.vehicle_request.status');
     });
 
 
@@ -186,5 +205,5 @@ Route::middleware(['customer_auth'])->group(function () {
     Route::get('/account.customer.customer_car_id_un_follow', [AccountController::class, 'customer_car_id_un_follow'])->name('account.customer.customer_car_id_un_follow');
     Route::get('/account.customer.follow', [AccountController::class, 'follow'])->name('account.customer.follow');
     Route::get('/account.customer.car', [AccountController::class, 'car'])->name('account.customer.car');
-
 });
+Route::get('/account.customer.logout', [AuthController::class, 'logout'])->name('account.customer.logout');

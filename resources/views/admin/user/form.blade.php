@@ -35,7 +35,7 @@
                                         <label for="firstname">Rol {{$user->role ?? NULL}} <span class="text-danger">*</span></label>
                                         <select class="form-control" name="role">
                                             <?php foreach ($roles as $role){ ?>
-                                              <option value="<?=$role->id?>"   {{($role->id == old('role',@$user->hasRole($role->name)))?'selected':''}}><?=$role->name?></option>
+                                              <option value="<?=$role->id?>" ><?=$role->name?></option>
                                             <?php } ?>
                                         </select>
                                      </div>

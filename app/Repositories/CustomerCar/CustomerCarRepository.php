@@ -9,13 +9,16 @@ use App\Models\CustomerCarExper;
 use App\Models\CustomerCarFollow;
 use App\Models\CustomerCarPhoto;
 use App\Models\CustomerCarStatuHistory;
+use App\Models\User;
 use App\Services\Upload;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class CustomerCarRepository implements CustomerCarInterface
 {
 
     protected $upload;
+    protected $user;
 
     public function __construct()
     {
@@ -25,7 +28,13 @@ class CustomerCarRepository implements CustomerCarInterface
 
     public function get()
     {
-        return CustomerCar::orderBy('id', 'desc')->simplePaginate(10);
+
+        $role_id = Auth::guard('web')->user()->roles->first()->id;
+
+        if ($role_id == 1) {
+            return CustomerCar::orderBy('id', 'desc')->simplePaginate(10);
+        }
+        return CustomerCar::where('user_id', Auth::guard('web')->id())->orderBy('id', 'desc')->get();
     }
 
     public function getDistrict($id)
@@ -34,8 +43,12 @@ class CustomerCarRepository implements CustomerCarInterface
     }
 
     public function getById($id)
-    {
-        return CustomerCar::findOrFail($id);
+    {        $role_id = Auth::guard('web')->user()->roles->first()->id;
+
+        if ($role_id == 1) {
+            return CustomerCar::findOrFail($id);
+        }
+        return CustomerCar::where('user_id', Auth::guard('web')->id())->where('id', $id)->first();
     }
 
     public function delete($id)
@@ -161,7 +174,7 @@ class CustomerCarRepository implements CustomerCarInterface
                 'button' => ($type == 5) ? "İncele" : "Favorilere Ekle",
                 'price' => ($type == 5) ? $customer_car->suggested . " TL" : "",
                 'type' => $type,
-                'follow' => CustomerCarFollow::where('customer_id',Auth::guard('customer')->id())->where('customer_car_id',$customer_car->id)->count()
+                'follow' => CustomerCarFollow::where('customer_id', Auth::guard('customer')->id())->where('customer_car_id', $customer_car->id)->count()
             );
         }
         return $arrray;
@@ -258,6 +271,7 @@ class CustomerCarRepository implements CustomerCarInterface
         $customer_car->status_km = $request->status_km;
         $customer_car->status_tyre = $request->status_tyre;
         $customer_car->date_inspection = $request->date_inspection;
+        $customer_car->gal_fiyat_1 = $request->gal_fiyat_1;
         $customer_car->laststep = 3;
         $customer_car->save();
 

@@ -9,6 +9,8 @@ use App\Repositories\Roles\RoleRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -26,6 +28,22 @@ class UserController extends Controller
         $data['users'] = $this->UserRepository->get();
         return view('admin.user.index',$data);
     }
+
+    public function permission(Request $request)
+    {
+        $data['user'] = $this->UserRepository->getById($request->id);
+        $data['roles'] = Role::all();
+        return view('admin.user.permission',$data);
+    }
+
+
+    public function permissionsave(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->syncRoles($request->roles);
+        return redirect()->back();
+    }
+
 
     public function form(Request $request)
     {

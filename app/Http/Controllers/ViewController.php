@@ -37,6 +37,20 @@ class ViewController
         return view('view.pages',$data);
     }
 
+
+    public function about(Request $request)
+    {
+        $data['pages'] = Page::where('slug',$request->slug)->first();
+        return view('view.about',$data);
+    }
+
+
+    public function blog(Request $request)
+    {
+        $data['pages'] = Page::where('slug',$request->slug)->where('type','blog')->first();
+        return view('view.blog',$data);
+    }
+
     public function how_run_system()
     {
         $data['chart'] = [];

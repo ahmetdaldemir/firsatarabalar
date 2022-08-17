@@ -212,14 +212,14 @@
                                                         <div class="form-group mb-0">
                                                             <label for="sahip">Şehir</label>
                                                             <input type="text" class="form-control form-control-sm"
-                                                                   value="{{$car->car_city}}" disabled>
+                                                                   value="{{\App\Models\City::find($car->car_city)->name}}" disabled>
                                                         </div>
                                                     </div>
-                                                    <div class="col pl-1 pr-1">
+                                                    <div class="col pl-2 pr-1">
                                                         <div class="form-group mb-0">
                                                             <label for="sahip">İlçe</label>
                                                             <input type="text" class="form-control form-control-sm"
-                                                                   value="{{$car->car_state}}" disabled>
+                                                                   value="{{\App\Models\Town::find($car->car_state)->name}}" disabled>
                                                         </div>
                                                     </div>
                                                     <div class="col pl-1">
@@ -236,7 +236,7 @@
                                                         <div class="form-group mb-0">
                                                             <label for="plate">Son Muayene</label>
                                                             <input type="text" class="form-control form-control-sm"
-                                                                   value="{{$car->date_inspection}}" disabled>
+                                                                   value="{{date('d-m-Y',strtotime($car->date_inspection))}}" disabled>
                                                         </div>
                                                     </div>
                                                     <div class="col-3 pl-1 pr-1">
@@ -454,10 +454,10 @@
                             <div class="row">
                                 @foreach ( $car->photo as $photo )
                                     <div class="col-2">
-                                        <a href="/Uploads/Cars/Photos/{{$photo->photo}}"
+                                        <a href="{{asset('images')}}/{{$photo->image}}"
                                            title="{{str_replace(" ", "", strtoupper($car->plate))}} Fotoğrafları"
                                            data-gallery>
-                                            <img src="/Uploads/Cars/Photos/{{$photo->photo}}" alt=""
+                                            <img src="{{asset('images')}}/{{$photo->image}}" style="width: 100%;height: 150px"
                                                  class="img-fluid rounded mb-3">
                                         </a>
                                     </div>
@@ -514,7 +514,7 @@
                 <div role="tabpanel" id="notes" class="tab-pane">
                     <div class="panel-body">
 
-                        <form action="#" id="AdminCommentsForm" method="post">
+                        <form action="#" ng-click="AdminCommentAdd()" id="AdminCommentsForm" method="post">
                             <input type="hidden" name="car_id" id="car_id" value="{{$car->id}}">
                             <div class="input-group mb-3">
                                 <input id="comment" name="comment" type="text" class="form-control"
@@ -545,12 +545,12 @@
                                     <tr>
                                         <td class="text-center">{{$Comment->id}}</td>
                                         <td>{{$Comment->comment}}</td>
-                                        <td class="text-center">{{$Comment->name}}</td>
-                                        <td class="text-center">{{$Comment->date_created}}</td>
-                                        <td class="text-center"><a href="javascript:;"
-                                                                   class="comment_delete btn btn-sm btn-danger"
-                                                                   data-commentid='{{$Comment->id}}'><i
-                                                        class="fad fa-trash-alt"></i> Sil</a></td>
+                                        <td>{{\App\Models\User::find($Comment->user_id)->name}}</td>
+                                        <td class="text-center">{{$Comment->created_at}}</td>
+                                        <td class="text-center"><a href="{{route('admin.customer_car_valuation.delete_commnet',['id'=>$Comment->id])}}"
+                                                                   class="comment_delete btn btn-sm btn-danger" ><i
+                                                        class="fad fa-trash-alt"></i> Sil</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             @else
@@ -909,41 +909,6 @@
 
             });
 
-            $("a.comment_delete").on("click", function () {
-
-                let parenttr = $(this).parents("tr");
-                let comment_id = $(this).data("commentid");
-
-                swal({
-                    title: "Emin misiniz?",
-                    text: "Bu kaydı silmek istediğinize emin misiniz?",
-                    type: "warning",
-                    showCancelButton: true,
-                    cancelButtonText: "Hayır",
-                    confirmButtonColor: "#1a7bb9",
-                    confirmButtonText: "Evet, sil!",
-                    closeOnConfirm: false
-                }, () => {
-                    $.post("/cars/comments/delete", {comment_id: comment_id}, function () {
-
-                        $(parenttr).remove();
-
-                        if (!$("#comments_table tbody tr").length) {
-                            $("#comments_table tbody").append('<tr><td colspan="10" class="text-center bg-white" height="80">Henüz hiç not eklenmemiş!</td></tr>');
-                        }
-
-                        swal({
-                            title: "Silindi!",
-                            text: "Kayıt başarıyla silindi.",
-                            type: "success",
-                            confirmButtonColor: "#1a7bb9",
-                            confirmButtonText: "Tamam"
-                        });
-
-                    });
-                });
-
-            });
 
         });
     </script>
@@ -965,6 +930,21 @@
                     swal(response.data);
                 });
             };
+
+            $scope.AdminCommentAdd = function () {
+                $http({
+                    method: 'POST',
+                    url: '{{route('admin.customer_car_valuation.store_comment')}}',
+                    data: $("#AdminCommentsForm").serialize(),
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                }).then(function successCallback(data) {
+                    swal(data.data);
+                    window.location.reload();
+                }, function errorCallback(response) {
+                    swal(response.data);
+                });
+            };
+
         });
     </script>
 @endsection

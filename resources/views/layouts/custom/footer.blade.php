@@ -9,8 +9,7 @@
                 <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeIn" data-wow-duration="2s" data-wow-delay="0.2s">
                     <div class="widget widget_about">
                         <h5 class="footer-title">Fırsat Arabalar</h5>
-                        <p>Maecenas pellentesque placerat quam, in finibus nisl tincidunt sed. Aliquam magna augue,
-                            malesuada ut feugiat eget, cursus eget felis.</p>
+                        <p>Fırsat arabalar olarsak kurulduğumuz günden bu yana araç alım satımında müşteri memnuniyeti ve satıcı güvenini sağlayarak piyasanın en uygun aracını ilk almak isteyen müşterisi ile buluşturmaktadır.</p>
                         <div class="dlab-social-icon">
                             <ul>
                                 <li><a class="fab fa-facebook-f" href="javascript:void(0);"></a></li>
@@ -33,12 +32,12 @@
                 </div>
                 <div class="col-xl-3 col-lg-3 col-sm-6 wow fadeIn" data-wow-duration="2s" data-wow-delay="0.6s">
                     <div class="widget widget_services">
-                        <h5 class="footer-title">Üyelik</h5>
+                        <h5 class="footer-title">Sayfalar</h5>
                         <ul>
-                            <?php $account = page('account'); ?>
-                            <?php foreach ($account as $item){ ?>
-                            <li><a href="{{route('sayfalar',['slug' => $item->slug])}}">{{$item->title}}</a></li>
-                            <?php } ?>
+                            <li class=""><a href="{{route('kurumsal',['slug' => 'kurumsal'])}}"><span>Kurumsal</span></a></li>
+                            <li class=""><a href="{{route('nasil_calisir')}}"><span>Nasıl Çalışır</span></a></li>
+                            <li class=""><a href="{{route('kullanici_gorusleri')}}"><span>Kullanıcı Görüşleri</span></a></li>
+                            <li class=""><a href="/iletisim"><span>İletişim</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -99,7 +98,7 @@
                                         <form id="loginForm" action="javascript:;" ng-submit="login()" method="post" role="form" style="display: block;">
                                             @csrf
                                             <div class="form-group">
-                                                <input type="text" name="email" id="email" tabindex="1"
+                                                <input type="text" name="phone" id="phone"  pattern="[0-9]{3}[0-9]{3}[0-9]{4}"  tabindex="1"
                                                        class="form-control" placeholder="Telefon Numarası" value="">
                                             </div>
                                             <div class="form-group">

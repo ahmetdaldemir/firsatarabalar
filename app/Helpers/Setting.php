@@ -72,3 +72,23 @@ if (! function_exists('word_abbreviation')) {
 
 }
 
+if (! function_exists('private_str')) {
+    /**
+     * Format number
+     *
+     * @param $value
+     * @param $attribute
+     * @param $data
+     * @return boolean
+     */
+
+    function private_str($str, $start, $end){
+        $after = mb_substr($str, 0, $start, 'utf8');
+        $repeat = str_repeat('*', $end);
+        $before = mb_substr($str, ($start + $end), strlen($str), 'utf8');
+        return $after.$repeat.$before;
+    }
+
+
+}
+

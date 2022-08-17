@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\BodyType;
 use App\Enums\FullType;
+use App\Enums\Tramer;
 use App\Enums\Transmission;
 use App\Models\Brand;
 use App\Models\Car;
@@ -39,6 +40,22 @@ class Make
         $data = Cache::get($cache_key);
         if (!Cache::has($cache_key)) {
             $data = Car::select('model')->where('brand_id', $brand)->where('production_start', '<=', $year)->where('production_end', '>=', $year)->get();
+            foreach ($data as $item) {
+                $array[]['model'] = $item->model;
+            }
+            $data = collect($array)->unique()->values();
+            Cache::put($cache_key, $data);
+        }
+        return $data;
+    }
+
+    public function onlymodel($brand)
+    {
+        $array = [];
+        $cache_key = 'onlymodel:' . $brand;
+        $data = Cache::get($cache_key);
+        if (!Cache::has($cache_key)) {
+            $data = Car::select('model')->where('brand_id', $brand)->get();
             foreach ($data as $item) {
                 $array[]['model'] = $item->model;
             }
@@ -184,6 +201,12 @@ class Make
             $customer_cars = CustomerCar::where('status', $type)->get()->take(setting('pagination_item'));
         }
         foreach ($customer_cars as $customer_car) {
+            if($type == 5 || $type == 6)
+            {
+                $price = number_format($customer_car->gal_price_1, 2, ',', '.');
+            }else{
+                $price = null;
+            }
             $arrray[] = array(
                 'id' => $customer_car->id,
                 'name' => 'Mercedes edition 1 amg paket',
@@ -204,20 +227,20 @@ class Make
                     "motorhacmi" => $customer_car->car->engine,
                     "gear" => Transmission::Transmission[$customer_car->gear]?? NULL,
                     "fuel" => FullType::FullType[$customer_car->fueltype]?? NULL,
-                    "tramer" => $customer_car->tramer,
+                    "tramer" => Tramer::Tramer[$customer_car->tramer],
                 ],
                 'tab2' => [
-                    'a01' => $customer_car->status_frame,
-                    'a02' => $customer_car->status_pole,
-                    'a03' => $customer_car->status_podium,
-                    'a04' => $customer_car->status_airbag,
-                    'a05' => $customer_car->status_triger,
-                    'a06' => $customer_car->status_oppression,
-                    'a07' => $customer_car->status_brake,
-                    'a08' => $customer_car->status_tyre,
-                    'a09' => $customer_car->status_km,
-                    'a10' => $customer_car->status_unrealizable,
-                    'a11' => $customer_car->status_onArkaBagaj,
+                    'a01' => ($customer_car->status_frame == 1) ? "Var" : "Yok",
+                    'a02' => ($customer_car->status_pole == 1) ? "Var" : "Yok",
+                    'a03' => ($customer_car->status_podium == 1) ? "Var" : "Yok",
+                    'a04' => ($customer_car->status_airbag == 1) ? "Var" : "Yok",
+                    'a05' => ($customer_car->status_triger == 1) ? "Var" : "Yok",
+                    'a06' => ($customer_car->status_oppression == 1) ? "Var" : "Yok",
+                    'a07' => ($customer_car->status_brake == 1) ? "Var" : "Yok",
+                    'a08' => ($customer_car->status_tyre == 1) ? "Var" : "Yok",
+                    'a09' => ($customer_car->status_km == 1) ? "Var" : "Yok",
+                    'a10' => ($customer_car->status_unrealizable == 1) ? "Var" : "Yok",
+                    'a11' => ($customer_car->status_onArkaBagaj == 1) ? "Var" : "Yok",
                 ],
                 'tab3' => [
                     'a12' =>  $customer_car->car_notwork,
@@ -231,7 +254,7 @@ class Make
                 'brand' => $customer_car->car->brand->name,
                 'model' => $customer_car->car->model,
                 'desc' => $customer_car->description,
-                'price' => $customer_car->suggested,
+                'price' => $price,
                 'sale' => true,
             );
         }

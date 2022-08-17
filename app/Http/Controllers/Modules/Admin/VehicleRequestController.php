@@ -6,11 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\carRequest;
 use App\Jobs\CustomerCarValuationPdf;
 use App\Models\CustomerCar;
-use App\Models\CustomerCarComment;
 use App\Models\CustomerCarValuation;
 use App\Repositories\Cities\CityRepositoryInterface;
 use App\Repositories\CustomerCar\CustomerCarInterface;
 use App\Repositories\Users\UserRepositoryInterface;
+use App\Repositories\VehicleRequest\VehicleRequestRepository;
+use App\Repositories\VehicleRequest\VehicleRequestRepositoryInterface;
 use App\Services\Sms;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -19,35 +20,27 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-class CustomerCarController extends Controller
+class VehicleRequestController extends Controller
 {
-    private CustomerCarInterface $CustomerCar;
+    private VehicleRequestRepositoryInterface $VehicleRequest;
     protected $now;
     protected $customer_car_status;
     protected $sms;
-    private CityRepositoryInterface $CityRepository;
 
-    public function __construct(CustomerCarInterface $CustomerCar, UserRepositoryInterface $UserRepository, CityRepositoryInterface $CityRepository)
+
+    public function __construct(VehicleRequestRepositoryInterface $VehicleRequest)
     {
-        $this->CustomerCar = $CustomerCar;
-        $this->UserRepository = $UserRepository;
+        $this->VehicleRequest = $VehicleRequest;
         $this->now = Carbon::now();
         $this->sms = new Sms();
-        $this->CityRepository = $CityRepository;
 
     }
 
     public function index()
     {
-
         $data['show'] = "";
-        $data['customer_car_valuations'] = $this->CustomerCar->get();
-        $data['years'] = DateEnum::Years;
-        $data['experts'] = $this->UserRepository->getExpert();
-        $data['mounth'] = $this->now->month;
-        $data['this_year'] = $this->now->year;
-        $data['status'] = CustomerCarStatus::Status;
-        return view('admin.customer_car_valuation.index', $data);
+        $data['vehicle_requests'] = $this->VehicleRequest->get();
+        return view('admin.vehicle_request.index', $data);
     }
 
     public function deleted()
@@ -156,23 +149,6 @@ class CustomerCarController extends Controller
 
         $customerCar = $this->CustomerCar->getById($request->customers_car_id);
         $this->dispatch(new CustomerCarValuationPdf($customerCar));
-    }
-
-
-    public function store_comment(Request $request)
-    {
-        $customer_car_commment = new CustomerCarComment();
-        $customer_car_commment->customer_car_id = $request->car_id;
-        $customer_car_commment->comment = $request->comment;
-        $customer_car_commment->user_id = Auth::guard('web')->id();
-        $customer_car_commment->save();
-    }
-
-    public function delete_commnet(Request $request)
-    {
-        $customer_car_commment = CustomerCarComment::find($request->id);
-        $customer_car_commment->delete();
-        return redirect()->back();
     }
 
 

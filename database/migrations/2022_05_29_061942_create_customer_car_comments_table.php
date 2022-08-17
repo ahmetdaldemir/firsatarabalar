@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -15,7 +14,11 @@ return new class extends Migration
     {
         Schema::create('customer_car_comments', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('customer_car_id');
+            $table->foreign('customer_car_id')->references('id')->on('customer_cars')->onDelete('restrict');
+            $table->text('comment');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

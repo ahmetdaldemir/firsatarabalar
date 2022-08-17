@@ -78,5 +78,11 @@ class CustomController extends Controller
 
     }
 
+    public function onlymodel(Request $request)
+    {
+        return $this->service->onlymodel($request->brand_id);
+
+    }
+
 
 }

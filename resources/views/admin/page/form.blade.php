@@ -59,7 +59,7 @@
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="title">Resim <span class="text-danger">*</span></label>
-                                <input type="file" name="file" required>
+                                <input type="file" name="file">
                             </div>
                         </div>
 

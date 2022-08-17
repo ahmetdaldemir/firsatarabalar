@@ -325,7 +325,7 @@
         </div>
     </section>
     <!-- Team -->
-    <section class="content-inner-1 bgl-primary">
+    <!-- section class="content-inner-1 bgl-primary">
         <div class="container">
             <div class="section-head style-1 text-center">
                 <h3 class="title">Aradığın Araca Saniyeler içinde ulaş</h3>
@@ -432,7 +432,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section -->
 
     @if(!empty($reviews))
     <!-- Testimonials -->
@@ -476,12 +476,11 @@
                 <div class="item wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
                     <div class="dlab-blog style-1 bg-white">
                         <div class="dlab-media" style="width: 370px;height: 208px">
-                            <a href="/">
-                                <img src="{{asset('storage/files/')}}/{{$blog->images}}" alt=""></a>
+                            <a href="{{route('blog',['slug'=>$blog->slug])}}"> <img src="{{asset('storage/files/')}}/{{$blog->images}}" alt=""></a>
                         </div>
                         <div class="dlab-info">
                             <h5 class="dlab-title" style="    width: 324px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
-                                <a href="/">{{$blog->title}}</a>
+                                <a href="{{route('blog',['slug'=>$blog->slug])}}">{{$blog->title}}</a>
                             </h5>
                             <p class="m-b0">Detaylı bilgi için okuyunuz.</p>
                             <div class="dlab-meta meta-bottom">

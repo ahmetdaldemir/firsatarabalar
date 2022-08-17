@@ -9,6 +9,7 @@
             <li class="cat-item cat-item-36"><a href="{{route('account.customer.follow')}}">Takip Ettiklerim</a></li>
             <li class="cat-item cat-item-43"><a href="#n">Satın Aldıklarım</a></li>
             <li class="cat-item cat-item-27"><a href="#">Mesaj Gönder</a></li>
+            <li class="cat-item cat-item-27"><a href="{{route('account.customer.logout')}}">Oturumu Kapat</a></li>
         </ul>
     </div>
 

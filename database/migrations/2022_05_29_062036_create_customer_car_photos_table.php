@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('image');
             $table->boolean('active')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

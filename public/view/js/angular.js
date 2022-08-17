@@ -33,7 +33,9 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
             },
             data: $("#loginForm").serialize(),
         }).then(function (response) {
-            if (response.data.success == true) {
+            setInterval( window.location.reload(), 3000);
+
+             if (response.data.success == true) {
                 window.location.reload();
             } else {
                 $scope.loginMessage = "*** " + response.data.message;

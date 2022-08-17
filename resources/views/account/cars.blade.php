@@ -49,19 +49,19 @@
                                                      style="text-align: left;font-size: 14px;  overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
                                                     <img
                                                             src="{{asset('view/icons/engine.png')}}"
-                                                            style="float:left;width: 20px;height: 20px;"/> {{  \App\Enums\Transmission::Transmission[$car->customer_car->gear] }}
+                                                            style="float:left;width: 20px;height: 20px;"/> {{  \App\Enums\Transmission::Transmission[$car->gear] }}
                                                 </div>
                                                 <div class="col-md-4"
                                                      style="text-align: left;font-size: 14px;  overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
                                                     <img
                                                             src="{{asset('view/icons/fuel.png')}}"
-                                                            style="float:left;width: 20px;height: 20px;"/>{{  \App\Enums\FullType::FullType[$car->customer_car->fuel] }}
+                                                            style="float:left;width: 20px;height: 20px;"/>{{  \App\Enums\FullType::FullType[$car->fueltype] ?? NULL }}
                                                 </div>
                                                 <div class="col-md-4"
                                                      style="text-align: left;  overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
                                                     <img
                                                             src="{{asset('view/icons/calendar.png')}}"
-                                                            style="float:left;width: 20px;height: 20px;"/> {{ $car->customer_car->caryear }}
+                                                            style="float:left;width: 20px;height: 20px;"/> {{ $car->caryear }}
                                                 </div>
                                             </div>
                                             <div class="row">

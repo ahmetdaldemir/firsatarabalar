@@ -1,11 +1,13 @@
 <?php
 namespace App\Repositories\VehicleRequest;
 
+use App\Models\VehicleRequest;
+
 class VehicleRequestRepository implements VehicleRequestRepositoryInterface
 {
     public function get()
     {
-        // TODO: Implement get() method.
+        return VehicleRequest::orderBy('id','desc')->get();
     }
 
     public function getById($id)

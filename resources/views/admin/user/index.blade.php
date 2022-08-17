@@ -24,11 +24,10 @@
                 <th width="50" class="text-center">#</th>
                 <th width="220">İsim</th>
                 <th width="130" class="text-center">Telefon</th>
-                <th>E-Posta / Kullanıcı Adı</th>
-                <th width="130" class="text-center">Araçlar</th>
+                <th width="130">E-Posta / Kullanıcı Adı</th>
                 <th width="150" class="text-center">Kazançlar</th>
                 <th width="70" class="text-center">Durum</th>
-                <th width="165" class="text-center">İşlem(ler)</th>
+                <th width="205" class="text-center">İşlem(ler)</th>
             </tr>
             </thead>
             <tbody>
@@ -45,13 +44,13 @@
                         <td>{{$user->name}}</td>
                         <td class="text-center">{{$user->phone}}</td>
                         <td >{{$user->email}}</td>
-                        <td class="text-center">{{$user->date_created}}</td>
                         <td class="text-center">{{$user->expert_earnings_sum()}} <i class="fa-solid fa-square-nfi"></i>/ {{$user->expert_earnings()->count()}} ₺</td>
                         <td class="text-center">{!! ( $user->status ) ? '<span class="label label-primary">Aktif</span>' : '<span class="label label-plain">Pasif</span>' !!}</td>
                         <td class="text-center">
                             @if ( Request::get("deleted") == "show" )
                                 <a href="javascript:;" data-agentid='{{$user->id}}' class="undelete btn btn-sm btn-warning"><i class="fad fa-reply mr-1"></i> Geri Al</a>
                             @else
+                                <a href="{{route('admin.expert.permission',['id' => $user->id])}}" class="btn btn-sm btn-success"><i class="fad fa-edit mr-1"></i> İzinler</a>
                                 <a href="{{route('admin.expert.edit',['id' => $user->id])}}" class="btn btn-sm btn-success"><i class="fad fa-edit mr-1"></i> Düzenle</a>
                                 <a href="javascript:;" data-agentid='{{$user->id}}' class="delete btn btn-sm btn-danger"><i class="fad fa-trash-alt mr-1"></i> Sil</a>
                             @endif

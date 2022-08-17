@@ -56,6 +56,7 @@ Route::get('getcar', [CustomController::class, 'getcar'])->name('getcar');
 Route::resource('vehicle_request', VehicleRequest::class);
 Route::get('/years', [\App\Http\Controllers\Api\CustomController::class, 'years']);
 Route::get('/models', [\App\Http\Controllers\Api\CustomController::class, 'models']);
+Route::get('/onlymodel', [\App\Http\Controllers\Api\CustomController::class, 'onlymodel']);
 Route::get('/fuels', [\App\Http\Controllers\Api\CustomController::class, 'fuels']);
 Route::get('/bodys', [\App\Http\Controllers\Api\CustomController::class, 'bodys']);
 Route::get('/versions', [\App\Http\Controllers\Api\CustomController::class, 'versions']);
@@ -75,11 +76,14 @@ Route::get('form5', [CustomerCarController::class, 'form5'])->name('form5');
 Route::post('customer_car.file_store', [CustomerCarController::class, 'dropzoneStore'])->name('customer_car.file_store');
 
 
-
-Route::get('follow', [AccountController::class, 'customer_car_id_follow'])->name('follow');
-Route::get('unFollow', [AccountController::class, 'customer_car_id_un_follow'])->name('unFfollow');
+ 
+Route::post('addFavorite', [AccountController::class, 'customer_car_id_follow'])->name('follow');
+Route::post('removeFavorite', [AccountController::class, 'customer_car_id_un_follow'])->name('unFfollow');
 Route::post('change_password', [AccountController::class, 'password_update'])->name('change_password');
 Route::post('account_update', [AccountController::class, 'account_update'])->name('account_update');
 Route::get('mycars', [AccountController::class, 'mycars'])->name('mycars');
 Route::post('letMeCar', [AccountController::class, 'letMeCar'])->name('letMeCar');
-Route::post('letMeCarList', [AccountController::class, 'letMeCarList'])->name('letMeCarList');
+Route::post('formSave', [AccountController::class, 'formSave'])->name('formSave');
+Route::get('letMeCarList', [AccountController::class, 'letMeCarList'])->name('letMeCarList');
+Route::get('carBuys', [AccountController::class, 'carBuys'])->name('carBuys');
+Route::post('carBuysList', [AccountController::class, 'carBuysList'])->name('carBuysList');

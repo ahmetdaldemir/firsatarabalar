@@ -26311,6 +26311,7 @@ pre {
     .mo-left .header-nav .logo-header {
         display: block;
         float: none;
+        background: #03133f;
         height: auto !important;
         max-width: 100%;
         padding: 25px 20px;
@@ -26369,7 +26370,7 @@ pre {
 }
 
 .text-black .navbar-toggler span {
-    background: #262F5A;
+    background: #fff;
 }
 
 @-webkit-keyframes upToDown {

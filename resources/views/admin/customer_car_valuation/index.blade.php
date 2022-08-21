@@ -81,6 +81,7 @@
                     <th width="160" class="text-center" colspan="2">İşlem(ler)</th>
                 </tr>
                 </thead>
+
                 <tbody>
                 @if ( empty($customer_car_valuations))
                     <tr>
@@ -99,17 +100,20 @@
                             <td class="text-center"><a href="{{route('admin.customer_car_valuation.edit',['id' =>$customer_car_valuation->id ])}}">{{@$customer_car_valuation->plate}} </a></td>
                             <td class="text-center">{{\Carbon\Carbon::parse($customer_car_valuation->created_at)->format('d-m-Y')}}</td>
                             <td class="text-left">{{$customer_car_valuation->gal_price_1}} ₺</td>
-                            <td class="text-left">{{$customer_car_valuation->expert->name ?? NULL}}</td>
+                            <td class="text-left">{{$customer_car_valuation->exper->name ?? NULL}}</td>
 
                             <td class="text-center">
-                                <select onchange="statuschange(this,{{$customer_car_valuation->id}})"
+                                <select style="background:#{{\App\Enums\CustomerCarStatus::Status[$customer_car_valuation->status]['color']}} " onchange="statuschange(this,{{$customer_car_valuation->id}})"
                                         class="btn btn-xs btn-danger w-50">
                                     <?php foreach ($status as $key => $value){ ?>
                                     <option @if($customer_car_valuation->status == $key) selected @endif value="<?=$key?>"><?=$value['text']?></option>
                                     <?php } ?>
                                 </select>
-                                <a href=""><i class="fa-fw fad fa-assistive-listening-systems"></i></a>
-                            </td>
+                                <?php $ccv = \App\Models\CustomerCarValuation::where('customer_car_id',$customer_car_valuation->id)->first();  ?>
+                                @if($ccv && $ccv->status == 1)
+                                 <a target="_blank" href="{{route('pdf',['id' => $customer_car_valuation->id])}}" class="btn btn-xs btn-success"><i class="fa fa-share"></i></a>
+                                @endif
+                             </td>
                             <td>
                                 <div class="dropdown">
                                     <a class="btn btn-xs btn-dark dropdown-toggle" href="#" role="button"

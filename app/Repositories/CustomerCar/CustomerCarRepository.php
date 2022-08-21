@@ -9,6 +9,7 @@ use App\Models\CustomerCarExper;
 use App\Models\CustomerCarFollow;
 use App\Models\CustomerCarPhoto;
 use App\Models\CustomerCarStatuHistory;
+use App\Models\CustomerCarValuation;
 use App\Models\User;
 use App\Services\Upload;
 use Illuminate\Support\Facades\Auth;
@@ -49,6 +50,12 @@ class CustomerCarRepository implements CustomerCarInterface
             return CustomerCar::findOrFail($id);
         }
         return CustomerCar::where('user_id', Auth::guard('web')->id())->where('id', $id)->first();
+    }
+
+    public function getByValuationCustomerId($id)
+    {
+        return CustomerCarValuation::where('customer_car_id', $id)->first();
+
     }
 
     public function delete($id)
@@ -167,6 +174,7 @@ class CustomerCarRepository implements CustomerCarInterface
             $arrray[] = array(
                 'name' => $customer_car->car->brand_name,
                 'id' => $customer_car->id,
+                'default_image' => $customer_car->default_image,
                 'gear' => Transmission::Transmission[$customer_car->gear],
                 'fuel' => FullType::FullType[$customer_car->fuel],
                 'body' => BodyType::BodyType[$customer_car->body],
@@ -271,7 +279,7 @@ class CustomerCarRepository implements CustomerCarInterface
         $customer_car->status_km = $request->status_km;
         $customer_car->status_tyre = $request->status_tyre;
         $customer_car->date_inspection = $request->date_inspection;
-        $customer_car->gal_fiyat_1 = $request->gal_fiyat_1;
+        $customer_car->gal_price_1 = $request->gal_fiyat_1;
         $customer_car->laststep = 3;
         $customer_car->save();
 

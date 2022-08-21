@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Affiliate;
 use App\Models\Customer;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -86,6 +87,17 @@ class AuthController
         $customer->email = $request->email;
         $customer->password = bcrypt($request->password);
         $customer->save();
+
+        $affiliate = Affiliate::where('phone',$request->phone)->first();
+        if($affiliate)
+        {
+            $affiliate->status = 1;
+            $affiliate->save();
+
+            $newCustomer = Customer::where('customer_id',$affiliate->customer_id)->first();
+            $newCustomer->reward += 1;
+            $newCustomer->save();
+        }
 
         return response()->json(['success' => false, 'message' => $validated], 200);
 

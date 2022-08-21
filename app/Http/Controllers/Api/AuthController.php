@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Affiliate;
 use App\Models\Customer;
 use App\Models\CustomerCarFollow;
 use App\Models\Device;
+use App\Services\Make;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +39,22 @@ class AuthController extends Controller
         $customer->phone = $request->phone;
         $customer->password = bcrypt($request->password);
         $customer->save();
+
+
+        $affiliate = Affiliate::where('phone',$request->phone)->first();
+        if($affiliate)
+        {
+            $affiliate->status = 1;
+            $affiliate->save();
+
+            $newCustomer = Customer::where('customer_id',$affiliate->customer_id)->first();
+            $newCustomer->reward += 1;
+            $newCustomer->save();
+        }
+
+
+
+
         return response(['status' => 'success'], 200);
     }
 
@@ -52,14 +70,16 @@ class AuthController extends Controller
         if (Auth::guard('customer')->attempt($credentials, $remember_me)) {
             $user = Customer::find(Auth::guard('customer')->id());
             $userToken = $user->createToken('api - token')->plainTextToken;
-            $follows = CustomerCarFollow::where('customer_id',Auth::guard('customer')->id())->get();
+            $service = new Make();
+
+            $follows =  $service->getFollow(Auth::guard('customer')->id());
 
             Device::firstOrCreate(
                 ['customer_id' =>Auth::guard('customer')->id(),'deviceId' => $request->device_id],
                 ['device' => $request->device]
             );
 
-            return response(['status' => 'success', 'data' => $user,'favorites' => $follows, 'token' => $userToken], 200);
+            return response(['status' => 'success', 'data' => $user,'favorites' => $follows,'payment_price' => '169', 'token' => $userToken], 200);
         }
         return response()->json(['success' => false, 'message' => "Hatalı Kullanıcı Adı ve Şifre"], 200);
     }

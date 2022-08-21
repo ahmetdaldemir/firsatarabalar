@@ -16,6 +16,7 @@ use App\Http\Controllers\Modules\Admin\PageController;
 use App\Http\Controllers\Modules\Admin\SettingsController;
 use App\Http\Controllers\Modules\Admin\ValuationController;
 use App\Http\Controllers\Modules\Admin\VehicleRequestController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -54,7 +55,6 @@ Route::get('form5', [ViewCustomerCarController::class, 'form5'])->name('form5');
 Route::post('customer_car.file_store', [ViewCustomerCarController::class, 'dropzoneStore'])->name('customer_car.file_store');
 
 
-
 Route::get('getmodel', [CustomController::class, 'models'])->name('getmodel');
 Route::get('getdistricts', [CustomController::class, 'districts'])->name('getdistricts');
 Route::get('getversion', [CrudController::class, 'getversion'])->name('getversion');
@@ -65,22 +65,16 @@ Route::get('getversionlist', [CrudController::class, 'getversionlist'])->name('g
 Route::get('mailsend', [CrudController::class, 'mailsend'])->name('mailsend');
 
 
-
 Route::post('kayit-ol', [AuthController::class, 'register'])->name('kayit-ol');
 
-
-
-
-
+Route::get('car_detail', [ViewController::class, 'car_detail'])->name('car_detail');
 
 
 Route::get('sayfalar', [ViewController::class, 'pages'])->name('sayfalar');
 Route::post('vehiclerequest', [CrudController::class, 'vehiclerequest'])->name('vehiclerequest');
 
 
-
-
- Auth::routes();
+Auth::routes();
 
 /*------------------------------------------
 --------------------------------------------
@@ -141,7 +135,6 @@ Route::prefix('admin/')->middleware(['auth', 'user-access:admin'])->group(functi
     });
 
 
-
     Route::prefix('page/')->group(function () {
         Route::get('index', [PageController::class, 'index'])->name('admin.page.index');
         Route::get('create', [PageController::class, 'create'])->name('admin.page.create');
@@ -171,7 +164,6 @@ Route::prefix('admin/')->middleware(['auth', 'user-access:admin'])->group(functi
     });
 
 
-
     Route::prefix('setting/')->group(function () {
         Route::get('city/{id}', [SettingsController::class, 'city'])->name('admin.setting.city.{id}');
         Route::get('index', [SettingsController::class, 'index'])->name('admin.setting.index');
@@ -180,8 +172,6 @@ Route::prefix('admin/')->middleware(['auth', 'user-access:admin'])->group(functi
     });
 
     Route::post('assignmentDo', [CustomerCarController::class, 'assignmentDo'])->name('admin.assignmentDo');
-
-
 
 
 });
@@ -205,5 +195,27 @@ Route::middleware(['customer_auth'])->group(function () {
     Route::get('/account.customer.customer_car_id_un_follow', [AccountController::class, 'customer_car_id_un_follow'])->name('account.customer.customer_car_id_un_follow');
     Route::get('/account.customer.follow', [AccountController::class, 'follow'])->name('account.customer.follow');
     Route::get('/account.customer.car', [AccountController::class, 'car'])->name('account.customer.car');
+    Route::get('/account.customer.buy', [AccountController::class, 'buy'])->name('account.customer.buy');
+    Route::get('/account.customer.car.buy', [AccountController::class, 'customer_car_id_buy'])->name('account.customer.car.buy');
+    Route::get('/account.customer.affiliate', [AccountController::class, 'affiliate'])->name('account.customer.affiliate');
+    Route::post('/account.customer.affiliateSave', [AccountController::class, 'affiliateSave'])->name('account.customer.affiliateSave');
+    Route::get('/account.customer.affiliates', [AccountController::class, 'affiliates'])->name('account.customer.affiliates');
+    Route::get('/account.customer.car.customer_car_buy_request_delete', [AccountController::class, 'customer_car_buy_request_delete'])->name('account.customer.car.customer_car_buy_request_delete');
+    Route::get('/account.customer.tender', [AccountController::class, 'tender'])->name('account.customer.tender');
+
 });
 Route::get('/account.customer.logout', [AuthController::class, 'logout'])->name('account.customer.logout');
+
+Route::get('/pdf', [HomeController::class, 'pdf'])->name('pdf');
+
+
+Route::get('pdf', [HomeController::class, 'pdf'])->name('pdf');
+Route::get('valuation_confirm', [HomeController::class, 'valuation_confirm'])->name('valuation_confirm');
+
+
+Route::post('payment', [PaymentController::class, 'index'])->name('payment');
+Route::post('payment/response', [PaymentController::class, 'response'])->name('payment/response');
+
+
+Route::get('valuation_confirm', [\App\Http\Controllers\CustomerCarController::class, 'customer_car_valuation_confirm'])->name('valuation_confirm');
+

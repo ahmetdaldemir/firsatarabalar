@@ -1,20 +1,24 @@
 <?php namespace App\Http\Controllers\Api;
 
 use App\Enums\BodyType;
+use App\Enums\CustomerCarStatus;
 use App\Enums\FullType;
 use App\Enums\Tramer;
 use App\Enums\Transmission;
 use App\Http\Controllers\Controller;
 use App\Jobs\SendEmailJob;
+use App\Models\Brand;
 use App\Models\Customer;
 use App\Models\CustomerCar;
 use App\Models\CustomerCarBuyRequest;
 use App\Models\CustomerCarExper;
 use App\Models\CustomerCarFollow;
 use App\Models\CustomerCarPhoto;
+use App\Models\CustomerCarValuation;
 use App\Repositories\Cars\CarRepositoryInterface;
 use App\Repositories\CustomerCar\CustomerCarInterface;
 use App\Services\Make;
+use App\Services\Sms;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -107,22 +111,16 @@ class AccountController extends Controller
 
     public function mycars(Request $request)
     {
+        $array = [];
         $data = CustomerCar::where('customer_id', $request->customer_id)->get();
-
-
         foreach ($data as $customer_car) {
-            $arrray[] = array(
+            $array[] = array(
                 'id' => $customer_car->id,
                 'name' => 'Mercedes edition 1 amg paket',
                 'version' => '1.5 TSI ACT Business DSG',
-                'image' => 'Uploads/Cars/Photos/6418_5BeE_1654522691.jpg',
-                'images' => [
-                    'Uploads/Cars/Photos/6418_5BeE_1654522691.jpg',
-                    'Uploads/Cars/Photos/6418_5BeE_1654522691.jpg',
-                    'Uploads/Cars/Photos/6418_5BeE_1654522691.jpg',
-                    'Uploads/Cars/Photos/6418_5BeE_1654522691.jpg',
-                    'Uploads/Cars/Photos/6418_5BeE_1654522691.jpg',
-                ],
+                'payment' => $customer_car->payment,
+                'image' => $customer_car->default_image,
+                'images' => $customer_car->photo,
                 'tab1' => [
                     "km" => $customer_car->km,
                     "modelyili" => $customer_car->caryear,
@@ -151,41 +149,70 @@ class AccountController extends Controller
                     'a15' => $customer_car->car_exterior_faults,
                     'a16' => $customer_car->maintenance_history,
                     'a17' => $customer_car->ownorder,
-                    'a18' => $customer_car->cities->name ?? NULL . "/" . $customer_car->state->name ?? NULL,
+                    'a18' => $customer_car->cities->name,
+                    'a19' => $customer_car->state->name,
                 ],
                 'brand' => $customer_car->car->brand->name,
                 'model' => $customer_car->car->model,
                 'desc' => $customer_car->description,
                 'price' => $customer_car->gal1_price,
                 'sale' => true,
+                'status' => CustomerCarStatus::Status[$customer_car->status],
+                'customer_car_valuation' => CustomerCarValuation::where('customer_car_id',$customer_car->id)->count(),
+                'customer_car_valuation_data' => CustomerCarValuation::where('customer_car_id',$customer_car->id)->first(),
             );
         }
 
-
-        return response($arrray, 200);
+        Log::info("info",$array);
+        return response($array, 200);
     }
 
     public function letMeCar(Request $request)
     {
-        Log::info("dfgh",(array)$request);
-
+        Log::info($request);
         $vehicle = new VehicleModel();
         $vehicle->brand_id = $request->brand_id;
-        $vehicle->version = $request->version;
+        $vehicle->model = $request->model;
+        $vehicle->body_type_id = $request->body_type_id;
+        $vehicle->fuel_type_id = $request->fuel_type_id;
+        $vehicle->gear_id = $request->gear_id;
+        $vehicle->damage_id = $request->damage_id;
         $vehicle->customer_id = $request->customer_id;
         $vehicle->price_min = $request->minPrice;
         $vehicle->price_max = $request->maxPrice;
         $vehicle->message = $request->message;
         $vehicle->save();
-       // dispatch(new SendEmailJob($vehicle));
+        // dispatch(new SendEmailJob($vehicle));
 
         return response(['success' => true], 200);
     }
 
     public function letMeCarList(Request $request)
     {
+        $array = [];
         $data = VehicleModel::where('customer_id', $request->customer_id)->get();
-        return response($data, 200);
+        foreach ($data as $item) {
+            $array[] = array(
+                'id' => $item->id,
+                'brand_id' => Brand::find($item->brand_id)->name,
+                'model' => $item->model,
+                'body_type_id' => BodyType::BodyType[$item->body_type_id],
+                'fuel_type_id' => FullType::FullType[$item->fuel_type_id],
+                'gear_id' => Transmission::Transmission[$item->gear_id],
+                'damage_id' => ($item->damage_id == 1) ? "Hatasız" : (($item->damage_id == 2) ? "Tramer Olabilir" : "Farketmez"),
+                'price_min' => $item->price_min,
+                'price_max' => $item->price_max,
+                'message' => $item->message,
+            );
+        }
+        return response($array, 200);
+    }
+
+    public function letMeCarDelete(Request $request)
+    {
+        $data = VehicleModel::find($request->id);
+        $data->delete();
+        return response("Silindi", 200);
     }
 
     public function formSave(Request $request)
@@ -256,6 +283,7 @@ class AccountController extends Controller
         $customercarbuyrequest->customer_id = $request->customer_id;
         $customercarbuyrequest->customer_car_id = $request->customer_car_id;
         $customercarbuyrequest->save();
+        return response()->json(['success' => true, 'message' => "Alım isteği Gönderildi!"], 200);
     }
 
     public function carBuysList(Request $request)
@@ -270,5 +298,43 @@ class AccountController extends Controller
         }
         return response($array, 200);
     }
+
+    public function repassword(Request $request)
+    {
+        $customer =  Customer::where('phone',$request->phone)->first();
+
+        if($customer)
+        {
+          $pass = rand(111111,999999);
+
+          $customer->password = bcrypt($pass);
+          $customer->save();
+
+          $request['message'] = "Sayın". $customer->firstname." ".$customer->lastname. " Şifreniz Güncellenmiştir. Yeni Şifreniz :". $pass;
+          $request['phone'] = $request->phone;
+            $sms = new Sms($request);
+
+        }
+        return response()->json(['success' => true, 'message' => "Yeni Şifre Gönderildi!"], 200);
+    }
+
+    public function change_password(Request $request)
+    {
+        if($request->password != $request->password_confirmation)
+        {
+            return response()->json(['success' => false, 'message' => "Şifreler Eşleşmiyor!"], 200);
+        }
+        $customer =  Customer::find($request->customer_id);
+        $customer->password = bcrypt($request->password);
+        $customer->save();
+
+        return response()->json(['success' => true, 'message' => "Şifre Güncellendi!"], 200);
+    }
+
+    public function getFollow(Request $request)
+    {
+        return $this->service->getFollow($request->customer_id);
+    }
+
 
 }

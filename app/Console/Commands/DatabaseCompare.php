@@ -178,7 +178,7 @@ class DatabaseCompare extends Command
     */
 
 
-        $x = DB::connection('mysql2')->table('payments')->get();
+       /* $x = DB::connection('mysql2')->table('payments')->get();
         foreach ($x as $item) {
             $pages = CustomerCarPaymentTransaction::where('id', $item->id)->first();
             if (!$pages) {
@@ -193,5 +193,6 @@ class DatabaseCompare extends Command
                 $page->save();
             }
         }
+       */
     }
 }

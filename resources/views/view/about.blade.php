@@ -14,22 +14,33 @@
             </div>
         </div>
     </div>
-    <section class="content-inner about-wraper-1" style="padding-top:25px;padding-bottom:0;background-image: url(images/background/bg15.png); background-size: contain; background-position: center right; background-repeat: no-repeat;">
+
+    <section class="content-inner about-wraper-1"
+             style="padding-top:25px;padding-bottom:0;background-image: url(images/background/bg15.png); background-size: contain; background-position: center right; background-repeat: no-repeat;">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6 m-b30 wow fadeInLeft" data-wow-duration="2s" data-wow-delay="0.2s">
-                    <div class="dz-media left">
-                        <img src="{{asset('storage/files')}}/{{$pages->images}}" alt="">
+                <?php
+                    if($pages->images != null){
+                       $col = "col-md-6";
+                    }else{
+                        $col = "col-md-12";
+                    }
+                ?>
+                    @if($pages->images != null)
+                    <div class="<?=$col?> m-b30 wow fadeInLeft" data-wow-duration="2s" data-wow-delay="0.2s">
+                        <div class="dz-media left">
+                            <img src="{{asset('storage/files')}}/{{$pages->images}}" alt="">
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-6 m-b30 wow fadeInRight" data-wow-duration="2s" data-wow-delay="0.4s">
-                    <div class="section-head style-1">
-                        <h6 class="sub-title text-primary m-b15">{{$pages->title}}</h6>
-                        <h2 class="title m-b20">{{$pages->meta_description}}</h2>
-                        {!! $pages->content !!}
+                    @endif
+                    <div class="<?=$col?> m-b30 wow fadeInRight" data-wow-duration="2s" data-wow-delay="0.4s">
+                        <div class="section-head style-1">
+                            <h6 class="sub-title text-primary m-b15">{{$pages->title}}</h6>
+                            <h2 class="title m-b20">{{$pages->meta_description}}</h2>
+                            {!! $pages->content !!}
+                        </div>
                     </div>
 
-                </div>
             </div>
         </div>
     </section>

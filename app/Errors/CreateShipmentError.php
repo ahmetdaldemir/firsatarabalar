@@ -49,4 +49,29 @@ class CreateInvoiceContractError implements CreateInvoiceContract
     {
         return $this->log;
     }
+
+    public function getInvoiceId(): string
+    {
+        // TODO: Implement getInvoiceId() method.
+    }
+
+    public function getInvoiceNo(): string
+    {
+        // TODO: Implement getInvoiceNo() method.
+    }
+
+    public function getInvoiceType(): string
+    {
+        // TODO: Implement getInvoiceType() method.
+    }
+
+    public function getRelationShip(): object
+    {
+        // TODO: Implement getRelationShip() method.
+    }
+
+    public function getAttribute(): object
+    {
+        // TODO: Implement getAttribute() method.
+    }
 }

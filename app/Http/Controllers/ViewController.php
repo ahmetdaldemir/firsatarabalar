@@ -76,4 +76,11 @@ class ViewController
         return view('view.contact',$data);
     }
 
+    public function car_detail(Request $request)
+    {
+        $data['car'] = CustomerCar::find($request->id);
+        return view('view.car_detail',$data);
+    }
+
+
  }

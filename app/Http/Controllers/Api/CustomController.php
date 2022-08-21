@@ -84,5 +84,9 @@ class CustomController extends Controller
 
     }
 
+    public function pages()
+    {
+        return $this->service->pages();
 
+    }
 }

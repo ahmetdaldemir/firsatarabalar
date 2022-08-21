@@ -8,6 +8,8 @@ use App\Jobs\CustomerCarValuationPdf;
 use App\Models\CustomerCar;
 use App\Models\CustomerCarComment;
 use App\Models\CustomerCarValuation;
+use App\Models\User;
+use App\Models\UserEarning;
 use App\Repositories\Cities\CityRepositoryInterface;
 use App\Repositories\CustomerCar\CustomerCarInterface;
 use App\Repositories\Users\UserRepositoryInterface;
@@ -17,6 +19,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class CustomerCarController extends Controller
@@ -32,7 +35,6 @@ class CustomerCarController extends Controller
         $this->CustomerCar = $CustomerCar;
         $this->UserRepository = $UserRepository;
         $this->now = Carbon::now();
-        $this->sms = new Sms();
         $this->CityRepository = $CityRepository;
 
     }
@@ -64,6 +66,7 @@ class CustomerCarController extends Controller
         $data['payments'] = NULL;
         $data['cars'] = NULL;
         $data['cities'] = $this->CityRepository->get();
+        $data['valuation'] = $this->CustomerCar->getByValuationCustomerId($request->id);
         return view('admin.customer_car_valuation.form', $data);
     }
 
@@ -121,7 +124,8 @@ class CustomerCarController extends Controller
         $check = $this->CustomerCar->checkAssingTo($request, CustomerCarStatus::STATUS_STRING['ASSINGTO']);
         if (!$check) {
             $this->CustomerCar->assignmentDo($request);
-            $this->sms->sendexpertmessage($request);
+            $sms = new Sms($request);
+
             $this->CustomerCar->status($request, CustomerCarStatus::STATUS_STRING['ASSINGTO']);
             $this->CustomerCar->statusLog($request, CustomerCarStatus::STATUS_STRING['ASSINGTO']);
             return response()->json("Atama Başarılı", Response::HTTP_OK);
@@ -131,31 +135,51 @@ class CustomerCarController extends Controller
 
     public function store_valuation(Request $request)
     {
-        $valuation = new CustomerCarValuation();
-        $valuation->uuid = Str::uuid();
-        $valuation->customers_car_id = $request->customers_car_id;
-        $valuation->comment = $request->comment;
-        $valuation->link1 = $request->link1;
-        $valuation->link1_comment = $request->link1_comment;
-        $valuation->link2 = $request->link2;
-        $valuation->link2_comment = $request->link2_comment;
-        $valuation->link3 = $request->link3;
-        $valuation->link3_comment = $request->link3_comment;
-        $valuation->link4 = $request->link4;
-        $valuation->link4_comment = $request->link4_comment;
-        $valuation->link5 = $request->link5;
-        $valuation->link5_comment = $request->link5_comment;
-        $valuation->offer_price = $request->offer_price;
-        $valuation->earning = $request->earning;
-        $valuation->date_sendconfirm = $request->date_sendconfirm;
-        $valuation->date_customer_open = $request->date_customer_open;
-        $valuation->date_confirm = $request->date_confirm;
-        $valuation->is_confirm = $request->is_confirm;
-        $valuation->status = $request->status;
-        $valuation->save();
+
+        $valuation = CustomerCarValuation::updateOrCreate(
+            ['customer_car_id' => $request->customers_car_id],
+            [
+                'uuid' => Str::uuid(),
+                'comment' => $request->comment,
+                'link1' => $request->link1,
+                'link1_comment ' => $request->link1_comment,
+                'link2' => $request->link2,
+                'link2_comment' => $request->link2_comment,
+                'link3' => $request->link3,
+                'link3_comment' => $request->link3_comment,
+                'link4' => $request->link4,
+                'link4_comment' => $request->link4_comment,
+                'link5' => $request->link5,
+                'link5_comment' => $request->link5_comment,
+                'offer_price' => $request->offer_price,
+                'earning' => User::find(Auth::id())->earn,
+                'is_confirm' => 0,
+                'status' => 1,
+            ]
+        );
+
 
         $customerCar = $this->CustomerCar->getById($request->customers_car_id);
-        $this->dispatch(new CustomerCarValuationPdf($customerCar));
+      //  $this->dispatch(new CustomerCarValuationPdf($customerCar));
+
+        $customer_car = CustomerCar::find($request->customers_car_id);
+        Log::info($customer_car);
+        $customer_car->status = 3;
+        $customer_car->save();
+
+        Log::info(Auth::guard('web')->id());
+        $valuation = UserEarning::updateOrCreate(
+            ['customer_car_id' => $request->customers_car_id],
+            [
+                'user_id' => Auth::guard('web')->id(),
+                'customers_car_id' => $request->customers_car_id,
+                'valuation_id' => $valuation->id,
+                'earning ' => User::find(Auth::id())->earn,
+                'comments' => $request->comments,
+                'status' => 'new',
+            ]
+        );
+
     }
 
 
@@ -174,6 +198,5 @@ class CustomerCarController extends Controller
         $customer_car_commment->delete();
         return redirect()->back();
     }
-
 
 }

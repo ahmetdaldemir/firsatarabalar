@@ -22,7 +22,7 @@ class Upload
         $uploadedFile = $file->getClientOriginalName();
         $filename = time() ."_". $uploadedFile;
         Storage::disk('local')->putFileAs(
-            'public/files/',
+            'public/cars/',
             $file,
             $filename
         );
@@ -37,6 +37,15 @@ class Upload
     public function getFileName(): string
     {
         return $this->filename;
+    }
+
+    public function mobil($request)
+    {
+        $path = $request->file('image')->store('images');
+
+        $imageName = "yeni_".time().'.'.$request->extension();
+        $request->move(public_path('images'),$imageName);
+        return $imageName;
     }
 
 }

@@ -18554,8 +18554,6 @@ textarea {
     margin-top: -60px;
     z-index: 99;
     background-color: #fff;
-    margin-right: 20px;
-    margin-left: 20px;
     position: relative;
 }
 
@@ -26203,7 +26201,7 @@ pre {
 
 .header-transparent .top-bar,
 .header-transparent .main-bar {
-    background: transparent;
+    background: #00309c;
 }
 
 .header-transparent .container-fluid, .header-transparent .container-sm, .header-transparent .container-md, .header-transparent .container-lg, .header-transparent .container-xl {

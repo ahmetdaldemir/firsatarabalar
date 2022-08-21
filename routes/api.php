@@ -51,6 +51,7 @@ Route::get('/customer/{id}', [CustomerController::class, 'show/{id}'])->name('cu
 
 Route::get('getversion', [CustomController::class, 'getversion'])->name('getversion');
 Route::get('getcar', [CustomController::class, 'getcar'])->name('getcar');
+Route::get('/pages', [\App\Http\Controllers\Api\CustomController::class, 'pages']);
 
 
 Route::resource('vehicle_request', VehicleRequest::class);
@@ -64,9 +65,7 @@ Route::get('/colors', [\App\Http\Controllers\Api\CustomController::class, 'color
 Route::get('/citys', [\App\Http\Controllers\Api\CustomController::class, 'citys']);
 Route::get('/town', [\App\Http\Controllers\Api\CustomController::class, 'town']);
 
-
 Route::get('/cacheflush', [\App\Http\Controllers\Api\CustomController::class, 'Cacheflush']);
-
 
 Route::get('form1', [CustomerCarController::class, 'form1'])->name('form1');
 Route::post('form2', [CustomerCarController::class, 'form2'])->name('form2');
@@ -85,5 +84,23 @@ Route::get('mycars', [AccountController::class, 'mycars'])->name('mycars');
 Route::post('letMeCar', [AccountController::class, 'letMeCar'])->name('letMeCar');
 Route::post('formSave', [AccountController::class, 'formSave'])->name('formSave');
 Route::get('letMeCarList', [AccountController::class, 'letMeCarList'])->name('letMeCarList');
-Route::get('carBuys', [AccountController::class, 'carBuys'])->name('carBuys');
+Route::post('carBuys', [AccountController::class, 'carBuys'])->name('carBuys');
 Route::post('carBuysList', [AccountController::class, 'carBuysList'])->name('carBuysList');
+Route::get('getFavorites', [AccountController::class, 'getFollow'])->name('getFavorites');
+Route::post('imageUpload', [CustomerCarController::class, 'imageUpload'])->name('imageUpload');
+
+Route::post('repassword', [AccountController::class, 'repassword'])->name('repassword');
+Route::post('change_password', [AccountController::class, 'change_password'])->name('change_password');
+
+
+Route::delete('letMeCarDelete', [AccountController::class, 'letMeCarDelete'])->name('letMeCarDelete');
+
+
+Route::get('customer_car_valuation', [CustomerCarController::class, 'customer_car_valuation'])->name('customer_car_valuation');
+Route::post('customer_car_valuation_confirm', [CustomerCarController::class, 'customer_car_valuation_confirm'])->name('customer_car_valuation_confirm');
+
+
+Route::resource('notification' , '\App\Http\Controllers\Api\NotificationController');
+Route::resource('payment' , '\App\Http\Controllers\Api\PaymentController');
+Route::resource('affiliate' , '\App\Http\Controllers\Api\AffiliateController');
+

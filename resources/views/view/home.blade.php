@@ -82,11 +82,8 @@
                         <div class="banner-content">
                             <h2 data-wow-duration="1.2s" data-wow-delay="1s" class="wow fadeInUp">AİLENE EN UYGUN ARACI
                                 SANİYELER İÇİNDE BUL</h2>
-                            <p data-wow-duration="1.4s" data-wow-delay="1.5s" class="wow fadeInUp m-b30">Morbi sed lacus
-                                nec risus finibus feugiat et fermentum nibh. Pellentesque vitae ante at elit fringilla
-                                ac at purus.</p>
-                            <a data-wow-duration="1.6s" data-wow-delay="2s" class="wow fadeInUp btn btn-primary"
-                               href="about-us-2.html">ARAÇ AL<i class="fa fa-angle-right m-l10"></i></a>
+                            <p data-wow-duration="1.4s" data-wow-delay="1.5s" class="wow fadeInUp m-b30 text-white">Aramış olduğunuz kriterlere uygun aracı portföyümüzdeki araçlar ile karşılaştırıp size sunuyoruz</p>
+                            <a data-wow-duration="1.6s" data-wow-delay="2s" class="wow fadeInUp btn btn-primary" href="javascript:;" ng-click="VehicleModal()">ARAÇ AL<i class="fa fa-angle-right m-l10"></i></a>
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -106,9 +103,9 @@
                     <a href="{{route('form1')}}">
 
                         <div class="icon-bx-wraper style-1 box-hover text-center m-b30"
-                             style="display: table;height: 230px;background-size: cover;background-image: url('{{asset('view/images/pexels-photo-707046.jpeg')}}')">
+                             style="display: table;height: 230px;  margin-bottom: 15px;background-size: cover;background-image: url('{{asset('view/images/banner/aracini-en-iyi-fiyata-sat.jpg')}}')">
                             <div class="icon-content" style="display: table-cell;    vertical-align: middle;">
-                                <h4 class="dlab-title">Aracını En İyi Fiyata Hemen Sat</h4>
+                                <h4 class="dlab-title text-white shadow">ARACINI EN İYİ FİYATA HEMEN SAT</h4>
                             </div>
                         </div>
                     </a>
@@ -116,18 +113,18 @@
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp">
                     <div class="icon-bx-wraper style-1 box-hover text-center m-b30"
-                         style="display: table;height: 230px;background-size: cover;background-image: url('{{asset('view/images/pexels-photo-707046.jpeg')}}')">
+                         style="display: table;height: 230px;background-size: cover;background-image: url('{{asset('view/images/banner/ihale-araclari-cok-yakinda.jpg')}}')">
                         <div class="icon-content" style="display: table-cell;    vertical-align: middle;">
-                            <h4 class="dlab-title">EN İYİ FİYATA HEMEN ARAÇ AL</h4>
+                            <h4 class="dlab-title text-white shadow">İHALE ARAÇLARI ÇOK YAKINDA</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 offset-lg-0 offset-md-3 wow fadeInUp">
                     <a href="javascript:;" ng-click="VehicleModal()">
                         <div class="icon-bx-wraper style-1 box-hover text-center m-b30"
-                             style="display: table;height: 230px;background-size: cover;background-image: url('{{asset('view/images/pexels-photo-707046.jpeg')}}')">
+                             style="display: table;height: 230px;background-size: cover;background-image: url('{{asset('view/images/banner/aradigim-arac-gelince-haber-ver.webp')}}')">
                             <div class="icon-content" style="display: table-cell;    vertical-align: middle;">
-                                <h4 class="dlab-title">ARADIĞIM ARAÇ GELİNCE HABER VER</h4>
+                                <h4 class="dlab-title text-white shadow">ARADIĞIM ARAÇ GELİNCE HABER VER</h4>
                             </div>
                         </div>
                     </a>
@@ -161,16 +158,18 @@
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="icon-bx-wraper style-7 text-center m-b30">
                                     <div class="icon-media">
-                                        <img src="{{asset('view/images/arac.jpeg')}}" alt="">
+                                        <a href="car_detail?id=@{{car.id}}">
+                                        <img src="{{asset('storage/files')}}/@{{ car.default_image }}" alt="">
+                                        </a>
                                     </div>
                                     <div class="icon-content">
                                         <div class="row">
                                             <div class="col-md-7"></div>
                                             <div class="col-md-7"></div>
                                         </div>
+                                        <a href="car_detail?id=@{{car.id}}">
                                         <div class="row">
-                                            <div class="col-md-6" style="text-align: left"><h5 class="dlab-title">@{{
-                                                    car.name }}</h5></div>
+                                            <div class="col-md-6" style="text-align: left"><h5 class="dlab-title">@{{car.name }}</h5></div>
                                             <div class="col-md-6" style="text-align: left"><img
                                                         src="{{asset('view/icons/calendar.png')}}"
                                                         style="float:left;width: 20px;height: 20px;"/> @{{ car.year }}
@@ -186,14 +185,19 @@
                                                         style="float:left;width: 20px;height: 20px;"/> @{{ car.fuel }}
                                             </div>
                                         </div>
+                                        </a>
                                         <div class="row">
-                                            <div class="col-md-12 m-t10">
-                                                <button ng-if="car.follow == 0" type="button" ng-click="CustomerCarFollow(car.type,car.id)" style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">@{{ car.button }}
-                                                    <span ng-if="car.item == 5">@{{ car.price }}</span>
+                                            <div class="col-md-12 m-t10" ng-if="car.type == 4">
+                                                <button ng-if="car.follow == 0" type="button" ng-click="CustomerCarFollow(car.type,car.id)" style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">Takibe Al
+                                                    <i class="fas fa-check-circle" style="    float: left;font-size: 19px;"></i>
                                                 </button>
                                                 <button ng-if="car.follow == 1" type="button" ng-click="CustomerCarUnFollow(car.type,car.id)" style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">Listeden Çıkart
                                                     <i class="fas fa-check-circle" style="    float: left;font-size: 19px;"></i>
                                                 </button>
+                                            </div>
+                                            <div class="col-md-12 m-t10" ng-if="car.type == 5">
+                                                <button ng-if="car.follow == 1" type="button" ng-click="CustomerCarBuy(car.id)" style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">Aldım</button>
+                                                <a ng-if="car.follow == 0" href="car_detail?id=@{{car.id}}" style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">İncele</a>
                                             </div>
                                         </div>
                                     </div>
@@ -204,14 +208,32 @@
              </div>
         </div>
     </section>
+    <style>
+        .shadow {
+             position: relative;
+            font-size: 21px;
+            font-weight: bold;
+            text-align: center;
+            perspective: 50px;
+            perspective-origin: 50% 100%;
+            display: inline-block;
+        }
+        .shadow::after {
+            content: 'Fırsat Arabalar';
+             position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            transform: scaleY(0.5) rotateX(-15deg);
+            transform-origin: 50% 100%;
+            opacity: .3;
+        }
+    </style>
 <div class="clearfix"></div>
     <section style="background-image: url({{asset('view/images/background/bg1.png')}}); background-size:100%;">
         <div class="content-inner-2">
             <div class="container">
                 <div class="section-head style-1 text-center">
                     <h2 class="title">Nasıl Çalışır</h2>
-                    <h6 class="sub-title">Buraya Yazı Gelecek</h6>
-                </div>
+                 </div>
 
                 <div class="container">
                     <div class="row align-items-center">
@@ -231,8 +253,7 @@
                                     </div>
                                     <div class="icon-content">
                                         <h4 class="dlab-title">Aracını Ekle</h4>
-                                        <p>Sisteme aracınız ile ilgili gerekli bilgileri doldurdurunuz</p>
-                                    </div>
+                                     </div>
                                 </div>
                                 <div class="icon-bx-wraper style-2 left m-b30">
                                     <div class="icon-bx-md radius bg-white text-yellow">
@@ -242,8 +263,6 @@
                                     </div>
                                     <div class="icon-content">
                                         <h4 class="dlab-title">Değerleme Sonucunu Onayla</h4>
-                                        <p>Mauris eleifend ipsum dolor, sit amet elementum tortor mattis interdum.
-                                            Praesent ut lobortis purus.</p>
                                     </div>
                                 </div>
                                 <div class="icon-bx-wraper style-2 left m-b30">
@@ -254,9 +273,7 @@
                                     </div>
                                     <div class="icon-content">
                                         <h4 class="dlab-title">24 Saat İçerisinde Satalım</h4>
-                                        <p>Mauris eleifend ipsum dolor, sit amet elementum tortor mattis interdum.
-                                            Praesent ut lobortis purus.</p>
-                                    </div>
+                                     </div>
                                 </div>
                             </div>
                         </div>
@@ -281,13 +298,11 @@
                         <div class="icon-bx-wraper style-1 box-hover text-center m-b30">
                             <div class="icon-bx-md radius bg-yellow shadow-yellow">
                                 <a href="javascript:void(0);" class="icon-cell">
-                                    <i class="flaticon-office"></i>
+                                    <img style="filter: brightness(0) invert(1);" src="{{asset('view/images/icon/padlock.png')}}" />
                                 </a>
                             </div>
                             <div class="icon-content">
                                 <h4 class="dlab-title">Güvenilir</h4>
-                                <p>Fusce sit amet dui vitae urna tristique imperdiet. Donec eget sapien euismod,
-                                    faucibus nibh non, consequat elit. </p>
                             </div>
                         </div>
                     </div>
@@ -295,13 +310,11 @@
                         <div class="icon-bx-wraper style-1 box-hover active text-center m-b30">
                             <div class="icon-bx-md radius bg-red shadow-red">
                                 <a href="javascript:void(0);" class="icon-cell">
-                                    <i class="flaticon-website"></i>
+                                    <img style="filter: brightness(0) invert(1);"  src="{{asset('view/images/icon/valuation.png')}}" />
                                 </a>
                             </div>
                             <div class="icon-content">
                                 <h4 class="dlab-title">Değerinde Değerleme</h4>
-                                <p>Fusce sit amet dui vitae urna tristique imperdiet. Donec eget sapien euismod,
-                                    faucibus nibh non, consequat elit. </p>
                             </div>
                         </div>
                     </div>
@@ -310,13 +323,11 @@
                         <div class="icon-bx-wraper style-1 box-hover text-center m-b30">
                             <div class="icon-bx-md radius bg-green shadow-green">
                                 <a href="javascript:void(0);" class="icon-cell">
-                                    <i class="flaticon-pie-charts"></i>
+                                    <img style="filter: brightness(0) invert(1);"  src="{{asset('view/images/icon/balance.png')}}" />
                                 </a>
                             </div>
                             <div class="icon-content">
                                 <h4 class="dlab-title">Parasının Karşılığı</h4>
-                                <p>Fusce sit amet dui vitae urna tristique imperdiet. Donec eget sapien euismod,
-                                    faucibus nibh non, consequat elit. </p>
                             </div>
                         </div>
                     </div>

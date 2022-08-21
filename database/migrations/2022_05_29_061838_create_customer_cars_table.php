@@ -73,6 +73,8 @@ return new class extends Migration
             $table->double('gal_price_1',10,2)->default(0);
             $table->double('gal_price_2',10,2)->default(0);
             $table->double('gal_price_3',10,2)->default(0);
+            $table->double('offer_price',10,2)->default(0);
+            $table->double('price',10,2)->default(0);
             $table->string('valuation');
             $table->string('suggested');
             $table->string('suggested_accept');

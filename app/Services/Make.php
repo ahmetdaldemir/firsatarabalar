@@ -11,10 +11,13 @@ use App\Models\Car;
 use App\Models\City;
 use App\Models\Color;
 use App\Models\CustomerCar;
+use App\Models\CustomerCarFollow;
+use App\Models\CustomerCarPhoto;
 use App\Models\District;
 use App\Models\Page;
 use App\Models\Review;
 use App\Models\Town;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class Make
@@ -191,6 +194,25 @@ class Make
     }
 
 
+    public function pages()
+    {
+        $array = [];
+        $pages =  Page::select('title','content','images','slug','id')->get();
+        foreach ($pages as $val)
+        {
+            $array[] = array(
+                'title' =>$val->title,
+                'content' => strip_tags($val->content),
+                'images' => $val->images,
+                'slug' => $val->slug,
+                'id' => $val->id,
+            );
+        }
+
+        return $array;
+    }
+
+
     public function getType($type, $limit)
     {
         $arrray = [];
@@ -201,6 +223,9 @@ class Make
             $customer_cars = CustomerCar::where('status', $type)->get()->take(setting('pagination_item'));
         }
         foreach ($customer_cars as $customer_car) {
+
+            $images = $customer_car->photo;
+
             if($type == 5 || $type == 6)
             {
                 $price = number_format($customer_car->gal_price_1, 2, ',', '.');
@@ -211,22 +236,16 @@ class Make
                 'id' => $customer_car->id,
                 'name' => 'Mercedes edition 1 amg paket',
                 'version' => '1.5 TSI ACT Business DSG',
-                'image' => 'Uploads/Cars/Photos/6418_5BeE_1654522691.jpg',
-                'images' => [
-                    'Uploads/Cars/Photos/6418_5BeE_1654522691.jpg',
-                    'Uploads/Cars/Photos/6418_5BeE_1654522691.jpg',
-                    'Uploads/Cars/Photos/6418_5BeE_1654522691.jpg',
-                    'Uploads/Cars/Photos/6418_5BeE_1654522691.jpg',
-                    'Uploads/Cars/Photos/6418_5BeE_1654522691.jpg',
-                ],
+                'image' => $customer_car->default_image,
+                'images' =>$images,
                 'tab1' => [
                     "km" => $customer_car->km,
                     "modelyili" => $customer_car->caryear,
-                    "kasatipi" => BodyType::BodyType[$customer_car->bodytype] ?? NULL,
+                    "kasatipi" => BodyType::BodyType[$customer_car->body] ?? NULL,
                     "motorcc" => $customer_car->car->horse,
                     "motorhacmi" => $customer_car->car->engine,
                     "gear" => Transmission::Transmission[$customer_car->gear]?? NULL,
-                    "fuel" => FullType::FullType[$customer_car->fueltype]?? NULL,
+                    "fuel" => FullType::FullType[$customer_car->fuel]?? NULL,
                     "tramer" => Tramer::Tramer[$customer_car->tramer],
                 ],
                 'tab2' => [
@@ -249,7 +268,8 @@ class Make
                     'a15' => $customer_car->car_exterior_faults,
                     'a16' => $customer_car->maintenance_history,
                     'a17' => $customer_car->ownorder,
-                    'a18' =>  $customer_car->cities->name ?? NULL."/". $customer_car->state->name ?? NULL,
+                    'a18' => City::find($customer_car->car_city)->name ?? NULL,
+                    'a19' =>  Town::find($customer_car->car_state)->name ?? NULL,
                 ],
                 'brand' => $customer_car->car->brand->name,
                 'model' => $customer_car->car->model,
@@ -258,7 +278,66 @@ class Make
                 'sale' => true,
             );
         }
+        return $arrray;
+    }
 
+    public function getFollow($customer_id)
+    {
+        $customer_car_follows = CustomerCarFollow::where('customer_id',$customer_id)->get();
+        $arrray = [];
+
+        foreach ($customer_car_follows as $customer_car_follow) {
+
+            $images = $customer_car_follow->customer_car->photo;
+
+
+
+            $arrray[] = array(
+                'id' => $customer_car_follow->customer_car_id,
+                'name' =>"",
+                'version' => $customer_car_follow->customer_car->car->name,
+                'image' => $customer_car_follow->customer_car->default_image,
+                'images' => $images,
+                'tab1' => [
+                    "km" => $customer_car_follow->customer_car->km,
+                    "modelyili" => $customer_car_follow->customer_car->caryear,
+                    "kasatipi" => BodyType::BodyType[$customer_car_follow->customer_car->body] ?? NULL,
+                    "motorcc" => $customer_car_follow->customer_car->car->horse,
+                    "motorhacmi" => $customer_car_follow->customer_car->car->engine,
+                    "gear" => Transmission::Transmission[$customer_car_follow->customer_car->gear]?? NULL,
+                    "fuel" => FullType::FullType[$customer_car_follow->customer_car->fuel]?? NULL,
+                    "tramer" => Tramer::Tramer[$customer_car_follow->customer_car->tramer],
+                ],
+                'tab2' => [
+                    'a01' => ($customer_car_follow->customer_car->status_frame == 1) ? "Var" : "Yok",
+                    'a02' => ($customer_car_follow->customer_car->status_pole == 1) ? "Var" : "Yok",
+                    'a03' => ($customer_car_follow->customer_car->status_podium == 1) ? "Var" : "Yok",
+                    'a04' => ($customer_car_follow->customer_car->status_airbag == 1) ? "Var" : "Yok",
+                    'a05' => ($customer_car_follow->customer_car->status_triger == 1) ? "Var" : "Yok",
+                    'a06' => ($customer_car_follow->customer_car->status_oppression == 1) ? "Var" : "Yok",
+                    'a07' => ($customer_car_follow->customer_car->status_brake == 1) ? "Var" : "Yok",
+                    'a08' => ($customer_car_follow->customer_car->status_tyre == 1) ? "Var" : "Yok",
+                    'a09' => ($customer_car_follow->customer_car->status_km == 1) ? "Var" : "Yok",
+                    'a10' => ($customer_car_follow->customer_car->status_unrealizable == 1) ? "Var" : "Yok",
+                    'a11' => ($customer_car_follow->customer_car->status_onArkaBagaj == 1) ? "Var" : "Yok",
+                ],
+                'tab3' => [
+                    'a12' =>  $customer_car_follow->customer_car->car_notwork,
+                    'a13' => $customer_car_follow->customer_car->car_details,
+                    'a14' => $customer_car_follow->customer_car->car_interior_faults,
+                    'a15' => $customer_car_follow->customer_car->car_exterior_faults,
+                    'a16' => $customer_car_follow->customer_car->maintenance_history,
+                    'a17' => $customer_car_follow->customer_car->ownorder,
+                    'a18' => City::find($customer_car_follow->customer_car->car_city)->name ?? NULL,
+                    'a19' =>  Town::find($customer_car_follow->customer_car->car_state)->name ?? NULL,
+                ],
+                'brand' => $customer_car_follow->customer_car->car->brand->name,
+                'model' => $customer_car_follow->customer_car->car->model,
+                'desc' => $customer_car_follow->customer_car->description,
+                'price' => 0,
+                'sale' => true,
+            );
+        }
         return $arrray;
     }
 

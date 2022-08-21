@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Repositories\Affiliates\AffiliateRepository;
+use App\Repositories\Affiliates\AffiliateRepositoryInterface;
+
+
 use App\Repositories\Brands\BrandRepository;
 use App\Repositories\Brands\BrandRepositoryInterface;
 use App\Repositories\Cars\CarRepository;
@@ -63,6 +67,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind( VehicleRequestRepositoryInterface::class,  VehicleRequestRepository::class);
         $this->app->bind( BrandRepositoryInterface::class,  BrandRepository::class);
         $this->app->bind( ReviewRepositoryInterface::class,  ReviewRepository::class);
+        $this->app->bind(  AffiliateRepositoryInterface::class,AffiliateRepository::class );
 
     }
 

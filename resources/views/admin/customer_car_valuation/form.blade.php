@@ -571,12 +571,12 @@
                             <div class="col-lg-12">
 
                                 <form id="ValuationSave" ng-submit="ValuationSave()" method="post">
-                                    <input type="hidden" name="valuation_id" value="{{$car->valuation->id ?? 0}}">
+                                    <input type="hidden" name="valuation_id" value="{{$valuation->id ?? 0}}">
                                     <input type="hidden" name="customers_car_id" value="{{$car->id}}">
                                     <input type="hidden" name="sendtoadmin" id="sendtoadmin" value="">
-                                    <textarea name="comment" cols="30" rows="10" style="    width: 100%;" class="editor"
+                                    <textarea name="comment" cols="30" rows="10" style="    width: 100%;"
                                               placeholder="Araç değerlemesi için gerekli notlarınızı yazın..."
-                                              required>{{$car->valuation->comment ?? NULL}}</textarea>
+                                              required>{{$valuation->comment ?? NULL}}</textarea>
 
                                     <div class="form-group mt-4">
 
@@ -584,33 +584,33 @@
 
                                         <input type="text" name="link1" class="form-control mb-1"
                                                placeholder="Araç Linki (1)"
-                                               value="{{$car->valuation->link1 ?? NULL}}">
+                                               value="{{$valuation->link1 ?? NULL}}">
                                         <textarea name="link1_comment" rows="2" class="form-control mb-2"
-                                                  placeholder="Bu link için açıklama...">{{$car->valuation->link1_comment ?? NULL}}</textarea>
+                                                  placeholder="Bu link için açıklama...">{{$valuation->link1_comment ?? NULL}}</textarea>
 
                                         <input type="text" name="link2" class="form-control mb-1"
                                                placeholder="Araç Linki (2)"
                                                value="{{$car->valuation->link2 ?? NULL}}">
                                         <textarea name="link2_comment" rows="2" class="form-control mb-2"
-                                                  placeholder="Bu link için açıklama...">{{$car->valuation->link2_comment ?? NULL}}</textarea>
+                                                  placeholder="Bu link için açıklama...">{{$valuation->link2_comment ?? NULL}}</textarea>
 
                                         <input type="text" name="link3" class="form-control mb-1"
                                                placeholder="Araç Linki (3)"
-                                               value="{{$car->valuation->link3 ?? NULL}}">
+                                               value="{{$valuation->link3 ?? NULL}}">
                                         <textarea name="link3_comment" rows="2" class="form-control mb-2"
-                                                  placeholder="Bu link için açıklama...">{{$car->valuation->link3_comment ?? NULL}}</textarea>
+                                                  placeholder="Bu link için açıklama...">{{$valuation->link3_comment ?? NULL}}</textarea>
 
                                         <input type="text" name="link4" class="form-control mb-1"
                                                placeholder="Araç Linki (4)"
-                                               value="{{$car->valuation->link4 ?? NULL}}">
+                                               value="{{$valuation->link4 ?? NULL}}">
                                         <textarea name="link4_comment" rows="2" class="form-control mb-2"
-                                                  placeholder="Bu link için açıklama...">{{$car->valuation->link4_comment ?? NULL}}</textarea>
+                                                  placeholder="Bu link için açıklama...">{{$valuation->link4_comment ?? NULL}}</textarea>
 
                                         <input type="text" name="link5" class="form-control mb-1"
                                                placeholder="Araç Linki (5)"
-                                               value="{{$car->valuation->link5 ?? NULL}}">
+                                               value="{{$valuation->link5 ?? NULL}}">
                                         <textarea name="link5_comment" rows="2" class="form-control mb-2"
-                                                  placeholder="Bu link için açıklama...">{{$car->valuation->link5_comment ?? NULL}}</textarea>
+                                                  placeholder="Bu link için açıklama...">{{$valuation->link5_comment ?? NULL}}</textarea>
 
                                     </div>
 
@@ -621,7 +621,7 @@
                                             <div class="input-group mb-3">
                                                 <input type="text" name="offer_price" id="offer_price"
                                                        class="form-control text-right" aria-describedby="tl-addon"
-                                                       value="{{$car->valuation->offer_price ?? NULL}}" required>
+                                                       value="{{$valuation->offer_price ?? NULL}}" required>
                                                 <div class="input-group-append"><span class="input-group-text"
                                                                                       id="tl-addon"
                                                                                       style="font-size: 13px">TL</span>
@@ -840,7 +840,6 @@
         </div>
 
     </div>
-
     <style media="screen">
 
         #experts .row:last-child .col-2,

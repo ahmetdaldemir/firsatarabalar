@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\CustomerCar;
-use Barryvdh\DomPDF\Facade\Pdf;
+use PDF;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -28,31 +28,19 @@ class CustomerCarValuationPdf implements ShouldQueue
     public function __construct(CustomerCar $customerCar)
     {
         $this->customercar = $customerCar;
-    }
-
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
-    public function handle()
-    {
         $payload = [
             'data' => $this->customercar->valuation(),
             'customercar' => $this->customercar,
         ];
 
-        $batchId = $this->batch()->id;
-        $pdf = PDF::loadView('pdf/customer_car_valuation_pdf', [ 'payload' => $payload ])->setPaper('legal', 'portrait');
-        $fileName =  sprintf('%s %s %s.pdf',
-            "Deneme"
-        );
 
-        $pdfFilePath = '/results/' . $batchId . '/' . $fileName;
-        Storage::disk('local')->put($pdfFilePath, $pdf->output());
+        \File::delete(storage_path()."/pdf/".$this->customercar->id.'.pdf');
 
-        $this->updateZipArchive($batchId, $pdfFilePath, $fileName);
+        $pdf = PDF::setPaper('a4', 'portrait')->setOptions(['dpi' => 120, 'defaultFont' => 'sans-serif'])->loadView('pdf/customer_car_valuation_pdf', $payload);
+        return $pdf->save(storage_path()."/pdf/".$this->customercar->id.'.pdf');
     }
+
+
 
     private function updateZipArchive($batchId, $pdfFilePath, $fileName)
     {

@@ -65,12 +65,12 @@ class CustomerCar extends Model
 
     public function exper()
     {
-        return $this->belongsTo(CustomerCarExper::class, 'customer_car_id', 'id');
+        return $this->belongsTo(CustomerCarExper::class, 'user_id', 'id');
     }
 
     public function valuation()
     {
-        return $this->belongsTo(CustomerCarValuation::class, 'customer_car_id', 'id');
+        return $this->hasMany(CustomerCarValuation::class);
     }
 
     public function payment()
@@ -87,6 +87,6 @@ class CustomerCar extends Model
 
     public function state()
     {
-        return $this->belongsTo(City::class, 'car_state', 'id');
+        return $this->belongsTo(Town::class, 'car_state', 'id');
     }
 }

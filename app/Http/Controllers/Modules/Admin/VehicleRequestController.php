@@ -32,7 +32,6 @@ class VehicleRequestController extends Controller
     {
         $this->VehicleRequest = $VehicleRequest;
         $this->now = Carbon::now();
-        $this->sms = new Sms();
 
     }
 
@@ -109,7 +108,7 @@ class VehicleRequestController extends Controller
         return response()->json(null, Response::HTTP_OK);
     }
 
-    public function assignmentDo(Request $request)
+   /* public function assignmentDo(Request $request)
     {
         $check = $this->CustomerCar->checkAssingTo($request, CustomerCarStatus::STATUS_STRING['ASSINGTO']);
         if (!$check) {
@@ -121,7 +120,7 @@ class VehicleRequestController extends Controller
         }
         return response()->json("Daha Önce Atama işlemi yapılmıştır", Response::HTTP_CONFLICT);
     }
-
+*/
     public function store_valuation(Request $request)
     {
         $valuation = new CustomerCarValuation();

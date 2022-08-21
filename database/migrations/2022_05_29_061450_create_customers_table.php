@@ -39,6 +39,7 @@ return new class extends Migration
             $table->string('company_name')->nullable();
             $table->string('tax_number')->nullable();
             $table->string('tax_office')->nullable();
+            $table->double('reward')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

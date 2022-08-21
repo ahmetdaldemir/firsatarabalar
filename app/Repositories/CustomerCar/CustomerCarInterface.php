@@ -4,6 +4,7 @@ interface CustomerCarInterface
 {
     public function get();
     public function getById($id);
+    public function getByValuationCustomerId($id);
     public function delete($id);
     public function create($request);
     public function update($id,$request);

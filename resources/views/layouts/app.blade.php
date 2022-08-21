@@ -31,8 +31,14 @@
     <script src="{{asset('admin/js/plugins/sweetalert/sweetalert.min.js')}}"></script>
     <script src="{{asset('admin/js/jquery.mask.min.js')}}" charset="utf-8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js" charset="utf-8"></script>
-
-
+    <script src="https://cdn.tiny.cloud/1/oj6zyoqfb6eqi7142vqs78p5k23x3vdo28svzv867z9cd3fu/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'advlist autolink lists link image charmap preview anchor pagebreak',
+            toolbar_mode: 'floating',
+        });
+    </script>
 </head>
 
 <body ng-app="app">

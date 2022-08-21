@@ -20,6 +20,7 @@ final class CustomerCarStatus extends Enum
         '5' => ['color' => '002d9c', 'sort' => 'sale', 'text' => 'Satışta'],
         '6' => ['color' => '42be65', 'sort' => 'complate', 'text' => 'Tamamlandı'],
         '7' => ['color' => 'fa4d56', 'sort' => 'closed', 'text' => 'İptal Edildi'],
+        '8' => ['color' => 'fa4d56', 'sort' => 'closed', 'text' => 'Değerleme Kabul Edilmedi'],
     ];
 
 

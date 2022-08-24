@@ -7,6 +7,7 @@ use App\Http\Requests\carRequest;
 use App\Jobs\CustomerCarValuationPdf;
 use App\Models\CustomerCar;
 use App\Models\CustomerCarComment;
+use App\Models\CustomerCarPhoto;
 use App\Models\CustomerCarValuation;
 use App\Models\User;
 use App\Models\UserEarning;
@@ -196,6 +197,15 @@ class CustomerCarController extends Controller
     {
         $customer_car_commment = CustomerCarComment::find($request->id);
         $customer_car_commment->delete();
+        return redirect()->back();
+    }
+
+    public function default_photo(Request $request)
+    {
+        $customer_car = CustomerCar::find($request->id);
+        $customer_car_photo = CustomerCarPhoto::find($request->photo);
+        $customer_car->default_image = $customer_car_photo->image;
+        $customer_car->save();
         return redirect()->back();
     }
 

@@ -60,17 +60,28 @@ class CustomerCarController extends Controller
 
     public function customer_car_valuation_confirm(Request $request)
     {
-        $customer_car_id = CustomerCar::where('customer_id', $request->customer_id)->where('id', $request->customer_car_id)->first();
+
+        $customer_car_valuation = CustomerCarValuation::where('customer_car_id',$request->customer_car_id)->first();
+        $customer_car_id = CustomerCar::find($request->customer_car_id);
+
         if($customer_car_id || $customer_car_id == 3)
         {
-            $customer_car_id->status = $request->status;
-            if($request->status == 4)
+            if($customer_car_valuation)
             {
-                $customer_car_id->is_confirm = 1;
-            }
-            $customer_car_id->save();
-        }
+                $customer_car_valuation->is_confirm = 1;
+                if($request->status == 4)
+                {
+                    $status = 1;
+                }else{
+                    $status = 0;
+                }
+                $customer_car_valuation->status = $status;
+                $customer_car_valuation->save();
 
+                $customer_car_id->status = $request->status;
+                $customer_car_id->save();
+            }
+        }
         return response()->json(['success' => true, 'message' => "İşlem Yapıldı!"], 200);
     }
 

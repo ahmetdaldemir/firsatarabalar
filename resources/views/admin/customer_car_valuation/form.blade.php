@@ -454,11 +454,17 @@
                             <div class="row">
                                 @foreach ( $car->photo as $photo )
                                     <div class="col-2">
-                                        <a href="{{asset('images')}}/{{$photo->image}}"
+                                        <a href="{{asset('storage/cars')}}/{{$photo->image}}"
                                            title="{{str_replace(" ", "", strtoupper($car->plate))}} Fotoğrafları"
                                            data-gallery>
-                                            <img src="{{asset('images')}}/{{$photo->image}}" style="width: 100%;height: 150px"
+                                            <img src="{{asset('storage/cars')}}/{{$photo->image}}" style="width: 100%;height: 150px"
                                                  class="img-fluid rounded mb-3">
+                                        </a>
+                                        <a class="btn btn-success w-100" href="{{route('admin.customer_car_valuation.default_photo',['id' => $car->id,'photo' => $photo->id])}}">
+                                            Default
+                                           @if($photo->image == $car->default_image)
+                                               <i style="float: right;line-height: 1.5" class="fas fa-check"></i>
+                                            @endif
                                         </a>
                                     </div>
                                 @endforeach

@@ -13,6 +13,7 @@ use App\Repositories\CustomerCar\CustomerCarInterface;
 use App\Services\Make;
 use App\Services\Upload;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Redis;
 
 class CustomerCarController extends Controller
@@ -36,33 +37,77 @@ class CustomerCarController extends Controller
         $data['bodytype'] = BodyType::BodyType;
         $data['fueltype'] = FullType::FullType;
         $data['transmission'] = Transmission::Transmission;
+
+        $data['customer_car'] =  $this->customer_car_control(1);
+        if($data['customer_car'] == false)
+        {
+            return redirect()->to('form1');
+        }
         return view('view.car.form1',$data);
     }
 
 
     public function form2(Request $request)
     {
-        $data['customer_car_id'] = $this->customerCarRepository->firstStepStore($request);
+        if($request->request == null)
+        {
+            $data['customer_car_id'] = $this->customerCarRepository->firstStepStore($request);
+        }
+        $data['customer_car'] =  $this->customer_car_control(2);
+        if($data['customer_car'] == false)
+        {
+            return redirect()->to('form1');
+        }
         return view('view.car.form2',$data);
     }
 
 
     public function form3(Request $request)
     {
-        $data['customer_car_id'] = $this->customerCarRepository->secondStepStore($request);
+        if($request->request == null)
+        {
+            $data['customer_car_id'] = $this->customerCarRepository->secondStepStore($request);
+        }
+        $data['customer_car'] =  $this->customer_car_control(3);
+
+        if($data['customer_car'] == false)
+        {
+            return redirect()->to('form1');
+        }
+
         return view('view.car.form3',$data);
     }
 
     public function form4(Request $request)
     {
+        if($request->request == null)
+        {
         $data['customer_car_id'] = $this->customerCarRepository->thirtyStepStore($request);
+        }
+        $data['customer_car'] =  $this->customer_car_control(4);
+        if($data['customer_car'] == false)
+        {
+            return redirect()->to('form1');
+        }
         return view('view.car.form4',$data);
     }
 
     public function form5()
     {
         $data['chart'] = [];
+        $data['customer_car'] =  $this->customer_car_control(5);
+
         return view('view.car.form5',$data);
+    }
+
+    public function customer_car_control($step)
+    {
+        $customer_car = CustomerCar::where('customer_id',Auth::guard('customer')->id())->where('laststep', $step)->first();
+        if(!$customer_car)
+        {
+            return false;
+        }
+        return $customer_car;
     }
 
     public function dropzoneStore(Request $request)

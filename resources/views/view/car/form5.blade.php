@@ -8,34 +8,7 @@
          style="background-image: url(images/background/bg2.png); background-repeat: no-repeat; background-size:100%;">
         <div class="container">
             <div class="row align-items-center">
-                <div class="stepwizard mb-5">
-                    <div class="stepwizard-row setup-panel">
-                        <div class="stepwizard-step">
-                            <a href="form-1.html" type="button" class="btn btn-default btn-circle"
-                               disabled="disabled">1</a>
-                            <p>Yeni Araç Seçimi</p>
-                        </div>
-                        <div class="stepwizard-step">
-                            <a href="form-2.html" type="button" class="btn btn-default btn-circle"
-                               disabled="disabled">2</a>
-                            <p>Boya & Değişen & İşlem</p>
-                        </div>
-                        <div class="stepwizard-step">
-                            <a href="form-3.html" type="button" class="btn btn-default btn-circle"
-                               disabled="disabled">3</a>
-                            <p>Araç Özel Bilgileri</p>
-                        </div>
-                        <div class="stepwizard-step">
-                            <a href="form-4.html" type="button" class="btn btn-default btn-circle"
-                               disabled="disabled">4</a>
-                            <p>Araç Fotoğrafları</p>
-                        </div>
-                        <div class="stepwizard-step">
-                            <a href="form-5.html" type="button" class="btn btn-primary btn-circle">5</a>
-                            <p>Ödeme Bilgileri</p>
-                        </div>
-                    </div>
-                </div>
+               @include('view/car/menu',['url' => request()->route()->getName()])
                 <div class="col-lg-12 m-b30 wow fadeIn" data-wow-duration="2s" data-wow-delay="0.2s">
                     <form class="dlab-form" id="step-five-form" method="POST" action="{{route('payment')}}">
                         @csrf
@@ -49,7 +22,7 @@
                                                     <label for="card_holder">İsim<span class="text-danger">*</span></label>
                                                 </div>
                                                 <div class="input-group mb-3">
-                                                    <input type="text" name="firstname" id="firstname" class="form-control" value="{{\Illuminate\Support\Facades\Auth::user()->firstname}}" required>
+                                                    <input type="text" name="firstname" id="firstname" class="form-control" @if($customer_car) value="{{$customer_car->customer->firstname}}" @endif required>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
@@ -57,7 +30,7 @@
                                                     <label for="card_holder">Soyisim <span class="text-danger">*</span></label>
                                                 </div>
                                                 <div class="input-group mb-3">
-                                                    <input type="text" name="lastname" id="lastname" class="form-control"  value="{{\Illuminate\Support\Facades\Auth::user()->lastname}}" required>
+                                                    <input type="text" name="lastname" id="lastname" class="form-control"  @if($customer_car) value="{{$customer_car->customer->lastname}}" @endif required>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
@@ -65,7 +38,7 @@
                                                     <label for="card_holder">Telefon<span  class="text-danger">*</span></label>
                                                 </div>
                                                 <div class="input-group mb-3">
-                                                    <input type="text" name="phone" id="phone" class="form-control"  value="{{\Illuminate\Support\Facades\Auth::user()->phone}}" required>
+                                                    <input type="text" name="phone" id="phone" class="form-control"  @if($customer_car) value="{{$customer_car->customer->phone}}" @endif required>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
@@ -73,7 +46,7 @@
                                                     <label for="card_holder">Email<span class="text-danger">*</span></label>
                                                 </div>
                                                 <div class="input-group mb-3">
-                                                    <input type="text" name="email" id="email" class="form-control"  value="{{\Illuminate\Support\Facades\Auth::user()->email}}" required>
+                                                    <input type="text" name="email" id="email" class="form-control"  @if($customer_car) value="{{$customer_car->customer->email}}" @endif required>
                                                 </div>
                                             </div>
 
@@ -147,7 +120,7 @@
                                                     yerine, sadece <span>169 TL</span></div>
                                                 <small>Güvenli Ödeme Yap ve Değerlemeye Gönder</small>
                                             </div>
-                                            <div class="right"><i class="fad fa-angle-right fa-2x"></i></div>
+                                            <div class="right"><i class="fas fa-angle-right fa-2x"></i></div>
                                         </button>
                                     </div>
                                 </div>

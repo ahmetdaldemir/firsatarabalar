@@ -190,7 +190,7 @@ class CustomerCarRepository implements CustomerCarInterface
 
     public function customer_add()
     {
-        if (!Auth::check()) {
+        if (!Auth::guard('customer')->check()) {
             $rand = rand(000000, 999999);
             $customer = new Customer();
             $customer->firstname = "John";
@@ -211,7 +211,7 @@ class CustomerCarRepository implements CustomerCarInterface
             }
             return $customer->id;
         } else {
-            return Auth::id();
+            return Auth::guard('customer')->id();
         }
     }
 
@@ -228,6 +228,7 @@ class CustomerCarRepository implements CustomerCarInterface
                 'fuel' => $request->fuel,
                 'gear' => $request->transmission,
                 'car_id' => $request->version,
+                'custom_version' => $request->custom_version,
                 'km' => $request->km,
                 'color' => $request->color,
                 'plate' => $request->plate,
@@ -243,7 +244,6 @@ class CustomerCarRepository implements CustomerCarInterface
 
     public function secondStepStore($request)
     {
-
         $filename = "";
         if (!empty($request->files->all())) {
             $files = $request->files->all()['tramer_image'];

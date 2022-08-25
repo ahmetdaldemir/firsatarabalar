@@ -7,156 +7,127 @@
          style="background-image: url(images/background/bg2.png); background-repeat: no-repeat; background-size:100%;">
         <div class="container">
             <div class="row align-items-center">
-                <div class="stepwizard mb-5">
-                    <div class="stepwizard-row setup-panel">
-                        <div class="stepwizard-step">
-                            <a href="form-1.html" type="button" class="btn btn-primary btn-circle">1</a>
-                            <p>Yeni Araç Seçimi</p>
-                        </div>
-                        <div class="stepwizard-step">
-                            <a href="form-2.html" type="button" class="btn btn-default btn-circle"
-                               disabled="disabled">2</a>
-                            <p>Boya & Değişen & İşlem</p>
-                        </div>
-                        <div class="stepwizard-step">
-                            <a href="form-3.html" type="button" class="btn btn-default btn-circle"
-                               disabled="disabled">3</a>
-                            <p>Araç Özel Bilgileri</p>
-                        </div>
-                        <div class="stepwizard-step">
-                            <a href="form-4.html" type="button" class="btn btn-default btn-circle"
-                               disabled="disabled">4</a>
-                            <p>Araç Fotoğrafları</p>
-                        </div>
-                        <div class="stepwizard-step">
-                            <a href="form-5.html" type="button" class="btn btn-default btn-circle"
-                               disabled="disabled">5</a>
-                            <p>Ödeme Bilgileri</p>
-                        </div>
-                    </div>
-                </div>
+                @include('view/car/menu',['url' => request()->route()->getName()])
+
                 <div class="col-lg-12 m-b30 wow fadeIn" data-wow-duration="2s" data-wow-delay="0.2s">
                     <form class="dlab-form" method="POST" action="{{route('form2')}}">
                         @csrf
                         <div class="row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="input-group">
-                                    <select name="brand" ng-init="brands ='1'" id="getModelValue" ng-model="brands"
-                                            class="form-control">
+                                    <select name="brand" ng-init="brands ='1'" id="getModelValue" ng-model="brands" class="form-select">
                                         @foreach ($brands as $brand)
-                                            <option value="{{$brand->id}}" my-directive>{{$brand->name}}</option>
+                                            <option @if($customer_car && $customer_car->brand == $brand->id) selected @endif value="{{$brand->id}}" my-directive>{{$brand->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="input-group">
-                                    <select name="year" ng-init="year ='2022'" class="form-control"
-                                            ng-change="GetModel(year,brands)" ng-model="year">
-                                        <option selected>Model Yılı</option>
+                                    <select name="year" ng-init="year ='2022'"  class="form-select" ng-change="GetModel(year,brands)" ng-model="year">
                                         @for($i= date('Y'); $i > 1950; $i--)
-                                            <option value="{{$i}}">{{$i}}</option>
+                                            <option  @if($customer_car && $customer_car->year == $i) selected @endif  value="{{$i}}">{{$i}}</option>
                                         @endfor
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="input-group">
-                                    <select name="model" class="form-control" ng-init="model ='0'"
-                                            ng-change="GetBody(year,brands,model)" ng-model="model">
+                                    <select name="model"  class="form-select" ng-init="model ='0'" ng-change="GetBody(year,brands,model)" ng-model="model">
                                         <option selected value="0">Seçiniz</option>
-                                        <option ng-repeat="model in modelList" value="@{{model.model}}">
+                                        <option ng-repeat="model in modelList"  ng-selected="model.model == <?=@$customer_car->model?>"  value="@{{model.model}}">
                                             @{{model.model}}
                                         </option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="input-group">
-                                    <select name="body" ng-init="body ='0'" class="form-control" ng-change="GetFuel(year,brands,model)"  ng-model="body">
+                                    <select name="ownorder"  class="form-select">
+                                        <option selected>Kaçıncı Sahibisiniz</option>
+                                        <option @if($customer_car && $customer_car->ownorder == 1) selected @endif  value="1">1.Sahibiyim</option>
+                                        <option @if($customer_car && $customer_car->ownorder == 2) selected @endif  value="2">2.Sahibiyim</option>
+                                        <option @if($customer_car && $customer_car->ownorder == 3) selected @endif  value="3">3.Sahibiyim</option>
+                                        <option @if($customer_car && $customer_car->ownorder == 4) selected @endif  value="4">4.Sahibiyim</option>
+                                        <option @if($customer_car && $customer_car->ownorder == 5) selected @endif  value="5">5.Sahibiyim</option>
+                                        <option @if($customer_car && $customer_car->ownorder == 6) selected @endif  value="6">Bilmiyorum</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <select name="body" ng-init="body ='0'"  class="form-select" ng-change="GetFuel(year,brands,model)"  ng-model="body">
                                         <option selected value="0">Kasa Tipi</option>
-                                        <option ng-repeat="item in bodyList" value="@{{item.id}}">@{{item.bodytype}}
+                                        <option ng-repeat="item in bodyList"  ng-selected="item.id == <?=@$customer_car->body?>"  value="@{{item.id}}">@{{item.bodytype}}
                                         </option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="input-group">
-                                    <select name="fuel" class="form-control"  ng-init="fuel ='0'"
+                                    <select name="fuel"  class="form-select"  ng-init="fuel ='0'"
                                             ng-change="GetVersion(year,brands,model,body,fuel)" ng-model="fuel">
                                         <option selected value="0">Yakıt Tipi</option>
-                                        <option ng-repeat="item in fuelList" value="@{{item.id}}">@{{item.fueltype}}
+                                        <option ng-repeat="item in fuelList" ng-selected="item.id == <?=@$customer_car->fuel?>" value="@{{item.id}}">@{{item.fueltype}}
                                         </option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="input-group">
-                                    <select name="transmission" class="form-control">
+                                    <select name="transmission"  class="form-select">
                                         <option selected>Vites Tipi</option>
                                         @foreach($transmission as $key => $value)
-                                            <option value="{{$key}}">{{$value}}</option>
+                                            <option value="{{$key}}"  @if($customer_car && $customer_car->transmission == $key) selected @endif >{{$value}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <select name="color"  class="form-select input-group-lg">
+                                        <option selected>Renk</option>
+                                        @foreach($colors as $color)
+                                            <option value="{{$color->id}}"   @if($customer_car && $customer_car->color == $color->id) selected @endif>{{$color->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="input-group">
-                                    <select name="version" id="version" class="form-control form-select-sm" rows="40"
-                                            cols="50" style="height:150px">
-                                        <option ng-repeat="item in versionList" value="@{{item.id}}">@{{item.name}}
-                                        </option>
+                                    <select name="version" id="version" class="form-select" rows="40"  cols="50" style="    width: 100%;">
+                                        <option ng-repeat="item in versionList" value="@{{item.id}}">@{{item.name}}</option>
                                     </select>
+                                    <input name="custom_version" id="custom_version" style="display: none;" placeholder="Araç Versiyonunu yazınız...!" class="form-select">
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="input-group">
-                                    <input name="km" required type="text" class="form-control" placeholder="KM Bilgisi">
+                                    <input name="km" required type="text" class="form-control" value="<?=@$customer_car->km?>" placeholder="KM Bilgisi">
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+
+                            <div class="col-sm-3">
                                 <div class="input-group">
-                                    <select name="color" class="form-control">
-                                        <option selected>Renk</option>
-                                        @foreach($colors as $color)
-                                            <option value="{{$color->id}}">{{$color->name}}</option>
-                                        @endforeach
-                                    </select>
+                                    <input name="plate" type="text" class="form-control" value="<?=@$customer_car->plate?>" placeholder="Araç Plakası">
                                 </div>
                             </div>
-                            <div class="col-sm-4">
-                                <div class="input-group">
-                                    <input name="plate" type="text" class="form-control" placeholder="Araç Plakası">
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="input-group">
-                                    <select name="ownorder" class="form-control">
-                                        <option selected>Kaçıncı Sahibisiniz</option>
-                                        <option value="1">1.Sahibiyim</option>
-                                        <option value="2">2.Sahibiyim</option>
-                                        <option value="3">3.Sahibiyim</option>
-                                        <option value="4">4.Sahibiyim</option>
-                                        <option value="5">5.Sahibiyim</option>
-                                        <option value="6">Bilmiyorum</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
+
+                            <div class="col-sm-3">
                                 <div class="input-group">
                                     <select name="car_city"  ng-init="districts ='1'" ng-change="GetDistricts(districts)"
-                                            ng-model="districts" class="form-control">
+                                            ng-model="districts"  class="form-select" style="height: 58px">
                                         @foreach($cities as $city)
-                                            <option value="{{$city->id}}">{{$city->name}}</option>
+                                            <option value="{{$city->id}}" @if($customer_car && $customer_car->car_city == $city->id) selected @endif>{{$city->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="input-group">
-                                    <select name="car_state"  class="form-control">
+                                    <select name="car_state"  class="form-select" style="height: 58px">
                                         <option selected>İlçe</option>
-                                        <option ng-repeat="district in districtsList" value="@{{district.id}}">
+                                        <option ng-repeat="district in districtsList"  ng-selected="district.id == <?=@$customer_car->car_state?>" value="@{{district.id}}">
                                             @{{district.name}}
                                         </option>
                                     </select>
@@ -164,12 +135,12 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="input-group">
-                                    <textarea name="description" class="form-control" placeholder="Mesaj"></textarea>
+                                    <textarea name="description" class="form-control" placeholder="Mesaj"><?=@$customer_car->description?></textarea>
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <button name="submit" type="submit" value="Submit"
-                                        class="btn btn-primary gradient border-0 rounded-xl btn-block">Devam Et
+                                        class="btn btn-primary gradient border-0 rounded-md btn-block">Devam Et
                                 </button>
                             </div>
                         </div>

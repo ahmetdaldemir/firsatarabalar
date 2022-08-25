@@ -26,8 +26,7 @@ class VehiclePostRequest extends FormRequest
         return [
             'customer_id' => 'required',
             'brand_id' => 'required',
-            'version' => 'required',
-        ];
+         ];
     }
 
     public function messages(): array
@@ -35,7 +34,6 @@ class VehiclePostRequest extends FormRequest
         return [
             'customer_id.required' => 'Müşteri girişi yapmak zorunludur',
             'brand_id.required' => 'Marka Seçilmedi',
-            'version.required' => 'Araç seçilmedi',
-        ];
+         ];
     }
 }

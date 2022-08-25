@@ -14,6 +14,7 @@ use App\Repositories\Cars\CarRepositoryInterface;
 use App\Repositories\CustomerCar\CustomerCarInterface;
 use App\Services\Make;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Redis;
 
 class CrudController extends Controller
@@ -34,15 +35,20 @@ class CrudController extends Controller
     {
         $request->validated();
 
-
+        Log::info($request);
         $vehicle = new VehicleRequest();
         $vehicle->brand_id = $request->brand_id;
-        $vehicle->version = $request->version;
+        $vehicle->model = $request->model;
+        $vehicle->body_type_id = $request->body_type_id;
+        $vehicle->fuel_type_id = $request->fuel_type_id;
+        $vehicle->gear_id = $request->gear_id;
+        $vehicle->damage_id = $request->damage_id;
         $vehicle->customer_id = $request->customer_id;
-        $vehicle->price_min = $request->price_min;
-        $vehicle->price_max = $request->price_max;
+        $vehicle->price_min = $request->minPrice;
+        $vehicle->price_max = $request->maxPrice;
         $vehicle->message = $request->message;
         $vehicle->save();
+
 
         dispatch(new SendEmailJob($vehicle));
 

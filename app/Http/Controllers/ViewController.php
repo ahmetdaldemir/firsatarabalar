@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 
+use App\Enums\BodyType;
+use App\Enums\FullType;
+use App\Enums\Tramer;
+use App\Enums\Transmission;
 use App\Models\Customer;
 use App\Models\CustomerCar;
 use App\Models\Page;
@@ -28,6 +32,10 @@ class ViewController
         $data['brands'] = $this->service->brands();
         $data['blogs'] = $this->service->blogs();
         $data['reviews'] =  $this->service->reviews();
+        $data['bodytypes'] =  BodyType::BodyType;
+        $data['fueltypes'] =  FullType::FullType;
+        $data['transmissions'] =  Transmission::Transmission;
+        $data['tramers'] =  Tramer::Tramer;
         return view('view.home',$data);
     }
 

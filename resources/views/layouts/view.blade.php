@@ -70,6 +70,10 @@
     });
 </script>
 <script src="{{asset('view/js/angular.js')}}" class=""></script>
-
+<script>
+    @if($errors->any())
+    Swal.fire('{{$errors->first()}}');
+    @endif
+</script>
 </body>
 </html>

@@ -47,12 +47,6 @@ Route::middleware(['customer_auth', 'user-access:customer'])->group(function () 
     Route::get('arac-sat', [ViewController::class, 'carSell'])->name('arac-sat');
 });
 
-Route::get('form1', [ViewCustomerCarController::class, 'form1'])->name('form1');
-Route::post('form2', [ViewCustomerCarController::class, 'form2'])->name('form2');
-Route::post('form3', [ViewCustomerCarController::class, 'form3'])->name('form3');
-Route::post('form4', [ViewCustomerCarController::class, 'form4'])->name('form4');
-Route::get('form5', [ViewCustomerCarController::class, 'form5'])->name('form5');
-Route::post('customer_car.file_store', [ViewCustomerCarController::class, 'dropzoneStore'])->name('customer_car.file_store');
 
 
 Route::get('getmodel', [CustomController::class, 'models'])->name('getmodel');
@@ -204,6 +198,12 @@ Route::middleware(['customer_auth'])->group(function () {
     Route::get('/account.customer.car.customer_car_buy_request_delete', [AccountController::class, 'customer_car_buy_request_delete'])->name('account.customer.car.customer_car_buy_request_delete');
     Route::get('/account.customer.tender', [AccountController::class, 'tender'])->name('account.customer.tender');
 
+    Route::get('form1', [ViewCustomerCarController::class, 'form1'])->name('form1');
+    Route::any('form2', [ViewCustomerCarController::class, 'form2'])->name('form2');
+    Route::any('form3', [ViewCustomerCarController::class, 'form3'])->name('form3');
+    Route::any('form4', [ViewCustomerCarController::class, 'form4'])->name('form4');
+    Route::get('form5', [ViewCustomerCarController::class, 'form5'])->name('form5');
+    Route::post('customer_car.file_store', [ViewCustomerCarController::class, 'dropzoneStore'])->name('customer_car.file_store');
 });
 Route::get('/account.customer.logout', [AuthController::class, 'logout'])->name('account.customer.logout');
 

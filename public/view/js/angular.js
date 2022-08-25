@@ -56,7 +56,15 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
             }, dataType: 'json', cache: true, processData: false, contentType: false
 
         }).then(function (response) {
-            $scope.modelList = response.data;
+            if(response.data == "")
+            {
+                $("#version").hide();
+                $("#custom_version").show();
+            }else{
+                $("#custom_version").hide();
+                $("#version").show();
+                $scope.modelList = response.data;
+            }
         });
     }
 
@@ -126,7 +134,15 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
                 "Content-Type": "application/x-www-form-urlencoded"
             }, dataType: 'json', cache: true, processData: false, contentType: false
         }).then(function (response) {
-            $scope.bodyList = response.data
+            if(response.data == "")
+            {
+                $("#version").hide();
+                $("#custom_version").show();
+            }else{
+                $("#custom_version").hide();
+                $("#version").show();
+                $scope.bodyList = response.data
+            }
         }, function (data) {
             Swal.fire('Araç Bulunamadı')
         });
@@ -139,7 +155,15 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
                 "Content-Type": "application/x-www-form-urlencoded"
             }, dataType: 'json', cache: true, processData: false, contentType: false
         }).then(function (response) {
-            $scope.fuelList = response.data
+            if(response.data == "")
+            {
+                $("#version").hide();
+                $("#custom_version").show();
+            }else{
+                $("#custom_version").hide();
+                $("#version").show();
+                $scope.fuelList = response.data
+            }
         }, function (data) {
             Swal.fire('Araç Bulunamadı')
         });
@@ -158,7 +182,15 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
             processData: false,
             contentType: false
         }).then(function (response) {
-            $scope.versionList = response.data
+            if(response.data == "")
+            {
+              $("#version").hide();
+              $("#custom_version").show();
+            }else{
+                $("#custom_version").hide();
+                $("#version").show();
+                $scope.versionList = response.data
+            }
         }, function (data) {
             Swal.fire('Araç Bulunamadı')
         });

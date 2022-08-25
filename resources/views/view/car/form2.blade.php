@@ -5,30 +5,8 @@
     <div class="content-inner-2" style="background-image: url(images/background/bg2.png); background-repeat: no-repeat; background-size:100%;">
     <div class="container">
         <div class="row align-items-center">
-            <div class="stepwizard mb-5">
-                <div class="stepwizard-row setup-panel">
-                    <div class="stepwizard-step">
-                        <a href="form-1.html" type="button" class="btn btn-default btn-circle" disabled="disabled">1</a>
-                        <p>Yeni Araç Seçimi</p>
-                    </div>
-                    <div class="stepwizard-step">
-                        <a href="form-2.html" type="button" class="btn btn-primary btn-circle">2</a>
-                        <p>Boya & Değişen & İşlem</p>
-                    </div>
-                    <div class="stepwizard-step">
-                        <a href="form-3.html" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-                        <p>Araç Özel Bilgileri</p>
-                    </div>
-                    <div class="stepwizard-step">
-                        <a href="form-4.html" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
-                        <p>Araç Fotoğrafları</p>
-                    </div>
-                    <div class="stepwizard-step">
-                        <a href="form-5.html" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
-                        <p>Ödeme Bilgileri</p>
-                    </div>
-                </div>
-            </div>
+            @include('view/car/menu',['url' => request()->route()->getName()])
+
             <div class="col-lg-12 m-b30 wow fadeIn" data-wow-duration="2s" data-wow-delay="0.2s">
                 <form class="dlab-form" method="POST" action="{{route('form3')}}" enctype="multipart/form-data">
                     @csrf
@@ -39,9 +17,15 @@
                             <div class="car-damage-wrapper">
                                 <div class="row">
                                     <div class="col-lg-5 text-center">
-
                                         <div class="damage-area">
                                             <div class="car-parts">
+                                                @if($customer_car && !is_null($customer_car->damage))
+                                                     <?php $damage = json_decode($customer_car->damage); ?>
+                                                    @foreach ($damage as $key => $value)
+                                                        @continue( substr($key, 0, 5) == "islem" )
+                                                        <div class="{{$key}} {{$value}}"></div>
+                                                    @endforeach
+                                                @else
                                                 <div class="front-bumper original"></div>
                                                 <div class="front-hood original"></div>
                                                 <div class="roof original"></div>
@@ -55,6 +39,7 @@
                                                 <div class="rear-left-mudguard original"></div>
                                                 <div class="rear-hood original"></div>
                                                 <div class="rear-bumper original"></div>
+                                                @endif
                                             </div>
                                         </div>
 
@@ -193,25 +178,28 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <select name="tramer" id="tramer" class="form-control" required>
-                                    <option value="" selected>Tramer Bilgisi</option>
-                                    <option value="1">Tramer Yok</option>
-                                    <option value="0">Tramer Var</option>
-                                    <option value="3">Ağır Hasar Kayıtlı</option>
+                                    <option value="" @if(!$customer_car && $customer_car->tramer == NULL) selected @endif>Tramer Bilgisi</option>
+                                    <option value="1" @if($customer_car && $customer_car->tramer == 1)   selected @endif>Tramer Yok</option>
+                                    <option value="2" @if($customer_car && $customer_car->tramer == 2)  selected @endif>Tramer Var</option>
+                                    <option value="3" @if($customer_car && $customer_car->tramer == 3)  selected @endif>Ağır Hasar Kayıtlı</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <input name="tramer_price" id="tramerValue" type="text" class="form-control" placeholder="Toplam Tramer Tutarı">
+                                <input name="tramer_price" id="tramerValue" type="text" class="form-control" value="{{@$customer_car->tramerValue}}">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <input name="tramer_image" id="tramerPhoto" type="file" class="form-control" placeholder="Tramer Görüntüsü">
+                                <input name="tramer_image" id="tramerPhoto" type="file" class="form-control">
+                                @if(@$customer_car && !is_null($customer_car->tramerPhoto))
+                                <img style="width: 60px;height: 60px" src="{{asset('storage/cars')}}/{{@$customer_car->tramer_photo}}" />
+                                @endif
                             </div>
                         </div>
                         <div class="col-sm-12">
-                            <button name="submit" type="submit" value="Submit" class="btn btn-primary gradient border-0 rounded-xl btn-block">Devam Et</button>
+                            <button name="submit" type="submit" value="Submit" class="btn btn-primary gradient border-0 rounded-md btn-block">Devam Et</button>
                         </div>
                     </div>
                 </form>
@@ -275,6 +263,46 @@
         $(".car-parts .durum_lastik").removeClass("original").addClass("Orta");
         $("tr.durum_lastik td.Orta input").prop("checked", true);
 
-        $("#tramer").val(1);
+        $("#tramer").val({{@$customer_car->tramer}});
+
+
+        $("#tramer").on("change", function(){
+            if( $(this).val() == 0 || $(this).val() == 3 ){
+                $("#tramerValue").prop("disabled", false).prop("required", true);
+                $("#tramerPhoto").prop("disabled", false).prop("required", true);
+            } else if($(this).val() == 1 || $(this).val() == " ") {
+                $("#tramerValue").prop("disabled", true).prop("required", false);
+                $("#tramerPhoto").prop("disabled", true).prop("required", false);
+            }else{
+                $("#tramerValue").prop("disabled", true).prop("required", false);
+                $("#tramerPhoto").prop("disabled", true).prop("required", false);
+            }
+        });
+
     </script>
+
+    <?php
+    if($customer_car)
+        {
+            $array = array(1, 2, 3);
+            if ($customer_car->tramer == 2 || $customer_car->tramer == 3)
+            {
+                ?>
+                <script>
+                    $("#tramerValue").prop("disabled", false).prop("required", true);
+                    $("#tramerPhoto").prop("disabled", false).prop("required", true);
+                </script>
+                <?php
+            }else{ ?>
+    <script>
+        $("#tramerValue").prop("disabled", true).prop("required", false);
+        $("#tramerPhoto").prop("disabled", true).prop("required", false);
+    </script>
+    <?php }
+        }
+
+    ?>
+
+
+
 @endsection

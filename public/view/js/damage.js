@@ -55,20 +55,6 @@ $(function(){
 
     });
 
-    $("#tramerValue").prop("disabled", true).prop("required", false).val('');
-    $("#tramerPhoto").prop("disabled", true).prop("required", false).val('');
 
-    $("#tramer").on("change", function(){
-        if( $(this).val() == 0 || $(this).val() == 3 ){
-            $("#tramerValue").prop("disabled", false).prop("required", true);
-            $("#tramerPhoto").prop("disabled", false).prop("required", true);
-        } else if($(this).val() == 1 || $(this).val() == " ") {
-            $("#tramerValue").prop("disabled", true).prop("required", false).val('');
-            $("#tramerPhoto").prop("disabled", true).prop("required", false).val('');
-        }else{
-            $("#tramerValue").prop("disabled", true).prop("required", false).val('');
-            $("#tramerPhoto").prop("disabled", true).prop("required", false).val('');
-        }
-    });
 
 });

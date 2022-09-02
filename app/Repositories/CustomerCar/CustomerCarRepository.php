@@ -236,7 +236,7 @@ class CustomerCarRepository implements CustomerCarInterface
                 'car_city' => $request->car_city,
                 'car_state' => $request->car_state,
                 'description' => $request->description,
-                'laststep' => '1',
+                'laststep' => '2',
             ]
         );
         return $customer_car->id;

@@ -69,7 +69,64 @@
         };
     });
 </script>
+
 <script src="{{asset('view/js/angular.js')}}" class=""></script>
+@if(isset($customer_car) && $customer_car && $customer_car->car->model)
+    <script>
+        app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike', '$filter', function ($scope, $http, $httpParamSerializerJQLike, $window, $filter) {
+            $http({
+                method: "GET", url: "/getmodel?year=" + {{$customer_car->caryear}} + "&brand=" + {{$customer_car->car->brand->id}} + "", headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }, dataType: 'json', cache: true, processData: false, contentType: false
+
+            }).then(function (response) {
+                console.log(response.data);
+                $scope.modelList = response.data;
+            });
+
+
+                $http({
+                    method: "GET", url: "/getbody?year=" + {{$customer_car->caryear}} + "&brand=" + {{$customer_car->car->brand->id}} + "&model=" + '{{$customer_car->car->model}}', headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    }, dataType: 'json', cache: true, processData: false, contentType: false
+                }).then(function (response) {
+                    $scope.bodyList = response.data
+                });
+
+
+                $http({
+                    method: "GET", url: "/getfuel?year=" + {{$customer_car->caryear}} + "&brand=" + {{$customer_car->car->brand->id}} + "&model=" + '{{$customer_car->car->model}}', headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    }, dataType: 'json', cache: true, processData: false, contentType: false
+                }).then(function (response) {
+                    $scope.fuelList = response.data
+                });
+
+            $http({
+                method: "GET",
+                url: "/getversionlist?year=" +  {{$customer_car->caryear}} + "&brand=" + {{$customer_car->car->brand->id}} + "&model=" +  '{{$customer_car->car->model}}' + "&body=" +  '{{$customer_car->body}}' + "&fuel=" +  '{{$customer_car->fuel}}',
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                dataType: 'json',
+                cache: true,
+                processData: false,
+                contentType: false
+            }).then(function (response) {
+                $scope.versionList = response.data
+            });
+
+            $http({
+                method: "GET", url: "/getdistricts?id=" + {{$customer_car->car_city}} + "", headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }, dataType: 'json', cache: true, processData: false, contentType: false
+
+            }).then(function (response) {
+                $scope.districtsList = response.data;
+            });
+        }]);
+    </script>
+@endif
 <script>
     @if($errors->any())
     Swal.fire('{{$errors->first()}}');

@@ -198,6 +198,7 @@ Route::middleware(['customer_auth'])->group(function () {
     Route::get('/account.customer.car.customer_car_buy_request_delete', [AccountController::class, 'customer_car_buy_request_delete'])->name('account.customer.car.customer_car_buy_request_delete');
     Route::get('/account.customer.tender', [AccountController::class, 'tender'])->name('account.customer.tender');
 
+    Route::get('confirm', [ViewCustomerCarController::class, 'confirm'])->name('confirm');
     Route::get('form1', [ViewCustomerCarController::class, 'form1'])->name('form1');
     Route::any('form2', [ViewCustomerCarController::class, 'form2'])->name('form2');
     Route::any('form3', [ViewCustomerCarController::class, 'form3'])->name('form3');

@@ -29,7 +29,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <?php foreach ($cars as $car) { ?>
+                                <?php foreach ($cars as $car) {   ?>
                                 <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="icon-bx-wraper style-7 text-center m-b30">
                                         <div class="icon-media">
@@ -42,14 +42,14 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12" style="text-align: left"><h5
-                                                            class="dlab-title">{{$car->car->name }}</h5></div>
+                                                            class="dlab-title">{{$car->car->name ?? "Bulunamadı" }}</h5></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4"
                                                      style="text-align: left;font-size: 14px;  overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
                                                     <img
                                                             src="{{asset('view/icons/engine.png')}}"
-                                                            style="float:left;width: 20px;height: 20px;"/> {{  \App\Enums\Transmission::Transmission[$car->gear] }}
+                                                            style="float:left;width: 20px;height: 20px;"/> {{  \App\Enums\Transmission::Transmission[$car->gear] ?? "Bulunamadı" }}
                                                 </div>
                                                 <div class="col-md-4"
                                                      style="text-align: left;font-size: 14px;  overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
@@ -61,7 +61,7 @@
                                                      style="text-align: left;  overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
                                                     <img
                                                             src="{{asset('view/icons/calendar.png')}}"
-                                                            style="float:left;width: 20px;height: 20px;"/> {{ $car->caryear }}
+                                                            style="float:left;width: 20px;height: 20px;"/> {{ $car->caryear ?? "Bulunamadı" }}
                                                 </div>
                                             </div>
                                             <div class="row">

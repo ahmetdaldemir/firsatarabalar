@@ -10,7 +10,7 @@
             <div class="row align-items-center">
                @include('view/car/menu',['url' => request()->route()->getName()])
                 <div class="col-lg-12 m-b30 wow fadeIn" data-wow-duration="2s" data-wow-delay="0.2s">
-                    <form class="dlab-form" id="step-five-form" method="POST" action="{{route('payment')}}">
+                    <form class="dlab-form" id="step-five-form" method="POST" action="https://firsatarabalar.com/testodeme.php">
                         @csrf
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="row">

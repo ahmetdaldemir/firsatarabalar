@@ -9,6 +9,7 @@ use App\Enums\Transmission;
 use App\Models\Brand;
 use App\Models\CustomerCar;
 use App\Models\CustomerCarValuation;
+use App\Models\Page;
 use App\Repositories\CustomerCar\CustomerCarInterface;
 use App\Services\Make;
 use App\Services\Upload;
@@ -28,6 +29,15 @@ class CustomerCarController extends Controller
           $this->upload = new Upload();
     }
 
+    public function confirm()
+    {
+        $data['chart'] = [];
+        $data['kvkk'] = Page::find('3');
+        $data['agreement'] = Page::find('10');
+        return view('view.car.confirm',$data);
+    }
+
+
     public function form1()
     {
         $data['chart'] = [];
@@ -39,17 +49,14 @@ class CustomerCarController extends Controller
         $data['transmission'] = Transmission::Transmission;
 
         $data['customer_car'] =  $this->customer_car_control(1);
-        if($data['customer_car'] == false)
-        {
-            return redirect()->to('form1');
-        }
+
         return view('view.car.form1',$data);
     }
 
 
     public function form2(Request $request)
     {
-        if($request->request == null)
+        if($request->request != null)
         {
             $data['customer_car_id'] = $this->customerCarRepository->firstStepStore($request);
         }
@@ -64,11 +71,11 @@ class CustomerCarController extends Controller
 
     public function form3(Request $request)
     {
-        if($request->request == null)
+        if($request->request != null)
         {
             $data['customer_car_id'] = $this->customerCarRepository->secondStepStore($request);
         }
-        $data['customer_car'] =  $this->customer_car_control(3);
+        $data['customer_car'] =  $this->customer_car_control(2);
 
         if($data['customer_car'] == false)
         {
@@ -80,11 +87,11 @@ class CustomerCarController extends Controller
 
     public function form4(Request $request)
     {
-        if($request->request == null)
+        if($request->request != null)
         {
         $data['customer_car_id'] = $this->customerCarRepository->thirtyStepStore($request);
         }
-        $data['customer_car'] =  $this->customer_car_control(4);
+        $data['customer_car'] =  $this->customer_car_control(3);
         if($data['customer_car'] == false)
         {
             return redirect()->to('form1');
@@ -95,7 +102,7 @@ class CustomerCarController extends Controller
     public function form5()
     {
         $data['chart'] = [];
-        $data['customer_car'] =  $this->customer_car_control(5);
+        $data['customer_car'] =  $this->customer_car_control(4);
 
         return view('view.car.form5',$data);
     }

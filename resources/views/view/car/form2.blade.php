@@ -178,7 +178,6 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <select name="tramer" id="tramer" class="form-control" required>
-                                    <option value="" @if(!$customer_car && $customer_car->tramer == NULL) selected @endif>Tramer Bilgisi</option>
                                     <option value="1" @if($customer_car && $customer_car->tramer == 1)   selected @endif>Tramer Yok</option>
                                     <option value="2" @if($customer_car && $customer_car->tramer == 2)  selected @endif>Tramer Var</option>
                                     <option value="3" @if($customer_car && $customer_car->tramer == 3)  selected @endif>Ağır Hasar Kayıtlı</option>
@@ -267,10 +266,10 @@
 
 
         $("#tramer").on("change", function(){
-            if( $(this).val() == 0 || $(this).val() == 3 ){
+            if( $(this).val() == 2 || $(this).val() == 3 ){
                 $("#tramerValue").prop("disabled", false).prop("required", true);
                 $("#tramerPhoto").prop("disabled", false).prop("required", true);
-            } else if($(this).val() == 1 || $(this).val() == " ") {
+            } else if($(this).val() == 1) {
                 $("#tramerValue").prop("disabled", true).prop("required", false);
                 $("#tramerPhoto").prop("disabled", true).prop("required", false);
             }else{
@@ -284,7 +283,6 @@
     <?php
     if($customer_car)
         {
-            $array = array(1, 2, 3);
             if ($customer_car->tramer == 2 || $customer_car->tramer == 3)
             {
                 ?>

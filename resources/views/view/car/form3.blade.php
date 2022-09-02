@@ -73,7 +73,7 @@
                             </div>
                             <div class="col-sm-12">
                                 <div>
-                                    Aracın Bakım Geçmişi
+                                    Aracın Bakım Geçmişi <span class="text-danger">*</span>
                                 </div>
                                 <div class="input-group">
                                     <textarea name="maintenance_history" id="maintenance_history" required
@@ -346,6 +346,9 @@
 
     <script>
 
+        $('#car_details_norequire').prop('checked', true);
+        $('#car_details').attr('disabled', true);
+        $('#car_details').attr('required', false);
 
         $('#car_notwork_norequire').prop('checked', true);
         $('#car_notwork').attr('disabled', true);

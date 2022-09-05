@@ -20,7 +20,7 @@
             <div class="row align-items-center">
 
                 <div class="col-md-6">
-                    <form id="loginForm" action="javascript:;" ng-submit="login()" method="post" role="form"
+                    <form id="loginForm" action="{{route('giris-yap')}}" method="post" role="form"
                           style="display: block;">
                         @csrf
                         <div class="form-group">
@@ -58,8 +58,7 @@
                     </form>
                 </div>
                 <div class="col-md-6">
-                    <form id="registerForm" autocomplete="off" action="javascript:;"
-                          ng-submit="register()" method="post" role="form" >
+                    <form id="registerForm" autocomplete="off" action="{{route('kayit-ol')}}" method="post" role="form" >
                         @csrf
                         <input name="id" value="" type="hidden"/>
                         <div class="form-group">

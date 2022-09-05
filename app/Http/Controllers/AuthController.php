@@ -52,7 +52,8 @@ class AuthController
 
         if (Auth::guard('customer')->attempt($credentials, $remember_me)) {
 
-            return redirect()->to('/')->withSuccess('You have Successfully loggedin');
+            return response()->json(['success' => true], 200);
+
 /*
             $finduser = Customer::find(Auth::guard('customer')->id());
             Auth::guard('customer')->login($finduser, $remember_me);

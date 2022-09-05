@@ -2,7 +2,7 @@
 @section('content')
 
     <div class="modal fade" id="VehicleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+         aria-hidden="true" style="    z-index: 99999;">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -11,7 +11,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="dlab-form" id="VehicleRequest" method="POST" ng-submit="VehicleRequest()">
+                <form id="VehicleRequest" method="POST" ng-submit="VehicleRequest()">
                     <div class="modal-title">
                         <div ng-if="error" class="alert alert-danger">
                             <span style="display: flex">@{{ brand_id_error }}</span>
@@ -27,7 +27,7 @@
                                     <div class="input-group">
                                         <label>Marka</label>
                                         <select name="brand_id" ng-change="GetVersionOnlyCar(brands)" ng-model="brands"
-                                                id="getModelValue" class="form-control w-100">
+                                                id="getModelValue" class="form-select w-100">
                                             @foreach ($brands as $brand)
                                                 <option value="{{$brand->id}}" my-directive>{{$brand->name}}</option>
                                             @endforeach
@@ -37,7 +37,7 @@
                                 <div class="col-sm-6">
                                     <div class="input-group">
                                         <label>Araç</label>
-                                        <select name="version" id="version" class="form-control form-select-sm w-100">
+                                        <select name="version" id="version" class="form-select  w-100">
                                             <option ng-repeat="version in versionList" value="@{{version.name}}">
                                                 @{{version.name}}
                                             </option>
@@ -50,7 +50,7 @@
                                     <div class="input-group">
                                         <label>Vites Tipi</label>
                                         <select name="gear_id" id="body_type_id"
-                                                class="form-control form-select-sm w-100">
+                                                class="form-select w-100">
                                             <?php foreach ($transmissions as $key => $value){ ?>
                                             <option value="<?=$key?>"><?=$value?></option>
                                             <?php } ?>
@@ -61,7 +61,7 @@
                                     <div class="input-group">
                                         <label>Hasar Durumu</label>
                                         <select name="damage_id" id="damage_id"
-                                                class="form-control form-select-sm w-100">
+                                                class="form-select w-100">
                                             <?php foreach ($tramers as $key => $value){ ?>
                                             <option value="<?=$key?>"><?=$value?></option>
                                             <?php } ?>
@@ -74,7 +74,7 @@
                                     <div class="input-group">
                                         <label>Kasa Tipi</label>
                                         <select name="body_type_id" id="body_type_id"
-                                                class="form-control form-select-sm w-100">
+                                                class="form-select w-100">
                                             <?php foreach ($bodytypes as $key => $value){ ?>
                                             <option value="<?=$key?>"><?=$value?></option>
                                             <?php } ?>
@@ -85,7 +85,7 @@
                                     <div class="input-group">
                                         <label>Yakıt Tipi</label>
                                         <select name="body_type_id" id="body_type_id"
-                                                class="form-control form-select-sm w-100">
+                                                class="form-select w-100">
                                             <?php foreach ($fueltypes as $key => $value){ ?>
                                             <option value="<?=$key?>"><?=$value?></option>
                                             <?php } ?>
@@ -97,16 +97,16 @@
                                 <div class="col-sm-12">
                                     <label>Fiyat Aralığı</label>
                                     <div class="input-group">
-                                        <input class="form-control form-select-sm" name="price_min"
+                                        <input class="form-control" name="price_min"
                                                placeholder="0.00"/>
-                                        <input class="form-control form-select-sm" name="price_max"
+                                        <input class="form-control" name="price_max"
                                                placeholder="1.000.000"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <label>Mesajınız</label>
                                     <div class="input-group" style="margin-bottom: 0;">
-                                            <textarea name="message" class="form-control"
+                                            <textarea name="message" cols="5" class="form-control"
                                                       placeholder="Message"></textarea>
                                     </div>
                                 </div>

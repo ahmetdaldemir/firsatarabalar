@@ -12,9 +12,9 @@
                         <p>Fırsat arabalar olarsak kurulduğumuz günden bu yana araç alım satımında müşteri memnuniyeti ve satıcı güvenini sağlayarak piyasanın en uygun aracını ilk almak isteyen müşterisi ile buluşturmaktadır.</p>
                         <div class="dlab-social-icon">
                             <ul>
-                                <li><a class="fab fa-facebook-f" href="javascript:void(0);"></a></li>
-                                <li><a class="fab fa-instagram" href="javascript:void(0);"></a></li>
-                                <li><a class="fab fa-twitter" href="javascript:void(0);"></a></li>
+                                <li><a class="fab fa-facebook-f" href="https://www.facebook.com/parababasi.youtube"></a></li>
+                                <li><a class="fab fa-instagram" href="https://www.instagram.com/parababasi_firsat_arabalar/"></a></li>
+                                <li><a class="fab fa-twitter" href="https://www.youtube.com/c/ParaBabas%C4%B1"></a></li>
                             </ul>
                         </div>
                     </div>
@@ -99,11 +99,11 @@
                                             @csrf
                                             <div class="form-group">
                                                 <input type="text" name="phone" id="phone"  pattern="[0-9]{3}[0-9]{3}[0-9]{4}"  tabindex="1"
-                                                       class="form-control" placeholder="Telefon Numarası" value="">
+                                                       class="form-control" placeholder="Telefon Numarası" value="" autocomplete="off">
                                             </div>
                                             <div class="form-group">
                                                 <input type="password" name="password" id="password" tabindex="2"
-                                                       class="form-control" placeholder="Şifre">
+                                                       class="form-control" placeholder="Şifre" autocomplete="off">
                                             </div>
                                             <div class="form-group text-center">
                                                 <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
@@ -136,25 +136,23 @@
                                             <input name="id" value="" type="hidden"/>
                                             <div class="form-group">
                                                 <input type="text" name="firstname" id="firstname" tabindex="1"
-                                                       class="form-control" placeholder="İsim" value="" required>
+                                                       class="form-control" placeholder="İsim" value="" required autocomplete="off">
                                             </div>
                                             <div class="form-group">
                                                 <input type="text" name="lastname" id="lastname" tabindex="1"
-                                                       class="form-control" placeholder="Soyisim" value="" required>
+                                                       class="form-control" placeholder="Soyisim" value="" required autocomplete="off">
                                             </div>
                                             <div class="form-group">
-                                                <input type="email" name="email" id="email" tabindex="1"
-                                                       class="form-control" placeholder="Email Adresi" value=""
-                                                       required>
+                                                <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Adresi"  required autocomplete="off">
                                             </div>
                                             <div class="form-group">
                                                 <input type="text" name="phone" id="phone" tabindex="1"
                                                        class="form-control" placeholder="5xx xxx xx xx" value=""
-                                                       required>
+                                                       required autocomplete="off">
                                             </div>
                                             <div class="form-group">
                                                 <input type="password" name="password" id="password" tabindex="2"
-                                                       class="form-control" placeholder="Şifre" required>
+                                                       class="form-control" placeholder="Şifre" required autocomplete="off">
                                             </div>
                                             @if(env('GOOGLE_RECAPTCHA_KEY'))
                                                 <div class="g-recaptcha"  data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">

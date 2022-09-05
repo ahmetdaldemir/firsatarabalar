@@ -14,6 +14,11 @@ class HomeController extends Controller
         $data['chart'] = [];
         return view('view.home',$data);
     }
+    public function authpage()
+    {
+        $data['chart'] = [];
+        return view('view.auth',$data);
+    }
 
     /**
      * Show the application dashboard.

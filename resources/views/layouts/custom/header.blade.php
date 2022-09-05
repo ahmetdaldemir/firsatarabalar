@@ -19,7 +19,8 @@
                     <div class="extra-cell">
                         <a href="{{route('form1')}}"  class="btn btn-primary">Aracımı Satmak İstiyorum<i class="fa fa-angle-right m-l10"></i></a>
                         @if(!\Illuminate\Support\Facades\Auth::guard('customer')->check())
-                        <a href="javascript:;" ng-click="CustomerLoginForm()" class="btn btn-info">Giriş Yap<i class="fa fa-angle-right m-l10"></i></a>
+                        <!-- a href="javascript:;" ng-click="CustomerLoginForm()" class="btn btn-info">Giriş Yap<i class="fa fa-angle-right m-l10"></i></a -->
+                        <a href="{{route('authpage')}}"  class="btn btn-info">Giriş Yap<i class="fa fa-angle-right m-l10"></i></a>
                         @else
                             <a href="{{route('profil')}}" style="color: #fff" class="btn btn-warning">Hesabım<i class="fa fa-angle-right m-l10"></i></a>
                         @endif

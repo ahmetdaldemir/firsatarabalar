@@ -209,6 +209,7 @@ Route::middleware(['customer_auth'])->group(function () {
 Route::get('/account.customer.logout', [AuthController::class, 'logout'])->name('account.customer.logout');
 
 Route::get('/pdf', [HomeController::class, 'pdf'])->name('pdf');
+Route::get('/authpage', [HomeController::class, 'authpage'])->name('authpage');
 
 
 Route::get('pdf', [HomeController::class, 'pdf'])->name('pdf');

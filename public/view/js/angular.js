@@ -24,11 +24,11 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
                 "Content-Type": "application/x-www-form-urlencoded"
             }, data: $("#loginForm").serialize(),
         }).then(function (response) {
-            setInterval(window.location.reload(), 3000);
-
             if (response.data.success == true) {
-                window.location.reload();
+                Swal.fire('Başarılı', 'Giriş Başarılı Anasayfaya Yönlendiriliyorsunuz');
+                setInterval(window.location.reload(), 10000);
             } else {
+                Swal.fire('Hata', 'Bilgiler hatalı tekrar deneyiniz');
                 $scope.loginMessage = "*** " + response.data.message;
             }
         });

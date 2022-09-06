@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
 use App\Models\Affiliate;
 use App\Models\Customer;
 use App\Providers\RouteServiceProvider;
@@ -52,34 +53,24 @@ class AuthController
 
         if (Auth::guard('customer')->attempt($credentials, $remember_me)) {
 
-            return response()->json(['success' => true], 200);
-
-/*
-            $finduser = Customer::find(Auth::guard('customer')->id());
-            Auth::guard('customer')->login($finduser, $remember_me);
-            return response()->json(['success' => true], 200); */
+            return redirect()->to('profil');
+            /*
+                        $finduser = Customer::find(Auth::guard('customer')->id());
+                        Auth::guard('customer')->login($finduser, $remember_me);
+                        return response()->json(['success' => true], 200); */
         }
-        return response()->json(['success' => false, 'message' => "Hatalı Kullanıcı Adı ve Şifre"], 200);
+        return redirect()->back()->withErrors(['msg' => 'Kullanıcı Adı veya Şifre Yanlış'], 'login');
     }
 
-    public function logout() {
+    public function logout()
+    {
         Session::flush();
         Auth::guard('customer')->logout();
         return Redirect('/');
     }
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-
-        $validated = $request->validate([
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'email' => 'required|email|unique:customers',
-            'password' => 'required',
-            'phone' => 'required|numeric|min:10|unique:customers',
-            'g-recaptcha-response' => 'required|recaptcha'
-        ]);
-
 
         $customer = new Customer();
         $customer->firstname = $request->firstname;
@@ -89,19 +80,16 @@ class AuthController
         $customer->password = bcrypt($request->password);
         $customer->save();
 
-        $affiliate = Affiliate::where('phone',$request->phone)->first();
-        if($affiliate)
-        {
+        $affiliate = Affiliate::where('phone', $request->phone)->first();
+        if ($affiliate) {
             $affiliate->status = 1;
             $affiliate->save();
 
-            $newCustomer = Customer::where('customer_id',$affiliate->customer_id)->first();
+            $newCustomer = Customer::where('customer_id', $affiliate->customer_id)->first();
             $newCustomer->reward += 1;
             $newCustomer->save();
         }
-
-        return response()->json(['success' => false, 'message' => $validated], 200);
-
+        return redirect()->to('/')->withErrors(['msg' => 'Kayıt Başarılı']);
     }
 
 }

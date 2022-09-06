@@ -9,7 +9,7 @@ class CustomerRepository implements CustomerRepositoryInterface
 
     public function get()
     {
-        return Customer::orderBy('id','desc')->get()->take(20);
+        return Customer::orderBy('id','desc')->simplePaginate(20);
     }
 
     public function deleted()

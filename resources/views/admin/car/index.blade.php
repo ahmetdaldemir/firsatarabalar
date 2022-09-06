@@ -24,6 +24,9 @@
 
     <div class="wrapper wrapper-content">
 
+        <div class="d-flex justify-content-center float-left">
+            {!! $cars->links() !!}
+        </div>
         <table id="Cars" class="cars table table-striped table-bordered table-hover mb-0">
             <thead class="thead-light">
             <tr>
@@ -61,6 +64,9 @@
             </tbody>
         </table>
 
+        <div class="d-flex justify-content-center float-left">
+            {!! $cars->links() !!}
+        </div>
 
     </div>
 

@@ -3,11 +3,12 @@
 use App\Enums\DateEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\carRequest;
+use App\Models\Car;
 use App\Repositories\Cars\CarRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
+use \DB;
 class CarController extends Controller
 {
     private CarRepositoryInterface $CarRepository;
@@ -21,6 +22,8 @@ class CarController extends Controller
     {
         $data['show'] = "";
         $data['cars'] = $this->CarRepository->get();
+        $data['searchroute'] = "admin.car.search";
+
         return view('admin.car.index',$data);
     }
 
@@ -89,5 +92,13 @@ class CarController extends Controller
         $id = $request->id;
         $this->CarRepository->delete($id);
         return response()->json(null, Response::HTTP_OK);
+    }
+
+    public function search(Request $request)
+    {
+        $data['show'] = "";
+        $data['searchroute'] = "admin.car.search";
+        $data['cars'] = Car::orWhere(DB::raw("CONCAT(`brand_name`, ' ', `name`)"), 'LIKE', "%" . $request->q . "%")->paginate(10);
+        return view('admin.car.index',$data);
     }
 }

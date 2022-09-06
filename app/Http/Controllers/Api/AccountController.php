@@ -307,8 +307,8 @@ class AccountController extends Controller
         {
           $pass = rand(111111,999999);
 
-          $customer->password = bcrypt($pass);
-          $customer->save();
+          //$customer->password = bcrypt($pass);
+          //$customer->save();
 
           $request['message'] = "Sayın". $customer->firstname." ".$customer->lastname. " Şifreniz Güncellenmiştir. Yeni Şifreniz :". $pass;
           $request['phone'] = $request->phone;

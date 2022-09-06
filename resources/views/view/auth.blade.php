@@ -17,18 +17,20 @@
     <section class="content-inner about-wraper-1"
              style="padding-top:25px;padding-bottom:0;background-image: url(images/background/bg15.png); background-size: contain; background-position: center right; background-repeat: no-repeat;">
         <div class="container">
-            <div class="row align-items-center">
-
-                <div class="col-md-6">
-                    <form id="loginForm" action="{{route('giris-yap')}}" method="post" role="form"
-                          style="display: block;">
+            <div class="row">
+                <div class="col-md-6" style="border-right: 1px solid #DDD;">
+                    @if($errors->login->any())
+                      <div class="alert alert-warning"><h6>{{$errors->login->first()}}</h6></div>
+                    @endif
+					<div class="row form-group"><h4 style="text-align:center;font-weight: normal;">Giriş Yap</h4></div>
+                    <form id="loginForm" action="{{route('giris-yap')}}" method="post" role="form" style="display: block;">
                         @csrf
                         <div class="form-group">
-                            <input type="text" name="phone" id="phone" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" tabindex="1"
+                            <input type="text" name="phone" id="phone" pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
                                    class="form-control" placeholder="Telefon Numarası" value="" autocomplete="off">
                         </div>
                         <div class="form-group">
-                            <input type="password" name="password" id="password" tabindex="2"
+                            <input type="password" name="password" id="password"
                                    class="form-control" placeholder="Şifre" autocomplete="off">
                         </div>
                         <div class="form-group text-center">
@@ -37,10 +39,10 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-sm-6 col-sm-offset-3">
-                                    <button type="submit" class="form-control btn btn-login">Giriş Yap</button>
+                                <div class="col-sm-12 col-sm-offset-3 text-center">
+                                    <button type="submit" class="form-control btn btn-login" style="width: 50%;">Giriş Yap</button>
                                 </div>
-                                <div class="col-sm-6 col-sm-offset-3" id="loginMessage"
+                                <div class="col-sm-12 col-sm-offset-3" id="loginMessage"
                                      style="color: #f00">@{{loginMessage}}
                                 </div>
                             </div>
@@ -49,7 +51,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="text-center">
-                                        <a href="#" tabindex="5"
+                                        <a href="#" 
                                            class="forgot-password">Şifremi Unuttum?</a>
                                     </div>
                                 </div>
@@ -58,39 +60,40 @@
                     </form>
                 </div>
                 <div class="col-md-6">
+                    @if ($errors->register->any())
+                        <ul class="mt-3 list-none list-inside text-sm text-red-400">
+                            @foreach ($errors->register->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
+					<div class="form-group"><h4 style="text-align:center;font-weight: normal;">Kaydol</h4></div>
                     <form id="registerForm" autocomplete="off" action="{{route('kayit-ol')}}" method="post" role="form" >
                         @csrf
                         <input name="id" value="" type="hidden"/>
                         <div class="form-group">
-                            <input type="text" name="firstname" id="firstname" tabindex="1"
-                                   class="form-control" placeholder="İsim" value="" required autocomplete="off">
+                            <input type="text" name="firstname" id="firstname" class="form-control" placeholder="İsim" value="" required autocomplete="off">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="lastname" id="lastname" tabindex="1"
-                                   class="form-control" placeholder="Soyisim" value="" required autocomplete="off">
+                            <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Soyisim" value="" required autocomplete="off">
                         </div>
                         <div class="form-group">
-                            <input type="email" name="email" id="email" tabindex="1" class="form-control"
-                                   placeholder="Email Adresi" required autocomplete="off">
+                            <input type="email" name="email" id="email" class="form-control" placeholder="Email Adresi" required autocomplete="off">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="phone" id="phone" tabindex="1"
-                                   class="form-control" placeholder="5xx xxx xx xx" value=""
-                                   required autocomplete="off">
+                            <input type="text" name="phone" id="phone" class="form-control" placeholder="5xx xxx xx xx" value="" required autocomplete="off">
                         </div>
                         <div class="form-group">
-                            <input type="password" name="password" id="password" tabindex="2"
-                                   class="form-control" placeholder="Şifre" required autocomplete="off">
+                            <input type="password" name="password" id="password" class="form-control" placeholder="Şifre" required autocomplete="off">
                         </div>
                         @if(env('GOOGLE_RECAPTCHA_KEY'))
-                            <div class="g-recaptcha" data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
-                            </div>
+                            <div class="g-recaptcha" data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}"></div>
                         @endif
                         <script src='https://www.google.com/recaptcha/api.js'></script>
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-sm-6 col-sm-offset-3">
-                                    <button type="submit" class="form-control btn btn-login">Kayıt
+                                <div class="col-sm-12 col-sm-offset-3 text-center">
+                                    <button type="submit" style="width: 50%;color:white" class="btn btn-block btn-success">Kayıt
                                         Ol
                                     </button>
                                 </div>

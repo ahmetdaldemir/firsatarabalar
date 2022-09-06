@@ -22477,7 +22477,7 @@ icon-bx-wraper style-4:hover .icon-cell i,
     border-radius: 40px;
     bottom: 10px;
     color: #ffffff;
-    display: table;
+    display: none;
     height: 50px;
     left: 10px;
     min-width: 50px;
@@ -27159,4 +27159,25 @@ footer .widget_services ul a:hover {
     border: 0;
     background: transparent;
     font-size: 40px;
+}
+
+.header-transparent .is-fixed .navbar-toggler span {background: #ffffff;}
+.header-transparent .is-fixed .nav > li > a {
+    color: #000000;
+}
+@media only screen and (max-width: 575px){
+.logo-header {
+width: 220px;
+height: 75px;
+}
+}
+@media only screen and (max-width: 991px){
+.header-nav .nav {
+    float: none;
+    padding: 0!important;
+}
+.header-nav .nav > li {
+    border-bottom: 1px solid #eee;
+    width: 100%;padding: 0 20px;
+}
 }

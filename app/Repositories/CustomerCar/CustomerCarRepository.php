@@ -29,13 +29,11 @@ class CustomerCarRepository implements CustomerCarInterface
 
     public function get()
     {
-
         $role_id = Auth::guard('web')->user()->roles->first()->id;
-
         if ($role_id == 1) {
-            return CustomerCar::orderBy('id', 'desc')->simplePaginate(10);
+           return CustomerCar::orderBy('id', 'desc')->paginate(5);
         }
-        return CustomerCar::where('user_id', Auth::guard('web')->id())->orderBy('id', 'desc')->get();
+        return CustomerCar::where('user_id', Auth::guard('web')->id())->orderBy('id', 'desc')->paginate(5);
     }
 
     public function getDistrict($id)

@@ -12,13 +12,15 @@
 
             <div class="d-flex justify-content-end align-items-center">
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="show_deleted"  {{$show}}/>
+                    <input type="checkbox" class="custom-control-input" id="show_deleted" {{$show}}/>
                     <label class="custom-control-label" for="show_deleted">Silinen Müşterileri Göster</label>
                 </div>
                 @if (!old('q') )
-                    <a href="{{route('admin.customer.index')}}" class="btn btn-xs btn-warning ml-3"><i class="fad fa-trash-alt mr-1"></i> Arama Filtresini Kaldır</a>
+                    <a href="{{route('admin.customer.index')}}" class="btn btn-xs btn-warning ml-3"><i
+                                class="fad fa-trash-alt mr-1"></i> Arama Filtresini Kaldır</a>
                 @endif
-                <a href="{{route('admin.customer.create')}}" class="btn btn-xs btn-success mr-2"><i class="fad fa-plus-circle mr-1"></i> Yeni Müşteri Ekle</a>
+                <a href="{{route('admin.customer.create')}}" class="btn btn-xs btn-success mr-2"><i
+                            class="fad fa-plus-circle mr-1"></i> Yeni Müşteri Ekle</a>
             </div>
 
         </div>
@@ -46,28 +48,38 @@
             @else
                 @foreach ( $customers as $customer )
                     <tr id="customerRow-{{$customer->id}}">
-                        <td class="text-center"><a href="{{route('admin.customer.edit',['id' => $customer->id])}}">{{$customer->id}}</a></td>
+                        <td class="text-center"><a
+                                    href="{{route('admin.customer.edit',['id' => $customer->id])}}">{{$customer->id}}</a>
+                        </td>
                         <td>{{$customer->firstname}} {{$customer->lastname}}</td>
                         <td class="text-center">{{$customer->phone}}</td>
-                        <td >{{$customer->email}}</td>
+                        <td>{{$customer->email}}</td>
                         <td class="text-center">{{$customer->il}} / {{$customer->ilce}}</td>
                         <td class="text-center">{{$customer->date_created}}</td>
-                        <td class="text-center">{!! ( $customer->status ) ? '<span class="label label-primary">Aktif</span>' : '<span class="label label-plain">Pasif</span>' !!}</td>
+                        <td class="text-center">{!! ( $customer->status == 1 ) ? '<a href="'.route('admin.customer.status',['id'=>$customer->id,'status'=>0]).'"><span class="label label-primary">Aktif</span></a>' : '<a href="'.route('admin.customer.status',['id'=>$customer->id,'status'=>1]).'"><span class="label label-plain">Pasif</span></a>' !!}</td>
                         <td class="text-center">
                             @if ( Request::get("deleted") == "show" )
-                                <a href="javascript:;" onclick="undeleteCustomer({{$customer->id}});" class="btn btn-xs btn-warning"><i class="fad fa-reply mr-1"></i> Geri Al</a>
+                                <a href="javascript:;" onclick="undeleteCustomer({{$customer->id}});"
+                                   class="btn btn-xs btn-warning"><i class="fad fa-reply mr-1"></i> Geri Al</a>
                             @else
-                                <a href="javascript:;" data-toggle="modal" data-target="#SendSms" data-customernumber='{{$customer->phone}}' class="sendsms btn btn-xs btn-primary"><i class="far fa-envelope"></i></a>
-                                <a href="{{route('admin.customer.edit',['id' => $customer->id])}}" class="btn btn-xs btn-success"><i class="fad fa-edit mr-1"></i> Düzenle</a>
-                                <a href="javascript:;" onclick="deleteCustomer({{$customer->id}});" class="delete btn btn-xs btn-danger"><i class="fad fa-trash-alt mr-1"></i> Sil</a>
+                                <a href="javascript:;" data-toggle="modal" data-target="#SendSms"
+                                   data-customernumber='{{$customer->phone}}' class="sendsms btn btn-xs btn-primary"><i
+                                            class="far fa-envelope"></i></a>
+                                <a href="{{route('admin.customer.edit',['id' => $customer->id])}}"
+                                   class="btn btn-xs btn-success"><i class="fad fa-edit mr-1"></i> Düzenle</a>
+                                <a href="javascript:;" onclick="deleteCustomer({{$customer->id}});"
+                                   class="delete btn btn-xs btn-danger"><i class="fad fa-trash-alt mr-1"></i> Sil</a>
                             @endif
                         </td>
                     </tr>
                 @endforeach
             @endif
             </tbody>
-        </table>
 
+        </table>
+        <div class="d-flex justify-content-center">
+            {!! $customers->links() !!}
+        </div>
 
     </div>
 
@@ -85,7 +97,8 @@
                         <input type="hidden" name="customer_number" id="customer_number" value="">
                         <div class="form-group mb-0">
                             <label>Mesajınızı Yazın</label>
-                            <textarea name="sms-content" id="sms-content" cols="30" rows="5" class="form-control rounded"></textarea>
+                            <textarea name="sms-content" id="sms-content" cols="30" rows="5"
+                                      class="form-control rounded"></textarea>
                         </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-start">
@@ -99,7 +112,7 @@
 
     <script type="text/javascript">
 
-        function deleteCustomer( customer_id ){
+        function deleteCustomer(customer_id) {
             swal({
                 title: "Emin misiniz?",
                 text: "Bu kaydı kaldırmak istediğinize emin misiniz?",
@@ -109,14 +122,17 @@
                 confirmButtonColor: "#1a7bb9",
                 confirmButtonText: "Evet, kaldır!",
                 closeOnConfirm: false
-            }, ()=>{
-                $.post("/customers/delete", { customer_id:customer_id }, function(r){
-                    if( r.status == "success" ){ swal.close(); $("#customerRow-" + customer_id).remove(); }
+            }, () => {
+                $.post("/customer.delete", {customer_id: customer_id}, function (r) {
+                    if (r.status == "success") {
+                        swal.close();
+                        $("#customerRow-" + customer_id).remove();
+                    }
                 }, "json");
             });
         }
 
-        function undeleteCustomer( customer_id ){
+        function undeleteCustomer(customer_id) {
             swal({
                 title: "Emin misiniz?",
                 text: "Bu kaydı geri yüklemek istediğinize emin misiniz?",
@@ -126,17 +142,19 @@
                 confirmButtonColor: "#1a7bb9",
                 confirmButtonText: "Evet, geri al!",
                 closeOnConfirm: false
-            }, ()=>{
-                $.post("/customers/undelete", { customer_id:customer_id }, function(r){
-                    if( r.status == "success" ){ window.location.href = '/customers'; }
+            }, () => {
+                $.post("/customers/undelete", {customer_id: customer_id}, function (r) {
+                    if (r.status == "success") {
+                        window.location.href = '/customers';
+                    }
                 }, "json");
             });
         }
 
-        $(document).ready(function(){
+        $(document).ready(function () {
 
-            $("#show_deleted").on("change", function(){
-                if( $(this).prop("checked") == true ){
+            $("#show_deleted").on("change", function () {
+                if ($(this).prop("checked") == true) {
                     window.location.href = "{{route('admin.customer.deleted')}}";
                 } else {
                     window.location.href = "{{route('admin.customer.index')}}";
@@ -146,13 +164,16 @@
             $('#SendSms').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget);
                 var modal = $(this);
-                modal.find('.modal-body label').append(" -> "+button.data('customernumber'));
+                modal.find('.modal-body label').append(" -> " + button.data('customernumber'));
                 modal.find('.modal-body input[name=customer_number]').val(button.data('customernumber'));
             })
 
-            $("#send-sms-form").on("submit", function(e){
+            $("#send-sms-form").on("submit", function (e) {
                 e.preventDefault();
-                $.post("/customers/sendsms", { phone:$("#customer_number").val(), message:$("#sms-content").val() },function(){
+                $.post("/customers/sendsms", {
+                    phone: $("#customer_number").val(),
+                    message: $("#sms-content").val()
+                }, function () {
                     $("#send-sms-form")[0].reset();
                     $('#SendSms').modal("hide");
                 });

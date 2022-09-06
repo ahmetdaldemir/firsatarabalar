@@ -1,13 +1,12 @@
 @extends('layouts.view')
 @section('content')
 
-    <div class="modal fade" id="VehicleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true" style="    z-index: 99999;">
+    <div class="modal fade" id="VehicleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 99999;">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Araç Talep Et</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -49,7 +48,7 @@
                                 <div class="col-sm-6">
                                     <div class="input-group">
                                         <label>Vites Tipi</label>
-                                        <select name="gear_id" id="body_type_id"
+                                        <select name="gear_id"
                                                 class="form-select w-100">
                                             <?php foreach ($transmissions as $key => $value){ ?>
                                             <option value="<?=$key?>"><?=$value?></option>
@@ -73,7 +72,7 @@
                                 <div class="col-sm-6">
                                     <div class="input-group">
                                         <label>Kasa Tipi</label>
-                                        <select name="body_type_id" id="body_type_id"
+                                        <select name="body_type_id" 
                                                 class="form-select w-100">
                                             <?php foreach ($bodytypes as $key => $value){ ?>
                                             <option value="<?=$key?>"><?=$value?></option>
@@ -84,7 +83,7 @@
                                 <div class="col-sm-6">
                                     <div class="input-group">
                                         <label>Yakıt Tipi</label>
-                                        <select name="body_type_id" id="body_type_id"
+                                        <select name="body_type_id" 
                                                 class="form-select w-100">
                                             <?php foreach ($fueltypes as $key => $value){ ?>
                                             <option value="<?=$key?>"><?=$value?></option>
@@ -114,7 +113,7 @@
                      </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal Et</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-dismiss="modal">İptal Et</button>
                 <button type="submit" class="btn btn-primary" id="VehicleRequestButton">Talep Gönder</button>
             </div>
             </form>

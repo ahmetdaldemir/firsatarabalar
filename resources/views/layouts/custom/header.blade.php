@@ -36,7 +36,11 @@
                         <li class=""><a href="{{route('nasil_calisir')}}"><span>Nasıl Çalışır</span></a></li>
                         <li class=""><a href="{{route('kullanici_gorusleri')}}"><span>Kullanıcı Görüşleri</span></a></li>
                         <li class=""><a href="/iletisim"><span>İletişim</span></a></li>
-
+                        @if(!\Illuminate\Support\Facades\Auth::guard('customer')->check())
+                        <li class="d-sm-none" style="padding: 0;"><a href="{{route('authpage')}}" style="padding: 10px 20px;" class="btn-info">Giriş Yap<i class="fa fa-angle-right m-l10"></i></a></li>
+                        @else
+                        <li class="d-sm-none" style="padding: 0;"><a href="{{route('profil')}}" style="padding: 10px 20px;" class="btn-warning">Hesabım<i class="fa fa-angle-right m-l10"></i></a></li>
+                        @endif
                     </ul>
                     <div class="dlab-social-icon">
                         <ul>

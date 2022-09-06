@@ -59,7 +59,7 @@
                     <a href="{{route('admin.expert.index')}}">
                         <i class="fa-fw fad fa-user-tie"></i>
                         <span class="nav-label">Danışmanlar</span>
-                        <span class="label label-outline float-right">0</span>
+                        <span class="label label-outline float-right"><?php echo count_menu()['exper']; ?> </span>
                     </a>
                 </li>
                 @endrole
@@ -68,7 +68,7 @@
                     <a href="{{route('admin.customer.index')}}">
                         <i class="fa-fw fad fa-users"></i>
                         <span class="nav-label">Müşteriler</span>
-                        <span class="label label-success float-right">0</span>
+                        <span class="label label-success float-right"><?php echo count_menu()['customer']; ?> </span>
                     </a>
                 </li>
                 @endrole
@@ -77,7 +77,7 @@
                     <a href="{{route('admin.car.index')}}">
                         <i class="fa-fw fad fa-users"></i>
                         <span class="nav-label">Araçlar</span>
-                        <span class="label label-success float-right">0</span>
+                        <span class="label label-success float-right"><?php echo count_menu()['cars']; ?></span>
                     </a>
                 </li>
                 @endrole
@@ -86,7 +86,7 @@
                     <a href="{{route('admin.customer_car_valuation.index')}}">
                         <i class="fa-fw fad fa-bullseye-pointer"></i>
                         <span class="nav-label">Değerlemeler</span>
-                        <span class="label label-info float-right">0</span>
+                        <span class="label label-info float-right"><?php echo count_menu()['customer_car']; ?></span>
                     </a>
                 </li>
                 @endrole
@@ -95,7 +95,7 @@
                     <a href="{{route('admin.vehicle_request.index')}}">
                         <i class="fa-fw fad fa-bullseye-pointer"></i>
                         <span class="nav-label">Talepler</span>
-                        <span class="label label-info float-right">0</span>
+                        <span class="label label-info float-right"><?php echo count_menu()['customer_car_request']; ?></span>
                     </a>
                 </li>
                 @endrole
@@ -144,7 +144,7 @@
             <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fad fa-bars"></i></a>
-                    <form role="search" class="navbar-form-custom" action="#" method="get">
+                    <form role="search" class="navbar-form-custom" @if(!empty($searchroute)) action="{{route($searchroute)}}" @endif method="get">
                         <div class="form-group d-flex justify-align-start align-items-center">
                             <input type="text" placeholder="Arama..." class="form-control" name="q" id="top-search"
                                    style="width: 300px" size="60">

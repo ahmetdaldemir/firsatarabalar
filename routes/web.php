@@ -106,6 +106,8 @@ Route::prefix('admin/')->middleware(['auth', 'user-access:admin'])->group(functi
         Route::get('edit', [CustomerController::class, 'form'])->name('admin.customer.edit');
         Route::post('store', [CustomerController::class, 'store'])->name('admin.customer.store');
         Route::get('deleted', [CustomerController::class, 'deleted'])->name('admin.customer.deleted');
+        Route::get('status', [CustomerController::class, 'status'])->name('admin.customer.status');
+        Route::get('search', [CustomerController::class, 'search'])->name('admin.customer.search');
     });
 
     Route::prefix('car/')->group(function () {
@@ -114,6 +116,8 @@ Route::prefix('admin/')->middleware(['auth', 'user-access:admin'])->group(functi
         Route::get('edit', [CarController::class, 'form'])->name('admin.car.edit');
         Route::post('store', [CarController::class, 'store'])->name('admin.car.store');
         Route::get('deleted', [CarController::class, 'destroy'])->name('admin.car.deleted');
+        Route::get('search', [CarController::class, 'search'])->name('admin.car.search');
+
     });
 
     Route::prefix('customer_car_valuation/')->group(function () {

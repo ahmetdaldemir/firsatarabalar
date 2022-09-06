@@ -98,15 +98,15 @@
                                         <form id="loginForm" action="javascript:;" ng-submit="login()" method="post" role="form" style="display: block;">
                                             @csrf
                                             <div class="form-group">
-                                                <input type="text" name="phone" id="phone"  pattern="[0-9]{3}[0-9]{3}[0-9]{4}"  tabindex="1"
+                                                <input type="text" name="phone" id="phone"  pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
                                                        class="form-control" placeholder="Telefon Numarası" value="" autocomplete="off">
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" name="password" id="password" tabindex="2"
+                                                <input type="password" name="password" id="password"
                                                        class="form-control" placeholder="Şifre" autocomplete="off">
                                             </div>
                                             <div class="form-group text-center">
-                                                <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+                                                <input type="checkbox" class="" name="remember" id="remember">
                                                 <label for="remember"> Beni Hatırla</label>
                                             </div>
                                             <div class="form-group">
@@ -123,7 +123,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <div class="text-center">
-                                                            <a href="#" tabindex="5"
+                                                            <a href="#"
                                                                class="forgot-password">Şifremi Unuttum?</a>
                                                         </div>
                                                     </div>
@@ -135,23 +135,23 @@
                                             @csrf
                                             <input name="id" value="" type="hidden"/>
                                             <div class="form-group">
-                                                <input type="text" name="firstname" id="firstname" tabindex="1"
+                                                <input type="text" name="firstname" id="firstname"
                                                        class="form-control" placeholder="İsim" value="" required autocomplete="off">
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" name="lastname" id="lastname" tabindex="1"
+                                                <input type="text" name="lastname" id="lastname"
                                                        class="form-control" placeholder="Soyisim" value="" required autocomplete="off">
                                             </div>
                                             <div class="form-group">
-                                                <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Adresi"  required autocomplete="off">
+                                                <input type="email" name="email" id="email" class="form-control" placeholder="Email Adresi"  required autocomplete="off">
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" name="phone" id="phone" tabindex="1"
+                                                <input type="text" name="phone" id="phone"
                                                        class="form-control" placeholder="5xx xxx xx xx" value=""
                                                        required autocomplete="off">
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" name="password" id="password" tabindex="2"
+                                                <input type="password" name="password"
                                                        class="form-control" placeholder="Şifre" required autocomplete="off">
                                             </div>
                                             @if(env('GOOGLE_RECAPTCHA_KEY'))

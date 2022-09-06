@@ -91,7 +91,7 @@
                                         <select name="city" id="city" class="custom-select">
                                             <option value="">Seçim yapın...</option>
                                             @foreach ($cities as $city)
-                                                <option value="{{$city->id}}"   {{($city->id == old('city',@$customer->city))?'selected':''}}>{{$city->name}}</option>
+                                                <option value="{{$city->id}}"   {{($city->id == old('city',@$customer->city_id))?'selected':''}}>{{$city->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>

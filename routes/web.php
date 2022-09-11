@@ -62,6 +62,7 @@ Route::get('mailsend', [CrudController::class, 'mailsend'])->name('mailsend');
 Route::post('kayit-ol', [AuthController::class, 'register'])->name('kayit-ol');
 
 Route::get('car_detail', [ViewController::class, 'car_detail'])->name('car_detail');
+Route::get('aracgetir', [ViewController::class, 'aracgetir'])->name('aracgetir');
 
 
 Route::get('sayfalar', [ViewController::class, 'pages'])->name('sayfalar');
@@ -108,6 +109,7 @@ Route::prefix('admin/')->middleware(['auth', 'user-access:admin'])->group(functi
         Route::get('deleted', [CustomerController::class, 'deleted'])->name('admin.customer.deleted');
         Route::get('status', [CustomerController::class, 'status'])->name('admin.customer.status');
         Route::get('search', [CustomerController::class, 'search'])->name('admin.customer.search');
+        Route::post('update', [CustomerController::class, 'update'])->name('admin.customer.update');
     });
 
     Route::prefix('car/')->group(function () {
@@ -214,6 +216,10 @@ Route::get('/account.customer.logout', [AuthController::class, 'logout'])->name(
 
 Route::get('/pdf', [HomeController::class, 'pdf'])->name('pdf');
 Route::get('/authpage', [HomeController::class, 'authpage'])->name('authpage');
+Route::get('/passwordchange', [HomeController::class, 'passwordchange'])->name('passwordchange');
+Route::post('/sifre-degistir-baglantisi', [HomeController::class, 'passwordchangeconnect'])->name('sifre-degistir-baglantisi');
+Route::post('/sifremi-degistir', [HomeController::class, 'sifremidegistir'])->name('sifremi-degistir');
+Route::get('passwordchangepage', [HomeController::class, 'passwordchangepage'])->name('passwordchangepage');
 
 
 Route::get('pdf', [HomeController::class, 'pdf'])->name('pdf');

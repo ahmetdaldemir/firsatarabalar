@@ -65,7 +65,7 @@ class CustomerCar extends Model
 
     public function exper()
     {
-        return $this->belongsTo(CustomerCarExper::class, 'user_id', 'id');
+        return $this->belongsTo(CustomerCarExper::class, 'customer_car_id', 'id');
     }
 
     public function valuation()
@@ -88,5 +88,10 @@ class CustomerCar extends Model
     public function state()
     {
         return $this->belongsTo(Town::class, 'car_state', 'id');
+    }
+
+    public function colors()
+    {
+        return $this->belongsTo(Color::class, 'color', 'id');
     }
 }

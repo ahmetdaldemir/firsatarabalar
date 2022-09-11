@@ -12,7 +12,6 @@
                         @csrf
                         <div class="row">
                             <div class="col-sm-3">
-                                <label style="font-weight: 600">Marka</label>
                                 <div class="input-group">
                                     <select name="brand"
                                             ng-init="brands = '{{($customer_car && $customer_car->car->brand->id) ?  $customer_car->car->brand->id : '1'}}'"
@@ -25,7 +24,6 @@
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <label style="font-weight: 600">Yıl</label>
                                 <div class="input-group">
                                     <select name="year"
                                             ng-init="year = '{{($customer_car && $customer_car->year) ?  $customer_car->year : ''}}'"
@@ -38,7 +36,6 @@
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <label style="font-weight: 600">Model</label>
                                 <div class="input-group">
                                     <select name="model" class="form-select"
                                             ng-init="model = '{{($customer_car && $customer_car->car->model) ?  $customer_car->car->model : '0'}}'"
@@ -53,7 +50,6 @@
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <label style="font-weight: 600">Kaçıncı Sahibisiniz</label>
                                 <div class="input-group">
                                     <select name="ownorder" class="form-select">
                                         <option selected>Kaçıncı Sahibisiniz</option>
@@ -79,7 +75,6 @@
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <label style="font-weight: 600">Kasa Tipi</label>
                                 <div class="input-group">
                                     <select name="body" ng-init="body = '{{($customer_car && $customer_car->body) ?  $customer_car->body : '0'}}'" class="form-select"
                                             ng-change="GetFuel(year,brands,model)" ng-model="body">
@@ -92,7 +87,6 @@
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <label style="font-weight: 600">Yakıt Tipi</label>
                                 <div class="input-group">
                                     <select name="fuel" class="form-select" ng-init="fuel ='{{($customer_car && $customer_car->fuel) ?  $customer_car->fuel : '0'}}'"
                                             ng-change="GetVersion(year,brands,model,body,fuel)" ng-model="fuel">
@@ -105,7 +99,6 @@
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <label style="font-weight: 600">Vites Tipi</label>
                                 <div class="input-group">
                                     <select name="transmission" class="form-select">
                                         <option selected>Vites Tipi</option>
@@ -117,10 +110,9 @@
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <label style="font-weight: 600">Renk</label>
                                 <div class="input-group">
                                     <select name="color" class="form-select input-group-lg">
-                                        <option value="" selected>Seçiniz</option>
+                                        <option selected>Renk</option>
                                         @foreach($colors as $color)
                                             <option value="{{$color->id}}"
                                                     @if($customer_car && $customer_car->color == $color->id) selected @endif>{{$color->name}}</option>
@@ -129,7 +121,6 @@
                                 </div>
                             </div>
                             <div class="col-sm-12">
-                                <label style="font-weight: 600">Araç Versiyon</label>
                                 <div class="input-group">
                                     <select name="version" id="version" class="form-select" rows="40" cols="50"
                                             style="    width: 100%;">
@@ -141,7 +132,6 @@
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <label style="font-weight: 600">KM</label>
                                 <div class="input-group">
                                     <input name="km" required type="text" class="form-control"
                                            value="<?=@$customer_car->km?>" placeholder="KM Bilgisi">
@@ -149,7 +139,6 @@
                             </div>
 
                             <div class="col-sm-3">
-                                <label style="font-weight: 600">Araç Plakası</label>
                                 <div class="input-group">
                                     <input name="plate" type="text" class="form-control"
                                            value="<?=@$customer_car->plate?>" placeholder="Araç Plakası">
@@ -157,7 +146,6 @@
                             </div>
 
                             <div class="col-sm-3">
-                                <label style="font-weight: 600">İl</label>
                                 <div class="input-group">
                                     <select name="car_city" ng-init="districts ='{{($customer_car && $customer_car->car_city) ?  $customer_car->car_city : '0'}}'" ng-change="GetDistricts(districts)"
                                             ng-model="districts" class="form-select" style="height: 58px">
@@ -169,7 +157,6 @@
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <label style="font-weight: 600">İlçe</label>
                                 <div class="input-group">
                                     <select name="car_state" class="form-select" style="height: 58px">
                                         <option selected>İlçe</option>
@@ -182,7 +169,6 @@
                                 </div>
                             </div>
                             <div class="col-sm-12">
-                                <label style="font-weight: 600">Açıklama</label>
                                 <div class="input-group">
                                     <textarea name="description" class="form-control"
                                               placeholder="Mesaj"><?=@$customer_car->description?></textarea>

@@ -20099,7 +20099,7 @@ ul.primary li:before {
 
 .content-inner-1 {
     padding-top: 25px;
-    padding-bottom: 115px;
+    padding-bottom: 25px;
 }
 
 .content-inner-4 {
@@ -27163,7 +27163,7 @@ footer .widget_services ul a:hover {
 
 .header-transparent .is-fixed .navbar-toggler span {background: #ffffff;}
 .header-transparent .is-fixed .nav > li > a {
-    color: #000000;
+    color: #ffffff;
 }
 @media only screen and (max-width: 575px){
 .logo-header {

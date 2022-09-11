@@ -59,11 +59,7 @@ class CustomerController extends Controller
 
     public function store(CustomerRequest $request)
     {
-        if (is_null($request->customer_id)) {
-            $this->CustomerRepository->create($request);
-        } else {
-            $this->CustomerRepository->update($request->customer_id, $request);
-        }
+        $this->CustomerRepository->create($request);
         return redirect()->route('admin.customer.index');
     }
 
@@ -76,17 +72,10 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function update(Request $request): JsonResponse
+    public function update(Request $request)
     {
-        $id = $request->route('id');
-        $data = $request->only([
-            'client',
-            'details'
-        ]);
-
-        return response()->json([
-            'data' => $this->CustomerRepository->update($id, $data)
-        ]);
+        $this->CustomerRepository->update($request->customer_id, $request);
+        return redirect()->route('admin.customer.index');
     }
 
     public function destroy(Request $request): JsonResponse

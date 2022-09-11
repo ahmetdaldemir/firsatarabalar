@@ -76,7 +76,7 @@
                                                         <div class="form-group">
                                                             <label for="model">Model</label>
                                                             <input type="text" class="form-control form-control-sm"
-                                                                   value="{{$car->model}}" disabled>
+                                                                   value="{{$car->car->model}}" disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -134,7 +134,7 @@
                                                         <div class="form-group">
                                                             <label for="color">Renk</label>
                                                             <input type="text" class="form-control form-control-sm"
-                                                                   value="{{$car->color}}" disabled>
+                                                                   value="{{$car->colors->name}}" disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -245,7 +245,7 @@
                                                             <div class="input-group">
                                                                 <input type="text"
                                                                        class="form-control form-control-sm text-right"
-                                                                       value="{{$car->gal_fiyat_1}}" disabled>
+                                                                       value="{{$car->gal_price_1}}" disabled>
                                                                 <span class="input-group-text"
                                                                       style="font-size: 11px; border-radius: 0 3px 3px 0; border-left:0;">TL</span>
                                                             </div>
@@ -257,7 +257,7 @@
                                                             <div class="input-group">
                                                                 <input type="text"
                                                                        class="form-control form-control-sm text-right"
-                                                                       value="{{$car->gal_fiyat_2}}" disabled>
+                                                                       value="{{$car->gal_price_2}}" disabled>
                                                                 <span class="input-group-text"
                                                                       style="font-size: 11px; border-radius: 0 3px 3px 0; border-left:0;">TL</span>
                                                             </div>
@@ -269,7 +269,7 @@
                                                             <div class="input-group">
                                                                 <input type="text"
                                                                        class="form-control form-control-sm text-right"
-                                                                       value="{{$car->gal_fiyat_3}}" disabled>
+                                                                       value="{{$car->gal_price_3}}" disabled>
                                                                 <span class="input-group-text"
                                                                       style="font-size: 11px; border-radius: 0 3px 3px 0; border-left:0;">TL</span>
                                                             </div>
@@ -302,9 +302,7 @@
                                                 aria-controls="c2-a">Boya &amp; Değişen &amp; İşlem Durumu
                                         </button>
                                     </div>
-                                    <div id="c2-a" class="collapse show p-3" aria-labelledby="c2"
-                                         data-parent="#accordionExample">
-
+                                    <div id="c2-a" class="collapse show p-3" aria-labelledby="c2" data-parent="#accordionExample">
                                         <div class="row">
                                             <div class="col">
                                                 <div class="car-damage-wrapper">
@@ -313,9 +311,8 @@
                                                         <div class="col-lg-12 text-center">
                                                             <div class="damage-area">
                                                                 <div class="car-parts">
-                                                                    @if ($car->damage)
-                                                                        <?php $damage = json_decode($car->damage); ?>
-                                                                        @foreach ($damage as $key => $value)
+                                                                    @if($car->damage)
+                                                                        @foreach ($car->damage as $key => $value)
                                                                             @continue( substr($key, 0, 5) == "islem" )
                                                                             <div class="{{$key}} {{$value}}"></div>
                                                                         @endforeach
@@ -504,12 +501,10 @@
                     <div class="panel-body">
                         @if($car->exper)
                             <div class="row">
-
                                 @foreach ($car->exper as $expert)
                                     <div class="col-2 mb-3">
-                                        <a href="/Uploads/Cars/Expert/{{$expert->expert}}" target="_blank">
-                                            <img src="/Uploads/Cars/Expert/{{$expert->expert}}" alt=""
-                                                 class="img-fluid rounded">
+                                        <a href="{{asset('storage/files')}}/{{$expert->image}}" target="_blank">
+                                            <img src="{{asset('storage/files')}}/{{$expert->image}}"  class="img-fluid rounded">
                                         </a>
                                     </div>
                                 @endforeach

@@ -66,7 +66,7 @@ class AccountController extends Controller
 
     public function car()
     {
-        $data['cars'] = CustomerCar::where('customer_id', Auth::guard('customer')->id())->get();
+        $data['cars'] = CustomerCar::where('customer_id',Auth::guard('customer')->id())->get();
         return view('account/cars', $data);
     }
 

@@ -34,7 +34,6 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
         });
     }
 
-
     $scope.register = function () {
         $http({
             method: "POST", url: "/kayit-ol", headers: {
@@ -46,7 +45,6 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
             Swal.fire('info', 'Kayıt Başarılı');
         });
     }
-
 
     $scope.GetModel = function (item, brands) {
 
@@ -78,7 +76,6 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
             $scope.versionList = response.data;
         });
     }
-
 
     $scope.GetDistricts = function (item) {
         $http({
@@ -196,7 +193,6 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
         });
     }
 
-
     $scope.CustomerCarFollow = function (type, customer_car_id) {
         if (type == 4) {
             $http({
@@ -225,7 +221,6 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
         }
 
     }
-
 
     $scope.CustomerCarUnFollow = function (follow_id) {
         $http({
@@ -265,7 +260,6 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
 
     }
 
-
     $scope.AffiliateSave = function () {
         $http({
             method: "POST",
@@ -299,6 +293,4 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
             Swal.fire("Kullanıcı Girişi Yapmalısınız");
         });
     }
-
-
 }]);

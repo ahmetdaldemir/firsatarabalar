@@ -115,29 +115,7 @@
                                 @endif
                              </td>
                             <td>
-                                <div class="dropdown">
-                                    <a class="btn btn-xs btn-dark dropdown-toggle" href="#" role="button"
-                                       id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                       aria-expanded="false"><i class="fad fa-times mr-1"></i> Seçiniz </a>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item cancel" href="#"
-                                           data-valuationid="{{$customer_car_valuation->id}}" data-sendsms="0">Detay</a>
-                                        <a class="dropdown-item cancel" href="#"
-                                           data-valuationid="{{$customer_car_valuation->id}}"
-                                           data-sendsms="0">Resimler</a>
-                                        <a class="dropdown-item cancel" href="#"
-                                           data-valuationid="{{$customer_car_valuation->id}}" data-sendsms="1">SMS ile
-                                            Kaldır</a>
-                                        <a class="dropdown-item cancel" href="#"
-                                           data-valuationid="{{$customer_car_valuation->id}}" data-sendsms="0">Sessiz
-                                            Kaldır</a>
-                                        <a class="dropdown-item cancel" href="#"
-                                           data-valuationid="{{$customer_car_valuation->id}}" data-sendsms="0">Mesajlaşma</a>
-                                        <a class="dropdown-item cancel" href="#"
-                                           data-valuationid="{{$customer_car_valuation->id}}" data-sendsms="0">Değerlendirme
-                                            Raporu</a>
-                                    </div>
-                                </div>
+                                <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
                     @endforeach
@@ -315,8 +293,7 @@
         });
 
         function statuschange(key, id) {
-            if (key.value == 3) {
-
+            if (key.value == 2) {
                 $("#agentModal").modal('show');
                 $("#agentModal").find("#customer_car_id").val(id);
             }

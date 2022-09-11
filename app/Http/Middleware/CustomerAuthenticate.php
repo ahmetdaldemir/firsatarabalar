@@ -16,8 +16,6 @@ class CustomerAuthenticate
         if (Auth::guard('customer')->check()) {
             return $next($request);
         }
-        return redirect()->to('/')->withErrors(['msg' => 'Üye girişi yapmalısınız yada üye olmalısınız']);
+        return redirect()->to('authpage')->withErrors(['msg' => 'Üye girişi yapmalısınız yada üye olmalısınız']);
     }
-
-
 }

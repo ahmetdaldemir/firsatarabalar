@@ -108,6 +108,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-12">
+                                    {!! $car->description !!}
+                                </div>
 
 
                             </div>

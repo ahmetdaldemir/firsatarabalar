@@ -153,7 +153,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6 wow fadeInUp">
-                    <a href="{{route('form1')}}">
+                    <a href="{{route('confirm')}}">
 
                         <div class="icon-bx-wraper style-1 box-hover text-center m-b30"
                              style="display: table;height: 230px;  margin-bottom: 15px;background-size: cover;background-image: url('{{asset('view/images/banner/aracini-en-iyi-fiyata-sat.jpg')}}')">
@@ -185,34 +185,24 @@
             </div>
         </div>
     </section>
+
     <!-- Projects -->
+    @if(!is_null($yayinlanan_araclar))
     <section class="content-inner-1">
         <div class="container-fluid">
             <div class="section-head style-1 text-center mb-3">
-                <h3 class="title">ARAÇLAR</h3>
+                <h3 class="title">Yayındaki Araçlar</h3>
             </div>
-            <div class="site-filters style-1 clearfix center mb-5">
-                <ul class="filters" data-bs-toggle="buttons">
-                    <li data-filter=".web_development" class="btn active">
-                        <input type="radio">
-                        <a ng-click="GetCar(5)" href="javascript:void(0);">Satılan Araçlar</a>
-                    </li>
-                    <li data-filter=".branding" class="btn">
-                        <input type="radio">
-                        <a ng-click="GetCar(4)" href="javascript:void(0);">Gelecek Araçlar</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="container" ng-init="GetCar(5)">
-                <ul id="masonry" class="row lightgallery h-auto">
-                    <li ng-repeat="car in carList"
-                        class="card-container col-lg-3 col-md-6 col-sm-6 web_design wow fadeInUp"
-                        data-wow-duration="2s" data-wow-delay="0.2s">
+
+            <div class="container">
+                <ul  class="row  h-auto">
+                    <?php foreach ($yayinlanan_araclar as $car){ ?>
+                    <li class="card-container col-lg-4 col-md-6 col-sm-6 web_design wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="icon-bx-wraper style-7 text-center m-b30">
                                 <div class="icon-media">
-                                    <a href="car_detail?id=@{{car.id}}">
-                                        <img src="{{asset('storage/files')}}/@{{ car.default_image }}" alt="">
+                                    <a href="car_detail?id={{$car['id']}}">
+                                        <img src="{{asset('storage/files')}}/{{$car['default_image'] }}" alt="">
                                     </a>
                                 </div>
                                 <div class="icon-content">
@@ -220,62 +210,216 @@
                                         <div class="col-md-7"></div>
                                         <div class="col-md-7"></div>
                                     </div>
-                                    <a href="car_detail?id=@{{car.id}}">
+                                    <a href="car_detail?id={{$car['id']}}">
                                         <div class="row">
                                             <div class="col-md-6" style="text-align: left"><h5 class="dlab-title">
-                                                    @{{car.name }}</h5></div>
+                                                    {{$car['name'] }}</h5></div>
                                             <div class="col-md-6" style="text-align: left"><img
                                                         src="{{asset('view/icons/calendar.png')}}"
-                                                        style="float:left;width: 20px;height: 20px;"/> @{{ car.year }}
+                                                        style="float:left;width: 20px;height: 20px;    margin-right: 7px;"/>{{$car['year'] }}
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6" style="text-align: left;font-size: 14px;"><img
-                                                        src="{{asset('view/icons/engine.png')}}"
-                                                        style="float:left;width: 20px;height: 20px;"/> @{{ car.gear }}
+                                            <div class="col-md-6" style="text-align: left;font-size: 14px;">
+                                                <img src="{{asset('view/icons/engine.png')}}" style="float:left;width: 20px;height: 20px;    margin-right: 7px;"/>
+                                                {{$car['gear']}}
                                             </div>
-                                            <div class="col-md-6" style="text-align: left;font-size: 14px;"><img
-                                                        src="{{asset('view/icons/fuel.png')}}"
-                                                        style="float:left;width: 20px;height: 20px;"/> @{{ car.fuel }}
+                                            <div class="col-md-6" style="text-align: left;font-size: 14px;">
+                                                <img src="{{asset('view/icons/fuel.png')}}" style="float:left;width: 20px;height: 20px;    margin-right: 7px;"/>{{$car['fuel']}}
                                             </div>
                                         </div>
                                     </a>
                                     <div class="row">
-                                        <div class="col-md-12 m-t10" ng-if="car.type == 4">
-                                            <button ng-if="car.follow == 0" type="button"
-                                                    ng-click="CustomerCarFollow(car.type,car.id)"
-                                                    style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;"
-                                                    class="btn btn-success">Takibe Al
-                                                <i class="fas fa-check-circle"
-                                                   style="    float: left;font-size: 19px;"></i>
+                                        @if($car['type'] == 4)
+                                        <div class="col-md-12 m-t10">
+                                            @if($car['follow'] == 0)
+                                            <button type="button"  ng-click="CustomerCarFollow({{$car['type']}},{{$car['id']}})" style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">Takibe Al
+                                                <i class="fas fa-check-circle" style="    float: left;font-size: 19px;"></i>
                                             </button>
-                                            <button ng-if="car.follow == 1" type="button"
-                                                    ng-click="CustomerCarUnFollow(car.type,car.id)"
-                                                    style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;"
-                                                    class="btn btn-success">Listeden Çıkart
-                                                <i class="fas fa-check-circle"
-                                                   style="    float: left;font-size: 19px;"></i>
-                                            </button>
+                                            @endif
+                                                @if($car['follow'] == 1)
+                                                    <button type="button" ng-click="CustomerCarUnFollow({{$car['type']}},{{$car['id']}})"  style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">Listeden Çıkart
+                                                    <i class="fas fa-check-circle" style="    float: left;font-size: 19px;"></i>
+                                                    </button>
+                                                @endif
                                         </div>
-                                        <div class="col-md-12 m-t10" ng-if="car.type == 5">
-                                            <button ng-if="car.follow == 1" type="button"
-                                                    ng-click="CustomerCarBuy(car.id)"
-                                                    style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;"
-                                                    class="btn btn-success">Aldım
-                                            </button>
-                                            <a ng-if="car.follow == 0" href="car_detail?id=@{{car.id}}"
-                                               style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;"
-                                               class="btn btn-success">İncele</a>
+                                        @endif
+                                            @if($car['type'] == 5 )
+                                        <div class="col-md-12 m-t10">
+                                            @if($car['follow'] == 1)
+                                                <button type="button" ng-click="CustomerCarBuy({{$car['id']}})" style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">Aldım </button>
+                                            @endif
+                                            @if($car['follow'] == 0)
+                                                    <a  href="car_detail?id={{$car['id']}}" style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">İncele</a>
+                                                @endif
                                         </div>
+                                            @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>
     </section>
+    @endif
+    @if(!is_null($gelecek_araclar))
+    <section class="content-inner-1">
+        <div class="container-fluid">
+            <div class="section-head style-1 text-center mb-3">
+                <h3 class="title">Gelecek Araçlar</h3>
+            </div>
+
+            <div class="container">
+                <ul  class="row  h-auto">
+                    <?php foreach ($gelecek_araclar as $car){ ?>
+                    <li class="card-container col-lg-4 col-md-6 col-sm-6 web_design wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="icon-bx-wraper style-7 text-center m-b30">
+                                <div class="icon-media">
+                                    <a href="car_detail?id={{$car['id']}}">
+                                        <img src="{{asset('storage/files')}}/{{$car['default_image'] }}" alt="">
+                                    </a>
+                                </div>
+                                <div class="icon-content">
+                                    <div class="row">
+                                        <div class="col-md-7"></div>
+                                        <div class="col-md-7"></div>
+                                    </div>
+                                    <a href="car_detail?id={{$car['id']}}">
+                                        <div class="row">
+                                            <div class="col-md-6" style="text-align: left"><h5 class="dlab-title">
+                                                    {{$car['name'] }}</h5></div>
+                                            <div class="col-md-6" style="text-align: left"><img
+                                                        src="{{asset('view/icons/calendar.png')}}"
+                                                        style="float:left;width: 20px;height: 20px;"/>{{$car['year'] }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6" style="text-align: left;font-size: 14px;">
+                                                <img src="{{asset('view/icons/engine.png')}}" style="float:left;width: 20px;height: 20px;"/>
+                                                {{$car['gear']}}
+                                            </div>
+                                            <div class="col-md-6" style="text-align: left;font-size: 14px;">
+                                                <img src="{{asset('view/icons/fuel.png')}}" style="float:left;width: 20px;height: 20px;"/>{{$car['fuel']}}
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="row">
+                                        @if($car['type'] == 4)
+                                            <div class="col-md-12 m-t10">
+                                                @if($car['follow'] == 0)
+                                                    <button type="button"  ng-click="CustomerCarFollow({{$car['type']}},{{$car['id']}})" style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">Takibe Al
+                                                        <i class="fas fa-check-circle" style="    float: left;font-size: 19px;"></i>
+                                                    </button>
+                                                @endif
+                                                @if($car['follow'] == 1)
+                                                    <button type="button" ng-click="CustomerCarUnFollow({{$car['type']}},{{$car['id']}})"  style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">Listeden Çıkart
+                                                        <i class="fas fa-check-circle" style="    float: left;font-size: 19px;"></i>
+                                                    </button>
+                                                @endif
+                                            </div>
+                                        @endif
+                                        @if($car['type'] == 5 )
+                                            <div class="col-md-12 m-t10">
+                                                @if($car['follow'] == 1)
+                                                    <button type="button" ng-click="CustomerCarBuy({{$car['id']}})" style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">Aldım </button>
+                                                @endif
+                                                @if($car['follow'] == 0)
+                                                    <a  href="car_detail?id={{$car['id']}}" style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">İncele</a>
+                                                @endif
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <?php } ?>
+                </ul>
+            </div>
+        </div>
+    </section>
+    @endif
+    @if(!is_null($satilan_araclar))
+    <section class="content-inner-1">
+        <div class="container-fluid">
+            <div class="section-head style-1 text-center mb-3">
+                <h3 class="title">Satılan Araçlar</h3>
+            </div>
+            <div class="container">
+                <ul  class="row  h-auto">
+                    <?php foreach ($satilan_araclar as $car){ ?>
+                    <li class="card-container col-lg-4 col-md-6 col-sm-6 web_design wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.2s">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="icon-bx-wraper style-7 text-center m-b30">
+                                <div class="icon-media">
+                                    <a href="car_detail?id={{$car['id']}}">
+                                        <img src="{{asset('storage/files')}}/{{$car['default_image'] }}" alt="">
+                                    </a>
+                                </div>
+                                <div class="icon-content">
+                                    <div class="row">
+                                        <div class="col-md-7"></div>
+                                        <div class="col-md-7"></div>
+                                    </div>
+                                    <a href="car_detail?id={{$car['id']}}">
+                                        <div class="row">
+                                            <div class="col-md-6" style="text-align: left"><h5 class="dlab-title">
+                                                    {{$car['name'] }}</h5></div>
+                                            <div class="col-md-6" style="text-align: left"><img
+                                                        src="{{asset('view/icons/calendar.png')}}"
+                                                        style="float:left;width: 20px;height: 20px;"/>{{$car['year'] }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6" style="text-align: left;font-size: 14px;">
+                                                <img src="{{asset('view/icons/engine.png')}}" style="float:left;width: 20px;height: 20px;"/>
+                                                {{$car['gear']}}
+                                            </div>
+                                            <div class="col-md-6" style="text-align: left;font-size: 14px;">
+                                                <img src="{{asset('view/icons/fuel.png')}}" style="float:left;width: 20px;height: 20px;"/>{{$car['fuel']}}
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="row">
+                                        @if($car['type'] == 4)
+                                            <div class="col-md-12 m-t10">
+                                                @if($car['follow'] == 0)
+                                                    <button type="button"  ng-click="CustomerCarFollow({{$car['type']}},{{$car['id']}})" style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">Takibe Al
+                                                        <i class="fas fa-check-circle" style="    float: left;font-size: 19px;"></i>
+                                                    </button>
+                                                @endif
+                                                @if($car['follow'] == 1)
+                                                    <button type="button" ng-click="CustomerCarUnFollow({{$car['type']}},{{$car['id']}})"  style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">Listeden Çıkart
+                                                        <i class="fas fa-check-circle" style="    float: left;font-size: 19px;"></i>
+                                                    </button>
+                                                @endif
+                                            </div>
+                                        @endif
+                                        @if($car['type'] == 5 )
+                                            <div class="col-md-12 m-t10">
+                                                @if($car['follow'] == 1)
+                                                    <button type="button" ng-click="CustomerCarBuy({{$car['id']}})" style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">Aldım </button>
+                                                @endif
+                                                @if($car['follow'] == 0)
+                                                    <a  href="car_detail?id={{$car['id']}}" style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">İncele</a>
+                                                @endif
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <?php } ?>
+                </ul>
+            </div>
+        </div>
+    </section>
+    @endif
     <style>
         .shadow {
             position: relative;
@@ -306,7 +450,6 @@
                 <div class="section-head style-1 text-center">
                     <h2 class="title">Nasıl Çalışır</h2>
                 </div>
-
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-xl-6 col-lg-5 wow fadeInRight" data-wow-duration="2s" data-wow-delay="0.4s">

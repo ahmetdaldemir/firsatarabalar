@@ -1,39 +1,55 @@
 @extends('layouts.view')
 @section('content')
     <link rel="stylesheet" href="{{asset('view/css/wizard.css')}}">
-    <script src="{{asset('view/js/js/custom.js')}}"></script><!-- CUSTOM JS -->
-    <script src="{{asset('view/js/js/dz.ajax.js')}}"></script><!-- CUSTOM JS -->
+    <script src="{{asset('view/js/custom.js')}}"></script><!-- CUSTOM JS -->
+    <script src="{{asset('view/js/dz.ajax.js')}}"></script><!-- CUSTOM JS -->
 
     <div class="content-inner-2"
          style="background-image: url(images/background/bg2.png); background-repeat: no-repeat; background-size:100%;">
         <div class="container">
             <div class="row align-items-center">
-                <form action="{{route('form1')}}" method="get">
-                    <div class="col-lg-12 m-b30 wow fadeIn m-t80 m-b40" data-wow-duration="2s" data-wow-delay="0.2s">
-                        <div class="box m-b20">
-                            <p>Fırsat arabalar'da aracınız sat !</p>
-                            <h6 class="m-b30">Sözleşmeleri okuyunuz ve onaylayınız</h6>
-                            <label style="left: 43px;position: relative;top: 26px;"><a href="#" id="agreement">Online araç satış sözleşmesi Okudum ve Onaylıyorum</a></label>
-                            <label class="container">
-                                <input type="checkbox" name="agreement" required>
-                                <span class="checkmark"></span>
-                            </label>
+                <div class="col-lg-12 m-b30 wow fadeIn m-t80 m-b40" data-wow-duration="2s" data-wow-delay="0.2s">
+                    <div class="box m-b20">
+                        <p>Fırsat arabalar'da aracınız sat !</p>
+                        <h6 class="m-b30">Sözleşmeleri okuyunuz ve onaylayınız</h6>
+                        <label style="left: 43px;position: relative;top: 26px;"><a href="#" id="agreement">Online araç
+                                satış sözleşmesi Okudum ve Onaylıyorum</a></label>
+                        <label class="container">
+                            <input type="checkbox" name="agreement" required>
+                            <span class="checkmark"></span>
+                        </label>
 
-                            <label style="left: 43px;position: relative;top: 26px;"><a href="#" id="kvkk">KVKK metinini
-                                    online okudum ve onaylıyorum</a></label>
-                            <label class="container">
-                                <input type="checkbox" name="kvkk" required>
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <div class="">
-                            <button class="btn btn-primary float-end">İLERİ</button>
-                        </div>
+                        <label style="left: 43px;position: relative;top: 26px;"><a href="#" id="kvkk">KVKK metinini
+                                online okudum ve onaylıyorum</a></label>
+                        <label class="container">
+                            <input type="checkbox" name="kvkk" required>
+                            <span class="checkmark"></span>
+                        </label>
                     </div>
-                </form>
+                </div>
+                <!--
+                <?php if($customer_car){ ?>
+                <div class="col-lg-12 m-b30 wow fadeIn m-b40" data-wow-duration="2s" data-wow-delay="0.2s">
+                    <div class="box m-b20">
+                        <p>Daha önce eklenmiş bir aracınız bulunmaktadır. Devam etmek istermisiniz ?</p>
+                    </div>
+                </div>
+                <?php } ?>
+                <div class="">
+                    <?php if($customer_car){ ?>
+                      <button onclick="requiredButton(1,{{$customer_car->id??0}})" class="btn btn-danger float-end">Devam Etmek İstiyorum</button>
+                    <?php } ?>
+                    <button onclick="requiredButton(0,0)" class="btn btn-warning float-end text-white">Yeni Araç eklemek istiyorum</button>
+                </div>
+                -->
+                <div>
+                <button onclick="requiredButton(0,0)" class="btn btn-warning float-end text-white">Araç eklemek istiyorum</button>
+                </div>
             </div>
         </div>
     </div>
+
+
 
     <div class="modal fade" id="kvkkModal" tabindex="-1" role="dialog" aria-labelledby="kvkkModalLabel"
          aria-hidden="true" style="    z-index: 10582;">
@@ -97,7 +113,6 @@
             display: block;
             position: relative;
             padding-left: 40px;
-            margin-bottom: 25px;
             cursor: pointer;
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -202,6 +217,20 @@
         }
     </style>
     <script>
+
+        function requiredButton(id,is_data) {
+            if (!$('input[name=agreement]').is(':checked')) {
+                alert("Sözleşmeyi kabul etmelisiniz");
+                return false;
+            }
+            if (!$('input[name=kvkk]').is(':checked')) {
+                alert("Kvkk kabul etmelisiniz");
+                return false;
+            }
+            window.location.href = 'form1?status='+id+'&is_data='+is_data+'';
+
+        }
+
         $("#kvkk").click(function () {
             $("#kvkkModal").modal('show');
         });

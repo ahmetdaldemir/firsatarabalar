@@ -40,11 +40,11 @@ class CustomerCarController extends Controller
 
     }
 
-    public function index()
+    public function index(Request $request)
     {
 
         $data['show'] = "";
-        $data['customer_car_valuations'] = $this->CustomerCar->get();
+        $data['customer_car_valuations'] = $this->CustomerCar->get($request);
         $data['years'] = DateEnum::Years;
         $data['experts'] = $this->UserRepository->getExpert();
         $data['mounth'] = $this->now->month;
@@ -123,15 +123,18 @@ class CustomerCarController extends Controller
     public function assignmentDo(Request $request)
     {
         $check = $this->CustomerCar->checkAssingTo($request, CustomerCarStatus::STATUS_STRING['ASSINGTO']);
-        if (!$check) {
+        if ($check == 0) {
             $this->CustomerCar->assignmentDo($request);
-            $sms = new Sms($request);
-
-            $this->CustomerCar->status($request, CustomerCarStatus::STATUS_STRING['ASSINGTO']);
-            $this->CustomerCar->statusLog($request, CustomerCarStatus::STATUS_STRING['ASSINGTO']);
+            $customer_car = $this->CustomerCar->getById($request->customer_car_id);
+            $message = mb_strtoupper($customer_car->plate) . " Plakali aracin atamasi yapilmistir. En kisa surede arac degerlemesine baslayiniz.";
+            $requesta['message'] =  $message;
+            $requesta['phone']   =  $customer_car->expert->phone;
+            $sms = new Sms($requesta);
+            $this->CustomerCar->status($request, CustomerCarStatus::STATUS_STRING['VALUATION']);
+            $this->CustomerCar->statusLog($request, CustomerCarStatus::STATUS_STRING['VALUATION']);
             return response()->json("Atama Başarılı", Response::HTTP_OK);
         }
-        return response()->json("Daha Önce Atama işlemi yapılmıştır", Response::HTTP_CONFLICT);
+        return response()->json($check, 200);
     }
 
     public function store_valuation(Request $request)

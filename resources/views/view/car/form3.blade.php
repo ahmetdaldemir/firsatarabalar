@@ -11,7 +11,7 @@
                     <form class="dlab-form" method="POST" action="{{route('form4')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="dzFormMsg"></div>
-                        <input type="hidden" class="form-control" name="customer_car_id" value="@if(isset($customer_car_id)) {{$customer_car_id}} @else  {{$customer_car->id}} @endif">
+                        <input type="hidden" class="form-control" name="customer_car_id" value="@if(isset($customer_car_id)){{$customer_car_id}}@else{{$customer_car->id}}@endif">
                         <div class="row">
                             <div class="col-sm-12" id="checkboxDiv">
                                 <div>

@@ -68,7 +68,6 @@ class CustomerRepository implements CustomerRepositoryInterface
         if ($request->password) {
             $Customer->password = bcrypt($request->password);
         }
-        $Customer->earn = $request->earn;
         if (empty($request->status)) {
             $Customer->status = 0;
         }else{

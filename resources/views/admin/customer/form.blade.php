@@ -45,7 +45,7 @@
                     </div>
                     <div class="panel-body">
 
-                        <form action="{{route('admin.customer.store')}}" method="post">
+                        <form action="@if(!empty($customer)){{route('admin.customer.update')}} @else {{route('admin.customer.store')}} @endif" method="post">
                             @csrf
                             <input type="hidden" name="customer_id" value="{{@$customer->id}}">
 

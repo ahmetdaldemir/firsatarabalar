@@ -25,15 +25,14 @@ final class CustomerCarStatus extends Enum
 
 
     const STATUS_STRING = [
-        'TRANSACTION ABORTED' => 1,
-        'WAITING' => 2,
-        'ASSINGTO' => 3,
-        'VALUATION' => 4,
+        'TRANSACTION ABORTED' => 0,
+        'WAITING' => 1,
+        'ASSINGTO' => 2,
+        'VALUATION' => 3,
+        'CONFIRM' => 4,
         'SELL' => 5,
-        'COMPLATED' => '6',
+        'COMPLATED' => 6,
         'CLOSED' => 7,
-
+        'VALUATION NOT ACCEPTED' => 8,
     ];
-
-
 }

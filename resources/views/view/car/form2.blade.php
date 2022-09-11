@@ -11,7 +11,7 @@
                 <form class="dlab-form" method="POST" action="{{route('form3')}}" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" class="form-control" name="customer_id" value="{{auth()->id()}}" >
-                    <input type="hidden" class="form-control" name="customer_car_id" value="{{$customer_car_id}}" >
+                    <input type="hidden" class="form-control" name="customer_car_id" value="{{$customer_car_id}}">
                     <div class="row">
                         <div class="col-sm-12 mb-4">
                             <div class="car-damage-wrapper">
@@ -178,23 +178,21 @@
                         <div class="col-sm-4">
                             <div class="input-group">
                                 <select name="tramer" id="tramer" class="form-control" required>
-                                    <option value="1" @if($customer_car && $customer_car->tramer == 1)   selected @endif>Tramer Yok</option>
-                                    <option value="2" @if($customer_car && $customer_car->tramer == 2)  selected @endif>Tramer Var</option>
-                                    <option value="3" @if($customer_car && $customer_car->tramer == 3)  selected @endif>Ağır Hasar Kayıtlı</option>
+                                    <option value="1" selected>Tramer Yok</option>
+                                    <option value="2">Tramer Var</option>
+                                    <option value="3">Ağır Hasar Kayıtlı</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <input name="tramer_price" id="tramerValue" type="text" class="form-control" value="{{@$customer_car->tramerValue}}">
+                                <input name="tramer_price" id="tramerValue" type="text" class="form-control" disabled>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="input-group">
-                                <input name="tramer_image" id="tramerPhoto" type="file" class="form-control">
-                                @if(@$customer_car && !is_null($customer_car->tramerPhoto))
-                                <img style="width: 60px;height: 60px" src="{{asset('storage/cars')}}/{{@$customer_car->tramer_photo}}" />
-                                @endif
+                                <input name="tramer_image" id="tramerPhoto" type="file" class="form-control" disabled>
+
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -262,7 +260,8 @@
         $(".car-parts .durum_lastik").removeClass("original").addClass("Orta");
         $("tr.durum_lastik td.Orta input").prop("checked", true);
 
-        $("#tramer").val({{@$customer_car->tramer}});
+        $("#tramer").val(1);
+        //$("#tramer").val({{@$customer_car->tramer}});
 
 
         $("#tramer").on("change", function(){

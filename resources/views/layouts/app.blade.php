@@ -81,15 +81,43 @@
                     </a>
                 </li>
                 @endrole
+                <li>
+                    <hr style='border-top: 1px solid #3a586f'>
+                </li>
                 @role('Exper|Admin')
                 <li>
-                    <a href="{{route('admin.customer_car_valuation.index')}}">
+                    <a href="{{route('admin.customer_car_valuation.index',['status' => \App\Enums\CustomerCarStatus::STATUS_STRING['WAITING']])}}">
                         <i class="fa-fw fad fa-bullseye-pointer"></i>
-                        <span class="nav-label">Değerlemeler</span>
-                        <span class="label label-info float-right"><?php echo count_menu()['customer_car']; ?></span>
+                        <span class="nav-label">Yeni Gelenler</span>
+                        <span class="label label-info float-right">-</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('admin.customer_car_valuation.index',['status' =>  \App\Enums\CustomerCarStatus::STATUS_STRING['VALUATION']])}}">
+                        <i class="fa-fw fad fa-bullseye-pointer"></i>
+                        <span class="nav-label">Değerlemede Olanlar</span>
+                        <span class="label label-info float-right">-</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.customer_car_valuation.index',['status' =>  \App\Enums\CustomerCarStatus::STATUS_STRING['SELL']])}}">
+                        <i class="fa-fw fad fa-bullseye-pointer"></i>
+                        <span class="nav-label">Satışta Olanlar</span>
+                        <span class="label label-info float-right">-</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.customer_car_valuation.index',['status' => \App\Enums\CustomerCarStatus::STATUS_STRING['COMPLATED']])}}">
+                        <i class="fa-fw fad fa-bullseye-pointer"></i>
+                        <span class="nav-label">Tamamlananlar</span>
+                        <span class="label label-info float-right">-</span>
+                    </a>
+                </li>
+
                 @endrole
+                <li>
+                    <hr style='border-top: 1px solid #3a586f'>
+                </li>
                 @role('Admin')
                 <li>
                     <a href="{{route('admin.vehicle_request.index')}}">
@@ -123,12 +151,10 @@
                 <li><a href="{{route('admin.page.index')}}"><i class="fa-fw fad fa-file-alt"></i> <span
                                 class="nav-label">Sabit Sayfalar</span></a></li>
                 @endrole
-                @role('Admin')
-                <li>
+                 <li>
                     <hr style='border-top: 1px solid #3a586f'>
                 </li>
-                @endrole
-                @role('Admin')
+                 @role('Admin')
                 <li><a href="/admin/setting/index"><i class="fa-fw fad fa-cog"></i><span
                                 class="nav-label">Ayarlar</span></a></li>
                 @endrole

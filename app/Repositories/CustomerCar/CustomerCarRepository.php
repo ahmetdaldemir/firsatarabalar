@@ -3,6 +3,8 @@
 use App\Enums\BodyType;
 use App\Enums\FullType;
 use App\Enums\Transmission;
+use App\Models\Brand;
+use App\Models\Car;
 use App\Models\Customer;
 use App\Models\CustomerCar;
 use App\Models\CustomerCarExper;
@@ -13,6 +15,7 @@ use App\Models\CustomerCarValuation;
 use App\Models\User;
 use App\Services\Upload;
 use Illuminate\Support\Facades\Auth;
+use Psy\Util\Str;
 use Spatie\Permission\Models\Role;
 
 class CustomerCarRepository implements CustomerCarInterface
@@ -27,13 +30,13 @@ class CustomerCarRepository implements CustomerCarInterface
 
     }
 
-    public function get()
+    public function get($request)
     {
         $role_id = Auth::guard('web')->user()->roles->first()->id;
         if ($role_id == 1) {
-           return CustomerCar::orderBy('id', 'desc')->paginate(5);
+           return CustomerCar::where('status',$request->status)->orderBy('id', 'desc')->paginate(20);
         }
-        return CustomerCar::where('user_id', Auth::guard('web')->id())->orderBy('id', 'desc')->paginate(5);
+        return CustomerCar::where('user_id', Auth::guard('web')->id())->where('status',$request->status)->orderBy('id', 'desc')->paginate(20);
     }
 
     public function getDistrict($id)
@@ -58,7 +61,11 @@ class CustomerCarRepository implements CustomerCarInterface
 
     public function delete($id)
     {
-        return CustomerCar::destroy($id);
+        if($id != 0)
+        {
+             $x = CustomerCar::where('id',$id)->first();
+             $x->delete();
+        }
     }
 
     public function create($request)
@@ -160,9 +167,8 @@ class CustomerCarRepository implements CustomerCarInterface
 
     public function checkAssingTo($request, $status)
     {
-        return CustomerCarStatuHistory::where('customer_car_id', $request->customer_car_id)->where('status', $status)->get();
+        return CustomerCarStatuHistory::where('customer_car_id', $request->customer_car_id)->where('status', $status)->count();
     }
-
 
     public function getType($type)
     {
@@ -217,23 +223,43 @@ class CustomerCarRepository implements CustomerCarInterface
     {
         $customer_id = $this->customer_add();
 
+        if($request->version == null)
+        {
+            $cars = new Car();
+            $cars->brand_id = $request->brand;
+            $cars->brand_name = Brand::find($request->brand)->name;
+            $cars->model_id = NULL;
+            $cars->name = $request->custom_version;
+            $cars->model = $request->model;
+            $cars->fueltype = $request->fuel;
+            $cars->transmission = $request->transmission;
+            $cars->bodytype = $request->body;
+            $cars->engine = 1;
+            $cars->horse = 1;
+            $cars->save();
+
+            $car_id = $cars->id;
+        }else{
+            $car_id = $request->version;
+        }
+
         $customer_car = CustomerCar::updateOrCreate(
-            ['customer_id' => $customer_id, 'session_id' => cacheresponseid()],
+            ['customer_id' => $customer_id, 'session_id' => cacheresponseid() ?? \Illuminate\Support\Str::uuid()],
             [
                 'customer_id' => $customer_id,
-                'caryear' => $request->year,
-                'body' => $request->body,
-                'fuel' => $request->fuel,
-                'gear' => $request->transmission,
-                'car_id' => $request->version,
-                'custom_version' => $request->custom_version,
-                'km' => $request->km,
-                'color' => $request->color,
-                'plate' => $request->plate,
-                'ownorder' => $request->ownorder,
-                'car_city' => $request->car_city,
-                'car_state' => $request->car_state,
-                'description' => $request->description,
+                'caryear' => $request->year??null,
+                'body' => $request->body??null,
+                'fuel' => $request->fuel??null,
+                'gear' => $request->transmission??null,
+                'car_id' => $car_id??null,
+                'custom_version' => $request->custom_version??null,
+                'km' => $request->km??null,
+                'color' => $request->color??null,
+                'plate' => $request->plate??null,
+                'ownorder' => $request->ownorder??null,
+                'car_city' => $request->car_city??null,
+                'car_state' => $request->car_state??null,
+                'description' => $request->description??null,
                 'laststep' => '2',
             ]
         );
@@ -249,7 +275,7 @@ class CustomerCarRepository implements CustomerCarInterface
             $filename = $this->upload->getFileName();
         }
 
-        $customer_car = CustomerCar::find($request->customer_car_id);
+        $customer_car = CustomerCar::where('id',$request->customer_car_id)->first();
         $customer_car->damage = json_encode($request->damage);
         $customer_car->tramer = $request->tramer;
         $customer_car->tramerValue = $request->tramer_price;
@@ -262,7 +288,7 @@ class CustomerCarRepository implements CustomerCarInterface
     public function thirtyStepStore($request)
     {
 
-        $customer_car = CustomerCar::find($request->customer_car_id);
+        $customer_car = CustomerCar::where('id',trim($request->customer_car_id))->first();
         $customer_car->car_details = $request->car_details;
         $customer_car->car_notwork = $request->car_notwork;
         $customer_car->car_exterior_faults = $request->car_exterior_faults;
@@ -300,7 +326,7 @@ class CustomerCarRepository implements CustomerCarInterface
 
     public function fourth($request)
     {
-        $customer_car = CustomerCar::where('session_id', cacheresponseid())->first();
+        $customer_car = CustomerCar::where('id', $request->id)->where('session_id', cacheresponseid())->first();
         $customer_car_photo = new CustomerCarPhoto();
         $customer_car_photo->customer_car_id = $customer_car->id;
         $customer_car_photo->image = $request;

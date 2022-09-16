@@ -80,7 +80,7 @@ class CrudController extends Controller
 
     public function getversionlist(Request $request)
     {
-        $fuel = $this->service->version($request->year,$request->brand,$request->model,$request->body,$request->fuel);
+        $fuel = $this->service->version($request->year,$request->brand,$request->model);
         return response()->json($fuel,200);
     }
 

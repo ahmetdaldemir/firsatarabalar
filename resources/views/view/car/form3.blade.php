@@ -328,7 +328,7 @@
                                 <div class="input-group input-group-sm">
                                     <input type="text" name="gal_fiyat_1" id="gal_fiyat_1" class="form-control text-end"
                                            value="{{@$customer_car->gal_price_1}}" placeholder="0.000"
-                                           required="required" maxlength="19">
+                                           required="required" maxlength="19" style="height: 45px">
                                     <span class="input-group-text">TL</span>
                                 </div>
                             </div>

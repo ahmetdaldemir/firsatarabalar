@@ -8,7 +8,7 @@
          style="background-image: url(images/background/bg2.png); background-repeat: no-repeat; background-size:100%;">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-12 m-b30 wow fadeIn m-t80 m-b40" data-wow-duration="2s" data-wow-delay="0.2s">
+                <div class="col-lg-12 m-b30 wow fadeIn m-t80 m-b30" data-wow-duration="2s" data-wow-delay="0.2s">
                     <div class="box m-b20">
                         <p>Fırsat arabalar'da aracınız sat !</p>
                         <h6 class="m-b30">Sözleşmeleri okuyunuz ve onaylayınız</h6>
@@ -43,7 +43,7 @@
                 </div>
                 -->
                 <div>
-                <button onclick="requiredButton(0,0)" class="btn btn-warning float-end text-white">Araç eklemek istiyorum</button>
+                <button onclick="requiredButton(0,0)" class="btn btn-warning float-end text-white m-b30">Araç eklemek istiyorum</button>
                 </div>
             </div>
         </div>

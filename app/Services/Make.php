@@ -108,14 +108,14 @@ class Make
         return $data;
     }
 
-    public function version($year, $brand, $model, $body, $fuel)
+    public function version($year, $brand, $model)
     {
 
         $array = [];
-        $cache_key = 'name:' . $year . ":" . $brand . ":" . $body . ":" . $fuel;
+        $cache_key = 'name:' . $year . ":" . $brand;
         $data = Cache::get($cache_key);
         if (!Cache::has($cache_key)) {
-            $data = Car::select('id', 'name')->where('brand_id', $brand)->where('bodytype', $body)->where('fueltype', $fuel)->where('model', $model)->where('production_start', '<=', $year)->where('production_end', '>=', $year)->get();
+            $data = Car::select('id', 'name')->where('brand_id', $brand)->where('model', $model)->where('production_start', '<=', $year)->where('production_end', '>=', $year)->get();
             foreach ($data as $item) {
                 $array[] = array(
                     'name' => $item->name,

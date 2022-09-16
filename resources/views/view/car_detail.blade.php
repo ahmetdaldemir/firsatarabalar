@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-xl-6 col-md-12">
                     <div class="dlab-team style-3 mb-5">
-                        <div class="dlab-media rounded-md shadow">
+                        <div class="dlab-media rounded-md shadow "  id="lightgallery">
                             <div class="post-carousel owl-carousel owl-theme owl owl-btn-center-lr owl-btn-2">
                                 @if(!is_null($car->default_image))
                                     <div class="item"> <img src="{{asset('storage/files')}}/{{$car->default_image}}"
@@ -33,7 +33,7 @@
                                                            alt="image"/></div>
                                 @endif
                                 <?php foreach ($car->photo as $image){ ?>
-                                <div class="item"><img class="rounded-sm" src="{{asset('storage/files')}}/{{$image->image}}" alt=""></div>
+                                    <div class="item lightgallery"><a href="{{asset('storage/files')}}/{{$image->image}}"><img class="rounded-sm" src="{{asset('storage/files')}}/{{$image->image}}" alt=""></a></div>
                                 <?php } ?>
 
                             </div>
@@ -45,21 +45,21 @@
                     <div class="section-head style-1">
                         <h5 class="title m-b20">{{$car->car->name}}</h5>
                     </div>
+                    <div class="section-head style-1">
+                        <div class="car-price bg-warning text-white p-3 px-4 rounded mb-3 lead text-end d-flex justify-content-between align-items-center">
+                            <i class="fas fa-stars"></i>
+                            Fırsat Fiyatı
+                            <h3 class="m-0">{{($car->price == 0) ? $car->price."TL" :"Açıklanmadı" }}</h3>
+                        </div>
+                    </div>
+
+
+
+
                     <div class="about-media">
                         <div class="dz-content">
                             <div class="row media-portion">
-                                <div class="col-md-6">
-                                    <div class="icon-bx-wraper style-6 left p-0 m-b30 icon-up">
-                                        <div class="icon-bx-sm bg-white">
-                                            <a href="javascript:void(0);" class="icon-cell text-primary">
-                                                <img src="{{asset('view/icons/turkish-lira.png')}}" />
-                                            </a>
-                                        </div>
-                                        <div class="icon-content">
-                                            <h5 class="dlab-title m-b10 lh-lg">{{($car->price == 0) ? "Açıklanmadı" : $car->price}}</h5>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <div class="col-md-6">
                                     <div class="icon-bx-wraper style-6 left p-0 m-b30 icon-up">
                                         <div class="icon-bx-sm bg-white">
@@ -151,6 +151,7 @@
 
                                         <div class="row">
                                             <div class="col-lg-6 text-center">
+                                                @if($car->damage)
                                                 <div class="damage-area mt-0 pt-0">
                                                     <div class="car-parts">
                                                         @foreach ($car->damage as $key => $value)
@@ -159,6 +160,7 @@
                                                         @endforeach
                                                     </div>
                                                 </div>
+                                                @endif
 
                                                 <div class="color-desc mt-4">
                                                     <div class="form-check form-check-inline original">
@@ -335,7 +337,19 @@
             overflow: hidden;
             top: 100px;
         }
-
+        .car-price {
+            overflow: hidden;
+            position: relative;
+            background-color: #1a54b2 !important;
+            border-radius: 5px !important;
+        }
+        .car-price h3 {
+            font-weight: 900;
+            color: #fff;
+        }
+        .m-0 {
+            margin: 0!important;
+        }
         .dlab-bnr-inr .dlab-bnr-inr-entry .breadcrumb-row {
             margin-top: 0px;
         }

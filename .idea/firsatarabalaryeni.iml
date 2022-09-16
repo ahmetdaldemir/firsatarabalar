@@ -146,6 +146,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/shibby/ekrembk-sanal-pos" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/shibby/sanalpos" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ozgur/est" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/jaybizzle/crawler-detect" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/mobiledetect/mobiledetectlib" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/jenssegers/agent" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

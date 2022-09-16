@@ -8,6 +8,12 @@
                 <div class="logo-header  logo-dark">
                     <a href="/"><img src="{{asset('storage/files/'.setting('logo'))}}" alt=""></a>
                 </div>
+                @if ($agent->isMobile())
+
+                <a href="{{route('confirm')}}" class="btn btn-warning" style="    margin: 20px 22px;  padding: 5px;">
+                    Araç Ekle
+                </a>
+            @endif
                 <!-- Nav Toggle Button -->
                 <button class="navbar-toggler collapsed navicon justify-content-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span></span>

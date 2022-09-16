@@ -58,7 +58,6 @@ class CustomerCarController extends Controller
         $data['fueltype'] = FullType::FullType;
         $data['transmission'] = Transmission::Transmission;
 
-
         return view('view.car.form1', $data);
     }
 
@@ -116,8 +115,7 @@ class CustomerCarController extends Controller
     public function form5()
     {
         $data['chart'] = [];
-        $data['customer_car'] = $this->customer_car_control(4);
-
+        $data['customer_car'] = CustomerCar::where('customer_id', Auth::guard('customer')->id())->where('laststep',4)->first();
         return view('view.car.form5', $data);
     }
 
@@ -141,7 +139,7 @@ class CustomerCarController extends Controller
         /*$image = $request->file('file');
         $imageName = time().'.'.$image->extension();
         $image->move(public_path('images'),$imageName);*/
-        $this->customerCarRepository->fourth($this->upload->getFileName());
+        $this->customerCarRepository->fourth($this->upload->getFileName(),$request);
         return response()->json(['success' => $x]);
     }
 

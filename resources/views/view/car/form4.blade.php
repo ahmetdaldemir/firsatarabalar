@@ -11,8 +11,8 @@
 
                 <div class="col-lg-12 m-b30 wow fadeIn" data-wow-duration="2s" data-wow-delay="0.2s">
 
-                    <form action="{{ route('customer_car.file_store') }}" method="post" enctype="multipart/form-data"
-                          id="image-upload" class="dropzone">
+                    <form action="{{ route('customer_car.file_store') }}" method="post" enctype="multipart/form-data" id="image-upload" class="dropzone">
+                        <input type="hidden" class="form-control" name="customer_car_id" value="@if(isset($customer_car_id)){{$customer_car_id}}@else{{$customer_car->id}}@endif">
                         @csrf
 
                             <div class="dz-message" data-dz-message><span>Resim yüklemek için tıklayınız...</span></div>

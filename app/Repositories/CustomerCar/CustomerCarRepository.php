@@ -327,12 +327,12 @@ class CustomerCarRepository implements CustomerCarInterface
     }
 
 
-    public function fourth($request)
+    public function fourth($filename,$request)
     {
-        $customer_car = CustomerCar::where('id', $request->id)->where('session_id', cacheresponseid())->first();
+        $customer_car = CustomerCar::where('id', $request->customer_car_id)->first();
         $customer_car_photo = new CustomerCarPhoto();
         $customer_car_photo->customer_car_id = $customer_car->id;
-        $customer_car_photo->image = $request;
+        $customer_car_photo->image = $filename;
         $customer_car_photo->active = 0;
         $customer_car_photo->save();
 

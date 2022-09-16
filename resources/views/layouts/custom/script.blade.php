@@ -11,5 +11,6 @@
 <script src="{{asset('view/vendor/masonry/masonry-4.2.2.js')}}"></script><!-- MASONRY -->
 <script src="{{asset('view/vendor/lightgallery/js/lightgallery-all.min.js')}}"></script><!-- LIGHTGALLERY -->
 <script src="{{asset('view/js/dz.carousel.js')}}"></script><!-- OWL-CAROUSEL -->
+
 <script src="{{asset('view/js/dz.ajax.js')}}"></script><!-- CONTACT JS  -->
 <script src="{{asset('view/js/custom.js')}}"></script><!-- CUSTOM JS -->

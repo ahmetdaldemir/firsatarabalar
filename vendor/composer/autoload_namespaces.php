@@ -9,4 +9,5 @@ return array(
     'est' => array($vendorDir . '/ozgur/est/src'),
     'SanalPos' => array($vendorDir . '/shibby/ekrembk-sanal-pos/src', $vendorDir . '/shibby/sanalpos/src'),
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
+    'Detection' => array($vendorDir . '/mobiledetect/mobiledetectlib/namespaced'),
 );

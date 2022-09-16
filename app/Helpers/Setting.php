@@ -12,7 +12,10 @@ if (!function_exists('setting')) {
     {
 
         $setting = \App\Models\Setting::where('key', $value)->first();
-        return $setting->value;
+        if($setting)
+        {
+            return $setting->value;
+        }
 
     }
 

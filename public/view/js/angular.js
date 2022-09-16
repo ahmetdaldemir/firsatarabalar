@@ -166,11 +166,11 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
         });
     }
 
-    $scope.GetVersion = function (year, brand, model, body, fuel) {
+    $scope.GetVersion = function (year, brand, model) {
 
         $http({
             method: "GET",
-            url: "/getversionlist?year=" + year + "&brand=" + brand + "&model=" + model + "&body=" + body + "&fuel=" + fuel,
+            url: "/getversionlist?year=" + year + "&brand=" + brand + "&model=" + model,
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },

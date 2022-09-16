@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'b47f81c2814254cb007fdad8e86b1899d90f260f',
+        'reference' => '6a0836956319c183e6853f985f202a8d162bcf8c',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -457,6 +457,24 @@
                 0 => 'v9.23.0',
             ),
         ),
+        'jaybizzle/crawler-detect' => array(
+            'pretty_version' => 'v1.2.111',
+            'version' => '1.2.111.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../jaybizzle/crawler-detect',
+            'aliases' => array(),
+            'reference' => 'd572ed4a65a70a2d2871dc5137c9c5b7e69745ab',
+            'dev_requirement' => false,
+        ),
+        'jenssegers/agent' => array(
+            'pretty_version' => 'v2.6.4',
+            'version' => '2.6.4.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../jenssegers/agent',
+            'aliases' => array(),
+            'reference' => 'daa11c43729510b3700bc34d414664966b03bffe',
+            'dev_requirement' => false,
+        ),
         'josiasmontag/laravel-recaptchav3' => array(
             'pretty_version' => '1.0.0',
             'version' => '1.0.0.0',
@@ -505,7 +523,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'b47f81c2814254cb007fdad8e86b1899d90f260f',
+            'reference' => '6a0836956319c183e6853f985f202a8d162bcf8c',
             'dev_requirement' => false,
         ),
         'laravel/passport' => array(
@@ -663,6 +681,15 @@
             'replaced' => array(
                 0 => '*',
             ),
+        ),
+        'mobiledetect/mobiledetectlib' => array(
+            'pretty_version' => '2.8.39',
+            'version' => '2.8.39.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../mobiledetect/mobiledetectlib',
+            'aliases' => array(),
+            'reference' => '0fd6753003fc870f6e229bae869cc1337c99bc45',
+            'dev_requirement' => false,
         ),
         'mockery/mockery' => array(
             'pretty_version' => '1.5.0',

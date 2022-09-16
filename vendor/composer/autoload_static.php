@@ -157,6 +157,8 @@ class ComposerStaticInit6bf9a4c83a16891bd39725ccc44bb609
         'J' => 
         array (
             'JsonSchema\\' => 11,
+            'Jenssegers\\Agent\\' => 17,
+            'Jaybizzle\\CrawlerDetect\\' => 24,
         ),
         'I' => 
         array (
@@ -551,6 +553,14 @@ class ComposerStaticInit6bf9a4c83a16891bd39725ccc44bb609
         array (
             0 => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema',
         ),
+        'Jenssegers\\Agent\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jenssegers/agent/src',
+        ),
+        'Jaybizzle\\CrawlerDetect\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src',
+        ),
         'Illuminate\\Support\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Macroable',
@@ -718,6 +728,13 @@ class ComposerStaticInit6bf9a4c83a16891bd39725ccc44bb609
                 0 => __DIR__ . '/..' . '/mockery/mockery/library',
             ),
         ),
+        'D' => 
+        array (
+            'Detection' => 
+            array (
+                0 => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/namespaced',
+            ),
+        ),
     );
 
     public static $classMap = array (
@@ -776,12 +793,15 @@ class ComposerStaticInit6bf9a4c83a16891bd39725ccc44bb609
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\Modules\\Admin\\CarController' => __DIR__ . '/../..' . '/app/Http/Controllers/Modules/Admin/CarController.php',
         'App\\Http\\Controllers\\Modules\\Admin\\CustomerCarController' => __DIR__ . '/../..' . '/app/Http/Controllers/Modules/Admin/CustomerCarController.php',
+        'App\\Http\\Controllers\\Modules\\Admin\\CustomerCarValuationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Modules/Admin/CustomerCarValuationController.php',
         'App\\Http\\Controllers\\Modules\\Admin\\CustomerController' => __DIR__ . '/../..' . '/app/Http/Controllers/Modules/Admin/CustomerController.php',
         'App\\Http\\Controllers\\Modules\\Admin\\PageController' => __DIR__ . '/../..' . '/app/Http/Controllers/Modules/Admin/PageController.php',
         'App\\Http\\Controllers\\Modules\\Admin\\ReviewController' => __DIR__ . '/../..' . '/app/Http/Controllers/Modules/Admin/ReviewController.php',
         'App\\Http\\Controllers\\Modules\\Admin\\SettingsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Modules/Admin/SettingsController.php',
         'App\\Http\\Controllers\\Modules\\Admin\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Modules/Admin/UserController.php',
+        'App\\Http\\Controllers\\Modules\\Admin\\ValuationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Modules/Admin/ValuationController.php',
         'App\\Http\\Controllers\\Modules\\Admin\\VehicleRequestController' => __DIR__ . '/../..' . '/app/Http/Controllers/Modules/Admin/VehicleRequestController.php',
+        'App\\Http\\Controllers\\PaymentController' => __DIR__ . '/../..' . '/app/Http/Controllers/PaymentController.php',
         'App\\Http\\Controllers\\ViewController' => __DIR__ . '/../..' . '/app/Http/Controllers/ViewController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -797,7 +817,9 @@ class ComposerStaticInit6bf9a4c83a16891bd39725ccc44bb609
         'App\\Http\\Requests\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Requests/Authenticate.php',
         'App\\Http\\Requests\\CarRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CarRequest.php',
         'App\\Http\\Requests\\CustomerRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CustomerRequest.php',
+        'App\\Http\\Requests\\RegisterRequest' => __DIR__ . '/../..' . '/app/Http/Requests/RegisterRequest.php',
         'App\\Http\\Requests\\VehiclePostRequest' => __DIR__ . '/../..' . '/app/Http/Requests/VehiclePostRequest.php',
+        'App\\Http\\Requests\\VehicleRequest' => __DIR__ . '/../..' . '/app/Http/Requests/VehicleRequest.php',
         'App\\Jobs\\AffiliateMessage' => __DIR__ . '/../..' . '/app/Jobs/AffiliateMessage.php',
         'App\\Jobs\\CustomerCarValuationPdf' => __DIR__ . '/../..' . '/app/Jobs/CustomerCarValuationPdf.php',
         'App\\Jobs\\SendEmailJob' => __DIR__ . '/../..' . '/app/Jobs/SendEmailJob.php',
@@ -857,6 +879,8 @@ class ComposerStaticInit6bf9a4c83a16891bd39725ccc44bb609
         'App\\Repositories\\Cars\\CarRepositoryInterface' => __DIR__ . '/../..' . '/app/Repositories/Cars/CarRepositoryInterface.php',
         'App\\Repositories\\Cities\\CityRepository' => __DIR__ . '/../..' . '/app/Repositories/Cities/CityRepository.php',
         'App\\Repositories\\Cities\\CityRepositoryInterface' => __DIR__ . '/../..' . '/app/Repositories/Cities/CityRepositoryInterface.php',
+        'App\\Repositories\\CustomerCarValuation\\CustomerCarValuationInterface' => __DIR__ . '/../..' . '/app/Repositories/CustomerCarValuation/CustomerCarValuationInterface.php',
+        'App\\Repositories\\CustomerCarValuation\\CustomerCarValuationRepository' => __DIR__ . '/../..' . '/app/Repositories/CustomerCarValuation/CustomerCarValuationRepository.php',
         'App\\Repositories\\CustomerCar\\CustomerCarInterface' => __DIR__ . '/../..' . '/app/Repositories/CustomerCar/CustomerCarInterface.php',
         'App\\Repositories\\CustomerCar\\CustomerCarRepository' => __DIR__ . '/../..' . '/app/Repositories/CustomerCar/CustomerCarRepository.php',
         'App\\Repositories\\Customers\\CustomerRepository' => __DIR__ . '/../..' . '/app/Repositories/Customers/CustomerRepository.php',
@@ -877,6 +901,7 @@ class ComposerStaticInit6bf9a4c83a16891bd39725ccc44bb609
         'App\\Repositories\\Valuation\\ValuationRepositoryInterface' => __DIR__ . '/../..' . '/app/Repositories/Valuation/ValuationRepositoryInterface.php',
         'App\\Repositories\\VehicleRequest\\VehicleRequestRepository' => __DIR__ . '/../..' . '/app/Repositories/VehicleRequest/VehicleRequestRepository.php',
         'App\\Repositories\\VehicleRequest\\VehicleRequestRepositoryInterface' => __DIR__ . '/../..' . '/app/Repositories/VehicleRequest/VehicleRequestRepositoryInterface.php',
+        'App\\Services\\Est3DModel' => __DIR__ . '/../..' . '/app/Services/Est3DModel.php',
         'App\\Services\\Invoice\\Parasut\\ParasutService' => __DIR__ . '/../..' . '/app/Services/Invoice/Parasut/ParasutService.php',
         'App\\Services\\Invoice\\Parasut\\ParasutServiceContract' => __DIR__ . '/../..' . '/app/Services/Invoice/Parasut/ParasutServiceContract.php',
         'App\\Services\\Invoice\\Parasut\\Request\\CheckInvoice' => __DIR__ . '/../..' . '/app/Services/Invoice/Parasut/Request/CheckInvoice.php',
@@ -1305,7 +1330,6 @@ class ComposerStaticInit6bf9a4c83a16891bd39725ccc44bb609
         'Cron\\HoursField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/HoursField.php',
         'Cron\\MinutesField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
-        'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Seeders\\CreateUsersSeeder' => __DIR__ . '/../..' . '/database/seeders/CreateUsersSeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'Database\\Seeders\\RolePermissionSeeder' => __DIR__ . '/../..' . '/database/seeders/RolePermissionSeeder.php',
@@ -1348,6 +1372,7 @@ class ComposerStaticInit6bf9a4c83a16891bd39725ccc44bb609
         'Defuse\\Crypto\\KeyOrPassword' => __DIR__ . '/..' . '/defuse/php-encryption/src/KeyOrPassword.php',
         'Defuse\\Crypto\\KeyProtectedByPassword' => __DIR__ . '/..' . '/defuse/php-encryption/src/KeyProtectedByPassword.php',
         'Defuse\\Crypto\\RuntimeTests' => __DIR__ . '/..' . '/defuse/php-encryption/src/RuntimeTests.php',
+        'Detection\\MobileDetect' => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/namespaced/Detection/MobileDetect.php',
         'Dflydev\\DotAccessData\\Data' => __DIR__ . '/..' . '/dflydev/dot-access-data/src/Data.php',
         'Dflydev\\DotAccessData\\DataInterface' => __DIR__ . '/..' . '/dflydev/dot-access-data/src/DataInterface.php',
         'Dflydev\\DotAccessData\\Exception\\DataException' => __DIR__ . '/..' . '/dflydev/dot-access-data/src/Exception/DataException.php',
@@ -1567,6 +1592,9 @@ class ComposerStaticInit6bf9a4c83a16891bd39725ccc44bb609
         'Faker\\Extension\\BloodExtension' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Extension/BloodExtension.php',
         'Faker\\Extension\\ColorExtension' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Extension/ColorExtension.php',
         'Faker\\Extension\\CompanyExtension' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Extension/CompanyExtension.php',
+        'Faker\\Extension\\Container' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Extension/Container.php',
+        'Faker\\Extension\\ContainerBuilder' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Extension/ContainerBuilder.php',
+        'Faker\\Extension\\ContainerException' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Extension/ContainerException.php',
         'Faker\\Extension\\CountryExtension' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Extension/CountryExtension.php',
         'Faker\\Extension\\DateTimeExtension' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Extension/DateTimeExtension.php',
         'Faker\\Extension\\Extension' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Extension/Extension.php',
@@ -1575,6 +1603,7 @@ class ComposerStaticInit6bf9a4c83a16891bd39725ccc44bb609
         'Faker\\Extension\\GeneratorAwareExtension' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Extension/GeneratorAwareExtension.php',
         'Faker\\Extension\\GeneratorAwareExtensionTrait' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Extension/GeneratorAwareExtensionTrait.php',
         'Faker\\Extension\\Helper' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Extension/Helper.php',
+        'Faker\\Extension\\NotInContainerException' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Extension/NotInContainerException.php',
         'Faker\\Extension\\NumberExtension' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Extension/NumberExtension.php',
         'Faker\\Extension\\PersonExtension' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Extension/PersonExtension.php',
         'Faker\\Extension\\PhoneNumberExtension' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Extension/PhoneNumberExtension.php',
@@ -3322,6 +3351,14 @@ class ComposerStaticInit6bf9a4c83a16891bd39725ccc44bb609
         'Illuminate\\View\\ViewFinderInterface' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewFinderInterface.php',
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
+        'Jaybizzle\\CrawlerDetect\\CrawlerDetect' => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src/CrawlerDetect.php',
+        'Jaybizzle\\CrawlerDetect\\Fixtures\\AbstractProvider' => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src/Fixtures/AbstractProvider.php',
+        'Jaybizzle\\CrawlerDetect\\Fixtures\\Crawlers' => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src/Fixtures/Crawlers.php',
+        'Jaybizzle\\CrawlerDetect\\Fixtures\\Exclusions' => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src/Fixtures/Exclusions.php',
+        'Jaybizzle\\CrawlerDetect\\Fixtures\\Headers' => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src/Fixtures/Headers.php',
+        'Jenssegers\\Agent\\Agent' => __DIR__ . '/..' . '/jenssegers/agent/src/Agent.php',
+        'Jenssegers\\Agent\\AgentServiceProvider' => __DIR__ . '/..' . '/jenssegers/agent/src/AgentServiceProvider.php',
+        'Jenssegers\\Agent\\Facades\\Agent' => __DIR__ . '/..' . '/jenssegers/agent/src/Facades/Agent.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
         'JsonSchema\\Constraints\\BaseConstraint' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Constraints/BaseConstraint.php',
         'JsonSchema\\Constraints\\CollectionConstraint' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Constraints/CollectionConstraint.php',
@@ -4065,6 +4102,7 @@ class ComposerStaticInit6bf9a4c83a16891bd39725ccc44bb609
         'Lunaweb\\RecaptchaV3\\Facades\\RecaptchaV3' => __DIR__ . '/..' . '/josiasmontag/laravel-recaptchav3/src/Facades/RecaptchaV3.php',
         'Lunaweb\\RecaptchaV3\\Providers\\RecaptchaV3ServiceProvider' => __DIR__ . '/..' . '/josiasmontag/laravel-recaptchav3/src/Providers/RecaptchaV3ServiceProvider.php',
         'Lunaweb\\RecaptchaV3\\RecaptchaV3' => __DIR__ . '/..' . '/josiasmontag/laravel-recaptchav3/src/RecaptchaV3.php',
+        'Mobile_Detect' => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/Mobile_Detect.php',
         'Mockery' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegrationAssertPostConditions' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegrationAssertPostConditions.php',

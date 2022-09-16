@@ -42,7 +42,7 @@
                                 <div class="input-group">
                                     <select name="model" class="form-select"
                                             ng-init="model = '{{($customer_car && $customer_car->car->model) ?  $customer_car->car->model : '0'}}'"
-                                            ng-change="GetBody(year,brands,model)" ng-model="model">
+                                            ng-change="GetVersion(year,brands,model)" ng-model="model">
                                         <option selected value="0">Model</option>
                                         <option ng-repeat="model in modelList"
                                                 ng-selected="model.model == <?=@$customer_car->car->model?>"
@@ -81,26 +81,26 @@
                             <div class="col-sm-3">
                                 <label style="font-weight: 600">Kasa Tipi</label>
                                 <div class="input-group">
-                                    <select name="body" ng-init="body = '{{($customer_car && $customer_car->body) ?  $customer_car->body : '0'}}'" class="form-select"
-                                            ng-change="GetFuel(year,brands,model)" ng-model="body">
+                                    <select name="body" class="form-select">
                                         <option selected value="0">Kasa Tipi</option>
-                                        <option ng-repeat="item in bodyList"
-                                                ng-selected="item.id == <?=@$customer_car->body?>" value="@{{item.id}}">
-                                            @{{item.bodytype}}
+                                        @foreach($bodytype as $key => $value)
+                                        <option ng-selected="item.id == <?=@$customer_car->body?>" value="{{$key}}">
+                                            {{$value}}
                                         </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <label style="font-weight: 600">Yakıt Tipi</label>
                                 <div class="input-group">
-                                    <select name="fuel" class="form-select" ng-init="fuel ='{{($customer_car && $customer_car->fuel) ?  $customer_car->fuel : '0'}}'"
-                                            ng-change="GetVersion(year,brands,model,body,fuel)" ng-model="fuel">
+                                    <select name="fuel" class="form-select">
                                         <option selected value="0">Yakıt Tipi</option>
-                                        <option ng-repeat="item in fuelList"
-                                                ng-selected="item.id == <?=@$customer_car->fuel?>" value="@{{item.id}}">
-                                            @{{item.fueltype}}
+                                        @foreach($fueltype as $key => $value)
+                                        <option @if($key == @$customer_car->fuel) selected @endif  value="{{$key}}">
+                                            {{$value}}
                                         </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -160,10 +160,10 @@
                                 <label style="font-weight: 600">İl</label>
                                 <div class="input-group">
                                     <select name="car_city" ng-init="districts ='{{($customer_car && $customer_car->car_city) ?  $customer_car->car_city : '0'}}'" ng-change="GetDistricts(districts)"
-                                            ng-model="districts" class="form-select" style="height: 58px">
-                                        @foreach($cities as $city)
-                                            <option value="{{$city->id}}"
-                                                    @if($customer_car && $customer_car->car_city == $city->id) selected @endif>{{$city->name}}</option>
+                                            ng-model="districts" class="form-select" style="height: 45px">
+                                        <option value="0" selected>Seçiniz</option>
+                                    @foreach($cities as $city)
+                                            <option value="{{$city->id}}"  @if($customer_car && $customer_car->car_city == $city->id) selected @endif>{{$city->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -171,7 +171,7 @@
                             <div class="col-sm-3">
                                 <label style="font-weight: 600">İlçe</label>
                                 <div class="input-group">
-                                    <select name="car_state" class="form-select" style="height: 58px">
+                                    <select name="car_state" class="form-select" style="height:45px">
                                         <option selected>İlçe</option>
                                         <option ng-repeat="district in districtsList"
                                                 ng-selected="district.id == <?=@$customer_car->car_state?>"

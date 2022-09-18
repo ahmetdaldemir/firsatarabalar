@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\Affiliate;
 use App\Models\Customer;
@@ -43,7 +44,7 @@ class AuthController
     {
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         $credentials = array(
             'phone' => $request->phone,

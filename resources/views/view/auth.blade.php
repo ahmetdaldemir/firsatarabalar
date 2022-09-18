@@ -33,6 +33,12 @@
                             <input type="password" name="password" id="password"
                                    class="form-control" placeholder="Şifre" autocomplete="off">
                         </div>
+                        @if(env('GOOGLE_RECAPTCHA_KEY'))
+                            <div class="g-recaptcha"  data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+                            </div>
+                        @endif
+                        <script src='https://www.google.com/recaptcha/api.js'></script>
+
                         <div class="form-group text-center">
                             <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
                             <label for="remember"> Beni Hatırla</label>

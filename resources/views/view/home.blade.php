@@ -6,7 +6,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Araç Talep Et</h5>
-                    <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -113,7 +113,7 @@
                      </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-dismiss="modal">İptal Et</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-dismiss="modal">İptal Et</button>
                 <button type="submit" class="btn btn-primary" id="VehicleRequestButton">Talep Gönder</button>
             </div>
             </form>
@@ -187,7 +187,7 @@
     </section>
 
     <!-- Projects -->
-    @if(!is_null($yayinlanan_araclar))
+    @if(!empty($yayinlanan_araclar))
     <section class="content-inner-1">
         <div class="container-fluid">
             <div class="section-head style-1 text-center mb-3">
@@ -265,7 +265,7 @@
         </div>
     </section>
     @endif
-    @if(!is_null($gelecek_araclar))
+    @if(!empty($gelecek_araclar))
     <section class="content-inner-1">
         <div class="container-fluid">
             <div class="section-head style-1 text-center mb-3">
@@ -343,7 +343,7 @@
         </div>
     </section>
     @endif
-    @if(!is_null($satilan_araclar))
+    @if(!empty($satilan_araclar))
     <section class="content-inner-1">
         <div class="container-fluid">
             <div class="section-head style-1 text-center mb-3">
@@ -738,7 +738,4 @@
             </div>
         </div>
     </section>
-
-
-
 @endsection

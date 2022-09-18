@@ -30,7 +30,6 @@ class ViewController
 
     public function index()
     {
-
         $data['chart'] = [];
         $data['customer_cars'] = CustomerCar::all();
         $data['brands'] = $this->service->brands();

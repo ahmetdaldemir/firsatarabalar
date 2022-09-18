@@ -151,7 +151,7 @@
 
                                         <div class="row">
                                             <div class="col-lg-6 text-center">
-                                                @if($car->damage)
+                                                @if(!empty($car->damage))
                                                 <div class="damage-area mt-0 pt-0">
                                                     <div class="car-parts">
                                                         @foreach ($car->damage as $key => $value)

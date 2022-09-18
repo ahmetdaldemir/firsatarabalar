@@ -3,16 +3,16 @@
     <link rel="stylesheet" href="{{asset('view/css/wizard.css')}}">
     <script src="{{asset('view/js/js/custom.js')}}"></script><!-- CUSTOM JS -->
     <script src="{{asset('view/js/js/dz.ajax.js')}}"></script><!-- CUSTOM JS -->
-
     <div class="content-inner-2"
          style="background-image: url(images/background/bg2.png); background-repeat: no-repeat; background-size:100%;">
         <div class="container">
             <div class="row align-items-center">
                @include('view/car/menu',['url' => request()->route()->getName()])
                 <div class="col-lg-12 m-b30 wow fadeIn" data-wow-duration="2s" data-wow-delay="0.2s">
-                    <form class="dlab-form" id="step-five-form" method="POST" action="https://firsatarabalar.com/testodeme.php">
+                    <form class="dlab-form" id="step-five-form" method="POST" action="{{route('payment')}}">
                         @csrf
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="customer_car_id" value="{{$customer_car_id}}">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div id="pKK" class="payment_type row" style="&quot;padding-left:" 20px&quot;="">

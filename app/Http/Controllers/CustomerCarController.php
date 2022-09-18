@@ -112,10 +112,11 @@ class CustomerCarController extends Controller
         return view('view.car.form4', $data);
     }
 
-    public function form5()
+    public function form5(Request $request)
     {
         $data['chart'] = [];
-        $data['customer_car'] = CustomerCar::where('customer_id', Auth::guard('customer')->id())->where('laststep',4)->first();
+        $data['customer_car'] = CustomerCar::where('id', $request->customer_car_id)->first();
+        $data['customer_car_id'] = $request->customer_car_id;
         return view('view.car.form5', $data);
     }
 
@@ -135,7 +136,7 @@ class CustomerCarController extends Controller
 
     public function dropzoneStore(Request $request)
     {
-        $x = $this->upload->index($request->file('file'));
+        $x = $this->upload->index($request->file('file'),"cars");
         /*$image = $request->file('file');
         $imageName = time().'.'.$image->extension();
         $image->move(public_path('images'),$imageName);*/

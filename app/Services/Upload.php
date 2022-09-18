@@ -16,13 +16,12 @@ class Upload
         $this->filename = "";
     }
 
-    public function index($file)
+    public function index($file,$filedirectory="cars")
     {
-
         $uploadedFile = $file->getClientOriginalName();
-        $filename = time() ."_". $uploadedFile;
+        $filename = time() ."_".$filedirectory."_". $uploadedFile;
         Storage::disk('local')->putFileAs(
-            'public/cars/',
+            'public/'.$filedirectory.'/',
             $file,
             $filename
         );

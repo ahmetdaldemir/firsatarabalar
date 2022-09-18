@@ -274,7 +274,7 @@ class CustomerCarRepository implements CustomerCarInterface
         $filename = "";
         if (!empty($request->files->all())) {
             $files = $request->files->all()['tramer_image'];
-            $this->upload->index($files);
+            $this->upload->index($files,'tramers');
             $filename = $this->upload->getFileName();
         }
 
@@ -314,7 +314,7 @@ class CustomerCarRepository implements CustomerCarInterface
         if (!empty($request->files->all())) {
             $files = $request->files->all();
             foreach ($files as $key => $file) {
-                $this->upload->index($file);
+                $this->upload->index($file,'expers');
                 $filename = $this->upload->getFileName();
                 $image = new CustomerCarExper();
                 $image->customer_car_id = $request->customer_car_id;

@@ -52,7 +52,7 @@ class CustomerCarController extends Controller
     public function imageUpload(Request $request)
     {
         $image = [];
-       $x = $this->upload->index($request->files->all()['image']);
+       $x = $this->upload->index($request->files->all()['image'],'cars');
        // $request->file('image')->store('images');
         return response()->json(['success' => $this->upload->getFileName()],200);
     }

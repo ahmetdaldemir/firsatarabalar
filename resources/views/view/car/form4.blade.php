@@ -32,7 +32,7 @@
 
 
                     <div class="col-sm-12">
-                        <a href="{{route('form5',['customer_car_id' => $customer_car->id])}}" class="btn btn-primary gradient border-0 rounded-xl btn-block">Devam Et</a>
+                        <a href="{{route('form5',['customer_car_id' => $customer_car_id])}}" class="btn btn-primary gradient border-0 rounded-xl btn-block">Devam Et</a>
                     </div>
 
                 </div>

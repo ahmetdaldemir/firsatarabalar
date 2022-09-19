@@ -18,17 +18,18 @@ class PaymentController extends Controller
     public function __construct()
     {
         $this->est3dModel = new Est3DModel();
+        $this->customer_car_id = NULL;
     }
 
 
     public function kuveytturk(Request $request)
     {
         $this->customer_car_id = $request->customer_car_id;
-        $this->ordertotal = 169;
-        $OrderId = microtime();
-        $Amount = str_replace(".", "", 169);
-        $OkUrl = route('payment/response');;
-        $FailUrl = route('payment/response');;
+        $this->ordertotal = 169*100;
+        $OrderId = $request->customer_car_id;
+        $Amount = str_replace(".", "", $this->ordertotal);
+        $OkUrl = route('payment/response');
+        $FailUrl = route('payment/response');
         $CustomerId = 97386770;
         $MerchantId = 60233;
         $UserName = "FRSTARBAPI";
@@ -37,10 +38,10 @@ class PaymentController extends Controller
 
         $CardNumber = preg_replace('/\D/', '', $request->Pan);
         $ExpireDateMonth = $request->ExpiryMo;
-        $ExpireDateYear = $request->ExpiryYr;
-        $CardCVV2 = $request->Ccv2;
-        $Name = "Ahmet DALDEMİR";
+        $ExpireDateYear = substr($request->ExpiryYr, -2);;
+        $CardCVV2 = $request->Cvv2;
 
+        $Name = "Ahmet DALDEMİR";
         $xml = "
             <KuveytTurkVPosMessage xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
                 <APIVersion>1.0.0</APIVersion>
@@ -92,11 +93,11 @@ class PaymentController extends Controller
         $RequestContent = urldecode($request['AuthenticationResponse']);
         $xml = simplexml_load_string($RequestContent) or die("Hata: Banka dönüş hatası");
 
-        $MerchantOrderId = ($xml->MerchantOrderId) ? $xml->MerchantOrderId : $xml->VPosMessage->MerchantOrderId;
+         $MerchantOrderId = ($xml->MerchantOrderId) ? $xml->MerchantOrderId : $xml->VPosMessage->MerchantOrderId;
 
         if ($xml->ResponseCode == "00") {
 
-            $Amount = intval($this->ordertotal);
+            $Amount = intval($xml->VPosMessage->Amount);
             $MD = $xml->MD;
 
             $CustomerId = 97386770;
@@ -140,22 +141,24 @@ class PaymentController extends Controller
             curl_close($ch);
             $response = simplexml_load_string($response) or die("Hata: Banka dönüş hatası");
 
-            $customercar = CustomerCar::find($this->customer_car_id);
+            $customercar = CustomerCar::where('id',$MerchantOrderId)->first();
             $customercar->laststep = 5;
             $customercar->payment = 1;
             $customercar->save();
 
             $customercarpayment = new CustomerCarPaymentTransaction();
-            $customercarpayment->customer_car_id = $this->customer_car_id;
+            $customercarpayment->customer_car_id = $MerchantOrderId;
             $customercarpayment->payment_type = "Rapor";
-            $customercarpayment->order_total = $this->ordertotal;
+            $customercarpayment->order_total = $Amount;
             $customercarpayment->response_auth = json_encode($_xml);
             $customercarpayment->response_payment = json_encode($_xml);
             $customercarpayment->status = 1;
             $customercarpayment->save();
-            view("success");
+
+            return redirect()->to('paymentsuccess');
+
         } else {
-            return view("fail");
+            return redirect()->to('paymentfail');
         }
     }
 
@@ -167,8 +170,8 @@ class PaymentController extends Controller
         $total = '100';
         //Islem tutari
         $oid = rand(9999, 9999999);     //Siparis Numarasi
-        $okUrl = route('payment/response');   //Islem basariliysa dönülecek isyeri sayfasi  (3D isleminin ve ödeme isleminin sonucu)
-        $failUrl = route('payment/response');    //Islem basarizsa dönülecek isyeri sayfasi  (3D isleminin ve ödeme isleminin sonucu)
+        $okUrl = route('isbankresponse');   //Islem basariliysa dönülecek isyeri sayfasi  (3D isleminin ve ödeme isleminin sonucu)
+        $failUrl = route('isbankresponse');    //Islem basarizsa dönülecek isyeri sayfasi  (3D isleminin ve ödeme isleminin sonucu)
         $rnd = microtime();    //Tarih veya her seferinde degisen bir deger güvenlik amaçli
         $taksit = "";         //taksit sayisi
         $islemtipi = "Auth";     //Islem tipi
@@ -212,6 +215,22 @@ class PaymentController extends Controller
         print('</form>');
         print('<script>document.getElementById("three_d_form").submit();</script>');
 
+    }
+
+
+    public function isbankresponse()
+    {
+        dd($_POST);
+    }
+
+    public function fail()
+    {
+        return view("view/payment/failure");
+    }
+
+    public function success()
+    {
+        return view("view/payment/success");
     }
 
 }

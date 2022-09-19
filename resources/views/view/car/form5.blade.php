@@ -11,7 +11,6 @@
                 <div class="col-lg-12 m-b30 wow fadeIn" data-wow-duration="2s" data-wow-delay="0.2s">
                     <form class="dlab-form" id="step-five-form" method="POST" action="{{route('payment')}}">
                         @csrf
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="customer_car_id" value="{{$customer_car_id}}">
                         <div class="row">
                             <div class="col-sm-12">
@@ -78,9 +77,18 @@
                                                         <select name="ExpiryMo" id="card_mo" class="form-control"
                                                                 required>
                                                             <option value="">Ay</option>
-                                                            @for($i = 1; $i < 12; $i++)
-                                                                <option value="{{$i}}">{{$i}}</option>
-                                                            @endfor
+                                                            <option value="01">1</option>
+                                                            <option value="02">2</option>
+                                                            <option value="03">3</option>
+                                                            <option value="04">4</option>
+                                                            <option value="05">5</option>
+                                                            <option value="06">6</option>
+                                                            <option value="07">7</option>
+                                                            <option value="08">8</option>
+                                                            <option value="09">9</option>
+                                                            <option value="10">10</option>
+                                                            <option value="11">11</option>
+                                                            <option value="12">12</option>
                                                         </select>
                                                     </div>
                                                 </div>

@@ -181,7 +181,7 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li><span class="m-r-md text-muted welcome-message">Hoşgeldiniz</span></li>
-                    <li><a href="https://www.{{config("app.domain")}}" target="_blank"><i class="fad fa-home"></i>
+                    <li><a href="https://www.firsatarabalar.com" target="_blank"><i class="fad fa-home"></i>
                             Siteyi Göster</a></li>
                     <li class="m-r-sm"><a href="{{route('admin.logout')}}"><i class="fad fa-sign-out-alt"></i> Çıkış Yap</a></li>
                 </ul>

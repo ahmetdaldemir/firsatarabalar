@@ -25,7 +25,7 @@
                     <div class="col-xs-3">
                         <select class="form-control col-sm-2" name="ExpiryMo" id="expiry-month">
                             <option>Month</option>
-                            <option value="01">Jan (01)</option>
+                            <option value="01">01</option>
                             <option value="02">Feb (02)</option>
                             <option value="03">Mar (03)</option>
                             <option value="04">Apr (04)</option>
@@ -41,7 +41,7 @@
                     </div>
                     <div class="col-xs-3">
                         <select class="form-control" name="ExpiryYr">
-                            <option value="13">2013</option>
+                            <option value="2030">2030</option>
                             <option value="14">2014</option>
                             <option value="15">2015</option>
                             <option value="16">2016</option>

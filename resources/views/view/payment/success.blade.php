@@ -18,7 +18,7 @@
     <section class="content-inner about-wraper-1"  style="padding-top:25px;padding-bottom:0;background-image: url(images/background/bg15.png); background-size: contain; background-position: center right; background-repeat: no-repeat;">
         <div class="container">
             <div class="row align-items-center">
-                <div class="card">
+                <div class="card text-center">
                     <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
                         <i class="checkmark">✓</i>
                     </div>
@@ -28,4 +28,13 @@
             </div>
         </div>
     </section>
+
+    <style>
+        .checkmark{
+            font-size: 136px;
+            color: #f00;
+            text-align: center;
+            line-height: 1.3;
+        }
+    </style>
 @endsection

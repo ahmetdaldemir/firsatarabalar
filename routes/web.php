@@ -229,6 +229,11 @@ Route::get('valuation_confirm', [HomeController::class, 'valuation_confirm'])->n
 Route::post('payment', [PaymentController::class, 'kuveytturk'])->name('payment');
 Route::get('paymentform', [PaymentController::class, 'paymentform'])->name('paymentform');
 Route::post('payment/response', [PaymentController::class, 'response'])->name('payment/response');
+Route::post('isbankresponse', [PaymentController::class, 'isbankresponse'])->name('isbankresponse');
+
+
+Route::get('paymentfail', [PaymentController::class, 'fail'])->name('paymentfail');
+Route::get('paymentsuccess', [PaymentController::class, 'success'])->name('paymentsuccess');
 
 
 Route::get('valuation_confirm', [\App\Http\Controllers\CustomerCarController::class, 'customer_car_valuation_confirm'])->name('valuation_confirm');

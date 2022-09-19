@@ -132,5 +132,9 @@
     Swal.fire('{{$errors->first()}}');
     @endif
 </script>
+
+<script>
+     Swal.fire('Sizlere daha iyi hizmet verebilmek için alt yapı değişikliği yapmaktayız. 19.09.2022 tarihinde ödeme alamadığımız için araç kaydı alamamaktayız. Ödeme sistemlerimiz aktif olduğunda uyarı ekranı kapatılacaktır.');
+ </script>
 </body>
 </html>

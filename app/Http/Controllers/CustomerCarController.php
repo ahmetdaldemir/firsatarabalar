@@ -81,6 +81,11 @@ class CustomerCarController extends Controller
 
     public function form3(Request $request)
     {
+        if($request->customer_car_id == NULL and $request->customer_car_id == 0)
+        {
+            return redirect()->to('/');
+        }
+
         if ($request->request != null) {
             $data['customer_car_id'] = $this->customerCarRepository->secondStepStore($request);
         }
@@ -98,6 +103,10 @@ class CustomerCarController extends Controller
 
     public function form4(Request $request)
     {
+        if($request->customer_car_id == NULL and $request->customer_car_id == 0)
+        {
+            return redirect()->to('/');
+        }
         if ($request->request != null) {
             $data['customer_car_id'] = $this->customerCarRepository->thirtyStepStore($request);
         }

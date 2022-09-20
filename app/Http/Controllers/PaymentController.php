@@ -41,7 +41,7 @@ class PaymentController extends Controller
         $ExpireDateYear = substr($request->ExpiryYr, -2);;
         $CardCVV2 = $request->Cvv2;
 
-        $Name = "Ahmet DALDEMİR";
+        $Name = $request->CardHolderName;
         $xml = "
             <KuveytTurkVPosMessage xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
                 <APIVersion>1.0.0</APIVersion>
@@ -144,6 +144,7 @@ class PaymentController extends Controller
             $customercar = CustomerCar::where('id',$MerchantOrderId)->first();
             $customercar->laststep = 5;
             $customercar->payment = 1;
+            $customercar->status = 1;
             $customercar->save();
 
             $customercarpayment = new CustomerCarPaymentTransaction();

@@ -33,8 +33,8 @@
                         Araç Notları <span class="label label-plain ml-2"></span></a></li>
                 <li><a class="nav-link" data-toggle="tab" href="#valuation"><i
                                 class="fad fa-fw fa-comment-alt-dots"></i> Araç Değerleme </a></li>
-                <li><a class="nav-link" data-toggle="tab" href="#messages"><i class="fad fa-fw fa-comment-alt-dots"></i>
-                        Mesajlaşma </a></li>
+                <!-- li><a class="nav-link" data-toggle="tab" href="#messages"><i class="fad fa-fw fa-comment-alt-dots"></i>
+                        Mesajlaşma </a></li -->
             </ul>
             <div class="tab-content" ng-controller="postController">
 
@@ -85,21 +85,21 @@
                                                         <div class="form-group">
                                                             <label for="body">Kasa Tipi</label>
                                                             <input type="text" class="form-control form-control-sm"
-                                                                   value="{{$car->body}}" disabled>
+                                                                   value="{{\App\Enums\BodyType::BodyType[$car->body]}}" disabled>
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="fuel">Yakıt Tipi</label>
                                                             <input type="text" class="form-control form-control-sm"
-                                                                   value="{{$car->fuel}}" disabled>
+                                                                   value="{{\App\Enums\FullType::FullType[$car->fuel]}}" disabled>
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="gear">Vites Tipi</label>
                                                             <input type="text" class="form-control form-control-sm"
-                                                                   value="{{$car->gear}}" disabled>
+                                                                   value="{{\App\Enums\Transmission::Transmission[$car->gear]}}" disabled>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -302,6 +302,7 @@
                                                 aria-controls="c2-a">Boya &amp; Değişen &amp; İşlem Durumu
                                         </button>
                                     </div>
+
                                     <div id="c2-a" class="collapse show p-3" aria-labelledby="c2" data-parent="#accordionExample">
                                         <div class="row">
                                             <div class="col">
@@ -309,16 +310,18 @@
 
                                                     <div class="row">
                                                         <div class="col-lg-12 text-center">
+                                                            @if(!empty($car->damage))
                                                             <div class="damage-area">
                                                                 <div class="car-parts">
                                                                     @if($car->damage)
-                                                                        @foreach ($car->damage as $key => $value)
+                                                                        @foreach (json_decode($car->damage) as $key => $value)
                                                                             @continue( substr($key, 0, 5) == "islem" )
                                                                             <div class="{{$key}} {{$value}}"></div>
                                                                         @endforeach
                                                                     @endif
                                                                 </div>
                                                             </div>
+                                                            @endif
                                                             <div class="color-desc d-flex justify-content-center align-items-center mt-4">
                                                                 <div class="mr-3"><a href="javascript:;"
                                                                                      class="btn btn-sm original">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
@@ -450,12 +453,15 @@
                         <div class="panel-body">
                             <div class="row">
                                 @foreach ( $car->photo as $photo )
-                                    <div class="col-2">
-                                        <a href="{{asset('storage/cars')}}/{{$photo->image}}"
+                                    <div class="col-2" style="padding: 2px;top: 13px;text-align: center">
+                                        <div style="border: 2px solid #ccc;padding: 10px;">
+                                        <a s href="{{asset('storage/cars')}}/{{$photo->image}}"
                                            title="{{str_replace(" ", "", strtoupper($car->plate))}} Fotoğrafları"
                                            data-gallery>
-                                            <img src="{{asset('storage/cars')}}/{{$photo->image}}" style="width: 100%;height: 150px"
+                                            <img src="{{asset('storage/cars')}}/{{$photo->image}}" style="height: 150px"
                                                  class="img-fluid rounded mb-3">
+                                            <img src="{{ public_path($photo->imag)}}" alt="" />
+
                                         </a>
                                         <a class="btn btn-success w-100" href="{{route('admin.customer_car_valuation.default_photo',['id' => $car->id,'photo' => $photo->id])}}">
                                             Default
@@ -463,6 +469,7 @@
                                                <i style="float: right;line-height: 1.5" class="fas fa-check"></i>
                                             @endif
                                         </a>
+                                        </div>
                                     </div>
                                 @endforeach
 

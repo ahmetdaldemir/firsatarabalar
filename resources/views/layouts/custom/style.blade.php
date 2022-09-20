@@ -8,4 +8,5 @@
 
 <!-- Custom Stylesheet -->
 <link rel="stylesheet" href="{{asset('view/css/style.css')}}">
+<link rel="stylesheet" href="{{asset('view/css/responsive.css')}}">
 <link class="skin" rel="stylesheet" href="{{asset('view/css/skin/skin-2.css')}}">

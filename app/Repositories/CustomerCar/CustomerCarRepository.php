@@ -34,9 +34,9 @@ class CustomerCarRepository implements CustomerCarInterface
     {
         $role_id = Auth::guard('web')->user()->roles->first()->id;
         if ($role_id == 1) {
-           return CustomerCar::where('status',$request->status)->orderBy('id', 'desc')->paginate(20);
+           return CustomerCar::where('status',$request->status)->where('payment',1)->orderBy('id', 'desc')->paginate(20);
         }
-        return CustomerCar::where('user_id', Auth::guard('web')->id())->where('status',$request->status)->orderBy('id', 'desc')->paginate(20);
+        return CustomerCar::where('user_id', Auth::guard('web')->id())->where('status',$request->status)->where('payment',1)->orderBy('id', 'desc')->paginate(20);
     }
 
     public function getDistrict($id)

@@ -25,12 +25,14 @@
                                 <div class="col-sm-6">
                                     <div class="input-group">
                                         <label>Marka</label>
+                                        @if($brands && !empty($brands))
                                         <select name="brand_id" ng-change="GetVersionOnlyCar(brands)" ng-model="brands"
                                                 id="getModelValue" class="form-select w-100">
                                             @foreach ($brands as $brand)
                                                 <option value="{{$brand->id}}" my-directive>{{$brand->name}}</option>
                                             @endforeach
                                         </select>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-sm-6">

@@ -1,6 +1,5 @@
 app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike', '$filter', function ($scope, $http, $httpParamSerializerJQLike, $window, $filter) {
 
-
     $scope.CustomerLoginForm = function () {
         $("#loginModal").modal("show");
     }
@@ -58,10 +57,19 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
             {
                 $("#version").hide();
                 $("#custom_version").show();
+                $scope.modelList = [{"model":"Model Bulunamadı"}];
+
+                $('#form-fuel').prop('disabled', '');
+                $('#form-body').prop('disabled', '');
+                $('#form-ownorder').prop('disabled', '');
+                $('#form-color').prop('disabled', '');
+                $('#form-transmission').prop('disabled', '')
+
             }else{
                 $("#custom_version").hide();
                 $("#version").show();
                 $scope.modelList = response.data;
+                $('#form-model').prop('disabled', '');
             }
         });
     }
@@ -187,6 +195,12 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
                 $("#custom_version").hide();
                 $("#version").show();
                 $scope.versionList = response.data
+
+                $('#form-fuel').prop('disabled', '');
+                $('#form-body').prop('disabled', '');
+                $('#form-ownorder').prop('disabled', '');
+                $('#form-color').prop('disabled', '');
+                $('#form-transmission').prop('disabled', '')
             }
         }, function (data) {
             Swal.fire('Araç Bulunamadı')
@@ -294,3 +308,17 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
         });
     }
 }]);
+
+
+$('#form-year').prop('disabled', 'disabled');
+$('#form-model').prop('disabled', 'disabled');
+$('#form-fuel').prop('disabled', 'disabled');
+$('#form-body').prop('disabled', 'disabled');
+$('#form-ownorder').prop('disabled', 'disabled');
+$('#form-color').prop('disabled', 'disabled');
+$('#form-transmission').prop('disabled', 'disabled');
+
+$("#form-brand").change(function () {
+    $('#form-year').prop('disabled', '');
+    $('#form-model').prop('disabled', 'disabled');
+})

@@ -65,7 +65,7 @@ class CustomerCar extends Model
 
     public function exper()
     {
-        return $this->belongsTo(CustomerCarExper::class, 'customer_car_id', 'id');
+        return $this->hasMany(CustomerCarExper::class);
     }
 
     public function valuation()

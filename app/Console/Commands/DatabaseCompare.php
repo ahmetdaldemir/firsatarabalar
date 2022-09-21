@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Customer;
 use App\Models\CustomerCar;
+use App\Models\CustomerCarExper;
 use App\Models\CustomerCarPaymentTransaction;
 use App\Models\CustomerCarPhoto;
 use App\Models\CustomerCarValuation;
@@ -22,7 +23,7 @@ class DatabaseCompare extends Command
     public function handle()
     {
 
-      $x = DB::connection('mysql2')->table('customers')->orderBy('id','desc')->get()->take(100);
+    /*  $x = DB::connection('mysql2')->table('customers')->orderBy('id','desc')->get()->take(100);
        foreach ($x as $item) {
            $customera = Customer::find($item->id);
            if(!$customera) {
@@ -42,10 +43,10 @@ class DatabaseCompare extends Command
            }
 
        }
+*/
 
 
-
-            $xd = DB::connection('mysql2')->table('customers_cars')->orderBy('id','desc')->get()->take(200);
+            $xd = DB::connection('mysql2')->table('customers_cars')->where('id','<','13106')->orderBy('id','desc')->get()->take(2000);
             foreach ($xd as $itemd)
               {
                   $customer_cars = CustomerCar::find($itemd->id);
@@ -165,7 +166,18 @@ class DatabaseCompare extends Command
 
                   }
 
-
+                  $x = DB::connection('mysql2')->table('customers_cars_experts')->where('customers_car_id',$itemd->id)->get();
+                  foreach ($x as $item) {
+                      $pages = CustomerCarExper::where('id',$item->id)->first();
+                      if(!$pages)
+                      {
+                          $page = new CustomerCarExper();
+                          $page->id = $item->id;
+                          $page->customer_car_id = $item->customers_car_id;
+                          $page->image = $item->expert;
+                          $page->save();
+                      }
+                  }
 
               }
 

@@ -19,7 +19,7 @@
                         <input name="id" value="{{$user->id}}" type="hidden"/>
                         <ul class="list-group">
                             @foreach($roles as $role)
-                                <li class="list-group-item"><input type="radio" name="roles" @if($user->roles->first()->id === $role->id) checked @endif value="{{$role->id}}"/> {{$role->name}}</li>
+                                <li class="list-group-item"><input type="radio" name="roles" @if(@$user->roles->first()->id === $role->id) checked @endif value="{{$role->id}}"/> {{$role->name}}</li>
                             @endforeach
                         </ul>
                     </div>

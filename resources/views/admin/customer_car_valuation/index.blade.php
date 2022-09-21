@@ -126,7 +126,6 @@
             </div>
         </div>
 
-
         <div class="modal fade" id="agentModal" tabindex="-1" role="dialog" aria-labelledby="agentModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">

@@ -455,13 +455,12 @@
                                 @foreach ( $car->photo as $photo )
                                     <div class="col-2" style="padding: 2px;top: 13px;text-align: center">
                                         <div style="border: 2px solid #ccc;padding: 10px;">
-                                        <a s href="{{asset('storage/cars')}}/{{$photo->image}}"
+                                        <a href="{{asset('storage/cars')}}/{{$photo->image}}"
                                            title="{{str_replace(" ", "", strtoupper($car->plate))}} Fotoğrafları"
                                            data-gallery>
                                             <img src="{{asset('storage/cars')}}/{{$photo->image}}" style="height: 150px"
                                                  class="img-fluid rounded mb-3">
-                                            <img src="{{ public_path($photo->imag)}}" alt="" />
-
+                                            <img src="{{ public_path($photo->image)}}" alt="" />
                                         </a>
                                         <a class="btn btn-success w-100" href="{{route('admin.customer_car_valuation.default_photo',['id' => $car->id,'photo' => $photo->id])}}">
                                             Default
@@ -510,8 +509,8 @@
                             <div class="row">
                                 @foreach ($car->exper as $expert)
                                     <div class="col-2 mb-3">
-                                        <a href="{{asset('storage/files')}}/{{$expert->image}}" target="_blank">
-                                            <img src="{{asset('storage/files')}}/{{$expert->image}}"  class="img-fluid rounded">
+                                        <a data-gallery href="{{asset('storage/expers')}}/{{$expert->image}}" target="_blank">
+                                            <img src="{{asset('storage/expers')}}/{{$expert->image}}"  class="img-fluid rounded">
                                         </a>
                                     </div>
                                 @endforeach

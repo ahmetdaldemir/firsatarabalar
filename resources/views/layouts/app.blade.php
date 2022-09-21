@@ -89,7 +89,7 @@
                     <a href="{{route('admin.customer_car_valuation.index',['status' => \App\Enums\CustomerCarStatus::STATUS_STRING['WAITING']])}}">
                         <i class="fa-fw fad fa-bullseye-pointer"></i>
                         <span class="nav-label">Yeni Gelenler</span>
-                        <span class="label label-info float-right">-</span>
+                        <span class="label label-info float-right">{{count_menu()['customer_car_new']}}</span>
                     </a>
                 </li>
                 <li>

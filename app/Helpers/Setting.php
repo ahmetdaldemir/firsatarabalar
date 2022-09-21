@@ -115,7 +115,28 @@ if (!function_exists('count_menu')) {
         $data['cars'] = \App\Models\Car::all()->count();
         $data['customer_car'] = \App\Models\CustomerCar::all()->count();
         $data['customer_car_request'] = \App\Models\VehicleRequest::all()->count();
+        $data['customer_car_new'] = \App\Models\CustomerCar::where('status',1)->count();
+
         return $data;
+    }
+
+
+}
+
+
+if (!function_exists('new_car')) {
+    /**
+     * Format number
+     *
+     * @param $value
+     * @param $attribute
+     * @param $data
+     * @return boolean
+     */
+
+    function new_car()
+    {
+      return  \App\Models\CustomerCar::where('status',1)->count();
     }
 
 

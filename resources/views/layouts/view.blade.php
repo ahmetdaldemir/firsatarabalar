@@ -133,8 +133,8 @@
     @endif
 </script>
 
-<!-- script>
-     Swal.fire('Sizlere daha iyi hizmet verebilmek için alt yapı değişikliği yapmaktayız. 19.09.2022 tarihinde ödeme alamadığımız için araç kaydı alamamaktayız. Ödeme sistemlerimiz aktif olduğunda uyarı ekranı kapatılacaktır.');
- </script -->
+<script>
+     Swal.fire('Alt yapı değişikliği kaynaklı yaşanmış olan sorunlardan dolayı özürdileriz. En kısa sürede normal işleyişimiz devam edecektir. Bize Ulaşabilirsiniz = 0850 308 35 09');
+ </script>
 </body>
 </html>

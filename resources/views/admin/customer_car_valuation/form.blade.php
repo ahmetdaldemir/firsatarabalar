@@ -581,11 +581,9 @@
                                     <input type="hidden" name="valuation_id" value="{{$valuation->id ?? 0}}">
                                     <input type="hidden" name="customers_car_id" value="{{$car->id}}">
                                     <input type="hidden" name="sendtoadmin" id="sendtoadmin" value="">
-                                    <textarea name="comment" cols="30" rows="10" style="    width: 100%;"
-                                              placeholder="Araç değerlemesi için gerekli notlarınızı yazın..."
-                                              required>{{$valuation->comment ?? NULL}}</textarea>
 
                                     <div class="form-group mt-4">
+                                        <textarea name="comment" cols="30" rows="10" style="    width: 100%;" placeholder="Araç değerlemesi için gerekli notlarınızı yazın..." >{{$valuation->comment ?? NULL}}</textarea>
 
                                         <label for="">Emsal Araçlar</label>
 

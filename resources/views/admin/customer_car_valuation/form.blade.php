@@ -37,7 +37,6 @@
                         Mesajlaşma </a></li -->
             </ul>
             <div class="tab-content" ng-controller="postController">
-
                 <div role="tabpanel" id="general" class="tab-pane active">
                     <div class="panel-body">
 

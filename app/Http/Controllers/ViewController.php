@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 
 use App\Enums\BodyType;
+use App\Enums\CustomerCarStatus;
 use App\Enums\FullType;
 use App\Enums\Tramer;
 use App\Enums\Transmission;
 use App\Models\Customer;
 use App\Models\CustomerCar;
+use App\Models\CustomerCarBuyRequest;
 use App\Models\Page;
 use App\Models\Review;
 use App\Repositories\CustomerCar\CustomerCarInterface;
@@ -31,70 +33,73 @@ class ViewController
     public function index()
     {
         $data['chart'] = [];
-        $data['customer_cars'] = CustomerCar::all();
+       // $data['customer_cars'] = CustomerCar::all();
         $data['brands'] = $this->service->brands();
-        $data['blogs'] = $this->service->blogs();
-        $data['reviews'] =  $this->service->reviews();
-        $data['bodytypes'] =  BodyType::BodyType;
-        $data['fueltypes'] =  FullType::FullType;
-        $data['transmissions'] =  Transmission::Transmission;
-        $data['tramers'] =  Tramer::Tramer;
-
-        $data['yayinlanan_araclar'] = $this->customerCarRepository->getType(4);
-        $data['gelecek_araclar']     = $this->customerCarRepository->getType(5);
-        $data['satilan_araclar']    = $this->customerCarRepository->getType(6);
-        return view('view.home',$data);
+         $data['blogs'] = $this->service->blogs();
+       // $data['reviews'] =  $this->service->reviews();
+         $data['bodytypes'] =  BodyType::BodyType;
+         $data['fueltypes'] =  FullType::FullType;
+         $data['transmissions'] =  Transmission::Transmission;
+         $data['tramers'] =  Tramer::Tramer;
+//
+        $data['yayinlanan_araclar']  = $this->customerCarRepository->getType(5);
+        $data['gelecek_araclar']     = $this->customerCarRepository->getType(4);
+        $data['satilan_araclar']     = $this->customerCarRepository->getType(6);
+        $data['sliders']             = $this->customerCarRepository->getShows();
+        $data['solds']    = null;
+        return view('new_view.home',$data);
     }
 
     public function pages(Request $request)
     {
         $data['pages'] = Page::where('slug',$request->slug)->first();
-        return view('view.pages',$data);
+        return view('new_view.pages',$data);
     }
 
 
     public function about(Request $request)
     {
         $data['pages'] = Page::where('slug',$request->slug)->first();
-        return view('view.about',$data);
+        return view('new_view.about',$data);
     }
 
 
     public function blog(Request $request)
     {
         $data['pages'] = Page::where('slug',$request->slug)->where('type','blog')->first();
-        return view('view.blog',$data);
+        return view('new_view.blog',$data);
     }
 
     public function how_run_system()
     {
         $data['chart'] = [];
-        return view('view.how_run_system',$data);
+        return view('new_view.how_run_system',$data);
     }
 
     public function customer_comment()
     {
         $data['chart'] = [];
         $data['reviews'] = Review::where('status',1)->get();
-        return view('view.customer_comment',$data);
+        return view('new_view.customer_comment',$data);
     }
 
     public function carSell()
     {
         $data['chart'] = [];
-        return view('view.car_sell',$data);
+        return view('new_view.car_sell',$data);
     }
 
     public function contact()
     {
         $data['chart'] = [];
-        return view('view.contact',$data);
+        return view('new_view.contact',$data);
     }
 
     public function car_detail(Request $request)
     {
         $data['car'] = CustomerCar::find($request->id);
-        return view('view.car_detail',$data);
+        $data['customer_car_buy'] = CustomerCarBuyRequest::where('customer_id', Auth::guard('customer')->id())->where('customer_car_id', $request->id)->first();
+        return view('new_view.car_detail',$data);
     }
 
 
@@ -117,5 +122,11 @@ class ViewController
         $data = json_decode(curl_exec($curl)); // Here you have the data that you need
         print_r(json_encode($data, JSON_PRETTY_PRINT));
         curl_close($curl);
+    }
+
+    public function allcars()
+    {
+        $data['allcars'] = CustomerCar::where('status',CustomerCarStatus::STATUS_STRING['COMPLATED'])->get();
+        return view('new_view/allcars',$data);
     }
  }

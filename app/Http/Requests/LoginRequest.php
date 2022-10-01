@@ -17,7 +17,6 @@ class LoginRequest extends FormRequest
         $rules = [
             'phone' => 'required',
             'password' => 'required',
-            'g-recaptcha-response' => 'required|recaptcha',
         ];
 
         return $rules;

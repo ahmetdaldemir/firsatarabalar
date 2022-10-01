@@ -15,7 +15,7 @@ final class FullType extends Enum
         1  =>  'Benzinli',
         2  =>  'Dizel',
         3  =>  'Benzin + LPG',
-        4  =>  'Hibrit',
+        8  =>  'Hibrit',
     ];
 
 }

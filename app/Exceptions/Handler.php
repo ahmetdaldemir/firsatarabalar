@@ -44,8 +44,16 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            //
+           // $e->getMessage();
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof \App\Exceptions\CustomException)  {
+            return $exception->render($request);
+        }
+        return parent::render($request, $exception);
     }
 
     protected function unauthenticated($request, AuthenticationException|\Illuminate\Auth\AuthenticationException $exception)

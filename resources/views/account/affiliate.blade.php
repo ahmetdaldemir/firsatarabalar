@@ -1,20 +1,24 @@
-@extends('layouts.view')
+@extends('layouts.view_new')
 @section('content')
 
 
     <?php
     use Illuminate\Support\Facades\Auth;
     ?>
-    <div class="dlab-bnr-inr overlay-primary-dark" style="background-image: url(images/banner/bnr1.jpg);">
+    <div class="page-header bg-light border-bottom">
         <div class="container">
-            <div class="dlab-bnr-inr-entry">
-                <nav aria-label="breadcrumb" class="breadcrumb-row">
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/">Anasayfa</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Arkadaşına Öner</li>
-                    </ul>
-                </nav>
-                <!-- Breadcrumb Row End -->
+            <div class="row">
+                <div class="col">
+                    <div class="page-title">
+                        <h1>Satılan Araçlar</h1>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/">Ana Sayfa</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Satılan Araçlar</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -38,7 +42,7 @@
                                             <input   required="required" type="tel" class="form-control" name="phone" pattern="[0-9]{3}[0-9]{3}[0-9]{4}"  placeholder="Telefon Numarası">
                                             <div class="input-group-addon">
                                                 <button name="submit" type="submit" class="btn btn-primary gradient">
-                                                    <i class="las la-paper-plane scale4"></i>
+                                                    <i class="fas fa-paper-plane scale4"></i>
                                                 </button>
                                             </div>
                                         </div>
@@ -82,4 +86,32 @@
                 text-overflow: ellipsis;
             }
         </style>
+@endsection
+
+        @section('body-before-js')
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.css" rel="stylesheet">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.js"></script>
+            <!-- Stylesheet -->
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-sanitize.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-utils/0.1.1/angular-ui-utils.min.js" class=""></script>
+
+            <script> var app = angular.module("app", ['ngSanitize']);
+                app.filter('unsafe', function ($sce) {
+                    return $sce.trustAsHtml;
+                });
+                app.directive('customOnChange', function() {
+                    return {
+                        restrict: 'A',
+                        link: function(scope, element, attrs) {
+                            var onChangeFunc = scope.$eval(attrs.customOnChange);
+                            element.unbind('change').bind('change', function(e) {
+                                onChangeFunc(e);
+                            });
+                        }
+                    };
+                });
+            </script>
+            <script src="{{asset('new_view/js/angular.js')}}" class=""></script>
+
 @endsection

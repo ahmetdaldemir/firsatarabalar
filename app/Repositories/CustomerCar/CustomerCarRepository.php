@@ -5,6 +5,7 @@ use App\Enums\FullType;
 use App\Enums\Transmission;
 use App\Models\Brand;
 use App\Models\Car;
+use App\Models\Color;
 use App\Models\Customer;
 use App\Models\CustomerCar;
 use App\Models\CustomerCarExper;
@@ -126,6 +127,13 @@ class CustomerCarRepository implements CustomerCarInterface
         // TODO: Implement filter() method.
     }
 
+    public function getShows()
+    {
+        return CustomerCar::where('sliders', 1)->get();
+    }
+
+
+
     public function assignmentDo($request)
     {
         try {
@@ -180,6 +188,9 @@ class CustomerCarRepository implements CustomerCarInterface
         foreach ($customer_cars as $customer_car) {
             $arrray[] = array(
                 'name' => $customer_car->car->brand_name,
+                'brand' => $customer_car->car->brand->name,
+                'model' => $customer_car->car->model,
+                'color' => Color::find($customer_car->color)->name,
                 'id' => $customer_car->id,
                 'default_image' => $customer_car->default_image,
                 'gear' => Transmission::Transmission[$customer_car->gear],
@@ -189,6 +200,7 @@ class CustomerCarRepository implements CustomerCarInterface
                 'button' => ($type == 5) ? "İncele" : "Favorilere Ekle",
                 'price' => ($type == 5) ? $customer_car->suggested . " TL" : "",
                 'type' => $type,
+                'specs' => $customer_car->specs,
                 'follow' => CustomerCarFollow::where('customer_id', Auth::guard('customer')->id())->where('customer_car_id', $customer_car->id)->count()
             );
         }
@@ -226,25 +238,6 @@ class CustomerCarRepository implements CustomerCarInterface
     {
         $customer_id = $this->customer_add();
 
-        if($request->version == null)
-        {
-            $cars = new Car();
-            $cars->brand_id = $request->brand;
-            $cars->brand_name = Brand::find($request->brand)->name;
-            $cars->model_id = NULL;
-            $cars->name = $request->custom_version;
-            $cars->model = $request->model;
-            $cars->fueltype = $request->fuel;
-            $cars->transmission = $request->transmission;
-            $cars->bodytype = $request->body;
-            $cars->engine = 1;
-            $cars->horse = 1;
-            $cars->save();
-
-            $car_id = $cars->id;
-        }else{
-            $car_id = $request->version;
-        }
 
         $customer_car = CustomerCar::updateOrCreate(
             ['customer_id' => $customer_id, 'session_id' => cacheresponseid() ?? \Illuminate\Support\Str::uuid()],
@@ -255,7 +248,7 @@ class CustomerCarRepository implements CustomerCarInterface
                 'fuel' => $request->fuel??null,
                 'gear' => $request->transmission??null,
                 'car_id' => $car_id??null,
-                'custom_version' => $request->custom_version??null,
+                'custom_version' => $request->custom_version,
                 'km' => $request->km??null,
                 'color' => $request->color??null,
                 'plate' => $request->plate??null,
@@ -279,7 +272,7 @@ class CustomerCarRepository implements CustomerCarInterface
         }
 
         $customer_car = CustomerCar::where('id',$request->customer_car_id)->first();
-        $customer_car->damage = json_encode($request->damage);
+        $customer_car->damage = json_encode($request->damage) ??"NULL";
         $customer_car->tramer = $request->tramer;
         $customer_car->tramerValue = $request->tramer_price;
         $customer_car->tramer_photo = $filename;
@@ -292,17 +285,17 @@ class CustomerCarRepository implements CustomerCarInterface
     {
 
         $customer_car = CustomerCar::where('id',trim($request->customer_car_id))->first();
-        $customer_car->car_details = $request->car_details;
-        $customer_car->car_notwork = $request->car_notwork;
-        $customer_car->car_exterior_faults = $request->car_exterior_faults;
-        $customer_car->car_interior_faults = $request->car_interior_faults;
-        $customer_car->maintenance_history = $request->maintenance_history;
-        $customer_car->status_frame = $request->status_frame;
-        $customer_car->status_pole = $request->status_pole;
-        $customer_car->status_podium = $request->status_podium;
-        $customer_car->status_airbag = $request->status_airbag;
-        $customer_car->status_unrealizable = $request->status_unrealizable;
-        $customer_car->status_onArkaBagaj = $request->status_onArkaBagaj;
+        $customer_car->car_details = $request->car_details??"NULL";
+        $customer_car->car_notwork = $request->car_notwork??"NULL";
+        $customer_car->car_exterior_faults = $request->car_exterior_faults??"NULL";
+        $customer_car->car_interior_faults = $request->car_interior_faults??"NULL";
+        $customer_car->maintenance_history = $request->maintenance_history??"NULL";
+        $customer_car->status_frame = $request->status_frame??"NULL";
+        $customer_car->status_pole = $request->status_pole??"NULL";
+        $customer_car->status_podium = $request->status_podium??"NULL";
+        $customer_car->status_airbag = $request->status_airbag??"NULL";
+        $customer_car->status_unrealizable = $request->status_unrealizable??"NULL";
+        $customer_car->status_onArkaBagaj = $request->status_onArkaBagaj??"NULL";
         $customer_car->status_km = $request->status_km;
         $customer_car->status_tyre = $request->status_tyre;
         $customer_car->date_inspection = $request->date_inspection;

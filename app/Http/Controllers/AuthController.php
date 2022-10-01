@@ -53,14 +53,16 @@ class AuthController
         $remember_me = $request->has('remember') ? true : false;
 
         if (Auth::guard('customer')->attempt($credentials, $remember_me)) {
+            return response()->json(['status' => 'success','data' => 'smscode'], 200);
 
-            return redirect()->to('profil');
+            //return redirect()->to('profil');
             /*
                         $finduser = Customer::find(Auth::guard('customer')->id());
                         Auth::guard('customer')->login($finduser, $remember_me);
                         return response()->json(['success' => true], 200); */
         }
-        return redirect()->back()->withErrors(['msg' => 'Kullanıcı Adı veya Şifre Yanlış'], 'login');
+        return response()->json(['status' => 'fail','data' => 'smscode'], 200);
+      //  return redirect()->back()->withErrors(['msg' => 'Kullanıcı Adı veya Şifre Yanlış'], 'login');
     }
 
     public function logout()
@@ -72,7 +74,6 @@ class AuthController
 
     public function register(RegisterRequest $request)
     {
-
         $customer = new Customer();
         $customer->firstname = $request->firstname;
         $customer->lastname = $request->lastname;

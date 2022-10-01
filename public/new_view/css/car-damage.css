@@ -1,0 +1,665 @@
+.car-damage-wrapper {
+    padding: 20px;
+    background: #f5f8f8;
+    border-radius: 4px;
+    border: 1px solid #dee6f2;
+}
+
+.damage-area {
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    padding-top: 40px;
+}
+
+.car-parts {
+    position: relative;
+    background-image: url("/Public/web/img/car-parts/car_base.png");
+    background-position: 0 0;
+    width: 311px;
+    height: 391px
+}
+
+.car-parts div {
+    position: absolute;
+    cursor: pointer;
+    z-index: 3;
+    -webkit-transition: background-image 0.1s linear;
+    -moz-transition: background-image 0.1s linear;
+    -o-transition: background-image 0.1s linear;
+    -ms-transition: background-image 0.1s linear;
+    transition: background-image 0.1s linear
+}
+
+.car-parts .front-bumper {
+    left: 104px;
+    top: 16px
+}
+
+.car-parts .front-left-mudguard {
+    top: 51px;
+    left: 21px
+}
+
+.car-parts .front-right-mudguard {
+    top: 51px;
+    left: 262px
+}
+
+.car-parts .front-hood {
+    top: 48px;
+    left: 101px
+}
+
+.car-parts .front-left-door {
+    top: 108px;
+    left: 21px
+}
+
+.car-parts .front-right-door {
+    top: 108px;
+    left: 210px
+}
+
+.car-parts .rear-left-door {
+    top: 197px;
+    left: 21px
+}
+
+.car-parts .rear-right-door {
+    top: 197px;
+    left: 211px
+}
+
+.car-parts .roof {
+    top: 208px;
+    left: 119px
+}
+
+.car-parts .rear-bumper {
+    left: 104px;
+    top: 352px
+}
+
+.car-parts .rear-hood {
+    top: 309px;
+    left: 104px
+}
+
+.car-parts .rear-left-mudguard {
+    top: 292px;
+    left: 21px
+}
+
+.car-parts .rear-right-mudguard {
+    top: 293px;
+    left: 262px
+}
+
+
+
+.car-parts .front-bumper.original {
+    background-image: url("/Public/web/img/car-parts/car_original.png");
+    background-position: 0 -245px;
+    width: 105px;
+    height: 22px
+}
+
+.car-parts .front-bumper:hover,
+.car-parts .front-bumper.hover {
+    background-image: url("/Public/web/img/car-parts/car_hover.png");
+    background-position: 0 -245px;
+    width: 105px;
+    height: 22px
+}
+
+.car-parts .front-bumper.painted {
+    background-image: url("/Public/web/img/car-parts/car_painted.png");
+    background-position: 0 -245px;
+    width: 105px;
+    height: 22px
+}
+
+.car-parts .front-bumper.paintedlocal {
+    background-image: url("/Public/web/img/car-parts/car_painted_local.png");
+    background-position: 0 -245px;
+    width: 105px;
+    height: 22px
+}
+
+.car-parts .front-bumper.changed {
+    background-image: url("/Public/web/img/car-parts/car_changed.png");
+    background-position: 0 -245px;
+    width: 105px;
+    height: 22px
+}
+
+
+
+.car-parts .front-left-mudguard {
+    background-image: url("/Public/web/img/car-parts/car_original.png");
+    background-position: -299px -164px;
+    width: 28px;
+    height: 43px
+}
+
+.car-parts .front-left-mudguard:hover,
+.car-parts .front-left-mudguard.hover {
+    background-image: url("/Public/web/img/car-parts/car_hover.png");
+    background-position: -299px -164px;
+    width: 28px;
+    height: 43px
+}
+
+.car-parts .front-left-mudguard.painted {
+    background-image: url("/Public/web/img/car-parts/car_painted.png");
+    background-position: -299px -164px;
+    width: 28px;
+    height: 43px
+}
+
+.car-parts .front-left-mudguard.paintedlocal {
+    background-image: url("/Public/web/img/car-parts/car_painted_local.png");
+    background-position: -299px -164px;
+    width: 28px;
+    height: 43px
+}
+
+.car-parts .front-left-mudguard.changed {
+    background-image: url("/Public/web/img/car-parts/car_changed.png");
+    background-position: -299px -164px;
+    width: 28px;
+    height: 43px
+}
+
+
+
+.car-parts .front-right-mudguard {
+    background-image: url("/Public/web/img/car-parts/car_original.png");
+    background-position: -299px -111px;
+    width: 28px;
+    height: 43px
+}
+
+.car-parts .front-right-mudguard:hover,
+.car-parts .front-right-mudguard.hover {
+    background-image: url("/Public/web/img/car-parts/car_hover.png");
+    background-position: -299px -111px;
+    width: 28px;
+    height: 43px
+}
+
+.car-parts .front-right-mudguard.painted {
+    background-image: url("/Public/web/img/car-parts/car_painted.png");
+    background-position: -299px -111px;
+    width: 28px;
+    height: 43px
+}
+
+.car-parts .front-right-mudguard.paintedlocal {
+    background-image: url("/Public/web/img/car-parts/car_painted_local.png");
+    background-position: -299px -111px;
+    width: 28px;
+    height: 43px
+}
+
+.car-parts .front-right-mudguard.changed {
+    background-image: url("/Public/web/img/car-parts/car_changed.png");
+    background-position: -299px -111px;
+    width: 28px;
+    height: 43px
+}
+
+
+
+.car-parts .front-hood {
+    background-image: url("/Public/web/img/car-parts/car_original.png");
+    background-position: 0 0;
+    width: 110px;
+    height: 80px
+}
+
+.car-parts .front-hood:hover,
+.car-parts .front-hood.hover {
+    background-image: url("/Public/web/img/car-parts/car_hover.png");
+    background-position: 0 0;
+    width: 110px;
+    height: 80px
+}
+
+.car-parts .front-hood.painted {
+    background-image: url("/Public/web/img/car-parts/car_painted.png");
+    background-position: 0 0;
+    width: 110px;
+    height: 80px
+}
+
+.car-parts .front-hood.paintedlocal {
+    background-image: url("/Public/web/img/car-parts/car_painted_local.png");
+    background-position: 0 0;
+    width: 110px;
+    height: 80px
+}
+
+.car-parts .front-hood.changed {
+    background-image: url("/Public/web/img/car-parts/car_changed.png");
+    background-position: 0 0;
+    width: 110px;
+    height: 80px
+}
+
+
+
+.car-parts .front-left-door {
+    background-image: url("/Public/web/img/car-parts/car_original.png");
+    background-position: -120px 0;
+    width: 80px;
+    height: 104px
+}
+
+.car-parts .front-left-door:hover,
+.car-parts .front-left-door.hover {
+    background-image: url("/Public/web/img/car-parts/car_hover.png");
+    background-position: -120px 0;
+    width: 80px;
+    height: 104px
+}
+
+.car-parts .front-left-door.painted {
+    background-image: url("/Public/web/img/car-parts/car_painted.png");
+    background-position: -120px 0;
+    width: 80px;
+    height: 104px
+}
+
+.car-parts .front-left-door.paintedlocal {
+    background-image: url("/Public/web/img/car-parts/car_painted_local.png");
+    background-position: -120px 0;
+    width: 80px;
+    height: 104px
+}
+
+.car-parts .front-left-door.changed {
+    background-image: url("/Public/web/img/car-parts/car_changed.png");
+    background-position: -120px 0;
+    width: 80px;
+    height: 104px
+}
+
+
+
+.car-parts .front-right-door {
+    background-image: url("/Public/web/img/car-parts/car_original.png");
+    background-position: 0 -90px;
+    width: 80px;
+    height: 105px
+}
+
+.car-parts .front-right-door:hover,
+.car-parts .front-right-door.hover {
+    background-image: url("/Public/web/img/car-parts/car_hover.png");
+    background-position: 0 -90px;
+    width: 80px;
+    height: 105px
+}
+
+.car-parts .front-right-door.painted {
+    background-image: url("/Public/web/img/car-parts/car_painted.png");
+    background-position: 0 -90px;
+    width: 80px;
+    height: 105px
+}
+
+.car-parts .front-right-door.paintedlocal {
+    background-image: url("/Public/web/img/car-parts/car_painted_local.png");
+    background-position: 0 -90px;
+    width: 80px;
+    height: 105px
+}
+
+.car-parts .front-right-door.changed {
+    background-image: url("/Public/web/img/car-parts/car_changed.png");
+    background-position: 0 -90px;
+    width: 80px;
+    height: 105px
+}
+
+
+
+.car-parts .rear-left-door {
+    background-image: url("/Public/web/img/car-parts/car_original.png");
+    background-position: -210px -95px;
+    width: 79px;
+    height: 84px
+}
+
+.car-parts .rear-left-door:hover,
+.car-parts .rear-left-door.hover {
+    background-image: url("/Public/web/img/car-parts/car_hover.png");
+    background-position: -210px -95px;
+    width: 79px;
+    height: 84px
+}
+
+.car-parts .rear-left-door.painted {
+    background-image: url("/Public/web/img/car-parts/car_painted.png");
+    background-position: -210px -95px;
+    width: 79px;
+    height: 84px
+}
+
+.car-parts .rear-left-door.paintedlocal {
+    background-image: url("/Public/web/img/car-parts/car_painted_local.png");
+    background-position: -210px -95px;
+    width: 79px;
+    height: 84px
+}
+
+.car-parts .rear-left-door.changed {
+    background-image: url("/Public/web/img/car-parts/car_changed.png");
+    background-position: -210px -95px;
+    width: 79px;
+    height: 84px
+}
+
+
+
+.car-parts .rear-right-door {
+    background-image: url("/Public/web/img/car-parts/car_original.png");
+    background-position: -210px 0;
+    width: 79px;
+    height: 85px
+}
+
+.car-parts .rear-right-door:hover,
+.car-parts .rear-right-door.hover {
+    background-image: url("/Public/web/img/car-parts/car_hover.png");
+    background-position: -210px 0;
+    width: 79px;
+    height: 85px
+}
+
+.car-parts .rear-right-door.painted {
+    background-image: url("/Public/web/img/car-parts/car_painted.png");
+    background-position: -210px 0;
+    width: 79px;
+    height: 85px
+}
+
+.car-parts .rear-right-door.paintedlocal {
+    background-image: url("/Public/web/img/car-parts/car_painted_local.png");
+    background-position: -210px 0;
+    width: 79px;
+    height: 85px
+}
+
+.car-parts .rear-right-door.changed {
+    background-image: url("/Public/web/img/car-parts/car_changed.png");
+    background-position: -210px 0;
+    width: 79px;
+    height: 85px
+}
+
+
+
+.car-parts .roof {
+    background-image: url("/Public/web/img/car-parts/car_original.png");
+    background-position: -120px -114px;
+    width: 74px;
+    height: 53px
+}
+
+.car-parts .roof:hover,
+.car-parts .roof.hover {
+    background-image: url("/Public/web/img/car-parts/car_hover.png");
+    background-position: -120px -114px;
+    width: 74px;
+    height: 53px
+}
+
+.car-parts .roof.painted {
+    background-image: url("/Public/web/img/car-parts/car_painted.png");
+    background-position: -120px -114px;
+    width: 74px;
+    height: 53px
+}
+
+.car-parts .roof.paintedlocal {
+    background-image: url("/Public/web/img/car-parts/car_painted_local.png");
+    background-position: -120px -114px;
+    width: 74px;
+    height: 53px
+}
+
+.car-parts .roof.changed {
+    background-image: url("/Public/web/img/car-parts/car_changed.png");
+    background-position: -120px -114px;
+    width: 74px;
+    height: 53px
+}
+
+
+
+.car-parts .rear-bumper {
+    background-image: url("/Public/web/img/car-parts/car_original.png");
+    background-position: -114px -205px;
+    width: 105px;
+    height: 22px
+}
+
+.car-parts .rear-bumper:hover,
+.car-parts .rear-bumper.hover {
+    background-image: url("/Public/web/img/car-parts/car_hover.png");
+    background-position: -114px -205px;
+    width: 105px;
+    height: 22px
+}
+
+.car-parts .rear-bumper.painted {
+    background-image: url("/Public/web/img/car-parts/car_painted.png");
+    background-position: -114px -205px;
+    width: 105px;
+    height: 22px
+}
+
+.car-parts .rear-bumper.paintedlocal {
+    background-image: url("/Public/web/img/car-parts/car_painted_local.png");
+    background-position: -114px -205px;
+    width: 105px;
+    height: 22px
+}
+
+.car-parts .rear-bumper.changed {
+    background-image: url("/Public/web/img/car-parts/car_changed.png");
+    background-position: -114px -205px;
+    width: 105px;
+    height: 22px
+}
+
+
+
+.car-parts .rear-hood {
+    background-image: url("/Public/web/img/car-parts/car_original.png");
+    background-position: 0 -205px;
+    width: 104px;
+    height: 30px
+}
+
+.car-parts .rear-hood:hover,
+.car-parts .rear-hood.hover {
+    background-image: url("/Public/web/img/car-parts/car_hover.png");
+    background-position: 0 -205px;
+    width: 104px;
+    height: 30px
+}
+
+.car-parts .rear-hood.painted {
+    background-image: url("/Public/web/img/car-parts/car_painted.png");
+    background-position: 0 -205px;
+    width: 104px;
+    height: 30px
+}
+
+.car-parts .rear-hood.paintedlocal {
+    background-image: url("/Public/web/img/car-parts/car_painted_local.png");
+    background-position: 0 -205px;
+    width: 104px;
+    height: 30px
+}
+
+.car-parts .rear-hood.changed {
+    background-image: url("/Public/web/img/car-parts/car_changed.png");
+    background-position: 0 -205px;
+    width: 104px;
+    height: 30px
+}
+
+
+
+.car-parts .rear-left-mudguard {
+    background-image: url("/Public/web/img/car-parts/car_original.png");
+    background-position: -299px 0;
+    width: 28px;
+    height: 46px
+}
+
+.car-parts .rear-left-mudguard:hover,
+.car-parts .rear-left-mudguard.hover {
+    background-image: url("/Public/web/img/car-parts/car_hover.png");
+    background-position: -299px 0;
+    width: 28px;
+    height: 46px
+}
+
+.car-parts .rear-left-mudguard.painted {
+    background-image: url("/Public/web/img/car-parts/car_painted.png");
+    background-position: -299px 0;
+    width: 28px;
+    height: 46px
+}
+
+.car-parts .rear-left-mudguard.paintedlocal {
+    background-image: url("/Public/web/img/car-parts/car_painted_local.png");
+    background-position: -299px 0;
+    width: 28px;
+    height: 46px
+}
+
+.car-parts .rear-left-mudguard.changed {
+    background-image: url("/Public/web/img/car-parts/car_changed.png");
+    background-position: -299px 0;
+    width: 28px;
+    height: 46px
+}
+
+
+
+.car-parts .rear-right-mudguard {
+    background-image: url("/Public/web/img/car-parts/car_original.png");
+    background-position: -299px -56px;
+    width: 28px;
+    height: 45px
+}
+
+.car-parts .rear-right-mudguard:hover,
+.car-parts .rear-right-mudguard.hover {
+    background-image: url("/Public/web/img/car-parts/car_hover.png");
+    background-position: -299px -56px;
+    width: 28px;
+    height: 45px
+}
+
+.car-parts .rear-right-mudguard.painted {
+    background-image: url("/Public/web/img/car-parts/car_painted.png");
+    background-position: -299px -56px;
+    width: 28px;
+    height: 45px
+}
+
+.car-parts .rear-right-mudguard.paintedlocal {
+    background-image: url("/Public/web/img/car-parts/car_painted_local.png");
+    background-position: -299px -56px;
+    width: 28px;
+    height: 45px
+}
+
+.car-parts .rear-right-mudguard.changed {
+    background-image: url("/Public/web/img/car-parts/car_changed.png");
+    background-position: -299px -56px;
+    width: 28px;
+    height: 45px
+}
+
+
+
+.color-desc {
+    padding-left: 15px
+}
+
+.color-desc .form-check-inline {
+    display: inline-block;
+    margin-right: .7rem;
+}
+
+.color-desc .form-check-input:disabled ~ .form-check-label, .color-desc .form-check-input[disabled] ~ .form-check-label,
+.color-desc .form-check-input:disabled {
+    opacity: 1 !important
+}
+
+.color-desc label {
+    font-size: 13px !important;
+    margin-bottom: 0
+}
+
+.damage-selection .original .form-check-input:checked,
+.color-desc .original .form-check-input:checked {
+    background-color: #828282;
+    border-color: #828282;
+}
+
+.damage-selection .painted .form-check-input:checked,
+.color-desc .painted .form-check-input:checked {
+    background-color: #ff7555;
+    border-color: #ff7555;
+}
+
+.damage-selection .paintedlocal .form-check-input:checked,
+.color-desc .paintedlocal .form-check-input:checked {
+    background-color: #ecb20f;
+    border-color: #ecb20f;
+}
+
+.damage-selection .changed .form-check-input:checked,
+.color-desc .changed .form-check-input:checked {
+    background-color: #6687d7;
+    border-color: #6687d7;
+}
+
+
+.damage-selection {
+    padding-left: 20px;
+}
+
+.damage-selection tbody tr:hover,
+.damage-selection .hover {
+    background-color: #e8eeee
+}
+
+.damage-selection td {
+    border-bottom: 0
+}
+
+.damage-selection tbody td {
+    border-bottom: 0;
+    padding: .47rem .5rem !important
+}
+
+.damage-selection td.original .form-check-input { border-color: #828282; }
+.damage-selection td.painted .form-check-input { border-color: #ff7555; }
+.damage-selection td.paintedlocal .form-check-input { border-color: #ecb20f; }
+.damage-selection td.changed .form-check-input { border-color: #6687d7; }
+
+.damage-selection thead td.original { color: #828282; }
+.damage-selection thead td.painted { color: #ff7555; }
+.damage-selection thead td.paintedlocal { color: #ecb20f; }
+.damage-selection thead td.changed { color: #6687d7; }

@@ -1,5 +1,6 @@
 <?php namespace App\Repositories\Cars;
 
+use App\Models\Brand;
 use App\Models\Car;
 use App\Models\CustomerCar;
 
@@ -23,33 +24,40 @@ class CarRepository implements CarRepositoryInterface
 
     public function create($request)
     {
-        $Cities = new Car();
-        $Cities->firstname = $request->firstname;
-        $Cities->lastname = $request->lastname;
-        $Cities->email = $request->email;
-        $Cities->phone = $request->phone;
-        $Cities->password = bcrypt($request->password);
-        $Cities->earn = 0;
-        $Cities->save();
+        $car = new Car();
+        $car->brand_id = $request->brand_id;
+        $car->brand_name = Brand::find($request->brand_id)->name;
+        $car->model_id = NULL;
+        $car->name = $request->name;
+        $car->model = $request->model;
+        $car->fueltype = $request->fueltype;
+        $car->transmission = $request->transmission;
+        $car->bodytype = $request->bodytype;
+        $car->engine = $request->engine;
+        $car->horse = $request->horse;
+        $car->production_start = $request->production_start;
+        $car->production_end = $request->production_end;
+        $car->status = 1;
+        $car->save();
     }
 
     public function update($id, $request)
     {
-        $Cities = Car::find($id);
-        $Cities->firstname = $request->firstname;
-        $Cities->lastname = $request->lastname;
-        $Cities->email = $request->email;
-        $Cities->phone = $request->phone;
-        if ($request->password) {
-            $Cities->password = bcrypt($request->password);
-        }
-        $Cities->earn = $request->earn;
-        if (empty($request->status)) {
-            $Cities->status = 0;
-        }else{
-            $Cities->status = $request->status;
-        }
-        $Cities->save();
+        $car = Car::find($id);
+        $car->brand_id = $request->brand_id;
+        $car->brand_name = Brand::find($request->brand_id)->name;
+        $car->model_id = NULL;
+        $car->name = $request->name;
+        $car->model = $request->model;
+        $car->fueltype = $request->fueltype;
+        $car->transmission = $request->transmission;
+        $car->bodytype = $request->bodytype;
+        $car->engine = $request->engine;
+        $car->horse = $request->horse;
+        $car->production_start = $request->production_start;
+        $car->production_end = $request->production_end;
+        $car->status = 1;
+        $car->save();
     }
 
     public function filter()

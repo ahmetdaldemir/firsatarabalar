@@ -10,6 +10,9 @@
         </div>
         <div class="col-6 d-flex justify-content-end align-items-center" style="padding-top: 52px">
             <div class="custom-control custom-checkbox mr-3">
+                <a href="{{route('admin.car.create')}}" class="btn btn-success">Yeni Araç Ekle</a>
+            </div>
+            <div class="custom-control custom-checkbox mr-3">
                 <input type="checkbox" class="custom-control-input" id="show_all" {{ ( Request::get("show") == "all" ) ? "checked" : "" }}>
                 <label class="custom-control-label" for="show_all" style="padding-top: 2px">Tüm Araçları Göster</label>
             </div>

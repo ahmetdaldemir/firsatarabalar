@@ -30,7 +30,7 @@ class Make
         if (Cache::has($cache_key)) {
             $data = Cache::get($cache_key);
         } else {
-            $brand = Brand::all();
+            $brand = Brand::all()->sortBy('name');
             $data = Cache::put($cache_key, $brand);
         }
         return $data;

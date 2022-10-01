@@ -1,4 +1,4 @@
-@extends('layouts.view')
+@extends('layouts.view_new')
 @section('content')
 
 

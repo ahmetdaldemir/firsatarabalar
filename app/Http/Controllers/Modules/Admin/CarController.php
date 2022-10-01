@@ -1,8 +1,12 @@
 <?php namespace App\Http\Controllers\Modules\Admin;
 
+use App\Enums\BodyType;
 use App\Enums\DateEnum;
+use App\Enums\FullType;
+use App\Enums\Transmission;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\carRequest;
+use App\Models\Brand;
 use App\Models\Car;
 use App\Repositories\Cars\CarRepositoryInterface;
 use Illuminate\Http\JsonResponse;
@@ -39,17 +43,16 @@ class CarController extends Controller
     {
         $data['car'] = $this->CarRepository->getById($request->id);
         $data['payments'] = NULL;
-        $data['cars'] = NULL;
-        $data['cities'] = $this->CityRepository->get();
         return view('admin.car.form',$data);
     }
 
     public function create()
     {
-        $data['car'] = NULL;
-        $data['payments'] = NULL;
-        $data['cars'] = NULL;
-        $data['cities'] = $this->CityRepository->get();
+        $data=[];
+        $data['brands']= Brand::all();
+        $data['bodyTypes']= BodyType::BodyType;
+        $data['fuelTypes']= FullType::FullType;
+        $data['transmissions']= Transmission::Transmission;
         return view('admin.car.form',$data);
     }
 

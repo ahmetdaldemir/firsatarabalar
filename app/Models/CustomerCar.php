@@ -15,6 +15,7 @@ class CustomerCar extends Model
         'body',
         'fuel',
         'gear',
+        'custom_version',
         'car_id',
         'km',
         'color',

@@ -18,5 +18,6 @@ interface CustomerCarInterface
     public function thirtyStepStore($request);
     public function fourth($id,$request);
     public function fifthStep($request);
+    public function getShows();
 
 }

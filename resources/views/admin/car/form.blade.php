@@ -2,453 +2,144 @@
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col">
-            <h2>Müşteri {{(@$customer) ? "Düzenle":"Ekle"}}</h2>
+            <h2>Araç {{(@$Car->id) ? "Düzenle":"Ekle"}}</h2>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Ana Sayfa</a></li>
-                <li class="breadcrumb-item"><a href="/customers">Müşteriler</a></li>
-                <li class="breadcrumb-item active"><strong>Müşteri {{(@$customer->id) ? "Düzenle":"Ekle"}}
-                        : {{@$customer->firstname}} {{@$customer->lastname}}</strong></li>
+                <li class="breadcrumb-item"><a href="/settings">Ayarlar</a></li>
+                <li class="breadcrumb-item active"><strong>Araç {{(@$Car->id) ? "Düzenle":"Ekle"}}</strong></li>
             </ol>
         </div>
         <div class="col-4 text-right" style="padding-top: 52px">
-            <a href="{{route('admin.customer.index')}}" class="btn btn-sm btn-secondary"><i
-                        class="fad fa-reply mr-1"></i> Geri Dön</a>
-
+            <a href="javascript:history.go(-1);" class="btn btn-sm btn-secondary"><i class="fad fa-reply mr-1"></i> Geri Dön</a>
         </div>
     </div>
     <div class="wrapper wrapper-content">
+        <div class="ibox">
+            <div class="ibox-title"><h5>Araç Özellikleri</h5></div>
+            <div class="ibox-content">
 
-        <div class="tabs-container">
-            <ul id="CustomerTabs" class="nav nav-tabs" role="tablist">
-                <li><a class="nav-link active" data-toggle="tab" href="#general"><i class="fad fa-user"></i> Genel
-                        Bilgiler</a></li>
-                <li><a class="nav-link" data-toggle="tab" href="#cars"><i class="fad fa-cars"></i> Araçları <span
-                                class="label label-plain ml-2">{{($cars != NULL) ? count($cars) : 0}}</span></a></a>
-                </li>
-                <li><a class="nav-link" data-toggle="tab" href="#payments"><i class="fad fa-sack-dollar"></i> Ödemeleri
-                        <span class="label label-plain ml-2">{{($payments != NULL) ? count($payments) : 0}}</span></a></a>
-                </li>
-                <li><a class="nav-link" data-toggle="tab" href="#notes"><i class="fad fa-comment-alt-dots"></i> Müşteri
-                        Notları <span
-                                class="label label-plain ml-2">{{($customer != NULL) ? count($customer->comments) : 0}}</span></a></a>
-                </li>
-            </ul>
-            <div class="tab-content">
-
-                <div role="tabpanel" id="general" class="tab-pane active">
-                    <div class="panel-heading" style="background: white">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
+                <form action="{{route('admin.car.store')}}" method="post">
+                    <input type="hidden" name="car_id" value="{{@$Car->id}}">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="brand_id">Araç Markası <span class="text-danger">*</span></label>
+                                <select name="brand_id" id="brand_id" class="form-control">
+                                    <option value="">Araç Markası seçin...</option>
+                                    @foreach ($brands as $brand )
+                                        <option value="{{$brand->id}}" {{ ( $brand->id == @$car->brand_id ) ? "selected" : ""}}>{{$brand->name}}</option>
                                     @endforeach
-                                </ul>
+                                </select>
                             </div>
-                        @endif
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label for="model">Araç Modeli <span class="text-danger">*</span></label>
+                                <input type="text" name="model" id="model" class="form-control" value="{{@$Car->model}}" placeholder="Araç modeli yazın..." autocomplete="off" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="name">Araç Versiyonu <span class="text-danger">*</span></label>
+                                <input type="text" name="name" id="name" class="form-control" value="{{@$Car->name}}" placeholder="Araç versionu yazın..." autocomplete="off" required>
+                            </div>
+                        </div>
                     </div>
-                    <div class="panel-body">
 
-                        <form action="{{route('admin.customer.store')}}" method="post">
-                            @csrf
-                            <input type="hidden" name="customer_id" value="{{@$customer->id}}">
-
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="firstname">Müşteri İsmi <span class="text-danger">*</span></label>
-                                        <input type="text" name="firstname" id="firstname" class="form-control" value="{{old('firstname', @$customer->firstname)}}" placeholder="Müşteri ismi yazın..." autocomplete="off" required>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="lastname">Müşteri Soysmi <span class="text-danger">*</span></label>
-                                        <input type="text" name="lastname" id="lastname" class="form-control" value="{{old('lastname', @$customer->lastname)}}"  placeholder="Müşteri soyismi yazın..."
-                                               autocomplete="off" required>
-                                    </div>
-                                </div>
-                                <div class="col"></div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="email">Kasa <span class="text-danger">*</span></label>
+                                <select name="bodytype" id="bodytype" class="form-control" required>
+                                    <option value="">Kasa seçimi yapın...</option>
+                                    @foreach ( $bodyTypes as $key => $body )
+                                        <option value="{{$key}}" {{ ( $key == @$car->bodytype ) ? "selected" : ""}}>{{$body}}</option>
+                                    @endforeach
+                                </select>
                             </div>
-
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="phone">Müşteri Telefonu <span class="text-danger">*</span></label>
-                                        <input type="text" name="phone" id="phone" class="form-control" value="{{old('phone', @$customer->phone)}}" placeholder="Müşteri telefonu yazın..."
-                                               autocomplete="off" required>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="email">Müşteri E-Posta <span class="text-danger">*</span></label>
-                                        <input type="text" name="email" id="email" class="form-control" value="{{old('email', @$customer->email)}}"
-                                               placeholder="Müşteri e-posta adresi yazın..." autocomplete="off"
-                                               required>
-                                    </div>
-                                </div>
-                                <div class="col"></div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="fueltype">Yakıt <span class="text-danger">*</span></label>
+                                <select name="fueltype" id="fueltype" class="form-control" required>
+                                    <option value="">Yakıt seçimi yapın...</option>
+                                    @foreach ( $fuelTypes as $key => $fuel )
+                                        <option value="{{$key}}" {{ ( $key == @$Car->fueltype ) ? "selected" : ""}}>{{$fuel}}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="city">Müşteri İl</label>
-                                        <select name="city" id="city" class="custom-select">
-                                            <option value="">Seçim yapın...</option>
-                                            @foreach ($cities as $city)
-                                                <option value="{{$city->id}}"   {{($city->id == old('city',@$customer->city))?'selected':''}}>{{$city->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="state">Müşteri İlçe</label>
-                                        <select name="state" id="state" class="custom-select">
-                                            <option value="">Seçim yapın...</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col"></div>
-                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="transmission">Şanzuman <span class="text-danger">*</span></label>
+                                <select name="transmission" id="transmission" class="form-control" required>
+                                    <option value="">Şanzuman seçimi yapın...</option>
+                                    @foreach ( $transmissions as $key => $Transmission )
+                                        <option value="{{$key}}" {{ ($key == @$Car->transmission ) ? "selected" : ""}}>{{$Transmission}}</option>
+                                    @endforeach
 
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="password">Müşteri Şifresi</label>
-                                        <input type="text" name="password" id="password" class="form-control"
-                                               placeholder="Müşteri şifresi yazın..." autocomplete="off">
-                                        <small id="passwordHelp" class="form-text text-muted">Yalnızca değiştirmek için
-                                            doldurun!</small>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="smscode">Müşteri SMS Kodu</label>
-                                        <input type="text" name="smscode" id="smscode" class="form-control"
-                                               placeholder="Müşteri sms kodu..." autocomplete="off"
-                                               value="{{@$customer->smscode}}">
-                                    </div>
-                                </div>
-                                <div class="col-8"></div>
+                                </select>
                             </div>
-
-                            <div class="d-flex justify-content-start align-items-center">
-                                <div class="custom-control custom-checkbox mt-3 mr-4">
-                                    <input type="checkbox" name="status" value="1" class="custom-control-input"
-                                           id="status" {{ ( @$customer == "" or @$customer->status == 1 ) ? "checked" : "" }}>
-                                    <label class="custom-control-label" for="status">Aktif</label>
-                                </div>
-                                <div class="custom-control custom-checkbox mt-3">
-                                    <input type="checkbox" name="freecar" class="custom-control-input"
-                                           id="freecar" {{ ( @$customer == "" or @$customer->freecar ) ? "checked" : "" }}>
-                                    <label class="custom-control-label" for="freecar">Ücretsiz Araç Ekleyebilir</label>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="phone">Motor <span class="text-danger">*</span></label>
+                                <div class="input-group mb-3">
+                                    <input name="engine" type="text" class="form-control" placeholder="Motor Hacmi" aria-label="Motor Hacmi" aria-describedby="basic-addon2" value="{{@$Car->engine}}" required>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2">cc</span>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="hr-line-dashed"></div>
-
-                            <div class="buttons">
-                                <button type="submit" class="btn btn-sm btn-primary mr-1"><i
-                                            class="fad fa-save mr-1"></i> Kaydet
-                                </button>
-                                <a href="/customers" class="btn btn-sm btn-secondary"><i class="fad fa-reply mr-1"></i>
-                                    Vazgeç</a>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="phone">Beygir <span class="text-danger">*</span></label>
+                                <div class="input-group mb-3">
+                                    <input name="horse" type="text" class="form-control" placeholder="Beygir Gücü" aria-label="Beygir Gücü" aria-describedby="basic-addon2" value="{{@$Car->horse}}" required>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2">Hp</span>
+                                    </div>
+                                </div>
                             </div>
-
-                        </form>
-
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="phone">Üretim Başlangıç & Bitiş <span class="text-danger">*</span></label>
+                                <div class="row">
+                                    <div class="col pr-1">
+                                        <input type="text" name="production_start" id="production_start" class="form-control" value="{{@$Car->production_start}}" placeholder="Yıl yazın..." autocomplete="off" required>
+                                    </div>
+                                    <div class="col pl-1">
+                                        <input type="text" name="production_end" id="production_end" class="form-control" value="{{@$Car->production_end}}" placeholder="Yıl yazın..." autocomplete="off" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div role="tabpanel" id="cars" class="tab-pane">
-                    <div class="panel-body">
-
-                        <table id="Cars" class="cars table table-striped table-bordered table-hover mb-0">
-                            <thead class="thead-light">
-                            <tr>
-                                <th width="40" class="text-center">#</th>
-                                <th width="80" class="text-center">Plaka</th>
-                                <th class="text-left">Araç Marka / İsim</th>
-                                <th width="100" class="text-center">Yakıt</th>
-                                <th width="120" class="text-center">Kasa</th>
-                                <th width="120" class="text-center">Kayıt Zamanı</th>
-                                <th width="200" class="text-center">Atanan</th>
-                                <th width="160" class="text-center">İşlem(ler)</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @if ( empty($cars) )
-                                <tr>
-                                    <td colspan="10" class="text-center bg-white" height="80">Henüz hiç araç yok!</td>
-                                </tr>
-                            @else
-                                @foreach ( $customer->customer_cars as $car )
-                                    <tr id="carRow-1">
-                                        <td class="text-center">{{$car->id}}</td>
-                                        <td class="text-center">{{$car->plate}}</td>
-                                        <td class="text-left">{{@$car->Brand->brand_name}} - {{@$car->Brand->name}}</td>
-                                        <td class="text-center">{{$car->fuel}}</td>
-                                        <td class="text-center">{{$car->body}}</td>
-                                        <td class="text-center">{{$car->date_created}}</td>
-                                        <td class="text-center">{{$car->agent}}</td>
-                                        <td class="text-center">
-
-                                            @if ( @$car->Payment->status == 0 )
-                                                <span class="text-danger">Ödeme Bekleniyor</span>
-                                            @else
-                                                @if( !$car->agent_id )
-                                                    <a href="javascript:;" data-carid="{{$car->id}}"
-                                                       class="confirm btn btn-xs btn-primary"><i
-                                                                class="fad fa-check mr-1"></i> Onayla ve Ata</a>
-                                                @else
-                                                    <a href="javascript:;" class="btn btn-xs btn-warning"><i
-                                                                class="fad fa-hourglass-half mr-1"></i> Değerleme
-                                                        Bekleniyor</a>
-                                                @endif
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                            </tbody>
-                        </table>
-
+                    <div class="custom-control custom-checkbox mt-1">
+                        <input type="checkbox" name="status" class="custom-control-input" id="status" {{ ( @$Car->status ) ? "checked" : "" }}>
+                        <label class="custom-control-label" for="status">Aktif</label>
                     </div>
-                </div>
 
-                <div role="tabpanel" id="payments" class="tab-pane">
-                    <div class="panel-body">
+                    <div class="hr-line-dashed"></div>
 
-                        <table class="table table-striped table-bordered table-hover mb-0 bg-white">
-                            <thead class="thead-light">
-                            <tr>
-                                <th width="40" class="text-center">#</th>
-                                <th width="80" class="text-center">Plaka</th>
-                                <th>Araç Marka / İsim</th>
-                                <th width="90" class="text-center">Tür</th>
-                                <th width="85" class="text-center">Tutar</th>
-                                <th width="120" class="text-center">Kayıt Z.</th>
-                                <th width="50" class="text-center"></th>
-                                <th width="100" class="text-center">Durum</th>
-                                <th width="100" class="text-center">İşlem(ler)</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @if ( empty($payments) )
-                                <tr>
-                                    <td colspan="10" class="text-center bg-white" height="80">Hiç ödeme yok!</td>
-                                </tr>
-                            @else
-                                @foreach ( $payments as $payment )
-                                    <tr>
-                                        <td class="text-center">{{$payment->id}}</td>
-                                        <td class="text-center">{{$payment->CustomerCar->plate}}</td>
-                                        <td>{{@$payment->Brand->brand_name}} - {{@$payment->Brand->name}}</td>
-                                        <td class="text-center">{{ ( $payment->payment_method == "KK" ) ? "Kredi Kartı" : "Havale / EFT"}}</td>
-                                        <td class="text-center">{{$payment->order_total}} ₺</td>
-                                        <td class="text-center">{{$payment->date_created}}</td>
-                                        <td class="text-center">
-                                            @if ( $payment->payment_method == "KK" )
-                                                <a tabindex="0" class="btn btn-xs btn-info" role="button"
-                                                   data-toggle="popover" data-trigger="focus" data-placement="left"
-                                                   title="Ödeme Sonucu" data-content="{{@$payment->ResponseText}}"><i
-                                                            class="fad fa-search"></i></a>
-                                            @endif
-                                        </td>
-                                        <td class="text-center">{!! ( $payment->status ) ? '<span class="label label-primary">Ödendi</span>' : '<span class="label label-plain">Beklemede</span>' !!}</td>
-                                        <td class="text-center">
-
-                                            <div class="dropdown">
-                                                <a class="btn btn-xs btn-success dropdown-toggle" href="#" role="button"
-                                                   id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                                   aria-expanded="false">İşlemler </a>
-                                                <div class="dropdown-menu dropdown-menu-right"
-                                                     aria-labelledby="dropdownMenuLink">
-                                                    <a class="dropdown-item" href="#">Ödendi İşaretle</a>
-                                                    <a class="dropdown-item" href="#">Beklemede İşaretle</a>
-
-                                                    @if ( $payment->payment_method == "KK" && !empty($payment->bankReturn) )
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="#">Dönüş Mesajı</a>
-                                                    @endif
-
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#">Kaydı Sil</a>
-                                                </div>
-                                            </div>
-
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                            </tbody>
-                        </table>
-
+                    <div class="buttons">
+                        <button type="submit" class="btn btn-sm btn-primary mr-1"><i class="fad fa-save mr-1"></i> Aracı Kaydet</button>
+                        <a href="javascript:history.go(-1);" class="btn btn-sm btn-secondary"><i class="fad fa-reply mr-1"></i> Vazgeç</a>
                     </div>
-                </div>
 
-                <div role="tabpanel" id="notes" class="tab-pane">
-                    <div class="panel-body">
-
-                        <form action="#" id="AdminCommentsForm" method="post">
-                            <input type="hidden" name="customer_id" id="customer_id" value="{{@$customer->id}}">
-                            <div class="input-group mb-3">
-                                <input id="comment" name="comment" type="text" class="form-control"
-                                       placeholder="Yöneticiler için notunuzu yazın..."
-                                       aria-label="Yöneticiler için notunuzu yazın..." aria-describedby="addNote"
-                                       required>
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit"><i
-                                                class="fad fa-plus-circle mr-1"></i> Notu Kaydet
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-
-                        <table id="comments_table" class="table table-striped table-hover table-bordered mb-0">
-                            <thead class="thead-light">
-                            <tr>
-                                <th width="50" class="text-center">#</th>
-                                <th>Not</th>
-                                <th width="220" class="text-center">Ekleyen</th>
-                                <th width="150" class="text-center">Eklenme Zamanı</th>
-                                <th width="80" class="text-center">İşlem</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @if (@$customer->comments)
-                                @foreach (@$customer->comments as $comment )
-                                    <tr>
-                                        <td class="text-center">{{$comment->id}}</td>
-                                        <td>{{$comment->comment}}</td>
-                                        <td class="text-center">{{$comment->name}}</td>
-                                        <td class="text-center">{{$comment->date_created}}</td>
-                                        <td class="text-center"><a href="javascript:;"
-                                                                   class="comment_delete btn btn-sm btn-danger"
-                                                                   data-commentid='{{$comment->id}}'><i
-                                                        class="fad fa-trash-alt"></i> Sil</a></td>
-                                    </tr>
-                                @endforeach
-                            @else
-                                <tr>
-                                    <td colspan="10" class="text-center bg-white" height="80">Henüz hiç not
-                                        eklenmemiş!
-                                    </td>
-                                </tr>
-                            @endif
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
+                </form>
 
             </div>
         </div>
     </div>
 
     <style media="screen">
-        .popover-header {
-            font-size: 12px;
-        }
-
-        .popover-body {
-            font-size: 11px;
+        .input-group-text {
+            font-size: 13px !important
         }
     </style>
-
-    <script type="text/javascript">
-        $(function () {
-
-            $(window).on('hashchange', function () {
-                $(".nav-tabs a[href='" + window.location.hash + "']").click();
-            });
-
-            $('#CustomerTabs a.nav-link').on('click', function (e) {
-                e.preventDefault();
-                window.location.hash = $(this).attr("href");
-            });
-
-            if (window.location.hash.length > 0) {
-                $(".nav-tabs a[href='" + window.location.hash + "']").click();
-            }
-
-            $("#AdminCommentsForm").on("submit", function (e) {
-
-                e.preventDefault();
-
-                var customer_id = $("#customer_id").val();
-                var comment = $("#comment").val();
-
-                $.post("/customers/comments/save", {customer_id: customer_id, comment: comment}, function (r) {
-                    if (r.status == "success") {
-                        window.location.reload();
-                    }
-                }, "json");
-
-            });
-
-            $("a.comment_delete").on("click", function () {
-
-                let parenttr = $(this).parents("tr");
-                let comment_id = $(this).data("commentid");
-
-                swal({
-                    title: "Emin misiniz?",
-                    text: "Bu kaydı silmek istediğinize emin misiniz?",
-                    type: "warning",
-                    showCancelButton: true,
-                    cancelButtonText: "Hayır",
-                    confirmButtonColor: "#1a7bb9",
-                    confirmButtonText: "Evet, sil!",
-                    closeOnConfirm: false
-                }, () => {
-                    $.post("/customers/comments/delete", {comment_id: comment_id}, function () {
-
-                        $(parenttr).remove();
-
-                        if (!$("#comments_table tbody tr").length) {
-                            $("#comments_table tbody").append('<tr><td colspan="10" class="text-center bg-white" height="80">Henüz hiç not eklenmemiş!</td></tr>');
-                        }
-
-                        swal({
-                            title: "Silindi!",
-                            text: "Kayıt başarıyla silindi.",
-                            type: "success",
-                            confirmButtonColor: "#1a7bb9",
-                            confirmButtonText: "Tamam"
-                        });
-
-                    });
-                });
-
-            });
-
-            $("#city").on("change", function () {
-                loadstates($(this).val());
-            });
-
-            @if($customer)
-            if ({{old('city',@$customer->city)}}) {
-                loadstates({{old('city',@$customer->city)}}, {{old('state',@$customer->state)}});
-            }
-            @endif
-         });
-
-        function loadstates(city_id, state_id="") {
-
-            $.get("/admin/setting/city/" + city_id, function (r) {
-
-                $("#state").html("<option value=''>Seçim yapın...</option>");
-
-                $.each(r, function (i, item) {
-                    let selected = (state_id == item.id) ? "selected" : "";
-                    $("#state").append("<option value='" + item.id + "' " + selected + ">" + item.name + "</option>");
-                });
-
-            }, "json");
-
-        }
-
-    </script>
 
 @endsection

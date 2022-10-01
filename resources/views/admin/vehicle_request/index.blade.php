@@ -34,7 +34,7 @@
                     <tr>
                         <td>#</td>
                         <td class="text-center">{{\App\Models\Customer::find($vehicle_request->customer_id)->firstname}} {{\App\Models\Customer::find($vehicle_request->customer_id)->lastname}}</td>
-                        <td>{{\App\Models\Brand::find($vehicle_request->brand_id)->name}}</td>
+                        <td>{{\App\Models\Brand::find($vehicle_request->brand_id)->name??"Bulunamadı"}}</td>
                         <td>{{$vehicle_request->version}}</td>
 
                         <td class="text-center">{{$vehicle_request->price_min}} / {{$vehicle_request->price_max}}</td>

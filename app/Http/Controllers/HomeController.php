@@ -14,25 +14,25 @@ class HomeController extends Controller
     public function index()
     {
         $data['chart'] = [];
-        return view('view.home', $data);
+        return view('new_view.home', $data);
     }
 
     public function authpage()
     {
         $data['chart'] = [];
-        return view('view.auth', $data);
+        return view('new_view.auth', $data);
     }
 
     public function passwordchange()
     {
         $data['chart'] = [];
-        return view('view.passwordchange', $data);
+        return view('new_view.passwordchange', $data);
     }
 
     public function passwordchangepage()
     {
         $data['chart'] = [];
-        return view('view.passwordchangepage', $data);
+        return view('new_view.passwordchangepage', $data);
     }
 
     public function passwordchangeconnect(Request $request)

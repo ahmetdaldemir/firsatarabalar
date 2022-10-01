@@ -62,6 +62,13 @@
                         <span class="label label-outline float-right"><?php echo count_menu()['exper']; ?> </span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('admin.expertises.index')}}">
+                        <i class="fa-fw fad fa-user-tie"></i>
+                        <span class="nav-label">Ekpertizler</span>
+                        <span class="label label-outline float-right">-</span>
+                    </a>
+                </li>
                 @endrole
                 @role('Admin')
                 <li>

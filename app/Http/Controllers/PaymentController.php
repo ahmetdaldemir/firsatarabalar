@@ -226,12 +226,12 @@ class PaymentController extends Controller
 
     public function fail()
     {
-        return view("view/payment/failure");
+        return view("new_view/payment/failure");
     }
 
     public function success()
     {
-        return view("view/payment/success");
+        return view("new_view/payment/success");
     }
 
 }

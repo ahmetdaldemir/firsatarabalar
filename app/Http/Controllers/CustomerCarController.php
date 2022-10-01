@@ -8,6 +8,7 @@ use App\Enums\FullType;
 use App\Enums\Transmission;
 use App\Models\Brand;
 use App\Models\CustomerCar;
+use App\Models\CustomerCarPhoto;
 use App\Models\CustomerCarValuation;
 use App\Models\Page;
 use App\Repositories\CustomerCar\CustomerCarInterface;
@@ -36,7 +37,8 @@ class CustomerCarController extends Controller
         $data['kvkk'] = Page::find('3');
         $data['agreement'] = Page::find('10');
         $data['customer_car'] = $this->customer_car_control(1);
-        return view('view.car.confirm', $data);
+        //return view('view.car.confirm', $data);
+        return view('new_view.car.confirm', $data);
     }
 
 
@@ -58,7 +60,7 @@ class CustomerCarController extends Controller
         $data['fueltype'] = FullType::FullType;
         $data['transmission'] = Transmission::Transmission;
 
-        return view('view.car.form1', $data);
+        return view('new_view.car.form1', $data);
     }
 
 
@@ -75,7 +77,7 @@ class CustomerCarController extends Controller
         }
         */
         $data['customer_car'] = null;
-        return view('view.car.form2', $data);
+        return view('new_view.car.form2', $data);
     }
 
 
@@ -98,7 +100,7 @@ class CustomerCarController extends Controller
          }
          */
         $data['customer_car'] = null;
-        return view('view.car.form3', $data);
+        return view('new_view.car.form3', $data);
     }
 
     public function form4(Request $request)
@@ -118,7 +120,7 @@ class CustomerCarController extends Controller
           }
           */
         $data['customer_car'] = null;
-        return view('view.car.form4', $data);
+        return view('new_view.car.form4', $data);
     }
 
     public function form5(Request $request)
@@ -126,7 +128,7 @@ class CustomerCarController extends Controller
         $data['chart'] = [];
         $data['customer_car'] = CustomerCar::where('id', $request->customer_car_id)->first();
         $data['customer_car_id'] = $request->customer_car_id;
-        return view('view.car.form5', $data);
+        return view('new_view.car.form5', $data);
     }
 
     public function customer_car_control($step)
@@ -179,4 +181,8 @@ class CustomerCarController extends Controller
         return redirect()->to('/');
     }
 
+    public function getImage(Request $request)
+    {
+      return CustomerCarPhoto::where('customer_car_id',$request->id)->get();
+    }
 }

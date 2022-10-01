@@ -10,6 +10,8 @@ use App\Http\Controllers\Modules\Admin\CarController;
 use App\Http\Controllers\Modules\Admin\CustomerCarController;
 use App\Http\Controllers\CustomerCarController as ViewCustomerCarController;
 use App\Http\Controllers\Modules\Admin\CustomerController;
+use App\Http\Controllers\Modules\Admin\EkspertisController;
+use App\Http\Controllers\Modules\Admin\ExpertisController;
 use App\Http\Controllers\Modules\Admin\ReviewController;
 use App\Http\Controllers\Modules\Admin\UserController;
 use App\Http\Controllers\Modules\Admin\PageController;
@@ -33,20 +35,20 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('exception/index', 'ExceptionController@index');
 Route::get('/', [ViewController::class, 'index']);
 Route::get('iletisim', [ViewController::class, 'contact'])->name('iletisim');
 Route::post('giris-yap', [AuthController::class, 'login'])->name('giris-yap');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('nasil_calisir', [ViewController::class, 'how_run_system'])->name('nasil_calisir');
+Route::get('nasil_calisir', [ViewController::class, 'pages'])->name('nasil_calisir');
 Route::get('kullanici_gorusleri', [ViewController::class, 'customer_comment'])->name('kullanici_gorusleri');
 Route::get('blog', [ViewController::class, 'blog'])->name('blog');
 Route::get('kurumsal', [ViewController::class, 'about'])->name('kurumsal');
+Route::get('satilan-araclar', [ViewController::class, 'allcars'])->name('satilan-araclar');
 
 Route::middleware(['customer_auth', 'user-access:customer'])->group(function () {
     Route::get('arac-sat', [ViewController::class, 'carSell'])->name('arac-sat');
 });
-
 
 
 Route::get('getmodel', [CustomController::class, 'models'])->name('getmodel');
@@ -57,6 +59,7 @@ Route::get('getbody', [CrudController::class, 'getbody'])->name('getbody');
 Route::get('getfuel', [CrudController::class, 'getfuel'])->name('getfuel');
 Route::get('getversionlist', [CrudController::class, 'getversionlist'])->name('getversionlist');
 Route::get('mailsend', [CrudController::class, 'mailsend'])->name('mailsend');
+Route::get('car-only-model', [CrudController::class, 'caronlymodel'])->name('car-only-model');
 
 
 Route::post('kayit-ol', [AuthController::class, 'register'])->name('kayit-ol');
@@ -175,6 +178,18 @@ Route::prefix('admin/')->middleware(['auth', 'user-access:admin'])->group(functi
     Route::post('assignmentDo', [CustomerCarController::class, 'assignmentDo'])->name('admin.assignmentDo');
 
 
+
+    Route::prefix('expertises')->group(function () {
+        Route::get('index', [ExpertisController::class, 'index'])->name('admin.expertises.index');
+        Route::get('create', [ExpertisController::class, 'create'])->name('admin.expertises.create');
+        Route::get('edit', [ExpertisController::class, 'form'])->name('admin.expertises.edit');
+        Route::post('store', [ExpertisController::class, 'store'])->name('admin.expertises.store');
+        Route::get('deleted', [ExpertisController::class, 'destroy'])->name('admin.expertises.deleted');
+        Route::get('search', [ExpertisController::class, 'search'])->name('admin.expertises.search');
+
+    });
+
+
 });
 
 /*------------------------------------------
@@ -211,6 +226,15 @@ Route::middleware(['customer_auth'])->group(function () {
     Route::any('form4', [ViewCustomerCarController::class, 'form4'])->name('form4');
     Route::get('form5', [ViewCustomerCarController::class, 'form5'])->name('form5');
     Route::post('customer_car.file_store', [ViewCustomerCarController::class, 'dropzoneStore'])->name('customer_car.file_store');
+    Route::post('getImage', [ViewCustomerCarController::class, 'getImage'])->name('getImage');
+
+
+    Route::get('arac-ekle', [ViewCustomerCarController::class, 'confirm'])->name('arac-ekle');
+    Route::post('car-selection', [CrudController::class, 'car_selection'])->name('car-selection');
+    Route::post('states', [CrudController::class, 'states'])->name('states');
+    Route::post('nasil-calisir', [ViewCustomerCarController::class, 'nasilCalisir'])->name('nasil-calisir');
+
+
 });
 Route::get('/account.customer.logout', [AuthController::class, 'logout'])->name('account.customer.logout');
 

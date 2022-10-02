@@ -9,4 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class CustomerCarBuyRequest extends Model
 {
     use HasFactory,SoftDeletes;
+
+
+    public function customer_car()
+    {
+        return $this->belongsTo(CustomerCar::class, 'customer_car_id', 'id');
+    }
 }

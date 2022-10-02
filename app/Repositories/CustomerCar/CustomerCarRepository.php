@@ -329,6 +329,9 @@ class CustomerCarRepository implements CustomerCarInterface
         $customer_car_photo->active = 0;
         $customer_car_photo->save();
 
+        $customer_car_photo_first = CustomerCarPhoto::where('customer_car_id',$request->customer_car_id)->first();
+
+        $customer_car->default_image = $customer_car_photo_first;
         $customer_car->laststep = 4;
         $customer_car->save();
     }

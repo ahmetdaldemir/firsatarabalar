@@ -43,8 +43,8 @@
                                                 <div class="col-md-7"></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-12" style="text-align: left"><h5
-                                                            class="dlab-title">{{$buy->customer_car->car->name }}</h5>
+                                                <div class="col-md-12" style="text-align: left"><h6
+                                                            class="dlab-title">{{$buy->customer_car->car->name }}</h6>
                                                 </div>
                                             </div>
                                             <div class="row">

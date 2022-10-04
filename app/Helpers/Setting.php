@@ -138,7 +138,5 @@ if (!function_exists('new_car')) {
     {
       return  \App\Models\CustomerCar::where('status',1)->count();
     }
-
-
 }
 

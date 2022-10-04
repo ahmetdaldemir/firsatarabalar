@@ -100,6 +100,7 @@
                             <td class="text-center">{{\Carbon\Carbon::parse($customer_car_valuation->created_at)->format('d-m-Y')}}</td>
                             <td class="text-left">{{$customer_car_valuation->gal_price_1}} ₺</td>
                             <td class="text-left">{{$customer_car_valuation->expert->name ?? NULL}}</td>
+                            @role('Admin')
                             <td class="text-center">
                                 <select style="float:left;background:#{{\App\Enums\CustomerCarStatus::Status[$customer_car_valuation->status]['color']}} " onchange="statuschange(this,{{$customer_car_valuation->id}})"
                                         class="btn btn-xs btn-danger w-50">
@@ -112,7 +113,18 @@
                                  <a target="_blank" href="{{route('pdf',['id' => $customer_car_valuation->id])}}" class="btn btn-xs btn-success" style="float: right"><i class="fa fa-share"></i></a>
                                 @endif
                              </td>
+                            @endrole
                             <td>
+                                @role('Admin')
+                                <div class="dropdown" style="margin-right: 10px;float: left;">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        İşlemler
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#" ng-click="customerModal({{$customer_car_valuation->id}})">Alıcı Tanımla</a>
+                                    </div>
+                                </div>
+                                @endrole
                                 <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
@@ -153,9 +165,34 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="agentModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="agentModalLabel">Müşteri Seçiniz</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="submitForm" ng-submit="submitCustomerForm()">
+                        <input name="customer_car_id" id="customer_car_id" type="hidden">
+                        <div class="modal-body">
+                            <select name="expert" id="js-example-basic-single">
+                                @foreach($customers as $customer)
+                                    <option value="{{$customer->id}}">{{$customer->firstname}} {{$customer->lastname}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                            <button type="submit" class="btn btn-primary">Atama Yap</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-
-
     <style media="screen">
 
         .valuations td {
@@ -173,7 +210,6 @@
             width: auto
         }
     </style>
-
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -295,8 +331,6 @@
             }
         }
     </script>
-
-
     <script>
         var postApp = angular.module('app', []);
         postApp.controller('postController', function ($scope, $http) {
@@ -316,7 +350,10 @@
                     swal(response.data);
                 });
             };
+
+
         });
     </script>
-
 @endsection
+
+

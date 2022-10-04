@@ -1,5 +1,7 @@
 @extends('layouts.app')
 @section('content')
+    <div ng-controller="postController">
+
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col">
             <h2>Müşteri {{(@$customer) ? "Düzenle":"Ekle"}}</h2>
@@ -271,7 +273,7 @@
             </div>
         </div>
     </div>
-
+    </div>
     <style media="screen">
         .popover-header {
             font-size: 12px;
@@ -281,7 +283,6 @@
             font-size: 11px;
         }
     </style>
-
     <script type="text/javascript">
         $(function () {
 
@@ -376,5 +377,16 @@
         }
 
     </script>
+<script>
 
+    var postApp = angular.module('app', []);
+    postApp.controller('postController', function ($scope, $http) {
+        $scope.customerModal = function (id) {
+            $('#customerModal').modal();
+            $('#customerModal').find('#customer_car_id').val(id);
+        }
+    });
+
+
+</script>
 @endsection

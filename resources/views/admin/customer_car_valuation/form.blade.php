@@ -33,13 +33,14 @@
                         Araç Notları <span class="label label-plain ml-2"></span></a></li>
                 <li><a class="nav-link" data-toggle="tab" href="#valuation"><i
                                 class="fad fa-fw fa-comment-alt-dots"></i> Araç Değerleme </a></li>
+                <li><a class="nav-link" data-toggle="tab" href="#request"><i class="fad fa-fw fa-comment-alt-dots"></i>
+                      Talepler </a></li>
                 <!-- li><a class="nav-link" data-toggle="tab" href="#messages"><i class="fad fa-fw fa-comment-alt-dots"></i>
                         Mesajlaşma </a></li -->
             </ul>
             <div class="tab-content" ng-controller="postController">
                 <div role="tabpanel" id="general" class="tab-pane active">
                     <div class="panel-body">
-
                         <div class="row">
                             <div class="col-lg-7">
                                 <form action="/cars/{{$car['id']}}/save" method="post">
@@ -837,6 +838,21 @@
 
 
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" id="request" class="tab-pane">
+                    <div class="panel-body">
+                         <div class="row">
+                            @if($requests->count() != 0)
+                             <ul>
+                                 <?php foreach ($requests->get() as $item){ ?>
+                                 <li><?=$item->customer_car->customer->fullname?></li>
+                                 <?php } ?>
+                             </ul>
+                            @else
+                                <div class="col-md-12">Talep Bulunamadı</div>
+                            @endif
                         </div>
                     </div>
                 </div>

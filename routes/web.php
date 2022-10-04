@@ -58,7 +58,7 @@ Route::get('getcar', [CrudController::class, 'getcar'])->name('getcar');
 Route::get('getbody', [CrudController::class, 'getbody'])->name('getbody');
 Route::get('getfuel', [CrudController::class, 'getfuel'])->name('getfuel');
 Route::get('getversionlist', [CrudController::class, 'getversionlist'])->name('getversionlist');
-Route::get('mailsend', [CrudController::class, 'mailsend'])->name('mailsend');
+Route::post('mailsend', [CrudController::class, 'mailsend'])->name('mailsend');
 Route::get('car-only-model', [CrudController::class, 'caronlymodel'])->name('car-only-model');
 
 
@@ -218,6 +218,7 @@ Route::middleware(['customer_auth'])->group(function () {
     Route::get('/account.customer.affiliates', [AccountController::class, 'affiliates'])->name('account.customer.affiliates');
     Route::get('/account.customer.car.customer_car_buy_request_delete', [AccountController::class, 'customer_car_buy_request_delete'])->name('account.customer.car.customer_car_buy_request_delete');
     Route::get('/account.customer.tender', [AccountController::class, 'tender'])->name('account.customer.tender');
+    Route::get('/account.customer.sellerpage', [AccountController::class, 'sellerpage'])->name('account.customer.sellerpage');
 
     Route::get('confirm', [ViewCustomerCarController::class, 'confirm'])->name('confirm');
     Route::get('form1', [ViewCustomerCarController::class, 'form1'])->name('form1');

@@ -236,8 +236,7 @@ class CustomerCarRepository implements CustomerCarInterface
 
     public function firstStepStore($request)
     {
-        $customer_id = $this->customer_add();
-
+        $customer_id = Auth::guard('customer')->id();
 
         $customer_car = CustomerCar::updateOrCreate(
             ['customer_id' => $customer_id, 'session_id' => cacheresponseid() ?? \Illuminate\Support\Str::uuid()],
@@ -247,7 +246,7 @@ class CustomerCarRepository implements CustomerCarInterface
                 'body' => $request->body??null,
                 'fuel' => $request->fuel??null,
                 'gear' => $request->transmission??null,
-                'car_id' => $car_id??null,
+                'car_id' => $request->version??null,
                 'custom_version' => $request->custom_version,
                 'km' => $request->km??null,
                 'color' => $request->color??null,

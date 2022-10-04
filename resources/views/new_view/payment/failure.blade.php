@@ -1,4 +1,4 @@
-@extends('layouts.view')
+@extends('layouts.view_new')
 @section('content')
     <div class="dlab-bnr-inr overlay-gradient-dark text-center" style="background-image: url(images/banner/bnr2.jpg);">
         <div class="container">

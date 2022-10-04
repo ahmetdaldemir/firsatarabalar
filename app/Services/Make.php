@@ -10,6 +10,7 @@ use App\Models\Brand;
 use App\Models\Car;
 use App\Models\City;
 use App\Models\Color;
+use App\Models\Customer;
 use App\Models\CustomerCar;
 use App\Models\CustomerCarFollow;
 use App\Models\CustomerCarPhoto;
@@ -23,6 +24,17 @@ use Illuminate\Support\Facades\Cache;
 class Make
 {
 
+    public static  function customers()
+    {
+        $cache_key = 'customers';
+        if (Cache::has($cache_key)) {
+            $data = Cache::get($cache_key);
+        } else {
+            $brand = Customer::all()->sortBy('id');
+            $data = Cache::put($cache_key, $brand);
+        }
+        return $data;
+    }
 
     public function brands()
     {

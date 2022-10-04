@@ -252,7 +252,7 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
             } else {
                 Swal.fire("Kullanıcı Girişi Yapmalısınız");
             }
-           // $scope.GetCar(4);
+            // $scope.GetCar(4);
         }, function (data) {
             Swal.fire("Kullanıcı Girişi Yapmalısınız");
         });
@@ -266,11 +266,10 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
                 "Content-Type": "application/x-www-form-urlencoded"
             }, dataType: 'json', cache: true, processData: false, contentType: false
         }).then(function (response) {
-            if(response.data.error)
-            {
+            if (response.data.error) {
                 Swal.fire(response.data.error);
                 return false;
-            }else{
+            } else {
                 $("#VehicleRequestButton").prop('disabled', false);
                 $scope.error = false;
                 Swal.fire('Ekibimiz en kısa süre içerisinde sizinle iletişime geçecektir.')
@@ -320,13 +319,13 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
     $scope.getImage = function ($id) {
         $http({
             method: "POST",
-            url: "/getImage?id="+$id+"",
+            url: "/getImage?id=" + $id + "",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
         }).then(function (response) {
             console.log(response);
-             $scope.images = response.data;
+            $scope.images = response.data;
         }, function (data) {
             Swal.fire("Kullanıcı Girişi Yapmalısınız");
         });
@@ -334,13 +333,13 @@ app.controller("MainController", ['$scope', '$http', '$httpParamSerializerJQLike
 }]);
 
 // For years
-$("#onlybrand").on("change", function(){
+$("#onlybrand").on("change", function () {
     var token = $('meta[name="csrf-token"]').attr('content');
-    $.get("/car-only-model", {_token: token, brand_id:$("#onlybrand").val() }, function(r){
-        if( r.status == "success" ){
+    $.get("/car-only-model", {_token: token, brand_id: $("#onlybrand").val()}, function (r) {
+        if (r.status == "success") {
             $("#onlymodel").html('<option value="">Model Yılı seçiniz...</option>');
-            $.each( r.data, function( i, item ){
-                $("<option />", { value: item.model, html:item.model }).appendTo("#onlymodel");
+            $.each(r.data, function (i, item) {
+                $("<option />", {value: item.model, html: item.model}).appendTo("#onlymodel");
             });
         }
     }, "json");

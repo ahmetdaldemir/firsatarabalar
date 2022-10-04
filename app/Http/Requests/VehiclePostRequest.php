@@ -33,7 +33,7 @@ class VehiclePostRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'customer_id.required' => 'Müşteri girişi yapmak zorunludur',
+            'customer_id.required' => 'Müşteri girişi yapmak zorunludur ',
             'price_min.required' => 'En düşük Fiyat Belirtilmelidir.',
             'price_max.required' => 'En Yüksek Fiyat Belirtilmelidir',
          ];

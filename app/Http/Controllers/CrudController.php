@@ -8,6 +8,7 @@ use App\Enums\FullType;
 use App\Enums\Transmission;
 use App\Http\Requests\VehiclePostRequest;
 use App\Jobs\SendEmailJob;
+use App\Mail\SiteMail;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Town;
@@ -17,6 +18,7 @@ use App\Repositories\CustomerCar\CustomerCarInterface;
 use App\Services\Make;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Redis;
 
 class CrudController extends Controller
@@ -323,4 +325,15 @@ class CrudController extends Controller
     }
 
 
+    public function mailsend(Request $request)
+    {
+        $data = [
+            'firstname'=>$request->firstname,
+            'lastname'=>$request->lastname,
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+            'message'=>$request->message
+        ];
+        Mail::to("info@firsatarabalar.com")->send(new SiteMail($data));
+    }
 }

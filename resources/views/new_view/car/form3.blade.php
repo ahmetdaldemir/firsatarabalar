@@ -106,7 +106,7 @@
                                                 <span class="text-danger">*</span></td>
                                             <td width="120">
                                                 <div class="form-check d-flex justify-content-center">
-                                                    <input type="radio" class="form-check-input" id="durum_sasi_0"
+                                                    <input required type="radio" class="form-check-input" id="durum_sasi_0"
                                                            name="status_frame" value="1" style="margin-right: 5px"
                                                     @if($customer_car && $customer_car->status_frame == 1) checked @endif>
                                                     <label class="form-check-label" for="durum_sasi_0">Var</label>
@@ -126,7 +126,7 @@
                                                 mı? <span class="text-danger">*</span></td>
                                             <td width="120">
                                                 <div class="form-check d-flex justify-content-center">
-                                                    <input type="radio" class="form-check-input" id="durum_direk_0"
+                                                    <input required type="radio" class="form-check-input" id="durum_direk_0"
                                                            name="status_pole" value="1" style="margin-right: 5px"
                                                            @if($customer_car && $customer_car->status_pole == 1) checked @endif>
                                                     <label class="form-check-label" for="durum_direk_0">Var</label>
@@ -134,7 +134,7 @@
                                             </td>
                                             <td width="120">
                                                 <div class="form-check d-flex justify-content-center">
-                                                    <input type="radio" class="form-check-input" id="durum_direk_1"
+                                                    <input required type="radio" class="form-check-input" id="durum_direk_1"
                                                            name="status_pole" value="0" style="margin-right: 5px"
                                                            @if($customer_car && $customer_car->status_pole == 0) checked @endif>
                                                     <label class="form-check-label" for="durum_direk_1">Yok</label>
@@ -146,7 +146,7 @@
                                                 mı? <span class="text-danger">*</span></td>
                                             <td width="120">
                                                 <div class="form-check d-flex justify-content-center">
-                                                    <input type="radio" class="form-check-input" id="durum_podye_0"
+                                                    <input required type="radio" class="form-check-input" id="durum_podye_0"
                                                            name="status_podium" value="1" style="margin-right: 5px"
                                                            @if($customer_car && $customer_car->status_podium == 1) checked @endif>
                                                     <label class="form-check-label" for="durum_podye_0">Var</label>
@@ -166,7 +166,7 @@
                                                 var mı? <span class="text-danger">*</span></td>
                                             <td width="120">
                                                 <div class="form-check d-flex justify-content-center">
-                                                    <input type="radio" class="form-check-input" id="durum_airbag_0"
+                                                    <input required type="radio" class="form-check-input" id="durum_airbag_0"
                                                            name="status_airbag" value="1" style="margin-right: 5px"
                                                            @if($customer_car && $customer_car->status_airbag == 1) checked @endif>
                                                     <label class="form-check-label" for="durum_airbag_0">Var</label>
@@ -186,7 +186,7 @@
                                                 durumu var mı? <span class="text-danger">*</span></td>
                                             <td width="120">
                                                 <div class="form-check d-flex justify-content-center">
-                                                    <input type="radio" class="form-check-input" id="durum_satilamaz_1"
+                                                    <input required type="radio" class="form-check-input" id="durum_satilamaz_1"
                                                            name="status_unrealizable" value="1"
                                                            style="margin-right: 5px" @if($customer_car && $customer_car->status_unrealizable == 1) checked @endif>
                                                     <label class="form-check-label" for="durum_satilamaz_1">Evet</label>
@@ -207,7 +207,7 @@
                                                 işlem/düzeltme var mı? <span class="text-danger">*</span></td>
                                             <td width="120">
                                                 <div class="form-check d-flex justify-content-center">
-                                                    <input type="radio" class="form-check-input"
+                                                    <input required type="radio" class="form-check-input"
                                                            id="durum_onArkaBagaj_1" name="status_onArkaBagaj" value="1"
                                                            style="margin-right: 5px" @if($customer_car && $customer_car->status_onArkaBagaj == 1) checked @endif>
                                                     <label class="form-check-label"
@@ -229,7 +229,7 @@
                                                         class="text-danger">*</span></td>
                                             <td width="120">
                                                 <div class="form-check d-flex justify-content-center">
-                                                    <input type="radio" class="form-check-input" id="durum_km_0"
+                                                    <input required type="radio" class="form-check-input" id="durum_km_0"
                                                            name="status_km" value="1" style="margin-right: 5px"
                                                            @if($customer_car && $customer_car->status_km == 1) checked @endif>
                                                     <label class="form-check-label" for="durum_km_0">Evet</label>
@@ -252,7 +252,7 @@
                                                     <tr>
                                                         <td width="100">
                                                             <div class="form-check d-flex justify-content-center">
-                                                                <input type="radio" class="form-check-input"
+                                                                <input required type="radio" class="form-check-input"
                                                                        id="durum_lastik_0" name="status_tyre" value="2"
                                                                        style="margin-right: 5px" @if($customer_car && $customer_car->status_tyre == 2) checked @endif>
                                                                 <label class="form-check-label" for="durum_lastik_0">Yeni</label>

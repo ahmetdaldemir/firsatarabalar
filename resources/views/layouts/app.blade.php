@@ -15,6 +15,7 @@
     <link href="{{asset('admin/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('admin/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('admin/css/custom.css')}}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.14.0/css/selectize.bootstrap2.css" rel="stylesheet">
 
 @yield('css')
 
@@ -24,6 +25,7 @@
     <script src="{{asset('admin/js/bootstrap.js')}}"></script>
     <script src="{{asset('admin/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
     <script src="{{asset('admin/js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.14.0/js/selectize.min.js"></script>
 
     <!-- Custom and plugin javascript -->
     <script src="{{asset('admin/js/inspinia.js')}}"></script>
@@ -37,6 +39,12 @@
             selector: 'textarea',
             plugins: 'advlist autolink lists link image charmap preview anchor pagebreak',
             toolbar_mode: 'floating',
+        });
+    </script>
+    <script>
+        $("select").selectize({
+            create: true,
+            sortField: "text",
         });
     </script>
 </head>
@@ -202,6 +210,7 @@
 </div>
 
 @yield('js')
+
 
 </body>
 </html>

@@ -35,6 +35,12 @@ class AccountController extends Controller
         return view('account/profil', $data);
     }
 
+    public function sellerpage()
+    {
+        $data['profil'] = Auth::guard('customer')->user();
+        return view('account/sellerpage', $data);
+    }
+
 
     public function payment()
     {
@@ -84,7 +90,7 @@ class AccountController extends Controller
 
     public function affiliates()
     {
-        return $this->AffiliateRepository->get();
+        return response()->json(['success' => "true", 'data' => $this->AffiliateRepository->get()], 200);
     }
 
     public function account_update(Request $request)

@@ -445,7 +445,7 @@
                         <div ng-if="error" class="alert alert-danger">
                             <span style="display: flex">@{{ price_min_error }}</span>
                             <span style="display: flex">@{{ price_max_error }}</span>
-                            <span style="display: flex">@{{ customer_id_error }}</span>
+                            <span style="display: flex">@{{ customer_id_error }}  <a href='authpage'>Üye Paneli</a></span>
                         </div>
                     </div>
                     <div class="modal-body">
@@ -457,6 +457,7 @@
                                     <div class="input-group">
                                         <label>Marka</label>
                                         <select name="brand_id" id="onlybrand" class="form-select w-100">
+                                            <option value="">Seçiniz</option>
                                             <?php foreach ($brands as $key => $value){ ?>
                                             <option value="<?=$value->id?>"><?=$value->name?></option>
                                             <?php } ?>

@@ -68,8 +68,9 @@
 
                 <div class="text-end hstack gap-2">
                     @if(!auth()->guard("customer")->check())
-                        <a href="javascript:;" class="btn wo-btn wo-btn-white me-2 d-block" data-bs-toggle="modal"
-                           data-bs-target="#loginpopup"><i class="fad fa-sign-in-alt me-1"></i> Giriş Yap</a>
+                        <!-- a href="javascript:;" class="btn wo-btn wo-btn-white me-2 d-block" data-bs-toggle="modal"
+                           data-bs-target="#loginpopup"><i class="fad fa-sign-in-alt me-1"></i> Giriş Yap</a -->
+                        <a href="{{route('authpage')}}" class="btn wo-btn wo-btn-white me-2 d-block"><i class="fad fa-sign-in-alt me-1"></i> Giriş Yap</a>
                         <a href="javascript:;" class="btn wo-btn d-block" data-bs-toggle="modal"
                            data-bs-target="#loginpopup"><i class="fal fa-usd-circle me-1"></i> Aracını Hemen Sat</a>
                     @else

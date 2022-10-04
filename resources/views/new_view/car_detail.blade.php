@@ -17,14 +17,14 @@
 
                     <div id="sync1" class="car-image slides owl-carousel">
                         @foreach ($car->photo as $photo)
-                            <img src="{{asset('storage/cars/')}}{{$photo->image}}" alt="" class="img-fluid rounded">
+                            <img src="{{asset('storage/cars')}}/{{$photo->image}}" alt="" class="img-fluid rounded">
                         @endforeach
                     </div>
 
                     <div id="sync2" class="photos-carousel owl-carousel mt-3">
                         @foreach ( $car->photo as $photo)
                             <a href="#">
-                                <img src="{{asset('storage/cars/')}}{{$photo->image}}" alt="" class="img-fluid rounded">
+                                <img src="{{asset('storage/cars')}}/{{$photo->image}}" alt="" class="img-fluid rounded">
                             </a>
                         @endforeach
                     </div>
@@ -82,7 +82,7 @@
                         </table>
                     </div>
 
-                     @if(!$customer_car_buy)
+                    @if(!$customer_car_buy)
                     @if($car->specs == "has_showcase")
                         <div class="vstack gap-2">
                             <button ng-click="CustomerCarBuy({{$car->id}})"  id="pay" type="button" class="d-flex justify-content-between align-items-center">

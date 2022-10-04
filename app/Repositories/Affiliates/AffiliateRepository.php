@@ -3,10 +3,12 @@
 use App\Jobs\AffiliateMessage;
 use App\Models\Affiliate;
 use App\Models\Customer;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Facades\Auth;
 
 class AffiliateRepository implements AffiliateRepositoryInterface
 {
+    use DispatchesJobs;
 
     public function get()
     {
@@ -43,7 +45,7 @@ class AffiliateRepository implements AffiliateRepositoryInterface
         $affiliate->save();
         $customer = Customer::find(Auth::guard('customer')->id());
         $this->dispatch(new AffiliateMessage($affiliate, $customer));
-        return ['status' => true, 'message' => "Öneri GÖnderildi"];
+        return ['status' => true, 'message' => "Öneri Gönderildi"];
 
     }
 

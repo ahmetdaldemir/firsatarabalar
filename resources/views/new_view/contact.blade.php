@@ -44,14 +44,15 @@
                             <div class="wo-replytitle mb-4">
                                 <h3>Bize Ulaşın</h3>
                             </div>
-                            <form id="contactform" class="wo-themeform wo-replyform" method="post">
+                            <form id="contactform" class="wo-themeform wo-replyform" action="{{route('mailsend')}}" method="post">
+                                @csrf
                                 <div class="hstack gap-2 mb-3">
                                     <input class="form-control" name="firstname" type="text" placeholder="İsminiz" required>
                                     <input class="form-control" name="lastname" type="text" placeholder="Soyisminiz" required>
                                 </div>
                                 <div class="hstack gap-2 mb-3">
                                     <input class="form-control" name="email" type="email" placeholder="E-Posta Adresiniz" required>
-                                    <input class="form-control" name="phone" id="phone" type="text" placeholder="Telefon No: +90(XXX) XXX XX XX" required>
+                                    <input class="form-control" name="phone" id="phone" type="text" placeholder="Telefon No: +90(XXX) XXX XX XX" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
                                 </div>
                                 <textarea name="message" cols="30" rows="7" class="form-control" placeholder="İletmek istedikileriniz..." required></textarea>
 
@@ -96,60 +97,4 @@
             </div>
         </div>
     </section>
-@endsection
-
-
-@section('body-after-js')
-    <script type="text/javascript">
-        $(function(){
-
-            $("#phone").mask('+90 (000) 000 00 00')
-                .on("focus", function(){
-                    if( $(this).val() == "" ){ $(this).val('+90 '); }
-                })
-                .on("blur", function(){
-                    if( $(this).val() == "+90 " ){ $(this).val(''); }
-                });
-
-            $("form#contactform").on("submit", function(e){
-
-                $("form#contactform button").prop("disabled", true);
-                $(this).find(".loading").prop("hidden", false);
-
-                var data = {
-                    "firstname" : $(this).find("input[name='firstname']").val(),
-                    "lastname" : $(this).find("input[name='lastname']").val(),
-                    "email" : $(this).find("input[name='email']").val(),
-                    "phone" : $(this).find("input[name='phone']").val(),
-                    "message" : $(this).find("textarea[name='message']").val(),
-                };
-
-                $.post("/iletisim", { data:data }, function( r ){
-
-                    if( r.status == "success" ){
-                        $("form#contactform")[0].reset();
-                        $(".alerts .alert-success").prop("hidden", false);
-                        setTimeout(function(){
-                            $(".alerts .alert-success").prop("hidden", true);
-                        }, 3000);
-                    }
-
-                    else {
-                        $(".alerts .alert-danger").prop("hidden", false);
-                        setTimeout(function(){
-                            $(".alerts .alert-danger").prop("hidden", true);
-                        }, 3000);
-                    }
-
-                    $("form#contactform button").prop("disabled", false);
-                    $("form#contactform").find(".loading").prop("hidden", true);
-
-                }, "json");
-
-                e.preventDefault();
-
-            });
-
-        });
-    </script>
 @endsection

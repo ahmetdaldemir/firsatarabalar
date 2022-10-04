@@ -31,9 +31,10 @@
                 </tr>
             @else
                 @foreach ($vehicle_requests as $vehicle_request )
+                    <?php $x = \App\Models\Customer::find($vehicle_request->customer_id); ?>
                     <tr>
                         <td>#</td>
-                        <td class="text-center">{{\App\Models\Customer::find($vehicle_request->customer_id)->firstname}} {{\App\Models\Customer::find($vehicle_request->customer_id)->lastname}}</td>
+                        <td class="text-center">@if(!$x) Müşteri Bulunamadı @else {{$x->firstname}} {{$x->lastname}} @endif</td>
                         <td>{{\App\Models\Brand::find($vehicle_request->brand_id)->name??"Bulunamadı"}}</td>
                         <td>{{$vehicle_request->version}}</td>
 

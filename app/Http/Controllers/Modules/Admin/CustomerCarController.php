@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\carRequest;
 use App\Jobs\CustomerCarValuationPdf;
 use App\Models\CustomerCar;
+use App\Models\CustomerCarBuyRequest;
 use App\Models\CustomerCarComment;
 use App\Models\CustomerCarPhoto;
 use App\Models\CustomerCarValuation;
@@ -14,6 +15,7 @@ use App\Models\UserEarning;
 use App\Repositories\Cities\CityRepositoryInterface;
 use App\Repositories\CustomerCar\CustomerCarInterface;
 use App\Repositories\Users\UserRepositoryInterface;
+use App\Services\Make;
 use App\Services\Sms;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -42,7 +44,6 @@ class CustomerCarController extends Controller
 
     public function index(Request $request)
     {
-
         $data['show'] = "";
         $data['customer_car_valuations'] = $this->CustomerCar->get($request);
         $data['years'] = DateEnum::Years;
@@ -50,6 +51,7 @@ class CustomerCarController extends Controller
         $data['mounth'] = $this->now->month;
         $data['this_year'] = $this->now->year;
         $data['status'] = CustomerCarStatus::Status;
+        $data['customers'] = Make::customers();
         return view('admin.customer_car_valuation.index', $data);
     }
 
@@ -67,6 +69,7 @@ class CustomerCarController extends Controller
         $data['payments'] = NULL;
         $data['cars'] = NULL;
         $data['cities'] = $this->CityRepository->get();
+        $data['requests'] = CustomerCarBuyRequest::where('customer_car_id',$request->id)->orderBy('id','asc');
         $data['valuation'] = $this->CustomerCar->getByValuationCustomerId($request->id);
         return view('admin.customer_car_valuation.form', $data);
     }

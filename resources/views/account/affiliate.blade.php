@@ -34,7 +34,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="col-lg-12">
-                                <form class="dzSubscribe" ng-submit="AffiliateSave()" id="Affiliate" action="#" method="post">
+                                <form class="dzSubscribe" ng-submit="AffiliateSave()" id="Affiliate" action="javascript:;" method="post">
                                     <div class="dzSubscribeMsg"></div>
                                     <div class="form-group">
                                         <div class="input-group shadow">

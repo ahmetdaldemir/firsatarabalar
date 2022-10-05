@@ -29,11 +29,11 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <?php foreach ($cars as $car) {   ?>
+                                <?php foreach ($cars as $car) { $x = json_decode($car->default_image);  ?>
                                 <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="icon-bx-wraper style-7 text-center m-b30">
                                         <div class="icon-media">
-                                            <img src="{{asset('view/images/arac.jpeg')}}" alt="" style="width: 100%">
+                                            <img src="{{asset('storage/cars')}}/<?php echo $x->image; ?>" alt="" style="width: 100%;    height: 250px;">
                                         </div>
                                         <div class="icon-content">
                                             <div class="row">
@@ -49,7 +49,7 @@
                                                 </div>
                                                 <div class="col-md-4" style="text-align: left;font-size: 14px;  overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
                                                     <img src="{{asset('view/icons/fuel.png')}}" style="float:left;width: 20px;height: 20px;"/>
-                                                    {{  \App\Enums\FullType::FullType[$car->fueltype] ?? NULL }}
+                                                    {{  \App\Enums\FullType::FullType[$car->fuel] ?? NULL }}
                                                 </div>
                                                 <div class="col-md-4" style="text-align: left;  overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
                                                     <img src="{{asset('view/icons/calendar.png')}}" style="float:left;width: 20px;height: 20px;"/> <span style="margin-left: 10px;">{{ $car->caryear ?? "Bulunamadı" }}</span>

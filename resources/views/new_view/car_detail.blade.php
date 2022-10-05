@@ -15,7 +15,7 @@
                 <div class="col-lg-1 d-none d-lg-block d-sm-none"></div>
                 <div class="col-lg-7 col-sm-12 pb-3 pe-2">
 
-                    <div id="sync1" class="car-image slides owl-carousel">
+                    <div id="sync1" class="car-image slides owl-carousel" style="height: 565px">
                         @foreach ($car->photo as $photo)
                             <img src="{{asset('storage/cars')}}/{{$photo->image}}" alt="" class="img-fluid rounded">
                         @endforeach
@@ -57,11 +57,11 @@
                             </tr>
                             <tr>
                                 <td>Kasa Tipi</td>
-                                <td class="text-end">{{$car->body??"Bulunamadı"}}</td>
+                                <td class="text-end">{{\App\Enums\BodyType::BodyType[$car->body]??"Bulunamadı"}}</td>
                             </tr>
                             <tr>
                                 <td>Vites</td>
-                                <td class="text-end">{{$car->gear??"Bulunamadı"}}</td>
+                                <td class="text-end">{{\App\Enums\Transmission::Transmission[$car->gear]??"Bulunamadı"}}</td>
                             </tr>
                             <tr>
                                 <td>Motor Gücü</td>
@@ -73,7 +73,7 @@
                             </tr>
                             <tr>
                                 <td>Yakıt</td>
-                                <td class="text-end">{{$car->fuel??"Bulunamadı"}}</td>
+                                <td class="text-end">{{\App\Enums\FullType::FullType[$car->fuel]??"Bulunamadı"}}</td>
                             </tr>
                             <tr>
                                 <td>Tramer Kaydı</td>
@@ -156,35 +156,35 @@
                                                 <table class="islem-table table table-bordered table-striped mb-0" style="height: 438px">
                                                     <tr>
                                                         <td>Aracın <u><b>şasesinde</b></u> işlem/ekleme/düzeltme var mı?</td>
-                                                        <td width="120" class="text-center">{!!( $car->status_frame == "Yok" ) ? "<span class='text-success'>".$car->status_frame."</span>" : $car->status_frame!!}</td>
+                                                        <td width="120" class="text-center">{!!( $car->status_frame == "0" ) ? "<span class='text-success'>YOK</span>" : "VAR"!!}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Aracın <u><b>direklerinde</b></u> işlem/ekleme/düzeltme var mı?</td>
-                                                        <td width="120" class="text-center">{!!( $car->status_pole == "Yok" ) ? "<span class='text-success'>".$car->status_pole."</span>" : $car->status_pole!!}</td>
+                                                        <td width="120" class="text-center">{!!( $car->status_pole == "0" ) ? "<span class='text-success'>YOK</span>" : "VAR"!!}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Aracın <u><b>podyelerinde</b></u> işlem/ekleme/düzeltme var mı?</td>
-                                                        <td width="120" class="text-center">{!!( $car->status_podium == "Yok" ) ? "<span class='text-success'>".$car->status_podium."</span>" : $car->status_podium!!}</td>
+                                                        <td width="120" class="text-center">{!!( $car->status_podium == "0" ) ? "<span class='text-success'>YOK</span>" :  "VAR"!!}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Aracın <u><strong>kredi, rehin, haciz</strong></u> gibi satışa engel bir durumu var mı?</td>
-                                                        <td width="120" class="text-center">{!!( $car->status_unrealizable == "Hayır" ) ? "<span class='text-success'>".$car->status_unrealizable."</span>" : $car->status_unrealizable!!}</td>
+                                                        <td width="120" class="text-center">{!!( $car->status_unrealizable == "0" ) ? "<span class='text-success'>YOK</span>" :  "VAR"!!}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Aracın <u><b>Ön, Arka Panel ve Bagaj Havuzu'nda</b></u> işlem/değişim var mı?</td>
-                                                        <td width="120" class="text-center">{!!( $car->status_onArkaBagaj == "Hayır" ) ? "<span class='text-success'>".$car->status_onArkaBagaj."</span>" : $car->status_onArkaBagaj!!}</td>
+                                                        <td width="120" class="text-center">{!!( $car->status_onArkaBagaj == "0" ) ? "<span class='text-success'>YOK</span>" : "VAR"!!}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Aracın <u><b>hava yastıklarında</b></u> işlem/kusur/değişim var mı?</td>
-                                                        <td width="120" class="text-center">{!!( $car->status_airbag == "Yok" ) ? "<span class='text-success'>".$car->status_airbag."</span>" : $car->status_airbag!!}</td>
+                                                        <td width="120" class="text-center">{!!( $car->status_airbag == "0" ) ? "<span class='text-success'>YOK</span>" : "VAR"!!}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Aracın <u><strong>kilometresi</strong></u> orjinal mi?</td>
-                                                        <td width="120" class="text-center">{!!( $car->status_km == "Evet" ) ? "<span class='text-success'>".$car->status_km."</span>" : $car->status_km!!}</td>
+                                                        <td width="120" class="text-center">{!!( $car->status_km == "1" ) ? "<span class='text-success'>EVET</span>" : "HAYIR"!!}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Aracın <u><strong>lastik</strong></u> durumu nasıl?</td>
-                                                        <td width="120" class="text-center">{{$car->status_tyre}}</td>
+                                                        <td width="120" class="text-center">@if($car->status_tyre == 1) İYİ @elseif($car->status_tyre == 2) ORTA @else KÖTÜ @endif</td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -256,11 +256,11 @@
                                         <div class="d-block d-lg-none" style="height: 10px"></div>
                                         <div class="col-lg-3 col-6">
                                             <label for="car_city">Aracın Bulunduğu İl</label>
-                                            <input type="text" class="detail form-control" value="{{$car->car_city}}" readonly>
+                                            <input type="text" class="detail form-control" value="{{\App\Models\City::find($car->car_city)->name}}" readonly>
                                         </div>
                                         <div class="col-lg-3 col-6">
                                             <label for="car_state">Aracın Bulunduğu İlçe</label>
-                                            <input type="text" class="detail form-control" value="{{$car->car_state}}" readonly>
+                                            <input type="text" class="detail form-control" value="{{\App\Models\Town::find($car->car_state)->name}}" readonly>
                                         </div>
                                         <div class="d-block d-lg-none" style="height: 10px"></div>
                                         <div class="col-lg-3 col-12">

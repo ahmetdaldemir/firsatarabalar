@@ -128,7 +128,7 @@
                                 </div>
                                 <div class="col-lg-3 col-6 form-group">
                                     <label for="sahip">Kaçıncı Sahibisiniz <span class="text-danger">*</span></label>
-                                    <select name="sahip" id="sahip" class="form-select form-select-sm" required>
+                                    <select name="ownorder" id="ownorder" class="form-select form-select-sm" required>
                                         <option value="">Seçiniz...</option>
                                         <option value="1. Sahibiyim">1. Sahibiyim</option>
                                         <option value="2. Sahibiyim">2. Sahibiyim</option>

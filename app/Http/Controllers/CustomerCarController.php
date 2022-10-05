@@ -176,8 +176,6 @@ class CustomerCarController extends Controller
                 $customer_car_id->save();
             }
         }
-
-
         return redirect()->to('/');
     }
 

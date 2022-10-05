@@ -52,7 +52,7 @@
                         </div>
                         <div class="card-body">
                             <div class="row" ng-init="Affiliate()">
-                                    <div ng-repeat="item in affiliates" class="col-xl-12 col-md-6 wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.5s" style="visibility: visible; animation-duration: 2s; animation-delay: 0.5s; animation-name: fadeInUp;">
+                                    <div ng-repeat="item in affiliates.data" class="col-xl-12 col-md-6 wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.5s" style="visibility: visible; animation-duration: 2s; animation-delay: 0.5s; animation-name: fadeInUp;">
                                         <div class="dlab-team style-1 m-b30 m-t10">
                                             <div class="dlab-content">
                                                 <div class="clearfix">

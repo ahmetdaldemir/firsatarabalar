@@ -245,7 +245,7 @@ class CustomerCarRepository implements CustomerCarInterface
                 'caryear' => $request->year??null,
                 'body' => $request->body??null,
                 'fuel' => $request->fuel??null,
-                'gear' => $request->transmission??null,
+                'gear' => $request->gear??null,
                 'car_id' => $request->version??null,
                 'custom_version' => $request->custom_version,
                 'km' => $request->km??null,

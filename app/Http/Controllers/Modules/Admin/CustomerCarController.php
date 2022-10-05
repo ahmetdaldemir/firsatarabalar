@@ -52,6 +52,7 @@ class CustomerCarController extends Controller
         $data['this_year'] = $this->now->year;
         $data['status'] = CustomerCarStatus::Status;
         $data['customers'] = Make::customers();
+        $data['searchroute'] = 'admin.customer_car_valuation.index';
         return view('admin.customer_car_valuation.index', $data);
     }
 

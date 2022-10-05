@@ -29,126 +29,126 @@ class DatabaseCompare extends Command
          * Yeni sistemden eskiye aktarma
          *
          */
+        /*
+                $customer_car = CustomerCar::find("13464");
 
-        $customer_car = CustomerCar::find("13464");
-
-        $customer = Customer::find($customer_car->customer_id);
-        $array1 = array(
-            'firstname' => $customer->firstname,
-            'lastname' => $customer->lastname,
-            'identity' => 00,
-            'phone' => $customer->phone,
-            'email' => $customer->email,
-            'password' => md5('123456'),
-            'gender' => $customer->gender,
-            'birthday' => $customer->birthday,
-            'smscode' => 1,
-            'city' => $customer->city_id,
-            'state' => $customer->town_id,
-            'freecar' => 0,
-            'date_created' => $customer->created_at,
-            'date_update' => $customer->created_at,
-            'date_login' => $customer->created_at,
-        );
-        $lastcustomer = DB::connection('mysql2')->table('customers')->insertGetId($array1);
-        $data = array(
-            'customer_id' => $lastcustomer,
-            'brand_id' => $customer_car->car->brand_id,
-            'car_id' => $customer_car->car_id,
-            'custom_version' => $customer_car->custom_version,
-            'agent_id' => 0,
-            'car_city' => $customer_car->car_city,
-            'car_state' => $customer_car->car_state,
-            'car_mahalle' => $customer_car->car_neighbourhood,
-            'title' => "Yeni Sistem",
-            'description' => $customer_car->description ?? "NULL",
-            'caryear' => $customer_car->caryear,
-            'plate' => $customer_car->plate,
-            'sasi' => $customer_car->sasi,
-            'ownorder' => $customer_car->ownorder,
-            'sebep' => $customer_car->sebep,
-            'score' => 1,
-            'km' => $customer_car->km,
-            'kmPhoto' => "NULL",
-            'body' => $customer_car->body,
-            'gear' => $customer_car->gear,
-            'fuel' => $customer_car->fuel,
-            'color' => $customer_car->color,
-            'damage' => $customer_car->damage,
-            'bakim_gecmisi' => $customer_car->maintenance_history,
-            'durum_sasi' => $customer_car->status_frame,
-            'durum_direk' => $customer_car->status_pole,
-            'durum_podye' => $customer_car->status_podium,
-            'durum_airbag' => $customer_car->status_airbag,
-            'durum_triger' => $customer_car->status_triger,
-            'durum_baski' => $customer_car->status_oppression,
-            'durum_fren' => $customer_car->status_brake,
-            'durum_lastik' => $customer_car->status_tyre,
-            'durum_km' => $customer_car->status_km,
-            'durum_satilamaz' => $customer_car->status_unrealizable,
-            'durum_onArkaBagaj' => $customer_car->status_onArkaBagaj,
-            'specs' => $customer_car->specs,
-            'tramer' => $customer_car->tramer,
-            'tramerValue' => $customer_car->tramerValue,
-            'tramer_photo' => $customer_car->tramer_photo,
-            'car_notwork' => $customer_car->car_notwork,
-            'car_exterior_faults' => $customer_car->car_exterior_faults,
-            'car_interior_faults' => $customer_car->car_interior_faults,
-            'gal_fiyat_1' => $customer_car->gal_price_1,
-            'gal_fiyat_2' => $customer_car->gal_price_2,
-            'gal_fiyat_3' => $customer_car->gal_price_3,
-            'degerleme' => $customer_car->id,
-            'onerilen' => $customer_car->id,
-            'onerilen_kabul' => 0,
-            'shows' => 0,
-            'date_created' => $customer_car->created_at,
-            'date_updated' => $customer_car->created_at,
-            'date_end' => $customer_car->created_at,
-            'date_inspection' => $customer_car->date_inspection,
-            'sessid' => $customer_car->session_id,
-            'laststep' => $customer_car->laststep,
-            'complete' => 1,
-            'notcomplete_mail' => 0,
-            'status' => 0,
-            'deleted' => 0,
-        );
-        $customerCarId = DB::connection('mysql2')->table('customers_cars')->insertGetId($data);
-
-        $customer_car_expers = CustomerCarExper::where('customer_car_id', '13464')->get();
-        if ($customer_car_expers) {
-            foreach ($customer_car_expers as $customer_car_exper) {
-                $array2 = array(
-                    'customer_id' => $lastcustomer,
-                    'customers_car_id' => $customerCarId,
-                    'expert' => $customer_car_exper->image,
-                    'date_created' => $customer_car_exper->created_at,
+                $customer = Customer::find($customer_car->customer_id);
+                $array1 = array(
+                    'firstname' => $customer->firstname,
+                    'lastname' => $customer->lastname,
+                    'identity' => 00,
+                    'phone' => $customer->phone,
+                    'email' => $customer->email,
+                    'password' => md5('123456'),
+                    'gender' => $customer->gender,
+                    'birthday' => $customer->birthday,
+                    'smscode' => 1,
+                    'city' => $customer->city_id,
+                    'state' => $customer->town_id,
+                    'freecar' => 0,
+                    'date_created' => $customer->created_at,
+                    'date_update' => $customer->created_at,
+                    'date_login' => $customer->created_at,
                 );
-                $customerCarExperId = DB::connection('mysql2')->table('customers_cars_experts')->insertGetId($array2);
-
-            }
-
-        }
-
-
-        $customer_car_photos = CustomerCarPhoto::where('customer_car_id', '13464')->get();
-        if ($customer_car_photos) {
-            foreach ($customer_car_photos as $customer_car_photo) {
-                $array2 = array(
+                $lastcustomer = DB::connection('mysql2')->table('customers')->insertGetId($array1);
+                $data = array(
                     'customer_id' => $lastcustomer,
-                    'customers_car_id' => $customerCarId,
-                    'photo' => $customer_car_photo->image,
-                    'date_created' => $customer_car_photo->created_at,
+                    'brand_id' => $customer_car->car->brand_id,
+                    'car_id' => $customer_car->car_id,
+                    'custom_version' => $customer_car->custom_version,
+                    'agent_id' => 0,
+                    'car_city' => $customer_car->car_city,
+                    'car_state' => $customer_car->car_state,
+                    'car_mahalle' => $customer_car->car_neighbourhood,
+                    'title' => "Yeni Sistem",
+                    'description' => $customer_car->description ?? "NULL",
+                    'caryear' => $customer_car->caryear,
+                    'plate' => $customer_car->plate,
+                    'sasi' => $customer_car->sasi,
+                    'ownorder' => $customer_car->ownorder,
+                    'sebep' => $customer_car->sebep,
+                    'score' => 1,
+                    'km' => $customer_car->km,
+                    'kmPhoto' => "NULL",
+                    'body' => $customer_car->body,
+                    'gear' => $customer_car->gear,
+                    'fuel' => $customer_car->fuel,
+                    'color' => $customer_car->color,
+                    'damage' => $customer_car->damage,
+                    'bakim_gecmisi' => $customer_car->maintenance_history,
+                    'durum_sasi' => $customer_car->status_frame,
+                    'durum_direk' => $customer_car->status_pole,
+                    'durum_podye' => $customer_car->status_podium,
+                    'durum_airbag' => $customer_car->status_airbag,
+                    'durum_triger' => $customer_car->status_triger,
+                    'durum_baski' => $customer_car->status_oppression,
+                    'durum_fren' => $customer_car->status_brake,
+                    'durum_lastik' => $customer_car->status_tyre,
+                    'durum_km' => $customer_car->status_km,
+                    'durum_satilamaz' => $customer_car->status_unrealizable,
+                    'durum_onArkaBagaj' => $customer_car->status_onArkaBagaj,
+                    'specs' => $customer_car->specs,
+                    'tramer' => $customer_car->tramer,
+                    'tramerValue' => $customer_car->tramerValue,
+                    'tramer_photo' => $customer_car->tramer_photo,
+                    'car_notwork' => $customer_car->car_notwork,
+                    'car_exterior_faults' => $customer_car->car_exterior_faults,
+                    'car_interior_faults' => $customer_car->car_interior_faults,
+                    'gal_fiyat_1' => $customer_car->gal_price_1,
+                    'gal_fiyat_2' => $customer_car->gal_price_2,
+                    'gal_fiyat_3' => $customer_car->gal_price_3,
+                    'degerleme' => $customer_car->id,
+                    'onerilen' => $customer_car->id,
+                    'onerilen_kabul' => 0,
+                    'shows' => 0,
+                    'date_created' => $customer_car->created_at,
+                    'date_updated' => $customer_car->created_at,
+                    'date_end' => $customer_car->created_at,
+                    'date_inspection' => $customer_car->date_inspection,
+                    'sessid' => $customer_car->session_id,
+                    'laststep' => $customer_car->laststep,
+                    'complete' => 1,
+                    'notcomplete_mail' => 0,
+                    'status' => 0,
                     'deleted' => 0,
-                    'primary' => 0,
                 );
-                $customerCarPhotosId = DB::connection('mysql2')->table('customers_cars_photos')->insertGetId($array2);
-            }
+                $customerCarId = DB::connection('mysql2')->table('customers_cars')->insertGetId($data);
 
-            $customer_car_photos = CustomerCarPhoto::where('customer_car_id', '13464')->get();
+                $customer_car_expers = CustomerCarExper::where('customer_car_id', '13464')->get();
+                if ($customer_car_expers) {
+                    foreach ($customer_car_expers as $customer_car_exper) {
+                        $array2 = array(
+                            'customer_id' => $lastcustomer,
+                            'customers_car_id' => $customerCarId,
+                            'expert' => $customer_car_exper->image,
+                            'date_created' => $customer_car_exper->created_at,
+                        );
+                        $customerCarExperId = DB::connection('mysql2')->table('customers_cars_experts')->insertGetId($array2);
+
+                    }
+
+                }
 
 
-        }
+                $customer_car_photos = CustomerCarPhoto::where('customer_car_id', '13464')->get();
+                if ($customer_car_photos) {
+                    foreach ($customer_car_photos as $customer_car_photo) {
+                        $array2 = array(
+                            'customer_id' => $lastcustomer,
+                            'customers_car_id' => $customerCarId,
+                            'photo' => $customer_car_photo->image,
+                            'date_created' => $customer_car_photo->created_at,
+                            'deleted' => 0,
+                            'primary' => 0,
+                        );
+                        $customerCarPhotosId = DB::connection('mysql2')->table('customers_cars_photos')->insertGetId($array2);
+                    }
 
+                    $customer_car_photos = CustomerCarPhoto::where('customer_car_id', '13464')->get();
+
+
+                }
+        */
 
         /*
          *
@@ -179,8 +179,8 @@ class DatabaseCompare extends Command
            }
     */
 
-        /*
-                    $xd = DB::connection('mysql2')->table('customers_cars')->where('id','<','13106')->orderBy('id','desc')->get()->take(2000);
+
+                    $xd = DB::connection('mysql2')->table('customers_cars')->orderBy('id','desc')->get()->take(2000);
                     foreach ($xd as $itemd)
                       {
                           $customer_cars = CustomerCar::find($itemd->id);
@@ -317,8 +317,6 @@ class DatabaseCompare extends Command
 
 
 
-
-                    */
 
 
         /*  $x = DB::connection('mysql2')->table('valuations')->get();

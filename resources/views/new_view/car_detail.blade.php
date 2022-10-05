@@ -123,10 +123,11 @@
                                     <div class="car-damage-wrapper border-0 bg-transparent">
                                         <div class="row">
                                             <div class="col-lg-5 text-center">
-                                                @if(gettype($car->damage) == "object")
+                                                @if($car->damage)
+                                                    <?php $d = json_decode($car->damage); ?>
                                                 <div class="damage-area mt-0 pt-0">
                                                     <div class="car-parts">
-                                                        @foreach (@$car->damage as $key => $value)
+                                                        @foreach (@$d as $key => $value)
                                                             @continue( substr($key, 0, 5) == "islem" )
                                                             <div class="{{$key}} {{$value}}"></div>
                                                         @endforeach

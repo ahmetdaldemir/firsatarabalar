@@ -29,11 +29,15 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <?php foreach ($cars as $car) { $x = json_decode($car->default_image);  ?>
+                                <?php foreach ($cars as $car) {  if(!empty($car->default_image)){$x = json_decode($car->default_image);}   ?>
                                 <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="icon-bx-wraper style-7 text-center m-b30">
                                         <div class="icon-media">
+                                            @if(!empty($car->default_image)){
                                             <img src="{{asset('storage/cars')}}/<?php echo $x->image; ?>" alt="" style="width: 100%;    height: 250px;">
+                                            @else
+                                                <img src="{{asset('new_view/img/noimage.jpg')}}" alt="" style="width: 100%;    height: 250px;">
+                                            @endif
                                         </div>
                                         <div class="icon-content">
                                             <div class="row">

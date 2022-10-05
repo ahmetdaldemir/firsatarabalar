@@ -9,10 +9,10 @@
           </advancedOptions>
         </fileTransfer>
       </webServer>
-      <webServer id="47262194-f7d9-4e31-a0ea-f5598cd1f0dc" name="firsatarabalarwhm" url="http://191.96.1.217">
-        <fileTransfer rootFolder="/public_html" host="191.96.1.217" port="21">
+      <webServer id="f0c35d76-102e-4fcf-bfca-59cfe2a08a5c" name="firsatarabalarplesk" url="http://191.96.1.217">
+        <fileTransfer rootFolder="/httpdocs" host="191.96.1.217" port="21">
           <advancedOptions>
-            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" showHiddenFiles="true" />
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
         </fileTransfer>
       </webServer>

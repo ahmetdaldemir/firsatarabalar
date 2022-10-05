@@ -59,8 +59,7 @@
                     <div class="profile-element font-weight-bold text-warning">Yönetim Paneli</div>
                     <div class="logo-element text-warning">YP+</div>
                 </li>
-                <li><a href="/admin/home"><i class="fa-fw fad fa-chart-network"></i> <span
-                                class="nav-label">Göstergeler</span></a></li>
+                <li><a href="/admin/home"><i class="fa-fw fad fa-chart-network"></i> <span  class="nav-label">Göstergeler</span></a></li>
                 <!--  {(Request::getSegment(0) == "agents") ? "class='active'":""} -->
                 @role('Admin')
                 <li>
@@ -89,12 +88,13 @@
                 @endrole
                 @role('Admin')
                 <li>
-                    <a href="{{route('admin.car.index')}}">
+                    <a href="{{route('admin.customer_car_valuation.index')}}">
                         <i class="fa-fw fad fa-users"></i>
-                        <span class="nav-label">Araçlar</span>
+                        <span class="nav-label">Tüm Gelen Araçlar</span>
                         <span class="label label-success float-right"><?php echo count_menu()['cars']; ?></span>
                     </a>
                 </li>
+
                 @endrole
                 <li>
                     <hr style='border-top: 1px solid #3a586f'>
@@ -170,6 +170,13 @@
                     <hr style='border-top: 1px solid #3a586f'>
                 </li>
                  @role('Admin')
+                <li>
+                    <a href="{{route('admin.car.index')}}">
+                        <i class="fa-fw fad fa-users"></i>
+                        <span class="nav-label">Sistem Araçları</span>
+                        <span class="label label-success float-right"><?php echo count_menu()['cars']; ?></span>
+                    </a>
+                </li>
                 <li><a href="/admin/setting/index"><i class="fa-fw fad fa-cog"></i><span
                                 class="nav-label">Ayarlar</span></a></li>
                 @endrole
@@ -187,10 +194,8 @@
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fad fa-bars"></i></a>
                     <form role="search" class="navbar-form-custom" @if(!empty($searchroute)) action="{{route($searchroute)}}" @endif method="get">
                         <div class="form-group d-flex justify-align-start align-items-center">
-                            <input type="text" placeholder="Arama..." class="form-control" name="q" id="top-search"
-                                   style="width: 300px" size="60">
-                            <a href="#" class="btn btn-xs btn-warning"><i class="fad fa-times mr-1"></i> Filtreyi
-                                Sıfırla</a>
+                            <input type="text" placeholder="Arama..." class="form-control" name="q" id="top-search" style="width: 300px" size="60">
+                            <a href="#" class="btn btn-xs btn-warning"><i class="fad fa-times mr-1"></i> Filtreyi Sıfırla</a>
                         </div>
                     </form>
                 </div>

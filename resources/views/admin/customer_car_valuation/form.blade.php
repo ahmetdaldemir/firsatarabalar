@@ -35,6 +35,8 @@
                                 class="fad fa-fw fa-comment-alt-dots"></i> Araç Değerleme </a></li>
                 <li><a class="nav-link" data-toggle="tab" href="#request"><i class="fad fa-fw fa-comment-alt-dots"></i>
                       Talepler </a></li>
+                <li><a class="nav-link" data-toggle="tab" href="#customercars"><i class="fad fa-fw fa-comment-alt-dots"></i>
+                        Müşteri Araçları </a></li>
                 <!-- li><a class="nav-link" data-toggle="tab" href="#messages"><i class="fad fa-fw fa-comment-alt-dots"></i>
                         Mesajlaşma </a></li -->
             </ul>
@@ -854,6 +856,61 @@
                                 <div class="col-md-12">Talep Bulunamadı</div>
                             @endif
                         </div>
+                    </div>
+                </div>
+                <div role="tabpanel" id="customercars" class="tab-pane">
+                    <div class="panel-body">
+                        <table id="Cars" class="cars table table-striped table-bordered table-hover mb-0">
+                            <thead class="thead-light">
+                            <tr>
+                                <th width="40" class="text-center">#</th>
+                                <th width="80" class="text-center">Plaka</th>
+                                <th class="text-left">Araç Marka / İsim</th>
+                                <th width="100" class="text-center">Yakıt</th>
+                                <th width="120" class="text-center">Kasa</th>
+                                <th width="120" class="text-center">Kayıt Zamanı</th>
+                                <th width="200" class="text-center">Atanan</th>
+                                <th width="160" class="text-center">İşlem(ler)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $customercars = \App\Models\CustomerCar::where('customer_id',$car->customer['id'])->get() ?>
+                            @if ( empty(@$customercars) )
+                                <tr>
+                                    <td colspan="10" class="text-center bg-white" height="80">Henüz hiç araç yok!</td>
+                                </tr>
+                            @else
+                                @foreach ( @$customercars as $car )
+                                    <tr id="carRow-1">
+                                        <td class="text-center">{{@$car->id}}</td>
+                                        <td class="text-center">{{@$car->plate}}</td>
+                                        <td class="text-left">{{@$car->brand->name}}</td>
+                                        <td class="text-center">{{@$car->fuel}}</td>
+                                        <td class="text-center">{{@$car->body}}</td>
+                                        <td class="text-center">{{@$car->date_created}}</td>
+                                        <td class="text-center">{{@$car->agent}}</td>
+                                        <td class="text-center">
+
+                                            @if ( @$car->payment->status == 0 )
+                                                <span class="text-danger">Ödeme Bekleniyor</span>
+                                            @else
+                                                @if(!$car->user_id )
+                                                    <a href="javascript:;" data-carid="{{$car->id}}"
+                                                       class="confirm btn btn-xs btn-primary"><i
+                                                                class="fad fa-check mr-1"></i> Onayla ve Ata</a>
+                                                @else
+                                                    <a href="javascript:;" class="btn btn-xs btn-warning"><i
+                                                                class="fad fa-hourglass-half mr-1"></i> Değerleme
+                                                        Bekleniyor</a>
+                                                @endif
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                            </tbody>
+                        </table>
+
                     </div>
                 </div>
             </div>

@@ -32,15 +32,30 @@
                                 <div class="col-xl-2 col-lg-2">
                                     <img src="{{asset('new_view/img/male.jpeg')}}" style="max-width: 100%" />
                                     <h5 style="text-align: center;">{{auth()->guard('customer')->user()->firstname}} {{auth()->guard('customer')->user()->lastname}}</h5>
+                                    <h5 style="text-align: center;">{{auth()->guard('customer')->user()->phone}}</h5>
+                                    <h6 style="text-align: center;">{{auth()->guard('customer')->user()->email}}</h6>
                                 </div>
                                 <div class="col-xl-8 col-lg-8">
                                     <div class="row">
-                                        <div class="col-xl-12 col-lg-8"></div>
-                                        <div class="col-xl-12 col-lg-8"></div>
+                                        <div class="col-xl-12 col-lg-8">
+                                            <h5>Araç Bilgileri</h5>
+                                            <h6>{{$customer_car->car->brand->name}} / {{$customer_car->car->model}} / {{$customer_car->caryear}} / {{\App\Enums\FullType::FullType[$customer_car->fuel]}} / {{\App\Enums\Transmission::Transmission[$customer_car->gear]}}</h6>
+                                            <h6>{{$customer_car->car->name}} / {{$customer_car->car->horse}} HP / {{$customer_car->car->engine}} Motor</h6>
+                                        </div>
+                                        <div class="col-xl-12 col-lg-8" style="text-align: center">
+                                            <img src="{{asset('new_view/img/exchange.png')}}" style="width:125px" />
+                                        </div>
+                                        <div class="divider"></div>
+                                        <div class="col-xl-12 col-lg-8" style="text-align: center">
+                                            <h5>Notlar</h5>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-xl-2 col-lg-2">
                                     <img src="{{asset('new_view/img/male.jpeg')}}" style="max-width: 100%" />
+                                    <h5 style="text-align: center;">{{auth()->guard('customer')->user()->firstname}} {{auth()->guard('customer')->user()->lastname}}</h5>
+                                    <h5 style="text-align: center;">{{auth()->guard('customer')->user()->phone}}</h5>
+                                    <h6 style="text-align: center;">{{auth()->guard('customer')->user()->email}}</h6>
                                 </div>
                             </div>
                         </div>
@@ -49,6 +64,12 @@
             </div>
         </div>
 
+        <style>
+            .divider{    width: 100%;
+                border-bottom: 1px solid #ccc;
+                height: 72px;}
+        </style>
+<!--
         <div class="container">
             <div class="row chat-window col-xs-5 col-md-3" id="chat_window_1" style="margin-left:10px;    z-index: 9999;">
                 <div class="col-xs-12 col-md-12">
@@ -331,6 +352,7 @@
             });
 
         </script>
+        -->
 @endsection
 
 @section('before-after-js'),,@endsection

@@ -55,8 +55,7 @@
                     @endrole
                     <button type="submit" class="btn btn-sm btn-primary"><i class="fad fa-search"></i></button>
                     @if ( Request::get("agent_id") || strlen(Request::get("state")) > 0 )
-                        <a href="/valuations" type="submit" class="btn btn-sm btn-warning ml-1"><i
-                                    class="fad fa-sync"></i></a>
+                        <a href="/valuations" type="submit" class="btn btn-sm btn-warning ml-1"><i class="fad fa-sync"></i></a>
                     @endif
                 </form>
 
@@ -111,6 +110,7 @@
                                 <?php $ccv = \App\Models\CustomerCarValuation::where('customer_car_id',$customer_car_valuation->id)->first();  ?>
                                 @if($ccv && $ccv->status == 1)
                                  <a target="_blank" href="{{route('pdf',['id' => $customer_car_valuation->id])}}" class="btn btn-xs btn-success" style="float: right"><i class="fa fa-share"></i></a>
+                                 <a target="_blank" href="{{route('admin.customer_car_valuation_sms',['id' => $customer_car_valuation->id])}}" class="btn btn-xs btn-success" style="float: right"><i class="fa fa-envelope"></i></a>
                                 @endif
                              </td>
                             @endrole

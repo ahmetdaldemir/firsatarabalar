@@ -144,7 +144,7 @@
                 @endrole
                 @role('Admin')
 
-                <li><a href="/payments"><i class="fa-fw fad fa-money-bill-wave"></i> <span
+                <li><a href="{{route('admin.payments')}}"><i class="fa-fw fad fa-money-bill-wave"></i> <span
                                 class="nav-label">Ödemeler</span></a></li>
 
                 @endrole
@@ -153,14 +153,14 @@
                                 class="nav-label">Kullanıcı Görüşleri</span></a></li>
                 @endrole
                 @role('Admin')
-                <li>
+                <!-- li>
                     <a href="javascript:;"><i class="fa-fw fad fa-question-circle"></i> <span class="nav-label">Yardım Sayfaları</span><span
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse" aria-expanded="true" style="">
                         <li><a href="/helps/categories">Kategoriler</a></li>
                         <li><a href="/helps/contents">İçerikler</a></li>
                     </ul>
-                </li>
+                </li -->
                 @endrole
                 @role('Admin')
                 <li><a href="{{route('admin.page.index')}}"><i class="fa-fw fad fa-file-alt"></i> <span

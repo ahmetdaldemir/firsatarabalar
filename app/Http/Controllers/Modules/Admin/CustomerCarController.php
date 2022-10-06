@@ -8,6 +8,7 @@ use App\Jobs\CustomerCarValuationPdf;
 use App\Models\CustomerCar;
 use App\Models\CustomerCarBuyRequest;
 use App\Models\CustomerCarComment;
+use App\Models\CustomerCarPaymentTransaction;
 use App\Models\CustomerCarPhoto;
 use App\Models\CustomerCarValuation;
 use App\Models\User;
@@ -82,6 +83,13 @@ class CustomerCarController extends Controller
         $data['cars'] = NULL;
         $data['cities'] = $this->CityRepository->get();
         return view('admin.car.form', $data);
+    }
+
+    public function payments()
+    {
+        $data['searchroute'] = 'admin.payments';
+        $data['payments'] = CustomerCarPaymentTransaction::all();
+        return view('admin.car.payments', $data);
     }
 
 
@@ -216,4 +224,16 @@ class CustomerCarController extends Controller
         return redirect()->back();
     }
 
+    public function customer_car_valuation_sms(Request $request)
+    {
+        $customer_car_valuation = CustomerCarValuation::find($request->id);
+        $customer = $customer_car_valuation->customer_car->customer;
+        $message = mb_strtoupper($customer_car_valuation->customer_car->plate) . " Plakali aracinızn değerlemesi yapilmistir. <a href='firsatrabalar.com/pdf?id =".$request->id."'";
+        $requesta['message'] =  $message;
+        $requesta['phone']   =  $customer->phone;
+        $this->dispatch(new Sms($requesta));
+        $customer_car_valuation->date_sendconfirm = date('Y-m-d');
+        $customer_car_valuation->save();
+        redirect()->back();
+    }
 }

@@ -60,8 +60,11 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-12 m-t10">
+                                                <div class="col-md-6 m-t10">
                                                     <a href="car_detail?id={{$car->id}}" style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">Detay</a>
+                                                </div>
+                                                <div class="col-md-6 m-t10">
+                                                    <a href="{{route('account.customer.sellerpage',['id'=>$car->id])}}" style="    width: 100%; padding: 10px;  color: #fff; background: #00309c;" class="btn btn-success">Alıcı</a>
                                                 </div>
                                             </div>
                                         </div>

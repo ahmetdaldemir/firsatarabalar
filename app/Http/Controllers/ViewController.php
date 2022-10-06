@@ -33,73 +33,73 @@ class ViewController
     public function index()
     {
         $data['chart'] = [];
-       // $data['customer_cars'] = CustomerCar::all();
+        // $data['customer_cars'] = CustomerCar::all();
         $data['brands'] = $this->service->brands();
-         $data['blogs'] = $this->service->blogs();
-       // $data['reviews'] =  $this->service->reviews();
-         $data['bodytypes'] =  BodyType::BodyType;
-         $data['fueltypes'] =  FullType::FullType;
-         $data['transmissions'] =  Transmission::Transmission;
-         $data['tramers'] =  Tramer::Tramer;
+        $data['blogs'] = $this->service->blogs();
+        // $data['reviews'] =  $this->service->reviews();
+        $data['bodytypes'] = BodyType::BodyType;
+        $data['fueltypes'] = FullType::FullType;
+        $data['transmissions'] = Transmission::Transmission;
+        $data['tramers'] = Tramer::Tramer;
 //
-        $data['yayinlanan_araclar']  = $this->customerCarRepository->getType(5);
-        $data['gelecek_araclar']     = $this->customerCarRepository->getType(4);
-        $data['satilan_araclar']     = $this->customerCarRepository->getType(6);
-        $data['sliders']             = $this->customerCarRepository->getShows();
-        $data['solds']    = null;
-        return view('new_view.home',$data);
+        $data['yayinlanan_araclar'] = $this->customerCarRepository->getType(5);
+        $data['gelecek_araclar'] = $this->customerCarRepository->getType(4);
+        $data['satilan_araclar'] = $this->customerCarRepository->getType(6);
+        $data['sliders'] = $this->customerCarRepository->getShows();
+        $data['solds'] = null;
+        return view('new_view.home', $data);
     }
 
     public function pages(Request $request)
     {
-        $data['pages'] = Page::where('slug',$request->slug)->first();
-        return view('new_view.pages',$data);
+        $data['pages'] = Page::where('slug', $request->slug)->first();
+        return view('new_view.pages', $data);
     }
 
 
     public function about(Request $request)
     {
-        $data['pages'] = Page::where('slug',$request->slug)->first();
-        return view('new_view.about',$data);
+        $data['pages'] = Page::where('slug', $request->slug)->first();
+        return view('new_view.about', $data);
     }
 
 
     public function blog(Request $request)
     {
-        $data['pages'] = Page::where('slug',$request->slug)->where('type','blog')->first();
-        return view('new_view.blog',$data);
+        $data['pages'] = Page::where('slug', $request->slug)->where('type', 'blog')->first();
+        return view('new_view.blog', $data);
     }
 
     public function how_run_system()
     {
         $data['chart'] = [];
-        return view('new_view.how_run_system',$data);
+        return view('new_view.how_run_system', $data);
     }
 
     public function customer_comment()
     {
         $data['chart'] = [];
-        $data['reviews'] = Review::where('status',1)->get();
-        return view('new_view.customer_comment',$data);
+        $data['reviews'] = Review::where('status', 1)->get();
+        return view('new_view.customer_comment', $data);
     }
 
     public function carSell()
     {
         $data['chart'] = [];
-        return view('new_view.car_sell',$data);
+        return view('new_view.car_sell', $data);
     }
 
     public function contact()
     {
         $data['chart'] = [];
-        return view('new_view.contact',$data);
+        return view('new_view.contact', $data);
     }
 
     public function car_detail(Request $request)
     {
         $data['car'] = CustomerCar::find($request->id);
         $data['customer_car_buy'] = CustomerCarBuyRequest::where('customer_id', Auth::guard('customer')->id())->where('customer_car_id', $request->id)->first();
-        return view('new_view.car_detail',$data);
+        return view('new_view.car_detail', $data);
     }
 
 
@@ -126,7 +126,7 @@ class ViewController
 
     public function allcars()
     {
-        $data['allcars'] = CustomerCar::where('status',CustomerCarStatus::STATUS_STRING['COMPLATED'])->get();
-        return view('new_view/allcars',$data);
+        $data['allcars'] = CustomerCar::where('status', CustomerCarStatus::STATUS_STRING['COMPLATED'])->get();
+        return view('new_view/allcars', $data);
     }
- }
+}

@@ -35,9 +35,10 @@ class AccountController extends Controller
         return view('account/profil', $data);
     }
 
-    public function sellerpage()
+    public function sellerpage(Request $request)
     {
         $data['profil'] = Auth::guard('customer')->user();
+        $data['customer_car'] = CustomerCar::find($request->id);
         return view('account/sellerpage', $data);
     }
 

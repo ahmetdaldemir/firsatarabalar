@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-lg-9 col-sm-12">
                     <div class="slides owl-carousel owl-theme">
-                        @if($sliders)
+                        @if($sliders->count() != 0)
                             @foreach ($sliders as $slider)
 
                                 <a href="/ilan/{{$slider->id}}/{{$slider->caryear}}-{{\Illuminate\Support\Str::slug($slider->car->name)}}">

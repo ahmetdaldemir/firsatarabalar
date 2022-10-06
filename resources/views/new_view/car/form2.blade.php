@@ -93,82 +93,82 @@
                                                     <tr class="front-bumper">
                                                         <td>Ön Tampon</td>
                                                         <td class="text-center original"><input class="form-check-input"
-                                                                                                type="radio"
+                                                                                                type="radio" value="original"
                                                                                                 name="damage[front-bumper]"
                                                                                                 checked></td>
                                                         <td class="text-center painted"><input class="form-check-input"
-                                                                                               type="radio"
+                                                                                               type="radio" value="painted"
                                                                                                name="damage[front-bumper]"></td>
-                                                        <td class="text-center paintedlocal"><input
+                                                        <td class="text-center paintedlocal"><input value="paintedlocal"
                                                                     class="form-check-input" type="radio"
                                                                     name="damage[front-bumper]"></td>
                                                         <td class="text-center changed"><input class="form-check-input"
-                                                                                               type="radio"
+                                                                                               type="radio" value="changed"
                                                                                                name="damage[front-bumper]"></td>
                                                     </tr>
                                                     <tr class="front-hood">
                                                         <td>Motor Kaputu</td>
                                                         <td class="text-center original"><input class="form-check-input"
-                                                                                                type="radio"
+                                                                                                type="radio" value="original"
                                                                                                 name="damage[front-hood]"
                                                                                                 checked></td>
                                                         <td class="text-center painted"><input class="form-check-input"
-                                                                                               type="radio"
+                                                                                               type="radio" value="painted"
                                                                                                name="damage[front-hood]"></td>
                                                         <td class="text-center paintedlocal"><input
-                                                                    class="form-check-input" type="radio"
+                                                                    class="form-check-input" type="radio" value="paintedlocal"
                                                                     name="damage[front-hood]"></td>
                                                         <td class="text-center changed"><input class="form-check-input"
-                                                                                               type="radio"
+                                                                                               type="radio" value="changed"
                                                                                                name="damage[front-hood]"></td>
                                                     </tr>
                                                     <tr class="roof">
                                                         <td>Tavan</td>
-                                                        <td class="text-center original"><input class="form-check-input"
+                                                        <td class="text-center original"><input class="form-check-input" value="original"
                                                                                                 type="radio" name="damage[roof]"
                                                                                                 checked></td>
-                                                        <td class="text-center painted"><input class="form-check-input"
+                                                        <td class="text-center painted"><input class="form-check-input" value="painted"
                                                                                                type="radio" name="damage[roof]">
                                                         </td>
-                                                        <td class="text-center paintedlocal"><input
+                                                        <td class="text-center paintedlocal"><input value="paintedlocal"
                                                                     class="form-check-input" type="radio" name="damage[roof]">
                                                         </td>
-                                                        <td class="text-center changed"><input class="form-check-input"
+                                                        <td class="text-center changed"><input class="form-check-input" value="changed"
                                                                                                type="radio" name="damage[roof]">
                                                         </td>
                                                     </tr>
                                                     <tr class="front-right-mudguard">
                                                         <td>Sağ Ön Çamurluk</td>
-                                                        <td class="text-center original"><input class="form-check-input"
+                                                        <td class="text-center original"><input class="form-check-input" value="original"
                                                                                                 type="radio"
                                                                                                 name="damage[front-right-mudguard]"
                                                                                                 checked></td>
-                                                        <td class="text-center painted"><input class="damage[form-check-input"
+                                                        <td class="text-center painted"><input class="damage[form-check-input" value="painted"
                                                                                                type="radio"
                                                                                                name="damage[front-right-mudguard]">
                                                         </td>
-                                                        <td class="text-center paintedlocal"><input
+                                                        <td class="text-center paintedlocal"><input value="paintedlocal"
                                                                     class="form-check-input" type="radio"
                                                                     name="damage[front-right-mudguard]"></td>
-                                                        <td class="text-center changed"><input class="form-check-input"
+                                                        <td class="text-center changed"><input class="form-check-input" value="changed"
                                                                                                type="radio"
                                                                                                name="damage[front-right-mudguard]">
                                                         </td>
                                                     </tr>
                                                     <tr class="front-right-door">
                                                         <td>Sağ Ön Kapı</td>
-                                                        <td class="text-center original"><input class="form-check-input"
+                                                        <td class="text-center original"><input class="form-check-input" value="original"
                                                                                                 type="radio"
                                                                                                 name="damage[front-right-door]"
                                                                                                 checked></td>
-                                                        <td class="text-center painted"><input class="form-check-input"
+                                                        <td class="text-center painted"><input class="form-check-input" value="painted"
                                                                                                type="radio"
                                                                                                name="damage[front-right-door]">
                                                         </td>
                                                         <td class="text-center paintedlocal"><input
-                                                                    class="form-check-input" type="radio"
+                                                                    class="form-check-input" type="radio" value="paintedlocal"
                                                                     name="damage[front-right-door]"></td>
-                                                        <td class="text-center changed"><input class="form-check-input"
+                                                        <td class="text-center changed"><input class="form-check-input" value="changed"
                                                                                                type="radio"
                                                                                                name="damage[front-right-door]">
                                                         </td>
@@ -176,141 +176,141 @@
                                                     <tr class="rear-right-door">
                                                         <td>Sağ Arka Kapı</td>
                                                         <td class="text-center original"><input class="form-check-input"
-                                                                                                type="radio"
+                                                                                                type="radio" value="original"
                                                                                                 name="damage[rear-right-door]"
                                                                                                 checked></td>
-                                                        <td class="text-center painted"><input class="form-check-input"
+                                                        <td class="text-center painted"><input class="form-check-input" value="painted"
                                                                                                type="radio"
                                                                                                name="damage[rear-right-door]">
                                                         </td>
-                                                        <td class="text-center paintedlocal"><input
+                                                        <td class="text-center paintedlocal"><input value="paintedlocal"
                                                                     class="form-check-input" type="radio"
                                                                     name="damage[rear-right-door]"></td>
-                                                        <td class="text-center changed"><input class="form-check-input"
+                                                        <td class="text-center changed"><input class="form-check-input" value="changed"
                                                                                                type="radio"
                                                                                                name="damage[rear-right-door]">
                                                         </td>
                                                     </tr>
                                                     <tr class="rear-right-mudguard">
                                                         <td>Sağ Arka Çamurluk</td>
-                                                        <td class="text-center original"><input class="form-check-input"
+                                                        <td class="text-center original"><input class="form-check-input" value="original"
                                                                                                 type="radio"
                                                                                                 name="damage[rear-right-mudguard]"
                                                                                                 checked></td>
-                                                        <td class="text-center painted"><input class="form-check-input"
+                                                        <td class="text-center painted"><input class="form-check-input" value="painted"
                                                                                                type="radio"
                                                                                                name="damage[rear-right-mudguard]">
                                                         </td>
                                                         <td class="text-center paintedlocal"><input
-                                                                    class="form-check-input" type="radio"
+                                                                    class="form-check-input" type="radio" value="paintedlocal"
                                                                     name="damage[rear-right-mudguard]"></td>
-                                                        <td class="text-center changed"><input class="form-check-input"
+                                                        <td class="text-center changed"><input class="form-check-input" value="changed"
                                                                                                type="radio"
                                                                                                name="damage[rear-right-mudguard]">
                                                         </td>
                                                     </tr>
                                                     <tr class="front-left-mudguard">
                                                         <td>Sol Ön Çamurluk</td>
-                                                        <td class="text-center original"><input class="form-check-input"
+                                                        <td class="text-center original"><input class="form-check-input" value="original"
                                                                                                 type="radio"
                                                                                                 name="damage[front-left-mudguard]"
                                                                                                 checked></td>
-                                                        <td class="text-center painted"><input class="form-check-input"
+                                                        <td class="text-center painted"><input class="form-check-input" value="painted"
                                                                                                type="radio"
                                                                                                name="damage[front-left-mudguard]">
                                                         </td>
                                                         <td class="text-center paintedlocal"><input
-                                                                    class="form-check-input" type="radio"
+                                                                    class="form-check-input" type="radio" value="paintedlocal"
                                                                     name="damage[front-left-mudguard]"></td>
-                                                        <td class="text-center changed"><input class="form-check-input"
+                                                        <td class="text-center changed"><input class="form-check-input" value="changed"
                                                                                                type="radio"
                                                                                                name="damage[front-left-mudguard]">
                                                         </td>
                                                     </tr>
                                                     <tr class="front-left-door">
                                                         <td>Sol Ön Kapı</td>
-                                                        <td class="text-center original"><input class="form-check-input"
+                                                        <td class="text-center original"><input class="form-check-input"value="original"
                                                                                                 type="radio"
                                                                                                 name="damage[front-left-door]"
                                                                                                 checked></td>
-                                                        <td class="text-center painted"><input class="form-check-input"
+                                                        <td class="text-center painted"><input class="form-check-input" value="painted"
                                                                                                type="radio"
                                                                                                name="damage[front-left-door]">
                                                         </td>
-                                                        <td class="text-center paintedlocal"><input
+                                                        <td class="text-center paintedlocal"><input value="paintedlocal"
                                                                     class="form-check-input" type="radio"
                                                                     name="damage[front-left-door]"></td>
-                                                        <td class="text-center changed"><input class="form-check-input"
+                                                        <td class="text-center changed"><input class="form-check-input" value="changed"
                                                                                                type="radio"
                                                                                                name="damage[front-left-door]">
                                                         </td>
                                                     </tr>
                                                     <tr class="rear-left-door">
                                                         <td>Sol Arka Kapı</td>
-                                                        <td class="text-center original"><input class="form-check-input"
+                                                        <td class="text-center original"><input class="form-check-input" value="original"
                                                                                                 type="radio"
                                                                                                 name="damage[rear-left-door]"
                                                                                                 checked></td>
-                                                        <td class="text-center painted"><input class="form-check-input"
+                                                        <td class="text-center painted"><input class="form-check-input" value="painted"
                                                                                                type="radio"
                                                                                                name="damage[rear-left-door]">
                                                         </td>
-                                                        <td class="text-center paintedlocal"><input
+                                                        <td class="text-center paintedlocal"><input value="paintedlocal"
                                                                     class="form-check-input" type="radio"
                                                                     name="damage[rear-left-door]"></td>
                                                         <td class="text-center changed"><input class="form-check-input"
-                                                                                               type="radio"
+                                                                                               type="radio" value="changed"
                                                                                                name="damage[rear-left-door]">
                                                         </td>
                                                     </tr>
                                                     <tr class="rear-left-mudguard">
                                                         <td>Sol Arka Çamurluk</td>
-                                                        <td class="text-center original"><input class="form-check-input"
+                                                        <td class="text-center original"><input class="form-check-input" value="original"
                                                                                                 type="radio"
                                                                                                 name="damage[rear-left-mudguard]"
                                                                                                 checked></td>
-                                                        <td class="text-center painted"><input class="form-check-input"
+                                                        <td class="text-center painted"><input class="form-check-input" value="painted"
                                                                                                type="radio"
                                                                                                name="damage[rear-left-mudguard]">
                                                         </td>
-                                                        <td class="text-center paintedlocal"><input
+                                                        <td class="text-center paintedlocal"><input value="paintedlocal"
                                                                     class="form-check-input" type="radio"
                                                                     name="damage[rear-left-mudguard]"></td>
                                                         <td class="text-center changed"><input class="form-check-input"
-                                                                                               type="radio"
+                                                                                               type="radio" value="changed"
                                                                                                name="damage[rear-left-mudguard]">
                                                         </td>
                                                     </tr>
                                                     <tr class="rear-hood">
                                                         <td>Bagaj Kapağı</td>
-                                                        <td class="text-center original"><input class="form-check-input"
+                                                        <td class="text-center original"><input class="form-check-input" value="original"
                                                                                                 type="radio"
                                                                                                 name="damage[rear-hood]"
                                                                                                 checked></td>
-                                                        <td class="text-center painted"><input class="form-check-input"
+                                                        <td class="text-center painted"><input class="form-check-input" value="painted"
                                                                                                type="radio"
                                                                                                name="damage[rear-hood]"></td>
                                                         <td class="text-center paintedlocal"><input
-                                                                    class="form-check-input" type="radio"
+                                                                    class="form-check-input" type="radio" value="paintedlocal"
                                                                     name="damage[rear-hood]"></td>
-                                                        <td class="text-center changed"><input class="form-check-input"
+                                                        <td class="text-center changed"><input class="form-check-input" value="changed"
                                                                                                type="radio"
                                                                                                name="damage[rear-hood]"></td>
                                                     </tr>
                                                     <tr class="rear-bumper">
                                                         <td>Arka Tampon</td>
-                                                        <td class="text-center original"><input class="form-check-input"
+                                                        <td class="text-center original"><input class="form-check-input" value="original"
                                                                                                 type="radio"
                                                                                                 name="damage[rear-bumper]"
                                                                                                 checked></td>
-                                                        <td class="text-center painted"><input class="form-check-input"
+                                                        <td class="text-center painted"><input class="form-check-input" value="painted"
                                                                                                type="radio"
                                                                                                name="damage[rear-bumper]"></td>
                                                         <td class="text-center paintedlocal"><input
-                                                                    class="form-check-input" type="radio"
+                                                                    class="form-check-input" type="radio" value="paintedlocal"
                                                                     name="damage[rear-bumper]"></td>
                                                         <td class="text-center changed"><input class="form-check-input"
-                                                                                               type="radio"
+                                                                                               type="radio" value="changed"
                                                                                                name="damage[rear-bumper]"></td>
                                                     </tr>
                                                     </tbody>

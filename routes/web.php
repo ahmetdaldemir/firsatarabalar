@@ -137,6 +137,7 @@ Route::prefix('admin/')->middleware(['auth', 'user-access:admin'])->group(functi
         Route::get('delete_commnet', [CustomerCarController::class, 'delete_commnet'])->name('admin.customer_car_valuation.delete_commnet');
         Route::get('default_photo', [CustomerCarController::class, 'default_photo'])->name('admin.customer_car_valuation.default_photo');
         Route::get('search', [CustomerCarController::class, 'search'])->name('admin.customer_car_valuation.search');
+        Route::get('customer_car_valuation_sms', [CustomerCarController::class, 'customer_car_valuation_sms'])->name('admin.customer_car_valuation_sms');
     });
 
 
@@ -177,6 +178,7 @@ Route::prefix('admin/')->middleware(['auth', 'user-access:admin'])->group(functi
     });
 
     Route::post('assignmentDo', [CustomerCarController::class, 'assignmentDo'])->name('admin.assignmentDo');
+    Route::get('admin.payments', [CustomerCarController::class, 'payments'])->name('admin.payments');
 
 
 

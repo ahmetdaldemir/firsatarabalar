@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CustomerCarStatus;
 use App\Models\Customer;
 use App\Models\CustomerCar;
 use App\Models\CustomerCarValuation;
@@ -96,6 +97,17 @@ class HomeController extends Controller
 
     public function valuation_confirm(Request $request)
     {
+        $customer_car_valulation = CustomerCarValuation::where('uuid',$request->uuid)->first();
+
+        if($request->status == CustomerCarStatus::STATUS_STRING['CONFIRM'])
+        {
+            $customer_car_valulation->is_confirm = 1;
+            $customer_car_valulation->date_confirm = date('Y-m-d');
+            $customer_car_valulation->save();
+        }
+
+        $customer_car_valulation->customer_car->status = $request->status;
+        $customer_car_valulation->customer_car->save();
     }
 
 
